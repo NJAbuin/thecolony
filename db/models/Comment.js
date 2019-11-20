@@ -13,4 +13,4 @@ Comment.init(
   { sequelize: db, modelName: "comment" }
 );
 
-export default Comment;
+module.exports = Comment;

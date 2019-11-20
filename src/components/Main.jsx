@@ -1,4 +1,5 @@
 import React from "react";
+import LoginModal from "./LoginModal";
 import { Route, Switch, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import Landing from "./Landing";
@@ -6,6 +7,7 @@ import Landing from "./Landing";
 export default function Main(props) {
   return (
     <div>
+      <LoginModal />
       <Grid>
         <div style={{ gridArea: "nav", backgroundColor: "blue" }}>NAV</div>
         <Switch>

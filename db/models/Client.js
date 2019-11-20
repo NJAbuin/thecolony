@@ -37,4 +37,4 @@ Client.init(
   { sequelize: db, modelName: "client" }
 );
 
-export default Client;
+module.exports = Client;
