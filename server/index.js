@@ -4,6 +4,9 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const db = require("../db");
 const chalk = require("chalk");
+const passport = require("passport");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -11,11 +14,20 @@ const port = process.env.PORT || 3001;
 //logger
 app.use(morgan("tiny"));
 
+//passport
+app.use(
+  session({ secret: "cualquierCosa", resave: false, saveUninitialized: true })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(cookieParser());
+
 //bodyṕarser config
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //modular routes
+app.use("/", require("../routes"));
 app.use("/*", (req, res) => res.send("server working"));
 
 //sync database then start server
