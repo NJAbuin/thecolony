@@ -28,6 +28,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //modular routes
+/* app.use("/*", (req, res) =>
+  res.sendFile(path.join(__dirname, "../dist/index.html"))
+); */
 
 app.use("/*", (req, res) =>
   res.sendFile(path.join(__dirname, "../dist/index.html"))
