@@ -1,4 +1,0 @@
-node-modules
-./dist/bundle.js
-./dist/bundle.js.map
-.env
