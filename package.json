@@ -27,13 +27,16 @@
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "sequelize": "^5.21.2"
+    "sequelize": "^5.21.2",
+    "styled-components": "^4.4.1"
   },
   "devDependencies": {
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },
   "scripts": {
+    "start": "nodemon ./server/index.js",
+    "build": "webpack -w",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./server/index.js & webpack -w --mode development",
     "postinstall": "createdb thecolony"
