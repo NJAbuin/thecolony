@@ -1,11 +1,10 @@
 const path = require("path");
-
 module.exports = {
   mode: "development",
   entry: "./src/index.jsx",
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "./dist")
+    path: path.resolve(__dirname + "/dist")
   },
   resolve: {
     extensions: [".js", ".jsx"]
@@ -23,7 +22,33 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: "style-loader!css-loader"
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+              modules: true
+            }
+          }
+        ],
+        include: /\.module\.css$/
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+        exclude: /\.module\.css$/
+      },
+      {
+        test: /\.(png|jp(e*)g|svg)$/,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 8000 // Convert images < 8kb to base64 strings
+            }
+          }
+        ]
       }
     ]
   },

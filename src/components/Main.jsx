@@ -1,12 +1,11 @@
 import React from "react";
-import { connect } from "react-redux";
 
-function Main(props) {
-  return <div>holi</div>;
+export default function Main(props) {
+  console.log("Holi.");
+
+  return (
+    <div>
+      <h1>HOLI</h1>
+    </div>
+  );
 }
-
-const mapStateToProps = state => ({
-  user: state.user
-});
-
-export default connect(mapStateToProps)(Main);
