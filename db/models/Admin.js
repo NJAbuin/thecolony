@@ -31,4 +31,4 @@ Admin.init(
   { sequelize: db, modelName: "admin" }
 );
 
-export default Admin;
+module.exports = Admin;

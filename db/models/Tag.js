@@ -18,4 +18,4 @@ Tag.init(
   { sequelize: db, modelName: "Tag" }
 );
 
-export default Tag;
+module.exports = Tag;
