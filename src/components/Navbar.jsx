@@ -1,10 +1,22 @@
 import React from "react";
-import LoginModal from "./LoginModal";
 
 export default props => {
   return (
-    <div style={{ backgroundColor: "black", gridArea: "nav" }}>
-      <img src="./images/thecolonynavbar.jpg" />
+    <div
+      style={{
+        gridArea: "nav",
+        justifySelf: "center",
+        width: "100%",
+        backgroundColor: "white",
+        textAlign: "center"
+      }}
+    >
+      <img
+        src="./images/thecolonynavbar.jpg"
+        style={{
+          height: "100%"
+        }}
+      />
     </div>
   );
 };

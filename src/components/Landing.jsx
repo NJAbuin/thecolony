@@ -1,23 +1,14 @@
 import React from "react";
 
 import { LandingGrid } from "../templates/LandingGrid";
+import { Card } from "../templates/Card";
 
 export default props => {
-  const IS = { width: "auto", height: "auto", maxWidth: "33vw" };
-
   return (
     <LandingGrid>
-      <div style={{ gridArea: "log1", background: "red" }}>
-        <img src="./images/business.jpg" style={IS} />
-      </div>
-
-      <div style={{ gridArea: "log2", background: "purple" }}>
-        <img src="./images/recruiter.png" style={IS} />
-      </div>
-
-      <div style={{ gridArea: "log3", background: "aquamarine" }}>
-        <img src="./images/bee.jpg" style={IS} />
-      </div>
+      <Card color="cyan"></Card>
+      <Card color="yellow"></Card>
+      <Card color="grey"></Card>
     </LandingGrid>
   );
 };
