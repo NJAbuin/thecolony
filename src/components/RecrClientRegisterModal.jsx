@@ -4,7 +4,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is required for IE 11 support
 import axios from "axios";
-import { labelInputCreator } from "../../utils";
+import { labelInputCreator, validateEmail } from "../../utils";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -44,12 +44,15 @@ const Fade = React.forwardRef(function Fade(props, ref) {
   );
 });
 
-export default function AdminRegisterModal() {
+export default function RecrClientRegisterModal() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [fullName, setfullName] = React.useState("");
+  const [logoURL, setLogoURL] = React.useState("");
+  const [phone, setPhone] = React.useState("");
+  let showWarning = "none";
 
   const handleOpen = () => {
     setOpen(true);
@@ -59,7 +62,7 @@ export default function AdminRegisterModal() {
     setOpen(false);
   };
 
-  const registerUser = (email, password, fullName) => {
+  const registerRecrClient = (email, password, fullName) => {
     axios
       .post("/admin/login", { email, password, fullName })
       .then(user => res.json(user))
@@ -69,7 +72,7 @@ export default function AdminRegisterModal() {
   return (
     <div>
       <button type="button" onClick={handleOpen}>
-        Registrate (Admin)
+        Registrate (Recrutador o Cliente)
       </button>
       <Modal
         aria-labelledby="spring-modal-title"
@@ -92,10 +95,13 @@ export default function AdminRegisterModal() {
               {labelInputCreator("Email", setEmail)}
               {labelInputCreator("Password", setPassword)}
               {labelInputCreator("Nombre Completo", setfullName)}
+              {labelInputCreator("Logo URL", setfullName)}
+              {labelInputCreator("Phone", setfullName)}
+
               <button
                 onClick={e => {
                   e.preventDefault();
-                  registerUser(email, password, fullName);
+                  registerRecrClient(email, password, fullName, logoURL, phone);
                 }}
               >
                 Submit

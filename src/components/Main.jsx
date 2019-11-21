@@ -4,12 +4,14 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import Landing from "./Landing";
 import AdminRegisterModal from "./AdminRegisterModal";
+import RecrClientRegisterModal from "./RecrClientRegisterModal";
 
 export default function Main(props) {
   return (
     <div>
       <LoginModal />
       <AdminRegisterModal />
+      <RecrClientRegisterModal />
       <Grid>
         <div style={{ gridArea: "nav", backgroundColor: "blue" }}>NAV</div>
         <Switch>
