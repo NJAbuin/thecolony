@@ -2,7 +2,7 @@ const db = require("../index");
 const S = require("sequelize");
 const crypto = require("crypto");
 
-class Client extends S.Model { }
+class Client extends S.Model {}
 
 Client.init(
   {
@@ -38,17 +38,16 @@ Client.init(
   { sequelize: db, modelName: "client" }
 );
 
-<<<<<<< HEAD
-Client.prototype.hashPassword = function (password) {
+Client.prototype.hashPassword = function(password) {
   return crypto
     .createHmac("sha1", this.salt)
     .update(password)
     .digest("hex");
 };
-Client.prototype.randomSalt = function () {
+Client.prototype.randomSalt = function() {
   return crypto.randomBytes(20).toString("hex");
 };
-Client.prototype.validatePassword = function (password) {
+Client.prototype.validatePassword = function(password) {
   let newPassword = this.hashPassword(password);
   return newPassword === this.password;
 };
@@ -58,6 +57,4 @@ Client.beforeCreate(user => {
   user.password = user.hashPassword(user.password);
 });
 
-=======
->>>>>>> 401bb2b3e4c11652ef26e2f54c84eef6d1099654
 module.exports = Client;

@@ -61,9 +61,17 @@ export default function AdminRegisterModal() {
 
   const registerUser = (email, password, fullName) => {
     axios
-      .post("/admin/login", { email, password, fullName })
-      .then(user => res.json(user))
+      .post("/api/admin/register", { email, password, fullName })
+      .then(user => console.log(user.config.data))
       .catch(console.error());
+  };
+
+  const validateRegister = (email, pass) => {
+    if (!validateEmail(email) || pass == "") {
+      setWarningMessage("Usuario o contraseña invalidos");
+    } else {
+      setWarningMessage("");
+    }
   };
 
   return (
