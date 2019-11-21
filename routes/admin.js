@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const Admin = require("../db/models/Admin");
-const passport = require("../db/passportAdmin")
+const passport = require("../db/passport/passportAdmin")
 
 router.post("/register", function (req, res) {
     Admin.create(req.body).then(admin =>
