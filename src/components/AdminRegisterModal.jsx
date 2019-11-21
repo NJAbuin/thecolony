@@ -71,8 +71,8 @@ export default function AdminRegisterModal() {
     if (!validateEmail(email)) {
       setWarningMessage("Usuario o contraseña invalidos");
     }
-    if (pass.length < 7) {
-      setWarningMessage("La contraseña debe tener al menos 6 caracteres");
+    if (pass.length <= 2) {
+      setWarningMessage("La contraseña debe tener al menos 2 caracteres");
     }
     if (fullName.length < 5) {
       setWarningMessage("Ingrese un nombre valido");
@@ -113,9 +113,6 @@ export default function AdminRegisterModal() {
                   validateRegister(email, password, fullName);
                   if (warningMessage === "") {
                     registerUser(email, password, fullName);
-                    {
-                      /* handleClose(); */
-                    }
                   }
                 }}
               >
