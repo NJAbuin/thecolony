@@ -44,15 +44,12 @@ const Fade = React.forwardRef(function Fade(props, ref) {
   );
 });
 
-const inputStyle = {
-  width: "100%"
-};
-
-export default function LoginModal() {
+export default function AdminRegisterModal() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [fullName, setfullName] = React.useState("");
   const [warningMessage, setWarningMessage] = React.useState("");
 
   const handleOpen = () => {
@@ -63,25 +60,29 @@ export default function LoginModal() {
     setOpen(false);
   };
 
-  const loginUser = (email, password) => {
+  const registerUser = (email, password, fullName) => {
     axios
-      .post("/api/admin/login", { email, password })
-      .then(user => console.log(user))
+      .post("/api/admin/register", { email, password, fullName })
+      .then(user => console.log(user.config.data))
       .catch(console.error());
   };
 
-  const validateLogin = (email, pass) => {
-    if (!validateEmail(email) || pass == "") {
+  const validateRegister = (email, pass, fullName) => {
+    if (!validateEmail(email)) {
       setWarningMessage("Usuario o contraseña invalidos");
-    } else {
-      setWarningMessage("");
+    }
+    if (pass.length <= 2) {
+      setWarningMessage("La contraseña debe tener al menos 2 caracteres");
+    }
+    if (fullName.length < 5) {
+      setWarningMessage("Ingrese un nombre valido");
     }
   };
 
   return (
     <div>
       <button type="button" onClick={handleOpen}>
-        Login
+        Registrate (Admin)
       </button>
       <Modal
         aria-labelledby="spring-modal-title"
@@ -98,16 +99,20 @@ export default function LoginModal() {
         <Fade in={open}>
           <div className={classes.paper}>
             <form>
-              <h2 id="spring-modal-title">Ingrese sus credenciales</h2>
+              <h2 id="spring-modal-title">
+                Ingrese sus datos para registrarse
+              </h2>
               {labelInputCreator("Email", setEmail)}
               {labelInputCreator("Password", setPassword)}
-              <p style={{ color: "red" }}>{warningMessage}</p>
+              {labelInputCreator("Nombre Completo", setfullName)}
+              <br />
+              <p>{warningMessage}</p>
               <button
                 onClick={e => {
                   e.preventDefault();
-                  validateLogin(email, password);
+                  validateRegister(email, password, fullName);
                   if (warningMessage === "") {
-                    loginUser(email, password);
+                    registerUser(email, password, fullName);
                   }
                 }}
               >

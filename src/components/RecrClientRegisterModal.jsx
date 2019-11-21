@@ -44,16 +44,15 @@ const Fade = React.forwardRef(function Fade(props, ref) {
   );
 });
 
-const inputStyle = {
-  width: "100%"
-};
-
-export default function LoginModal() {
+export default function RecrClientRegisterModal() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [warningMessage, setWarningMessage] = React.useState("");
+  const [fullName, setfullName] = React.useState("");
+  const [logoURL, setLogoURL] = React.useState("");
+  const [phone, setPhone] = React.useState("");
+  let showWarning = "none";
 
   const handleOpen = () => {
     setOpen(true);
@@ -63,25 +62,17 @@ export default function LoginModal() {
     setOpen(false);
   };
 
-  const loginUser = (email, password) => {
+  const registerRecrClient = (email, password, fullName) => {
     axios
-      .post("/api/admin/login", { email, password })
-      .then(user => console.log(user))
+      .post("/admin/login", { email, password, fullName })
+      .then(user => res.json(user))
       .catch(console.error());
-  };
-
-  const validateLogin = (email, pass) => {
-    if (!validateEmail(email) || pass == "") {
-      setWarningMessage("Usuario o contraseña invalidos");
-    } else {
-      setWarningMessage("");
-    }
   };
 
   return (
     <div>
       <button type="button" onClick={handleOpen}>
-        Login
+        Registrate (Recrutador o Cliente)
       </button>
       <Modal
         aria-labelledby="spring-modal-title"
@@ -98,17 +89,19 @@ export default function LoginModal() {
         <Fade in={open}>
           <div className={classes.paper}>
             <form>
-              <h2 id="spring-modal-title">Ingrese sus credenciales</h2>
+              <h2 id="spring-modal-title">
+                Ingrese sus datos para registrarse
+              </h2>
               {labelInputCreator("Email", setEmail)}
               {labelInputCreator("Password", setPassword)}
-              <p style={{ color: "red" }}>{warningMessage}</p>
+              {labelInputCreator("Nombre Completo", setfullName)}
+              {labelInputCreator("Logo URL", setfullName)}
+              {labelInputCreator("Phone", setfullName)}
+
               <button
                 onClick={e => {
                   e.preventDefault();
-                  validateLogin(email, password);
-                  if (warningMessage === "") {
-                    loginUser(email, password);
-                  }
+                  registerRecrClient(email, password, fullName, logoURL, phone);
                 }}
               >
                 Submit

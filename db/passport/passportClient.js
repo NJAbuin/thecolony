@@ -1,10 +1,10 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const Admin = require("./models/Admin");
+const Client = require("../models/Client");
 
 passport.use(
     new LocalStrategy(function (email, password, done) {
-        Admin.findOne({
+        Client.findOne({
             where: { email: email }
         })
             .then(user => {
