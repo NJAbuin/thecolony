@@ -39,7 +39,7 @@ export const labelInputCreator = (fieldName, setFn) => {
 /**
  * Validates if given string is an email address
  * @param {String} email Email to validate
- * @returns {Boolean}
+ * @returns {Boolean} boolean
  */
 export function validateEmail(email) {
   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

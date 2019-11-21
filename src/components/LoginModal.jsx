@@ -4,7 +4,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is required for IE 11 support
 import axios from "axios";
-import { labelInputCreator } from "../../utils";
+import { labelInputCreator, validateEmail } from "../../utils";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -53,6 +53,7 @@ export default function LoginModal() {
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [warningMessage, setWarningMessage] = React.useState("");
 
   const handleOpen = () => {
     setOpen(true);
@@ -67,6 +68,14 @@ export default function LoginModal() {
       .post("/admin/login", { email, password })
       .then(user => res.json(user))
       .catch(console.error());
+  };
+
+  const validateLogin = (email, pass) => {
+    if (!validateEmail(email) || pass == "") {
+      setWarningMessage("Usuario o contraseña invalidos");
+    } else {
+      setWarningMessage("");
+    }
   };
 
   return (
@@ -89,16 +98,17 @@ export default function LoginModal() {
         <Fade in={open}>
           <div className={classes.paper}>
             <form>
-              <h2 id="spring-modal-title">
-                Ingrese sus credenciales para ingresar
-              </h2>
+              <h2 id="spring-modal-title">Ingrese sus credenciales</h2>
               {labelInputCreator("Email", setEmail)}
               {labelInputCreator("Password", setPassword)}
-
+              <p style={{ color: "red" }}>{warningMessage}</p>
               <button
                 onClick={e => {
                   e.preventDefault();
-                  loginUser(email, password);
+                  validateLogin(email, password);
+                  if (warningMessage === "") {
+                    loginUser(email, password);
+                  }
                 }}
               >
                 Submit
