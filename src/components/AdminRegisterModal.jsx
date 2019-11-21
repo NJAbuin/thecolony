@@ -44,15 +44,12 @@ const Fade = React.forwardRef(function Fade(props, ref) {
   );
 });
 
-const inputStyle = {
-  width: "100%"
-};
-
-export default function LoginModal() {
+export default function AdminRegisterModal() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [fullName, setfullName] = React.useState("");
 
   const handleOpen = () => {
     setOpen(true);
@@ -62,9 +59,9 @@ export default function LoginModal() {
     setOpen(false);
   };
 
-  const loginUser = (email, password) => {
+  const registerUser = (email, password, fullName) => {
     axios
-      .post("/admin/login", { email, password })
+      .post("/admin/login", { email, password, fullName })
       .then(user => res.json(user))
       .catch(console.error());
   };
@@ -72,7 +69,7 @@ export default function LoginModal() {
   return (
     <div>
       <button type="button" onClick={handleOpen}>
-        Login
+        Registrate
       </button>
       <Modal
         aria-labelledby="spring-modal-title"
@@ -94,11 +91,11 @@ export default function LoginModal() {
               </h2>
               {labelInputCreator("Email", setEmail)}
               {labelInputCreator("Password", setPassword)}
-
+              {labelInputCreator("Nombre Completo", setfullName)}
               <button
                 onClick={e => {
                   e.preventDefault();
-                  loginUser(email, password);
+                  registerUser(email, password);
                 }}
               >
                 Submit
