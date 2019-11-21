@@ -57453,30 +57453,43 @@ module.exports = function(originalModule) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Landing; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _templates_LandingGrid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../templates/LandingGrid */ "./src/templates/LandingGrid.js");
 
 
-function Landing(props) {
+/* harmony default export */ __webpack_exports__["default"] = (function (props) {
+  var IS = {
+    width: "auto",
+    height: "auto",
+    maxWidth: "33vw"
+  };
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_LandingGrid__WEBPACK_IMPORTED_MODULE_1__["LandingGrid"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       gridArea: "log1",
       background: "red"
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "./images/business.jpg",
+    style: IS
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       gridArea: "log2",
       background: "purple"
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "./images/recruiter.png",
+    style: IS
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       gridArea: "log3",
       background: "aquamarine"
     }
-  }));
-}
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "./images/bee.jpg",
+    style: IS
+  })));
+});
 
 /***/ }),
 
@@ -57650,11 +57663,10 @@ function SpringModal() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Main; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _templates_HomeGrid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../templates/HomeGrid */ "./src/templates/HomeGrid.js");
+/* harmony import */ var _templates_MainGrid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../templates/MainGrid */ "./src/templates/MainGrid.js");
 /* harmony import */ var _containers_AuthContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../containers/AuthContainer */ "./src/containers/AuthContainer.jsx");
 /* harmony import */ var _Landing__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Landing */ "./src/components/Landing.jsx");
 /* harmony import */ var _components_Navbar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Navbar */ "./src/components/Navbar.jsx");
@@ -57664,9 +57676,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function Main(props) {
+/* harmony default export */ __webpack_exports__["default"] = (function (props) {
   var location = props.location;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_HomeGrid__WEBPACK_IMPORTED_MODULE_2__["HomeGrid"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, location.pathname === "/landing" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_MainGrid__WEBPACK_IMPORTED_MODULE_2__["MainGrid"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, location.pathname === "/landing" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/landing",
     component: _Landing__WEBPACK_IMPORTED_MODULE_4__["default"]
   }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
@@ -57676,7 +57688,7 @@ function Main(props) {
     path: "/",
     to: "/landing"
   })));
-}
+});
 
 /***/ }),
 
@@ -57689,13 +57701,12 @@ function Main(props) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Navbar; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _LoginModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LoginModal */ "./src/components/LoginModal.jsx");
 
 
-function Navbar(props) {
+/* harmony default export */ __webpack_exports__["default"] = (function (props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       backgroundColor: "black",
@@ -57704,7 +57715,7 @@ function Navbar(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: "./images/thecolonynavbar.jpg"
   }));
-}
+});
 
 /***/ }),
 
@@ -57720,13 +57731,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AuthContainer; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _templates_AuthGrid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../templates/AuthGrid */ "./src/templates/AuthGrid.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _templates_AuthGrid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../templates/AuthGrid */ "./src/templates/AuthGrid.js");
+/* harmony import */ var _DashboardAdmin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DashboardAdmin */ "./src/containers/DashboardAdmin.jsx");
+
+
 
 
 
 function AuthContainer(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_AuthGrid__WEBPACK_IMPORTED_MODULE_2__["AuthGrid"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  //needs a function to do redirect depending on
+  // auth permissions
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_AuthGrid__WEBPACK_IMPORTED_MODULE_3__["AuthGrid"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       gridArea: "sidebar",
       background: "purple"
@@ -57736,14 +57753,41 @@ function AuthContainer(props) {
       gridArea: "content",
       background: "yellow"
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: "/auth/admin"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    path: "/auth/admin",
+    component: _DashboardAdmin__WEBPACK_IMPORTED_MODULE_4__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/auth/recruiter"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/auth/business"
   })));
 }
+
+/***/ }),
+
+/***/ "./src/containers/DashboardAdmin.jsx":
+/*!*******************************************!*\
+  !*** ./src/containers/DashboardAdmin.jsx ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (function (props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      background: "white"
+    }
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      background: "purple"
+    }
+  }));
+});
 
 /***/ }),
 
@@ -57854,45 +57898,6 @@ var AuthGrid = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_te
 
 /***/ }),
 
-/***/ "./src/templates/HomeGrid.js":
-/*!***********************************!*\
-  !*** ./src/templates/HomeGrid.js ***!
-  \***********************************/
-/*! exports provided: HomeGrid */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeGrid", function() { return HomeGrid; });
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: grid;\n  grid-template-rows: 5vh 1fr;\n  grid-template-columns: 1fr;\n  grid-template-areas:\n    \"nav nav\"\n    \"body body\";\n  height: 100vh;\n"]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-
-var HomeGrid = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
-/*
-const MainGrid = styled.div`
-  display: grid;
-  grid-template-rows: 5vh 1fr;
-  grid-template-columns: 12vw 1fr;
-  grid-template-areas:
-    "nav nav"
-    "sidebar content";
-  height: 100vh;
-`;
-*/
-
-/***/ }),
-
 /***/ "./src/templates/LandingGrid.js":
 /*!**************************************!*\
   !*** ./src/templates/LandingGrid.js ***!
@@ -57918,6 +57923,45 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 var LandingGrid = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
+
+/***/ }),
+
+/***/ "./src/templates/MainGrid.js":
+/*!***********************************!*\
+  !*** ./src/templates/MainGrid.js ***!
+  \***********************************/
+/*! exports provided: MainGrid */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MainGrid", function() { return MainGrid; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n  display: grid;\n  grid-template-rows: 5vh 1fr;\n  grid-template-columns: 1fr;\n  grid-template-areas:\n    \"nav nav\"\n    \"body body\";\n  height: 100vh;\n  box-sizing: border-box;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+
+var MainGrid = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
+/*
+const MainGrid = styled.div`
+  display: grid;
+  grid-template-rows: 5vh 1fr;
+  grid-template-columns: 12vw 1fr;
+  grid-template-areas:
+    "nav nav"
+    "sidebar content";
+  height: 100vh;
+`;
+*/
 
 /***/ })
 

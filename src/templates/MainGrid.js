@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HomeGrid = styled.div`
+export const MainGrid = styled.div`
   display: grid;
   grid-template-rows: 5vh 1fr;
   grid-template-columns: 1fr;
@@ -8,6 +8,7 @@ export const HomeGrid = styled.div`
     "nav nav"
     "body body";
   height: 100vh;
+  box-sizing: border-box;
 `;
 
 /*

@@ -1,15 +1,15 @@
 import React from "react";
 import { Route as R, Switch, Redirect } from "react-router-dom";
 
-import { HomeGrid } from "../templates/HomeGrid";
+import { MainGrid } from "../templates/MainGrid";
 import AuthContainer from "../containers/AuthContainer";
 import Landing from "./Landing";
 import Navbar from "../components/Navbar";
 
-export default function Main(props) {
+export default props => {
   let { location } = props;
   return (
-    <HomeGrid>
+    <MainGrid>
       <Navbar />
 
       <Switch>
@@ -18,9 +18,8 @@ export default function Main(props) {
         ) : null}
 
         <R path="/auth" component={AuthContainer} />
-
         <Redirect path="/" to="/landing" />
       </Switch>
-    </HomeGrid>
+    </MainGrid>
   );
-}
+};
