@@ -99,10 +99,8 @@ function LoginModal(props) {
               <button
                 onClick={e => {
                   e.preventDefault();
-                  validateLogin(email, password);
-                  if (warningMessage === "") {
-                    props.loginUser(email, password);
-                  }
+
+                  loginUser(email, password);
                 }}
               >
                 Submit

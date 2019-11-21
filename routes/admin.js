@@ -8,13 +8,13 @@ router.post("/register", function(req, res) {
       if (err) {
         console.log(err);
       } else {
-        res.json(admin);
+        res.send(admin);
       }
     })
   );
 });
 
-router.post("/login", function(req, res) {
+router.post("/login", passport.authenticate("admin"), function(req, res) {
   res.send(req.user);
 });
 
