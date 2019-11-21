@@ -6,9 +6,9 @@ const meRouter = require("./me");
 
 
 router.use("/me", meRouter);
-router.use("/admin", adminRouter);
-router.use("/client", clientRouter);
-// router.use("/recruiter", recruiterRouter) 
+router.use("/admin", adminRouter)
+router.use("/client", clientRouter)
+router.use("/recruiter", recruiterRouter)
 
 
 module.exports = router
