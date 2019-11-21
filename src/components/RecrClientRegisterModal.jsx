@@ -44,7 +44,7 @@ const Fade = React.forwardRef(function Fade(props, ref) {
   );
 });
 
-export default function RecrClientRegisterModal() {
+export default function RecrClientRegisterModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState("");
@@ -62,9 +62,16 @@ export default function RecrClientRegisterModal() {
     setOpen(false);
   };
 
+  let routeToPost = "";
+  if (props.role === "Client") {
+    routeToPost = "/api/client/register";
+  } else {
+    routeToPost = "/api/recruiter/register";
+  }
+
   const registerRecrClient = (email, password, fullName) => {
     axios
-      .post("/admin/login", { email, password, fullName })
+      .post(routeToPost, { email, password, fullName })
       .then(user => res.json(user))
       .catch(console.error());
   };
@@ -72,7 +79,7 @@ export default function RecrClientRegisterModal() {
   return (
     <div>
       <button type="button" onClick={handleOpen}>
-        Registrate (Recrutador o Cliente)
+        Registrate
       </button>
       <Modal
         aria-labelledby="spring-modal-title"

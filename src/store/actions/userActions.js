@@ -1,7 +1,7 @@
-import { LOGIN_ADMIN } from "../constants";
+import { LOG_IN } from "../constants";
 
 export const loginUserAction = admin => {
-  return { type: LOGIN_ADMIN, payload: admin };
+  return { type: LOG_IN, payload: admin };
 };
 
 export const loginUser = (email, password) => dispatch => {

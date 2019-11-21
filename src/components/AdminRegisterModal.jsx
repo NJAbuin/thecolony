@@ -44,7 +44,7 @@ const Fade = React.forwardRef(function Fade(props, ref) {
   );
 });
 
-export default function AdminRegisterModal() {
+export default function AdminRegisterModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState("");
@@ -78,7 +78,6 @@ export default function AdminRegisterModal() {
       setWarningMessage("Ingrese un nombre valido");
     }
   };
-
   return (
     <div>
       <button type="button" onClick={handleOpen}>
