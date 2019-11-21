@@ -1,10 +1,10 @@
-import { LOGIN_ADMIN } from "../constants";
+import { LOG_IN } from "../constants";
 
 const initialState = {};
 
 export function userReducer(state = initialState, action) {
   switch (action.type) {
-    case LOGIN_ADMIN:
+    case LOG_IN:
       return { ...action.payload };
     default:
       return state;
