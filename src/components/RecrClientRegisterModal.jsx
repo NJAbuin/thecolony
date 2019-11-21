@@ -90,7 +90,7 @@ export default function RecrClientRegisterModal() {
           <div className={classes.paper}>
             <form>
               <h2 id="spring-modal-title">
-                Ingrese sus credenciales para ingresar
+                Ingrese sus datos para registrarse
               </h2>
               {labelInputCreator("Email", setEmail)}
               {labelInputCreator("Password", setPassword)}
