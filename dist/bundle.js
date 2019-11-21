@@ -57666,10 +57666,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _templates_MainGrid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../templates/MainGrid */ "./src/templates/MainGrid.js");
-/* harmony import */ var _containers_AuthContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../containers/AuthContainer */ "./src/containers/AuthContainer.jsx");
-/* harmony import */ var _Landing__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Landing */ "./src/components/Landing.jsx");
-/* harmony import */ var _components_Navbar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Navbar */ "./src/components/Navbar.jsx");
+/* harmony import */ var _PrivateRoute__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PrivateRoute */ "./src/components/PrivateRoute.jsx");
+/* harmony import */ var _templates_MainGrid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../templates/MainGrid */ "./src/templates/MainGrid.js");
+/* harmony import */ var _containers_AuthContainer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../containers/AuthContainer */ "./src/containers/AuthContainer.jsx");
+/* harmony import */ var _Landing__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Landing */ "./src/components/Landing.jsx");
+/* harmony import */ var _components_Navbar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Navbar */ "./src/components/Navbar.jsx");
+
 
 
 
@@ -57677,14 +57679,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function (props) {
-  var location = props.location;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_MainGrid__WEBPACK_IMPORTED_MODULE_2__["MainGrid"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_MainGrid__WEBPACK_IMPORTED_MODULE_3__["MainGrid"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/landing",
-    component: _Landing__WEBPACK_IMPORTED_MODULE_4__["default"]
+    component: _Landing__WEBPACK_IMPORTED_MODULE_5__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/auth",
-    component: _containers_AuthContainer__WEBPACK_IMPORTED_MODULE_3__["default"]
+    component: _containers_AuthContainer__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+    exact: true,
     path: "/",
     to: "/landing"
   })));
@@ -57716,6 +57718,44 @@ __webpack_require__.r(__webpack_exports__);
     src: "./images/thecolonynavbar.jpg"
   }));
 });
+
+/***/ }),
+
+/***/ "./src/components/PrivateRoute.jsx":
+/*!*****************************************!*\
+  !*** ./src/components/PrivateRoute.jsx ***!
+  \*****************************************/
+/*! exports provided: PrivateRoute */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PrivateRoute", function() { return PrivateRoute; });
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+var PrivateRoute = function PrivateRoute(_ref) {
+  var Component = _ref.component,
+      otherProps = _objectWithoutProperties(_ref, ["component"]);
+
+  return React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Route"], _extends({}, otherProps, {
+    render: function render(props) {
+      return isAuthenticated() ? React.createElement(Component, otherProps) : React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Redirect"], {
+        to: {
+          pathname: "/",
+          state: {
+            from: props.location || "/"
+          }
+        }
+      });
+    }
+  }));
+};
 
 /***/ }),
 
@@ -57751,7 +57791,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AuthContainer; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
@@ -57767,7 +57806,10 @@ __webpack_require__.r(__webpack_exports__);
 //import DashboardRecruiter from "./DashboardRecruiter";
 
 
+
 function AuthContainer(props) {
+  // !!! IF UNAUTH, REDIR TO HOME
+  // can be done with private route jsx, might be easier
   //needs a function to do redirect depending on
   // auth permissions
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_AuthGrid__WEBPACK_IMPORTED_MODULE_3__["AuthGrid"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Sidebar__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
@@ -57775,6 +57817,8 @@ function AuthContainer(props) {
     component: _DashboardAdmin__WEBPACK_IMPORTED_MODULE_4__["default"]
   })));
 }
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])()(AuthContainer));
 
 /***/ }),
 
@@ -57833,6 +57877,22 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
+/***/ "./src/store/constants/index.js":
+/*!**************************************!*\
+  !*** ./src/store/constants/index.js ***!
+  \**************************************/
+/*! exports provided: LOG_IN, LOG_OUT */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN", function() { return LOG_IN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_OUT", function() { return LOG_OUT; });
+var LOG_IN = "LOG_IN";
+var LOG_OUT = "LOG_OUT";
+
+/***/ }),
+
 /***/ "./src/store/index.js":
 /*!****************************!*\
   !*** ./src/store/index.js ***!
@@ -57874,9 +57934,45 @@ var middleWare = [Object(redux_logger__WEBPACK_IMPORTED_MODULE_1__["createLogger
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _sessionReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sessionReducer */ "./src/store/reducers/sessionReducer.js");
 
-var reducers = {};
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(reducers));
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
+  sessionState: _sessionReducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+}));
+
+/***/ }),
+
+/***/ "./src/store/reducers/sessionReducer.js":
+/*!**********************************************!*\
+  !*** ./src/store/reducers/sessionReducer.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./src/store/constants/index.js");
+
+var initialState = {
+  user: {}
+};
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["LOG_IN"]:
+      return state;
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["LOG_OUT"]:
+      return;
+    //{ ...state, user: action.user };
+
+    default:
+      return state;
+  }
+});
 
 /***/ }),
 

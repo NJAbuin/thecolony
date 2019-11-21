@@ -9,7 +9,10 @@ import DashboardAdmin from "./DashboardAdmin";
 
 import Sidebar from "../components/Sidebar";
 
-export default function AuthContainer(props) {
+function AuthContainer(props) {
+  // !!! IF UNAUTH, REDIR TO HOME
+  // can be done with private route jsx, might be easier
+
   //needs a function to do redirect depending on
   // auth permissions
 
@@ -24,3 +27,5 @@ export default function AuthContainer(props) {
     </AuthGrid>
   );
 }
+
+export default connect()(AuthContainer);
