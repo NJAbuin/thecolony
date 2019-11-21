@@ -110,13 +110,10 @@ export default function AdminRegisterModal() {
               <button
                 onClick={e => {
                   e.preventDefault();
-                  validateRegister(email, password, fullName);
-                  if (warningMessage === "") {
-                    registerUser(email, password, fullName);
-                    {
-                      /* handleClose(); */
-                    }
-                  }
+
+
+                  registerUser(email, password, fullName);
+
                 }}
               >
                 Submit

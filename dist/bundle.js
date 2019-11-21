@@ -3300,7 +3300,7 @@ var defaultTheme = Object(_createMuiTheme__WEBPACK_IMPORTED_MODULE_0__["default"
 /*!************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/styles/index.js ***!
   \************************************************************/
-/*! exports provided: createMuiTheme, createStyles, makeStyles, responsiveFontSizes, styled, useTheme, withStyles, withTheme, createGenerateClassName, jssPreset, ServerStyleSheets, StylesProvider, MuiThemeProvider, ThemeProvider, hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, easing, duration, formatMs, isString, isNumber */
+/*! exports provided: hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, createMuiTheme, createStyles, makeStyles, responsiveFontSizes, styled, easing, duration, formatMs, isString, isNumber, useTheme, withStyles, withTheme, createGenerateClassName, jssPreset, ServerStyleSheets, StylesProvider, MuiThemeProvider, ThemeProvider */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44254,7 +44254,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57554,6 +57554,11 @@ function AdminRegisterModal() {
       fullName = _React$useState8[0],
       setfullName = _React$useState8[1];
 
+  var _React$useState9 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(""),
+      _React$useState10 = _slicedToArray(_React$useState9, 2),
+      warningMessage = _React$useState10[0],
+      setWarningMessage = _React$useState10[1];
+
   var handleOpen = function handleOpen() {
     setOpen(true);
   };
@@ -57572,11 +57577,17 @@ function AdminRegisterModal() {
     })["catch"](console.error());
   };
 
-  var validateRegister = function validateRegister(email, pass) {
-    if (!validateEmail(email) || pass == "") {
+  var validateRegister = function validateRegister(email, pass, fullName) {
+    if (!Object(_utils__WEBPACK_IMPORTED_MODULE_6__["validateEmail"])(email)) {
       setWarningMessage("Usuario o contraseña invalidos");
-    } else {
-      setWarningMessage("");
+    }
+
+    if (pass.length < 7) {
+      setWarningMessage("La contraseña debe tener al menos 6 caracteres");
+    }
+
+    if (fullName.length < 5) {
+      setWarningMessage("Ingrese un nombre valido");
     }
   };
 
@@ -57600,7 +57611,7 @@ function AdminRegisterModal() {
     className: classes.paper
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
     id: "spring-modal-title"
-  }, "Ingrese sus datos para registrarse"), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Email", setEmail), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Password", setPassword), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Nombre Completo", setfullName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, "Ingrese sus datos para registrarse"), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Email", setEmail), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Password", setPassword), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Nombre Completo", setfullName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, warningMessage), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: function onClick(e) {
       e.preventDefault();
       registerUser(email, password, fullName);
@@ -57765,11 +57776,11 @@ function LoginModal() {
   };
 
   var loginUser = function loginUser(email, password) {
-    axios__WEBPACK_IMPORTED_MODULE_5___default.a.post("/admin/login", {
+    axios__WEBPACK_IMPORTED_MODULE_5___default.a.post("/api/admin/login", {
       email: email,
       password: password
     }).then(function (user) {
-      return res.json(user);
+      return console.log(user);
     })["catch"](console.error());
   };
 

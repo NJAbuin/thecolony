@@ -23,7 +23,7 @@ Client.init(
       allowNull: false
     },
     salt: {
-      type: S.salt
+      type: S.STRING
     },
     website: {
       type: S.STRING
