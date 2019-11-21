@@ -18,7 +18,7 @@ Admin.init(
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: true
+        isEmail: false
       }
     },
     password: {

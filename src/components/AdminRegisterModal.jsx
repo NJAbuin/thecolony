@@ -4,7 +4,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is required for IE 11 support
 import axios from "axios";
-import { labelInputCreator } from "../../utils";
+import { labelInputCreator, validateEmail } from "../../utils";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -50,6 +50,7 @@ export default function AdminRegisterModal() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [fullName, setfullName] = React.useState("");
+  const [warningMessage, setWarningMessage] = React.useState("");
 
   const handleOpen = () => {
     setOpen(true);
@@ -66,11 +67,15 @@ export default function AdminRegisterModal() {
       .catch(console.error());
   };
 
-  const validateRegister = (email, pass) => {
-    if (!validateEmail(email) || pass == "") {
+  const validateRegister = (email, pass, fullName) => {
+    if (!validateEmail(email)) {
       setWarningMessage("Usuario o contraseña invalidos");
-    } else {
-      setWarningMessage("");
+    }
+    if (pass.length < 7) {
+      setWarningMessage("La contraseña debe tener al menos 6 caracteres");
+    }
+    if (fullName.length < 5) {
+      setWarningMessage("Ingrese un nombre valido");
     }
   };
 
@@ -100,10 +105,18 @@ export default function AdminRegisterModal() {
               {labelInputCreator("Email", setEmail)}
               {labelInputCreator("Password", setPassword)}
               {labelInputCreator("Nombre Completo", setfullName)}
+              <br />
+              <p>{warningMessage}</p>
               <button
                 onClick={e => {
                   e.preventDefault();
-                  registerUser(email, password, fullName);
+                  validateRegister(email, password, fullName);
+                  if (warningMessage === "") {
+                    registerUser(email, password, fullName);
+                    {
+                      /* handleClose(); */
+                    }
+                  }
                 }}
               >
                 Submit

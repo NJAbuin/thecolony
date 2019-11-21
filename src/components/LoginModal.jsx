@@ -65,8 +65,8 @@ export default function LoginModal() {
 
   const loginUser = (email, password) => {
     axios
-      .post("/admin/login", { email, password })
-      .then(user => res.json(user))
+      .post("/api/admin/login", { email, password })
+      .then(user => console.log(user))
       .catch(console.error());
   };
 
