@@ -37,4 +37,4 @@ Recruiter.init(
   { sequelize: db, modelName: "recruiter" }
 );
 
-export default Recruiter;
+module.exports = Recruiter;

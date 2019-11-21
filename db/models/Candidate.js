@@ -34,4 +34,4 @@ Candidate.init(
   { sequelize: db, modelName: "jobposting" }
 );
 
-export default Candidate;
+module.exports = Candidate;
