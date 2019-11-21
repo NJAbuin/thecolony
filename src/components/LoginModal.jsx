@@ -120,7 +120,7 @@ const mapStateToProps = () => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  loginUser: userId => dispatch(loginUserAction(userId))
+  loginUser: email => dispatch(loginUserAction({ email }))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);

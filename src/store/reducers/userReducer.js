@@ -1,11 +1,11 @@
 import { LOGIN_ADMIN } from "../constants";
 
-const initialState = { user: {} };
+const initialState = {};
 
 export function userReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_ADMIN:
-      return { state, user: action.payload };
+      return { ...action.payload };
     default:
       return state;
   }

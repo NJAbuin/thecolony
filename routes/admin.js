@@ -15,7 +15,7 @@ router.post("/register", function(req, res) {
 });
 
 router.post("/login", function(req, res) {
-  res.send(req.user).catch(console.error());
+  res.send(req.user);
 });
 
 router.get("/logout", function(req, res) {
