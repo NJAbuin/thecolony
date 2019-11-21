@@ -38,7 +38,6 @@ Client.init(
   { sequelize: db, modelName: "client" }
 );
 
-<<<<<<< HEAD
 Client.prototype.hashPassword = function (password) {
   return crypto
     .createHmac("sha1", this.salt)
@@ -58,6 +57,4 @@ Client.beforeCreate(user => {
   user.password = user.hashPassword(user.password);
 });
 
-=======
->>>>>>> 401bb2b3e4c11652ef26e2f54c84eef6d1099654
 module.exports = Client;
