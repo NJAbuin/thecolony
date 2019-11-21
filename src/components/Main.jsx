@@ -1,30 +1,26 @@
 import React from "react";
-import LoginModal from "./LoginModal";
-import { Route, Switch, Redirect } from "react-router-dom";
-import styled from "styled-components";
+import { Route as R, Switch, Redirect } from "react-router-dom";
+
+import { HomeGrid } from "../templates/HomeGrid";
+import AuthContainer from "../containers/AuthContainer";
 import Landing from "./Landing";
+import Navbar from "../components/Navbar";
 
 export default function Main(props) {
+  let { location } = props;
   return (
-    <div>
-      <LoginModal />
-      <Grid>
-        <div style={{ gridArea: "nav", backgroundColor: "blue" }}>NAV</div>
-        <Switch>
-          <Route path="/landing" component={Landing} />
-          <Redirect exact path="/" to="/landing" />
-        </Switch>
-      </Grid>
-    </div>
+    <HomeGrid>
+      <Navbar />
+
+      <Switch>
+        {location.pathname === "/landing" ? (
+          <R path="/landing" component={Landing} />
+        ) : null}
+
+        <R path="/auth" component={AuthContainer} />
+
+        <Redirect path="/" to="/landing" />
+      </Switch>
+    </HomeGrid>
   );
 }
-
-const Grid = styled.div`
-  display: grid;
-  grid-template-rows: 7.5% 1fr;
-  grid-template-columns: 12.5% 1fr;
-  grid-template-areas:
-    "nav nav"
-    "sidebar content";
-  height: 100vh;
-`;

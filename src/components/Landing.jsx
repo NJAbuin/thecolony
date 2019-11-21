@@ -1,12 +1,13 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
-import styled from "styled-components";
+
+import { LandingGrid } from "../templates/LandingGrid";
 
 export default function Landing(props) {
   return (
-    <div>
-      <div style={{ gridArea: "sidebar", backgroundColor: "yellow" }}>a</div>
-      <div style={{ gridArea: "content", backgroundColor: "black" }}>b</div>
-    </div>
+    <LandingGrid>
+      <div style={{ gridArea: "log1", background: "red" }}></div>
+      <div style={{ gridArea: "log2", background: "purple" }}></div>
+      <div style={{ gridArea: "log3", background: "aquamarine" }}></div>
+    </LandingGrid>
   );
 }
