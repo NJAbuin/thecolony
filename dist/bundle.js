@@ -41863,6 +41863,100 @@ __webpack_require__.r(__webpack_exports__);
     to: "/landing"
   })));
 });
+<<<<<<< HEAD
+function AdminRegisterModal() {
+  var classes = useStyles();
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(false),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      open = _React$useState2[0],
+      setOpen = _React$useState2[1];
+
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(""),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      email = _React$useState4[0],
+      setEmail = _React$useState4[1];
+
+  var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(""),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      password = _React$useState6[0],
+      setPassword = _React$useState6[1];
+
+  var _React$useState7 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(""),
+      _React$useState8 = _slicedToArray(_React$useState7, 2),
+      fullName = _React$useState8[0],
+      setfullName = _React$useState8[1];
+
+  var _React$useState9 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(""),
+      _React$useState10 = _slicedToArray(_React$useState9, 2),
+      warningMessage = _React$useState10[0],
+      setWarningMessage = _React$useState10[1];
+
+  var handleOpen = function handleOpen() {
+    setOpen(true);
+  };
+
+  var handleClose = function handleClose() {
+    setOpen(false);
+  };
+
+  var registerUser = function registerUser(email, password, fullName) {
+    axios__WEBPACK_IMPORTED_MODULE_5___default.a.post("/api/admin/register", {
+      email: email,
+      password: password,
+      fullName: fullName
+    }).then(function (user) {
+      return console.log(user.config.data);
+    })["catch"](console.error());
+  };
+
+  var validateRegister = function validateRegister(email, pass, fullName) {
+    if (!Object(_utils__WEBPACK_IMPORTED_MODULE_6__["validateEmail"])(email)) {
+      setWarningMessage("Usuario o contraseña invalidos");
+    }
+
+    if (pass.length <= 2) {
+      setWarningMessage("La contraseña debe tener al menos 2 caracteres");
+    }
+
+    if (fullName.length < 5) {
+      setWarningMessage("Ingrese un nombre valido");
+    }
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    onClick: handleOpen
+  }, "Registrate (Admin)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Modal__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    "aria-labelledby": "spring-modal-title",
+    "aria-describedby": "spring-modal-description",
+    className: classes.modal,
+    open: open,
+    onClose: handleClose,
+    closeAfterTransition: true,
+    BackdropComponent: _material_ui_core_Backdrop__WEBPACK_IMPORTED_MODULE_3__["default"],
+    BackdropProps: {
+      timeout: 500
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Fade, {
+    "in": open
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.paper
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    id: "spring-modal-title"
+  }, "Ingrese sus datos para registrarse"), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Email", setEmail), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Password", setPassword), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Nombre Completo", setfullName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, warningMessage), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: function onClick(e) {
+      e.preventDefault();
+      validateRegister(email, password, fullName);
+
+      if (warningMessage === "") {
+        registerUser(email, password, fullName);
+      }
+    }
+  }, "Submit"))))));
+}
+=======
+>>>>>>> b2732d234965906652d40c2bf93160f2e851ffd8
 
 /***/ }),
 
@@ -41942,27 +42036,26 @@ var PrivateRoute = function PrivateRoute(_ref) {
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+    axios__WEBPACK_IMPORTED_MODULE_5___default.a.post("/api/admin/login", {
+      email: email,
+      password: password
+    }).then(function (user) {
+      return console.log(user);
+    })["catch"](console.error());
+  };
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ __webpack_exports__["default"] = (function (props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
-      backgroundColor: "cyan",
-      gridArea: "sidebar"
-    }
-  });
-});
-
+    onClick: function onClick(e) {
+      e.preventDefault();
+=======
+>>>>>>> b2732d234965906652d40c2bf93160f2e851ffd8
 /***/ }),
-
-/***/ "./src/containers/AuthContainer.jsx":
-/*!******************************************!*\
   !*** ./src/containers/AuthContainer.jsx ***!
   \******************************************/
-/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

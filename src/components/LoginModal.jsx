@@ -105,10 +105,10 @@ export default function LoginModal() {
               <button
                 onClick={e => {
                   e.preventDefault();
-                  validateLogin(email, password);
-                  if (warningMessage === "") {
-                    loginUser(email, password);
-                  }
+
+
+                  loginUser(email, password);
+
                 }}
               >
                 Submit
