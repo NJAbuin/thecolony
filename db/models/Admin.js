@@ -8,18 +8,12 @@ Admin.init(
   {
     fullName: {
       type: S.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
+      allowNull: false
     },
     email: {
       type: S.STRING,
       allowNull: false,
-      unique: true,
-      validate: {
-        isEmail: false
-      }
+      unique: true
     },
     password: {
       type: S.STRING,

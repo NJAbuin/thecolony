@@ -57582,8 +57582,8 @@ function AdminRegisterModal() {
       setWarningMessage("Usuario o contraseña invalidos");
     }
 
-    if (pass.length < 7) {
-      setWarningMessage("La contraseña debe tener al menos 6 caracteres");
+    if (pass.length <= 2) {
+      setWarningMessage("La contraseña debe tener al menos 2 caracteres");
     }
 
     if (fullName.length < 5) {
@@ -57614,7 +57614,11 @@ function AdminRegisterModal() {
   }, "Ingrese sus datos para registrarse"), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Email", setEmail), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Password", setPassword), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Nombre Completo", setfullName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, warningMessage), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: function onClick(e) {
       e.preventDefault();
-      registerUser(email, password, fullName);
+      validateRegister(email, password, fullName);
+
+      if (warningMessage === "") {
+        registerUser(email, password, fullName);
+      }
     }
   }, "Submit"))))));
 }
