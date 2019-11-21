@@ -8,14 +8,14 @@ router.post("/register", function(req, res) {
       if (err) {
         console.log(err);
       } else {
-        console.log(admin);
+        res.json(admin);
       }
     })
   );
 });
 
-router.post("/login", passport.authenticate("local"), function(req, res) {
-  res.send(req.user);
+router.post("/login", function(req, res) {
+  res.send(req.user).catch(console.error());
 });
 
 router.get("/logout", function(req, res) {

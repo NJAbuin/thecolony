@@ -3,8 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is required for IE 11 support
-import axios from "axios";
 import { labelInputCreator, validateEmail } from "../../utils";
+import { connect } from "react-redux";
+import { loginUserAction } from "../store/actions/userActions";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -48,7 +49,7 @@ const inputStyle = {
   width: "100%"
 };
 
-export default function LoginModal() {
+function LoginModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState("");
@@ -61,13 +62,6 @@ export default function LoginModal() {
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const loginUser = (email, password) => {
-    axios
-      .post("/api/admin/login", { email, password })
-      .then(user => console.log(user))
-      .catch(console.error());
   };
 
   const validateLogin = (email, pass) => {
@@ -107,7 +101,7 @@ export default function LoginModal() {
                   e.preventDefault();
                   validateLogin(email, password);
                   if (warningMessage === "") {
-                    loginUser(email, password);
+                    props.loginUser(email, password);
                   }
                 }}
               >
@@ -120,3 +114,13 @@ export default function LoginModal() {
     </div>
   );
 }
+
+const mapStateToProps = () => {
+  return {};
+};
+
+const mapDispatchToProps = dispatch => ({
+  loginUser: userId => dispatch(loginUserAction(userId))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);

@@ -2,11 +2,13 @@ import React from "react";
 import LoginModal from "./LoginModal";
 import { Route, Switch, Redirect } from "react-router-dom";
 import styled from "styled-components";
+import { connect } from "react-redux";
 import Landing from "./Landing";
 import AdminRegisterModal from "./AdminRegisterModal";
 import RecrClientRegisterModal from "./RecrClientRegisterModal";
+import { loginAdmin } from "../store/actions/userActions";
 
-export default function Main(props) {
+function Main(props) {
   return (
     <div>
       <LoginModal />
@@ -32,3 +34,11 @@ const Grid = styled.div`
     "sidebar content";
   height: 100vh;
 `;
+
+const mapStateToProps = () => {
+  return { user };
+};
+
+const mapDispatchToProps = dispatch => ({});
+
+export default connect(null, mapDispatchToProps)(Main);
