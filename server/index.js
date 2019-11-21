@@ -13,7 +13,7 @@ const port = process.env.PORT || 3001;
 
 //logger
 app.use(morgan("tiny"));
-app.use(express.static('dist'))
+app.use(express.static("dist"));
 
 //passport
 app.use(
@@ -32,6 +32,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
   res.sendFile(path.join(__dirname, "../dist/index.html"))
 ); */
 
+app.use("/*", (req, res) =>
+  res.sendFile(path.join(__dirname, "../dist/index.html"))
+);
+app.use("/", require("../routes"));
 //sync database then start server
 db.sync({ force: false })
   .then(() => {
