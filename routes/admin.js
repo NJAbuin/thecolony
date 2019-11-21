@@ -4,7 +4,7 @@ const passport = require("../db/passport/passportAdmin");
 
 router.post("/register", function(req, res) {
   Admin.create(req.body).then(admin =>
-    req.login(admin, function(req, res, err) {
+    req.login(admin, function(err) {
       if (err) {
         console.log(err);
       } else {
