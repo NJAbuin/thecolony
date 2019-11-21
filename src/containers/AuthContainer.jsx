@@ -18,8 +18,8 @@ export default function AuthContainer(props) {
       <Sidebar />
       <Switch>
         <R path="/auth/admin" component={DashboardAdmin} />
-        <R path="/auth/recruiter" component={DashboardRecruiter} />
-        <R path="/auth/business" component={DashboardBusiness} />
+        {/*         <R path="/auth/recruiter" component={DashboardRecruiter} />
+        <R path="/auth/business" component={DashboardBusiness} /> */}
       </Switch>
     </AuthGrid>
   );

@@ -57773,12 +57773,6 @@ function AuthContainer(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_AuthGrid__WEBPACK_IMPORTED_MODULE_3__["AuthGrid"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Sidebar__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/auth/admin",
     component: _DashboardAdmin__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    path: "/auth/recruiter",
-    component: DashboardRecruiter
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    path: "/auth/business",
-    component: DashboardBusiness
   })));
 }
 
