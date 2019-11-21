@@ -57678,10 +57678,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = (function (props) {
   var location = props.location;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_MainGrid__WEBPACK_IMPORTED_MODULE_2__["MainGrid"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, location.pathname === "/landing" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_MainGrid__WEBPACK_IMPORTED_MODULE_2__["MainGrid"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/landing",
     component: _Landing__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/auth",
     component: _containers_AuthContainer__WEBPACK_IMPORTED_MODULE_3__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
@@ -57719,6 +57719,29 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/components/Sidebar.jsx":
+/*!************************************!*\
+  !*** ./src/components/Sidebar.jsx ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (function (props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      backgroundColor: "cyan",
+      gridArea: "sidebar"
+    }
+  });
+});
+
+/***/ }),
+
 /***/ "./src/containers/AuthContainer.jsx":
 /*!******************************************!*\
   !*** ./src/containers/AuthContainer.jsx ***!
@@ -57735,31 +57758,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _templates_AuthGrid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../templates/AuthGrid */ "./src/templates/AuthGrid.js");
 /* harmony import */ var _DashboardAdmin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DashboardAdmin */ "./src/containers/DashboardAdmin.jsx");
+/* harmony import */ var _components_Sidebar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Sidebar */ "./src/components/Sidebar.jsx");
 
 
 
+
+ //import DashboardBusiness from "./DashboardBusiness";
+//import DashboardRecruiter from "./DashboardRecruiter";
 
 
 function AuthContainer(props) {
   //needs a function to do redirect depending on
   // auth permissions
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_AuthGrid__WEBPACK_IMPORTED_MODULE_3__["AuthGrid"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: {
-      gridArea: "sidebar",
-      background: "purple"
-    }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: {
-      gridArea: "content",
-      background: "yellow"
-    }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_AuthGrid__WEBPACK_IMPORTED_MODULE_3__["AuthGrid"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Sidebar__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/auth/admin",
     component: _DashboardAdmin__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    path: "/auth/recruiter"
+    path: "/auth/recruiter",
+    component: DashboardRecruiter
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    path: "/auth/business"
+    path: "/auth/business",
+    component: DashboardBusiness
   })));
 }
 
@@ -57778,15 +57797,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ __webpack_exports__["default"] = (function (props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
-      background: "white"
+      gridArea: "content",
+      backgroundColor: "blue"
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: {
-      background: "purple"
-    }
-  }));
+  });
 });
 
 /***/ }),
