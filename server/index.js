@@ -9,7 +9,7 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3002;
 
 //bodyṕarser config
 app.use(bodyParser.json());
