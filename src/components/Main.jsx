@@ -1,34 +1,24 @@
-import React from "react";
-import LoginModal from "./LoginModal";
-import { Route, Switch, Redirect } from "react-router-dom";
-import styled from "styled-components";
+import React, { Fragment } from "react";
+import { Route as R, Switch, Redirect } from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
+
+import { MainGrid } from "../templates/MainGrid";
+import AuthContainer from "../containers/AuthContainer";
+
 import Landing from "./Landing";
-import AdminRegisterModal from "./AdminRegisterModal";
-import RecrClientRegisterModal from "./RecrClientRegisterModal";
+import Navbar from "../components/Navbar";
 
-export default function Main(props) {
+export default props => {
   return (
-    <div>
-      <LoginModal />
-      <AdminRegisterModal />
-      <RecrClientRegisterModal />
-      <Grid>
-        <div style={{ gridArea: "nav", backgroundColor: "blue" }}>NAV</div>
-        <Switch>
-          <Route path="/landing" component={Landing} />
-          <Redirect exact path="/" to="/landing" />
-        </Switch>
-      </Grid>
-    </div>
-  );
-}
+    <MainGrid>
+      <Navbar />
+      <Switch>
+        <R path="/landing" component={Landing} />
+        {/* {'Change route Auth to a Private Route later'} */}
+        <R path="/auth" component={AuthContainer} />
 
-const Grid = styled.div`
-  display: grid;
-  grid-template-rows: 7.5% 1fr;
-  grid-template-columns: 12.5% 1fr;
-  grid-template-areas:
-    "nav nav"
-    "sidebar content";
-  height: 100vh;
-`;
+        <Redirect exact path="/" to="/landing" />
+      </Switch>
+    </MainGrid>
+  );
+};
