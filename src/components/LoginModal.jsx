@@ -99,8 +99,7 @@ function LoginModal(props) {
               <button
                 onClick={e => {
                   e.preventDefault();
-
-                  loginUser(email, password);
+                  props.loginUser(email, password);
                 }}
               >
                 Submit
