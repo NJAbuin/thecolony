@@ -31,11 +31,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 /* app.use("/*", (req, res) =>
   res.sendFile(path.join(__dirname, "../dist/index.html"))
 ); */
+app.use("/api", require("../routes"));
 
 app.use("/*", (req, res) =>
   res.sendFile(path.join(__dirname, "../dist/index.html"))
 );
-app.use("/api", require("../routes"));
+
 //sync database then start server
 db.sync({ force: false })
   .then(() => {

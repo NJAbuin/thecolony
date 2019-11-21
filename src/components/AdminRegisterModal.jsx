@@ -61,9 +61,17 @@ export default function AdminRegisterModal() {
 
   const registerUser = (email, password, fullName) => {
     axios
-      .post("/admin/login", { email, password, fullName })
-      .then(user => res.json(user))
+      .post("/api/admin/register", { email, password, fullName })
+      .then(user => console.log(user.config.data))
       .catch(console.error());
+  };
+
+  const validateRegister = (email, pass) => {
+    if (!validateEmail(email) || pass == "") {
+      setWarningMessage("Usuario o contraseña invalidos");
+    } else {
+      setWarningMessage("");
+    }
   };
 
   return (
@@ -87,7 +95,7 @@ export default function AdminRegisterModal() {
           <div className={classes.paper}>
             <form>
               <h2 id="spring-modal-title">
-                Ingrese sus credenciales para ingresar
+                Ingrese sus datos para registrarse
               </h2>
               {labelInputCreator("Email", setEmail)}
               {labelInputCreator("Password", setPassword)}
