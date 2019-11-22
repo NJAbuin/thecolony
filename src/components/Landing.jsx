@@ -2,6 +2,8 @@ import React from "react";
 
 import { LandingGrid } from "../templates/LandingGrid";
 import { Card } from "../templates/Card";
+import { H2 } from "../templates/Title";
+import { P } from "../templates/Paragraph";
 import LoginModal from "./LoginModal";
 import AdminRegisterModal from "./AdminRegisterModal";
 import RecrClientRegisterModal from "./RecrClientRegisterModal";
@@ -19,25 +21,66 @@ export default props => {
   return (
     <LandingGrid>
       <Card color="grey" imgUrl={admin}>
-        <h2>Admin</h2>
-        <p>Lorem ipsum dolor</p>
-        <LoginModal role={"Admin"} />
-        <AdminRegisterModal role={"Admin"} />
+        <div style={topDivStyle}>
+          <H2>Admin</H2>
+          <P>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam
+            dignissimos delectus tempora nesciunt, pariatur in eaque esse
+            quaerat reprehenderit ipsam commodi sint odio eum eos fuga autem,
+            at, itaque placeat laudantium aperiam! Debitis dolorum pariatur
+            delectus aperiam fuga optio culpa.
+          </P>
+        </div>
+        <div style={botDivStyle}>
+          <LoginModal role={"Admin"} />
+          <AdminRegisterModal role={"Admin"} />
+        </div>
       </Card>
 
       <Card color="yellow" imgUrl={recruiter}>
-        <h2>Recrutadores</h2>
-        <p>Lorem ipsum dolor</p>
-        <LoginModal role={"Recruiter"} />
-        <RecrClientRegisterModal role={"Recruiter"} />
+        <div style={topDivStyle}>
+          <H2>Reclutadores</H2>
+          <P>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam
+            dignissimos delectus tempora nesciunt, pariatur in eaque esse
+            quaerat reprehenderit ipsam commodi sint odio eum eos fuga autem,
+            at, itaque placeat laudantium aperiam! Debitis dolorum pariatur
+            delectus aperiam fuga optio culpa.
+          </P>
+        </div>
+        <div style={botDivStyle}>
+          <LoginModal role={"Recruiter"} />
+          <RecrClientRegisterModal role={"Recruiter"} />
+        </div>
       </Card>
-
       <Card color="cyan" imgUrl={client}>
-        <h2>Clientes</h2>
-        <p>Lorem ipsum dolor</p>
-        <LoginModal role={"Client"} />
-        <RecrClientRegisterModal role={"Client"} />
+        <div style={topDivStyle}>
+          <H2>Clientes</H2>
+          <P>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam
+            dignissimos delectus tempora nesciunt, pariatur in eaque esse
+            quaerat reprehenderit ipsam commodi sint odio eum eos fuga autem,
+            at, itaque placeat laudantium aperiam! Debitis dolorum pariatur
+            delectus aperiam fuga optio culpa.
+          </P>
+        </div>
+        <div style={botDivStyle}>
+          <LoginModal role={"Client"} />
+          <RecrClientRegisterModal role={"Client"} />
+        </div>
       </Card>
     </LandingGrid>
   );
+};
+
+const topDivStyle = {
+  width: "100%",
+  height: "80%"
+};
+
+const botDivStyle = {
+  justifyContent: "space-around",
+  width: "100%",
+  height: "20%",
+  textAlign: "center"
 };
