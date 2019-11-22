@@ -48,6 +48,7 @@ export default function RecrClientRegisterModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState("");
+  const [warningMessage, setWarningMessage] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [fullName, setfullName] = React.useState("");
   const [logoURL, setLogoURL] = React.useState("");
@@ -61,6 +62,18 @@ export default function RecrClientRegisterModal(props) {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const validateRegister = (email, pass, fullName) => {
+    if (!validateEmail(email)) {
+      setWarningMessage("Ingrese un email valido");
+    } else if (pass.length <= 2) {
+      setWarningMessage("La contraseña debe tener al menos 2 caracteres");
+    } else if (fullName.length < 5) {
+      setWarningMessage("Ingrese un nombre valido");
+    } else {
+      setWarningMessage("");
+    }
   };
 
   let routeToPost;
@@ -103,9 +116,11 @@ export default function RecrClientRegisterModal(props) {
               {labelInputCreator("Email", setEmail)}
               {labelInputCreator("Password", setPassword)}
               {labelInputCreator("Nombre Completo", setfullName)}
+              {labelInputCreator("Logo URL", setLogoURL)}
               {labelInputCreator("Phone", setPhone)}
               {labelInputCreator("Website", setWebsite)}
-              {labelInputCreator("Logo URL", setLogoURL)}
+              <p style={{ color: "red" }}>{warningMessage}</p>
+
               <button
                 onClick={e => {
                   e.preventDefault();
