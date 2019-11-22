@@ -53,6 +53,10 @@ export default function AdminRegisterModal(props) {
   const [fullName, setfullName] = React.useState("");
   const [warningMessage, setWarningMessage] = React.useState("");
 
+  React.useEffect(() => {
+    if (warningMessage === "") handleClose();
+  }, [warningMessage]);
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -89,9 +93,7 @@ export default function AdminRegisterModal(props) {
   };
 
   const handleClick = e => {
-    console.log(email, password, fullName);
     e.preventDefault();
-    console.log(e);
     validateRegister(email, password, fullName)(warningMessage);
   };
 
