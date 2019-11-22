@@ -31,7 +31,7 @@ app.use(cookieParser());
 /* app.use("/*", (req, res) =>
   res.sendFile(path.join(__dirname, "../dist/index.html"))
 ); */
-app.use("/api", require("../routes"));
+app.use("/api", require("../routes")); //TODO: declarar rutas afuera
 
 app.use("/*", (req, res) =>
   res.sendFile(path.join(__dirname, "../dist/index.html"))
