@@ -1,7 +1,7 @@
 const db = require("../index");
 const S = require("sequelize");
 
-class Candidate extends S.Model {}
+class Candidate extends S.Model { }
 
 Candidate.init(
   {
