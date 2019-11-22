@@ -5,7 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import { AuthGrid } from "../templates/AuthGrid";
 import DashboardAdmin from "./DashboardAdmin";
 //import DashboardBusiness from "./DashboardBusiness";
-//import DashboardRecruiter from "./DashboardRecruiter";
+import DashboardRecruiter from "./DashboardRecruiter";
 
 import Sidebar from "../components/Sidebar";
 
@@ -21,8 +21,8 @@ function AuthContainer(props) {
       <Sidebar />
       <Switch>
         <Route path="/auth/admin" component={DashboardAdmin} />
-        {/*         <R path="/auth/recruiter" component={DashboardRecruiter} />
-        <R path="/auth/business" component={DashboardBusiness} /> */}
+        <Route path="/auth/recruiter" component={DashboardRecruiter} />
+        {/* <R path="/auth/business" component={DashboardBusiness} />  */}
       </Switch>
     </AuthGrid>
   );
