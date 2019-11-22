@@ -64,6 +64,9 @@ export default function AdminRegisterModal(props) {
     axios
       .post("/api/admin/register", { email, password, fullName })
       .then(user => console.log(user.config.data))
+      .then(() => {
+        handleClose();
+      })
       .catch(console.error());
   };
 
@@ -113,7 +116,6 @@ export default function AdminRegisterModal(props) {
                   validateRegister(email, password, fullName);
                   if (warningMessage === "") {
                     registerUser(email, password, fullName);
-                    handleClose();
                   }
                 }}
               >

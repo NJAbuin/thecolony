@@ -60,18 +60,30 @@ function LoginModal(props) {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  function handleClose() {
     setOpen(false);
-  };
+  }
 
-  // FIXME: Not used, check for removal down the line
   const validateLogin = (email, pass) => {
-    if (!validateEmail(email) || pass == "") {
+    if (!validateEmail(email) || !pass) {
       setWarningMessage("Usuario o contraseña invalidos");
+      return false;
     } else {
       setWarningMessage("");
+      return true;
     }
   };
+
+  function validateAndClose(routeToPost, email, password, res, err) {
+    if (validateLogin(email, password)) {
+      props.sessionLogIn(routeToPost, email, password);
+      handleClose();
+    }
+
+    /*
+    return ;
+  });*/
+  }
 
   let routeToPost;
   if (props.role === "Recruiter") routeToPost = "/api/recruiter/login";
@@ -101,11 +113,12 @@ function LoginModal(props) {
               <h2 id="spring-modal-title">Ingrese sus credenciales</h2>
               {labelInputCreator("Email", setEmail)}
               {labelInputCreator("Password", setPassword)}
+              <br />
               <p style={{ color: "red" }}>{warningMessage}</p>
               <button
                 onClick={e => {
                   e.preventDefault();
-                  props.sessionLogIn(routeToPost, email, password);
+                  validateAndClose(routeToPost, email, password, validateLogin);
                 }}
               >
                 Submit
