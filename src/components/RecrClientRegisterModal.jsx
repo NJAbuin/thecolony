@@ -64,6 +64,18 @@ export default function RecrClientRegisterModal(props) {
     setOpen(false);
   };
 
+  const handleClick = e => {
+    e.preventDefault();
+    validateRegister(
+      email,
+      password,
+      fullName,
+      logoURL,
+      phone,
+      website
+    )(warningMessage);
+  };
+
   const validateRegister = (email, pass, fullName) => {
     if (!validateEmail(email)) {
       setWarningMessage("Ingrese un email valido");
@@ -74,19 +86,25 @@ export default function RecrClientRegisterModal(props) {
     } else {
       setWarningMessage("");
     }
+    return (function(validateState) {
+      if (!validateState)
+        return registerUser(email, password, fullName, logoURL, phone, website)
+          .then(() => handleClose())
+          .catch(console.error());
+    })();
   };
 
   let routeToPost;
   if (props.role === "Client") routeToPost = "/api/client/register";
   if (props.role === "Recruiter") routeToPost = "/api/recruiter/register";
 
-  const register = (email, password, fullName, phone, logoURL, website) =>
+  const registerUser = (email, password, fullName, phone, logoURL, website) =>
     axios
       .post(routeToPost, { email, password, fullName, phone, logoURL, website })
-      .then((res) => {
+      .then(res => {
         if (res.data === "Este email ya esta registrado.") {
           setWarningMessage(res.data);
-        }
+        } else setWarningMessage("");
       })
       .catch(console.error());
 
@@ -123,8 +141,7 @@ export default function RecrClientRegisterModal(props) {
 
               <button
                 onClick={e => {
-                  e.preventDefault();
-                  register(email, password, fullName, phone, logoURL, website);
+                  handleClick(e);
                 }}
               >
                 Submit
