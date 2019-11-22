@@ -70,7 +70,11 @@ export default function RecrClientRegisterModal(props) {
   const register = (email, password, fullName, phone, logoURL, website) =>
     axios
       .post(routeToPost, { email, password, fullName, phone, logoURL, website })
-      .then(user => console.log(user.config.data))
+      .then((res) => {
+        if (res.data === "Este email ya esta registrado.") {
+          setWarningMessage(res.data);
+        }
+      })
       .catch(console.error());
 
   return (
