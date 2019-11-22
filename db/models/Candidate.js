@@ -11,18 +11,18 @@ Candidate.init(
     },
     fullName: {
       type: S.STRING,
-      allowNull: false
+      allowNull: true
     },
     age: {
       type: S.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     jobTitle: {
       type: S.STRING
     },
     CV: {
       type: S.STRING,
-      allowNull: false
+      allowNull: true
     },
     address: {
       type: S.STRING
@@ -31,7 +31,7 @@ Candidate.init(
       type: S.INTEGER
     }
   },
-  { sequelize: db, modelName: "jobposting" }
+  { sequelize: db, modelName: "candidate" }
 );
 
 module.exports = Candidate;

@@ -7,17 +7,10 @@ const passport = require("../db/passport/passportRecruiter");
 //register, login y logout
 
 router.post("/register", function (req, res) {
-  Recruiter.findOrCreate({ where: { email: req.body.email } })
+  Recruiter.findOrCreate({ where: req.body })
     .then(([recruiter, created]) => {
       if (created) {
-        req.login(recruiter, function (err) {
-          if (err) {
-            console.log(err);
-          } else {
-            res.send(recruiter);
-          }
-        }
-        )
+        res.send(recruiter);
       } else {
         res.send("Este email ya esta registrado.")
       }
@@ -44,18 +37,15 @@ router.post("/candidatos", function (req, res) {
 
 router.put("/candidatos/edit/:id", function (req, res) {
   Candidate.findOne({ where: { id: req.params.id } })
-    .then(candidate =>
-      candidate.update({
-        DNI: req.body.candidate.name,
-        fullName: req.body.fullName,
-        age: req.body.age,
-        jobTitle: req.body.jobTitle,
-        CV: req.body.CV,
-        adress: req.body.adress,
-        expectedSalary: req.body.expectedSalary
-      })
-    )
-    .then(updatedCandidate => res.send(updatedCandidate));
+    .then(candidate => {
+      console.log(candidate)
+      console.log(req.body)
+      candidate.update(req.body)
+        .then(updatedCandidate => {
+          console.log(updatedCandidate)
+          res.send(updatedCandidate)
+        });
+    })
 })
 
 module.exports = router;

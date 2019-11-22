@@ -2,6 +2,16 @@ const router = require("express").Router();
 const Admin = require("../db/models/Admin");
 const passport = require("../db/passport/passportAdmin");
 
+<<<<<<< HEAD
+router.post("/register", function (req, res) {
+  Admin.findOrCreate({ where: req.body })
+    .then(([admin, created]) => {
+      if (created) {
+        res.send(admin);
+      } else {
+        res.send("Este email ya esta registrado.")
+      }
+=======
 router.post("/register", function(req, res) {
   Admin.findOrCreate({ where: req.body }).then(([admin, created]) => {
     console.log([admin, created]);
@@ -15,6 +25,7 @@ router.post("/register", function(req, res) {
       });
     } else {
       res.send("Este email ya esta registrado.");
+>>>>>>> bfa2ec9a34a38413ed4a05af3d93f0b9e0003768
     }
   });
 });

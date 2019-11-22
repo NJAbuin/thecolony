@@ -57568,28 +57568,37 @@ function AdminRegisterModal(props) {
   };
 
   var registerUser = function registerUser(email, password, fullName) {
-    axios__WEBPACK_IMPORTED_MODULE_5___default.a.post("/api/admin/register", {
+    return axios__WEBPACK_IMPORTED_MODULE_5___default.a.post("/api/admin/register", {
       email: email,
       password: password,
       fullName: fullName
     }).then(function (res) {
       if (res.data === "Este email ya esta registrado.") {
         setWarningMessage(res.data);
+        return;
       }
     })["catch"](console.error());
   };
 
   var validateRegister = function validateRegister(email, pass, fullName) {
     if (!Object(_utils__WEBPACK_IMPORTED_MODULE_6__["validateEmail"])(email)) {
-      setWarningMessage("Usuario o contraseña invalidos");
-    }
-
-    if (pass.length <= 2) {
+      setWarningMessage("Ingrese un email valido");
+    } else if (pass.length <= 2) {
       setWarningMessage("La contraseña debe tener al menos 2 caracteres");
-    }
-
-    if (fullName.length < 5) {
+    } else if (fullName.length < 5) {
       setWarningMessage("Ingrese un nombre valido");
+    } else {
+      setWarningMessage("");
+    }
+  };
+
+  var handleClick = function handleClick(e) {
+    e.preventDefault();
+    validateRegister(email, password, fullName);
+
+    if (warningMessage === "") {
+      registerUser(email, password, fullName);
+      handleClose();
     }
   };
 
@@ -57613,15 +57622,12 @@ function AdminRegisterModal(props) {
     className: classes.paper
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
     id: "spring-modal-title"
-  }, "Ingrese sus datos para registrarse"), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Email", setEmail), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Password", setPassword), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Nombre Completo", setfullName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, warningMessage), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: function onClick(e) {
-      e.preventDefault();
-      validateRegister(email, password, fullName);
-
-      if (warningMessage === "") {
-        registerUser(email, password, fullName);
-      }
+  }, "Ingrese sus datos para registrarse"), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Email", setEmail), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Password", setPassword), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Nombre Completo", setfullName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      color: "red"
     }
+  }, warningMessage), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: handleClick
   }, "Submit"))))));
 }
 
@@ -57640,9 +57646,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _templates_LandingGrid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../templates/LandingGrid */ "./src/templates/LandingGrid.js");
 /* harmony import */ var _templates_Card__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../templates/Card */ "./src/templates/Card.js");
-/* harmony import */ var _LoginModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./LoginModal */ "./src/components/LoginModal.jsx");
-/* harmony import */ var _AdminRegisterModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AdminRegisterModal */ "./src/components/AdminRegisterModal.jsx");
-/* harmony import */ var _RecrClientRegisterModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./RecrClientRegisterModal */ "./src/components/RecrClientRegisterModal.jsx");
+/* harmony import */ var _templates_Title__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../templates/Title */ "./src/templates/Title.js");
+/* harmony import */ var _templates_Paragraph__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../templates/Paragraph */ "./src/templates/Paragraph.js");
+/* harmony import */ var _LoginModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./LoginModal */ "./src/components/LoginModal.jsx");
+/* harmony import */ var _AdminRegisterModal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./AdminRegisterModal */ "./src/components/AdminRegisterModal.jsx");
+/* harmony import */ var _RecrClientRegisterModal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./RecrClientRegisterModal */ "./src/components/RecrClientRegisterModal.jsx");
+
+
 
 
 
@@ -57661,26 +57671,48 @@ __webpack_require__.r(__webpack_exports__);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_LandingGrid__WEBPACK_IMPORTED_MODULE_1__["LandingGrid"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_Card__WEBPACK_IMPORTED_MODULE_2__["Card"], {
     color: "grey",
     imgUrl: admin
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Admin"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Lorem ipsum dolor"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoginModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: topDivStyle
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_Title__WEBPACK_IMPORTED_MODULE_3__["H2"], null, "Admin"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_Paragraph__WEBPACK_IMPORTED_MODULE_4__["P"], null, "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat earum reiciendis ex cupiditate iste iusto labore nisi? Dicta dolorem, nulla laudantium a sint commodi cupiditate aut quod velit laboriosam minima ipsam unde at. Laboriosam aperiam, harum, placeat doloribus inventore numquam porro autem nostrum optio natus blanditiis officiis at aut ducimus nihil expedita asperiores eligendi consequatur, velit voluptates neque. Deleniti, neque. Incidunt modi sit enim unde et ipsa ipsam tempore quis? Ipsa debitis rem hic. Adipisci neque obcaecati nulla sint fuga quae laborum at. Cum excepturi laboriosam est cupiditate voluptatibus magnam. Error earum, reprehenderit nisi ipsum quae nam laboriosam sapiente veritatis!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: botDivStyle
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoginModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
     role: "Admin"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminRegisterModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminRegisterModal__WEBPACK_IMPORTED_MODULE_6__["default"], {
     role: "Admin"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_Card__WEBPACK_IMPORTED_MODULE_2__["Card"], {
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_Card__WEBPACK_IMPORTED_MODULE_2__["Card"], {
     color: "yellow",
     imgUrl: recruiter
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Recrutadores"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Lorem ipsum dolor"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoginModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: topDivStyle
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_Title__WEBPACK_IMPORTED_MODULE_3__["H2"], null, "Reclutadoras"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_Paragraph__WEBPACK_IMPORTED_MODULE_4__["P"], null, "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima eum, inventore cupiditate, dolores optio, accusantium voluptatum nemo totam obcaecati ratione est tempora maxime? Fuga, atque explicabo nisi nihil error, maxime deleniti, magni repellendus vitae molestias quas deserunt assumenda. Doloremque, error! Distinctio mollitia aut impedit omnis consectetur exercitationem maiores, unde molestias cupiditate laboriosam provident commodi aliquam quaerat adipisci possimus beatae quos eveniet aspernatur. Voluptatem reiciendis similique incidunt eligendi, accusamus reprehenderit cum debitis ipsam aut necessitatibus nisi iure nobis, non, sequi quo doloribus ut enim officiis qui amet et? Ullam, nihil, laudantium perferendis et sequi a quae dignissimos ratione, quasi est vero.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: botDivStyle
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoginModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
     role: "Recruiter"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RecrClientRegisterModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RecrClientRegisterModal__WEBPACK_IMPORTED_MODULE_7__["default"], {
     role: "Recruiter"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_Card__WEBPACK_IMPORTED_MODULE_2__["Card"], {
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_Card__WEBPACK_IMPORTED_MODULE_2__["Card"], {
     color: "cyan",
     imgUrl: client
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Clientes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Lorem ipsum dolor"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoginModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: topDivStyle
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_Title__WEBPACK_IMPORTED_MODULE_3__["H2"], null, "Clientes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_Paragraph__WEBPACK_IMPORTED_MODULE_4__["P"], null, "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi tempore sint reiciendis magnam rerum voluptas doloremque recusandae, quia sit, repellendus corporis deserunt enim fugiat eos, veniam sunt? Possimus labore deleniti similique, voluptate sapiente ullam dolorum nesciunt nisi atque provident explicabo molestias tempora suscipit pariatur? Earum molestiae ea numquam alias sit in repellendus explicabo saepe voluptatum ut, corporis ullam consequuntur molestias accusamus placeat laborum obcaecati aut velit soluta porro quae cum quis! Non tempore, tenetur a repudiandae rerum modi eos repellendus perspiciatis eaque dolor, recusandae id. Nobis tenetur cupiditate facilis officia omnis qui tempore error magni blanditiis placeat ducimus, dolorum voluptatum?")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: botDivStyle
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoginModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
     role: "Client"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RecrClientRegisterModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RecrClientRegisterModal__WEBPACK_IMPORTED_MODULE_7__["default"], {
     role: "Client"
-  })));
+  }))));
 });
+var topDivStyle = {
+  width: "100%",
+  height: "80%"
+};
+var botDivStyle = {
+  justifyContent: "space-around",
+  width: "100%",
+  height: "20%",
+  textAlign: "center"
+};
 
 /***/ }),
 
@@ -57802,18 +57834,26 @@ function LoginModal(props) {
     setOpen(true);
   };
 
-  var handleClose = function handleClose() {
+  function handleClose() {
     setOpen(false);
-  }; // FIXME: Not used, check for removal down the line
-
+  }
 
   var validateLogin = function validateLogin(email, pass) {
-    if (!Object(_utils__WEBPACK_IMPORTED_MODULE_5__["validateEmail"])(email) || pass == "") {
+    if (!Object(_utils__WEBPACK_IMPORTED_MODULE_5__["validateEmail"])(email) || !pass) {
       setWarningMessage("Usuario o contraseña invalidos");
+      return false;
     } else {
       setWarningMessage("");
+      return true;
     }
   };
+
+  function validateAndClose(routeToPost, email, password, res, err) {
+    if (validateLogin(email, password)) {
+      props.sessionLogIn(routeToPost, email, password);
+      handleClose();
+    }
+  }
 
   var routeToPost;
   if (props.role === "Recruiter") routeToPost = "/api/recruiter/login";
@@ -57839,14 +57879,14 @@ function LoginModal(props) {
     className: classes.paper
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
     id: "spring-modal-title"
-  }, "Ingrese sus credenciales"), Object(_utils__WEBPACK_IMPORTED_MODULE_5__["labelInputCreator"])("Email", setEmail), Object(_utils__WEBPACK_IMPORTED_MODULE_5__["labelInputCreator"])("Password", setPassword), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+  }, "Ingrese sus credenciales"), Object(_utils__WEBPACK_IMPORTED_MODULE_5__["labelInputCreator"])("Email", setEmail), Object(_utils__WEBPACK_IMPORTED_MODULE_5__["labelInputCreator"])("Password", setPassword), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     style: {
       color: "red"
     }
   }, warningMessage), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: function onClick(e) {
       e.preventDefault();
-      props.sessionLogIn(routeToPost, email, password);
+      validateAndClose(routeToPost, email, password, validateLogin);
     }
   }, "Submit"))))));
 }
@@ -58034,28 +58074,33 @@ function RecrClientRegisterModal(props) {
 
   var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(""),
       _React$useState6 = _slicedToArray(_React$useState5, 2),
-      password = _React$useState6[0],
-      setPassword = _React$useState6[1];
+      warningMessage = _React$useState6[0],
+      setWarningMessage = _React$useState6[1];
 
   var _React$useState7 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(""),
       _React$useState8 = _slicedToArray(_React$useState7, 2),
-      fullName = _React$useState8[0],
-      setfullName = _React$useState8[1];
+      password = _React$useState8[0],
+      setPassword = _React$useState8[1];
 
   var _React$useState9 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(""),
       _React$useState10 = _slicedToArray(_React$useState9, 2),
-      logoURL = _React$useState10[0],
-      setLogoURL = _React$useState10[1];
+      fullName = _React$useState10[0],
+      setfullName = _React$useState10[1];
 
   var _React$useState11 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(""),
       _React$useState12 = _slicedToArray(_React$useState11, 2),
-      phone = _React$useState12[0],
-      setPhone = _React$useState12[1];
+      logoURL = _React$useState12[0],
+      setLogoURL = _React$useState12[1];
 
   var _React$useState13 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(""),
       _React$useState14 = _slicedToArray(_React$useState13, 2),
-      website = _React$useState14[0],
-      setWebsite = _React$useState14[1];
+      phone = _React$useState14[0],
+      setPhone = _React$useState14[1];
+
+  var _React$useState15 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(""),
+      _React$useState16 = _slicedToArray(_React$useState15, 2),
+      website = _React$useState16[0],
+      setWebsite = _React$useState16[1];
 
   var showWarning = "none";
 
@@ -58065,6 +58110,18 @@ function RecrClientRegisterModal(props) {
 
   var handleClose = function handleClose() {
     setOpen(false);
+  };
+
+  var validateRegister = function validateRegister(email, pass, fullName) {
+    if (!Object(_utils__WEBPACK_IMPORTED_MODULE_6__["validateEmail"])(email)) {
+      setWarningMessage("Ingrese un email valido");
+    } else if (pass.length <= 2) {
+      setWarningMessage("La contraseña debe tener al menos 2 caracteres");
+    } else if (fullName.length < 5) {
+      setWarningMessage("Ingrese un nombre valido");
+    } else {
+      setWarningMessage("");
+    }
   };
 
   var routeToPost;
@@ -58106,7 +58163,11 @@ function RecrClientRegisterModal(props) {
     className: classes.paper
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
     id: "spring-modal-title"
-  }, "Ingrese sus datos para registrarse"), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Email", setEmail), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Password", setPassword), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Nombre Completo", setfullName), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Phone", setPhone), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Website", setWebsite), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Logo URL", setLogoURL), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, "Ingrese sus datos para registrarse"), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Email", setEmail), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Password", setPassword), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Nombre Completo", setfullName), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Logo URL", setLogoURL), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Phone", setPhone), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Website", setWebsite), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    style: {
+      color: "red"
+    }
+  }, warningMessage), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: function onClick(e) {
       e.preventDefault();
       register(email, password, fullName, phone, logoURL, website);
@@ -58218,8 +58279,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _templates_MainGrid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../templates/MainGrid */ "./src/templates/MainGrid.js");
 /* harmony import */ var _AuthContainer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AuthContainer */ "./src/containers/AuthContainer.jsx");
-/* harmony import */ var _components_Landing__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Landing */ "./src/components/Landing.jsx");
-/* harmony import */ var _components_Navbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Navbar */ "./src/components/Navbar.jsx");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _components_Landing__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Landing */ "./src/components/Landing.jsx");
+/* harmony import */ var _components_Navbar__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Navbar */ "./src/components/Navbar.jsx");
+
 
 
 
@@ -58231,11 +58294,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var Main = function Main(props) {
   var user = props.user;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_MainGrid__WEBPACK_IMPORTED_MODULE_4__["MainGrid"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(styled_components__WEBPACK_IMPORTED_MODULE_6__["ThemeProvider"], {
+    theme: theme
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_MainGrid__WEBPACK_IMPORTED_MODULE_4__["MainGrid"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_8__["default"], {
     user: user
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/landing",
-    component: _components_Landing__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: _components_Landing__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/auth",
     component: _AuthContainer__WEBPACK_IMPORTED_MODULE_5__["default"]
@@ -58243,14 +58308,8 @@ var Main = function Main(props) {
     exact: true,
     path: "/",
     to: "/landing"
-  })));
+  }))));
 };
-/* FIXME: Que es esto Manu? Estaba metido como texto entre los links;
-const Grid = styled.div` display: grid; grid-template-rows: 7.5% 1fr;
-grid-template-columns: 12.5% 1fr; grid-template-areas: "nav nav"
-"sidebar content"; height: 100vh; `;
-*/
-
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -58258,11 +58317,12 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+var theme = {
+  fontFamily: "PT Sans",
+  fontSize: "1rem",
+  color: "white"
 };
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, null)(Main));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps)(Main));
 
 /***/ }),
 
@@ -58332,6 +58392,7 @@ var sessionLogIn = function sessionLogIn(url, email, password) {
       email: email,
       password: password
     }).then(function (res) {
+      console.log(res);
       var _res$data = res.data,
           fullName = _res$data.fullName,
           email = _res$data.email;
@@ -58500,7 +58561,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Card", function() { return Card; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  background-color: ", ";\n  justify-self: center;\n  align-self: center;\n  height: 90%;\n  width: 90%;\n  transition: width 0.1s, height 0.1s, transform 0.2s;\n  background-image: url(", ");\n  background-position: center;\n  background-size: cover;\n  border-radius: 25px;\n  background-repeat: no-repeat;\n\n  &:hover {\n    height: 95%;\n    width: 95%;\n    /* transform: rotateY(180deg); */\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  background-color: ", ";\n  display: flex;\n  flex-direction: column;\n  justify-self: center;\n  align-self: center;\n  height: 90%;\n  width: 90%;\n  transition: width 0.1s, height 0.1s, transform 0.2s;\n  background-image: url(", ");\n  background-position: center;\n  background-size: cover;\n  border-radius: 25px;\n  background-repeat: no-repeat;\n\n  &:hover {\n    height: 95%;\n    width: 95%;\n    /* transform: rotateY(180deg); */\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -58573,6 +58634,72 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 var MainGrid = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
+
+/***/ }),
+
+/***/ "./src/templates/Paragraph.js":
+/*!************************************!*\
+  !*** ./src/templates/Paragraph.js ***!
+  \************************************/
+/*! exports provided: P */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "P", function() { return P; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n  font-family: ", ";\n  font-size: ", ";\n  color: ", ";\n  text-align: center;\n  background-color: rgba(2, 10, 20, 0.4);\n  margin-top: 2rem;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+
+var P = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].p(_templateObject(), function (props) {
+  return props.theme.fontFamily;
+}, function (props) {
+  return props.theme.fontSize;
+}, function (props) {
+  return props.theme.color;
+});
+
+/***/ }),
+
+/***/ "./src/templates/Title.js":
+/*!********************************!*\
+  !*** ./src/templates/Title.js ***!
+  \********************************/
+/*! exports provided: H2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "H2", function() { return H2; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n  font-family: ", ";\n  font-size: ", ";\n  color: black;\n  text-align: center;\n  margin-top: 2rem;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+
+var H2 = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].h2(_templateObject(), function (props) {
+  return props.theme.fontFamily;
+}, function (props) {
+  return props.theme.fontSize;
+});
 
 /***/ }),
 
