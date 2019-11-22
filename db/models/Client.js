@@ -10,6 +10,11 @@ Client.init(
       type: S.STRING,
       allowNull: false
     },
+    permissions: {
+      type: S.BOOLEAN,
+      defaultValue: false,
+      allowNull: false
+    },
     email: {
       type: S.STRING,
       allowNull: false,

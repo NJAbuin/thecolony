@@ -44,7 +44,7 @@ const Fade = React.forwardRef(function Fade(props, ref) {
   );
 });
 
-export default function RecrClientRegisterModal() {
+export default function RecrClientRegisterModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState("");
@@ -52,6 +52,7 @@ export default function RecrClientRegisterModal() {
   const [fullName, setfullName] = React.useState("");
   const [logoURL, setLogoURL] = React.useState("");
   const [phone, setPhone] = React.useState("");
+  const [website, setWebsite] = React.useState("");
   let showWarning = "none";
 
   const handleOpen = () => {
@@ -62,17 +63,20 @@ export default function RecrClientRegisterModal() {
     setOpen(false);
   };
 
-  const registerRecrClient = (email, password, fullName) => {
+  let routeToPost;
+  if (props.role === "Client") routeToPost = "/api/client/register";
+  if (props.role === "Recruiter") routeToPost = "/api/recruiter/register";
+
+  const register = (email, password, fullName, phone, logoURL, website) =>
     axios
-      .post("/admin/login", { email, password, fullName })
-      .then(user => res.json(user))
+      .post(routeToPost, { email, password, fullName, phone, logoURL, website })
+      .then(user => console.log(user.config.data))
       .catch(console.error());
-  };
 
   return (
     <div>
       <button type="button" onClick={handleOpen}>
-        Registrate (Recrutador o Cliente)
+        Registrate
       </button>
       <Modal
         aria-labelledby="spring-modal-title"
@@ -95,13 +99,13 @@ export default function RecrClientRegisterModal() {
               {labelInputCreator("Email", setEmail)}
               {labelInputCreator("Password", setPassword)}
               {labelInputCreator("Nombre Completo", setfullName)}
-              {labelInputCreator("Logo URL", setfullName)}
-              {labelInputCreator("Phone", setfullName)}
-
+              {labelInputCreator("Phone", setPhone)}
+              {labelInputCreator("Website", setWebsite)}
+              {labelInputCreator("Logo URL", setLogoURL)}
               <button
                 onClick={e => {
                   e.preventDefault();
-                  registerRecrClient(email, password, fullName, logoURL, phone);
+                  register(email, password, fullName, phone, logoURL, website);
                 }}
               >
                 Submit

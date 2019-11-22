@@ -3,8 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is required for IE 11 support
-import axios from "axios";
 import { labelInputCreator, validateEmail } from "../../utils";
+import { connect } from "react-redux";
+import { sessionLogIn } from "../store/actions/session";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -48,7 +49,7 @@ const inputStyle = {
   width: "100%"
 };
 
-export default function LoginModal() {
+function LoginModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState("");
@@ -63,13 +64,7 @@ export default function LoginModal() {
     setOpen(false);
   };
 
-  const loginUser = (email, password) => {
-    axios
-      .post("/api/admin/login", { email, password })
-      .then(user => console.log(user))
-      .catch(console.error());
-  };
-
+  // FIXME: Not used, check for removal down the line
   const validateLogin = (email, pass) => {
     if (!validateEmail(email) || pass == "") {
       setWarningMessage("Usuario o contraseña invalidos");
@@ -77,6 +72,11 @@ export default function LoginModal() {
       setWarningMessage("");
     }
   };
+
+  let routeToPost;
+  if (props.role === "Recruiter") routeToPost = "/api/recruiter/login";
+  if (props.role === "Client") routeToPost = "/api/client/login";
+  if (props.role === "Admin") routeToPost = "/api/admin/login";
 
   return (
     <div>
@@ -105,10 +105,7 @@ export default function LoginModal() {
               <button
                 onClick={e => {
                   e.preventDefault();
-
-
-                  loginUser(email, password);
-
+                  props.sessionLogIn(routeToPost, email, password);
                 }}
               >
                 Submit
@@ -120,3 +117,12 @@ export default function LoginModal() {
     </div>
   );
 }
+
+const mapDispatchToProps = {
+  sessionLogIn
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(LoginModal);
