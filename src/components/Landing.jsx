@@ -24,11 +24,18 @@ export default props => {
         <div style={topDivStyle}>
           <H2>Admin</H2>
           <P>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam
-            dignissimos delectus tempora nesciunt, pariatur in eaque esse
-            quaerat reprehenderit ipsam commodi sint odio eum eos fuga autem,
-            at, itaque placeat laudantium aperiam! Debitis dolorum pariatur
-            delectus aperiam fuga optio culpa.
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat
+            earum reiciendis ex cupiditate iste iusto labore nisi? Dicta
+            dolorem, nulla laudantium a sint commodi cupiditate aut quod velit
+            laboriosam minima ipsam unde at. Laboriosam aperiam, harum, placeat
+            doloribus inventore numquam porro autem nostrum optio natus
+            blanditiis officiis at aut ducimus nihil expedita asperiores
+            eligendi consequatur, velit voluptates neque. Deleniti, neque.
+            Incidunt modi sit enim unde et ipsa ipsam tempore quis? Ipsa debitis
+            rem hic. Adipisci neque obcaecati nulla sint fuga quae laborum at.
+            Cum excepturi laboriosam est cupiditate voluptatibus magnam. Error
+            earum, reprehenderit nisi ipsum quae nam laboriosam sapiente
+            veritatis!
           </P>
         </div>
         <div style={botDivStyle}>
@@ -39,13 +46,20 @@ export default props => {
 
       <Card color="yellow" imgUrl={recruiter}>
         <div style={topDivStyle}>
-          <H2>Reclutadores</H2>
+          <H2>Reclutadoras</H2>
           <P>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam
-            dignissimos delectus tempora nesciunt, pariatur in eaque esse
-            quaerat reprehenderit ipsam commodi sint odio eum eos fuga autem,
-            at, itaque placeat laudantium aperiam! Debitis dolorum pariatur
-            delectus aperiam fuga optio culpa.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima eum,
+            inventore cupiditate, dolores optio, accusantium voluptatum nemo
+            totam obcaecati ratione est tempora maxime? Fuga, atque explicabo
+            nisi nihil error, maxime deleniti, magni repellendus vitae molestias
+            quas deserunt assumenda. Doloremque, error! Distinctio mollitia aut
+            impedit omnis consectetur exercitationem maiores, unde molestias
+            cupiditate laboriosam provident commodi aliquam quaerat adipisci
+            possimus beatae quos eveniet aspernatur. Voluptatem reiciendis
+            similique incidunt eligendi, accusamus reprehenderit cum debitis
+            ipsam aut necessitatibus nisi iure nobis, non, sequi quo doloribus
+            ut enim officiis qui amet et? Ullam, nihil, laudantium perferendis
+            et sequi a quae dignissimos ratione, quasi est vero.
           </P>
         </div>
         <div style={botDivStyle}>
@@ -57,11 +71,18 @@ export default props => {
         <div style={topDivStyle}>
           <H2>Clientes</H2>
           <P>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam
-            dignissimos delectus tempora nesciunt, pariatur in eaque esse
-            quaerat reprehenderit ipsam commodi sint odio eum eos fuga autem,
-            at, itaque placeat laudantium aperiam! Debitis dolorum pariatur
-            delectus aperiam fuga optio culpa.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
+            tempore sint reiciendis magnam rerum voluptas doloremque recusandae,
+            quia sit, repellendus corporis deserunt enim fugiat eos, veniam
+            sunt? Possimus labore deleniti similique, voluptate sapiente ullam
+            dolorum nesciunt nisi atque provident explicabo molestias tempora
+            suscipit pariatur? Earum molestiae ea numquam alias sit in
+            repellendus explicabo saepe voluptatum ut, corporis ullam
+            consequuntur molestias accusamus placeat laborum obcaecati aut velit
+            soluta porro quae cum quis! Non tempore, tenetur a repudiandae rerum
+            modi eos repellendus perspiciatis eaque dolor, recusandae id. Nobis
+            tenetur cupiditate facilis officia omnis qui tempore error magni
+            blanditiis placeat ducimus, dolorum voluptatum?
           </P>
         </div>
         <div style={botDivStyle}>

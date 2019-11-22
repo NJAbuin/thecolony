@@ -6,4 +6,5 @@ export const P = styled.p`
   color: ${props => props.theme.color};
   text-align: center;
   background-color: rgba(2, 10, 20, 0.4);
+  margin-top: 2rem;
 `;
