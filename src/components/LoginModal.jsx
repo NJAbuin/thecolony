@@ -5,7 +5,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is required for IE 11 support
 import { labelInputCreator, validateEmail } from "../../utils";
 import { connect } from "react-redux";
-import { loginUserAction } from "../store/actions/userActions";
+import { loginUser } from "../store/actions/userActions";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -99,7 +99,7 @@ function LoginModal(props) {
               <button
                 onClick={e => {
                   e.preventDefault();
-                  props.loginUser(email, password);
+                  loginUser(email, password);
                 }}
               >
                 Submit
