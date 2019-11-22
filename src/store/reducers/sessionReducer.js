@@ -7,10 +7,9 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case LOG_IN:
-      return { ...action.credentials };
+      return { ...state, user: action.credentials };
     case LOG_OUT:
-      return;
-    //{ ...state, user: action.user };
+      return { ...state, user: {} };
 
     default:
       return state;

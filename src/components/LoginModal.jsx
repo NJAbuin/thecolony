@@ -5,7 +5,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is required for IE 11 support
 import { labelInputCreator, validateEmail } from "../../utils";
 import { connect } from "react-redux";
-import { loginUserAction } from "../store/actions/userActions";
+import { sessionLogIn } from "../store/actions/session";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -64,6 +64,7 @@ function LoginModal(props) {
     setOpen(false);
   };
 
+  // FIXME: Not used, check for removal down the line
   const validateLogin = (email, pass) => {
     if (!validateEmail(email) || pass == "") {
       setWarningMessage("Usuario o contraseña invalidos");
@@ -99,7 +100,7 @@ function LoginModal(props) {
               <button
                 onClick={e => {
                   e.preventDefault();
-                  props.loginUser(email, password);
+                  props.sessionLogIn(email, password);
                 }}
               >
                 Submit
@@ -114,9 +115,9 @@ function LoginModal(props) {
 
 const mapStateToProps = () => ({});
 
-const mapDispatchToProps = dispatch => ({
-  loginUser: email => dispatch(loginUserAction({ email }))
-});
+const mapDispatchToProps = {
+  sessionLogIn
+};
 
 export default connect(
   mapStateToProps,

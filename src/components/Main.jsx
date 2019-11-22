@@ -23,14 +23,14 @@ const Main = props => {
   );
 };
 
-/* Que es esto Manu? Estaba metido como texto entre los links;
+/* FIXME: Que es esto Manu? Estaba metido como texto entre los links;
 const Grid = styled.div` display: grid; grid-template-rows: 7.5% 1fr;
 grid-template-columns: 12.5% 1fr; grid-template-areas: "nav nav"
 "sidebar content"; height: 100vh; `;
 */
 
 const mapStateToProps = state => ({
-  user: state.session
+  user: state.session.user
 });
 
 const mapDispatchToProps = dispatch => ({});

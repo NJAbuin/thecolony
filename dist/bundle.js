@@ -57691,7 +57691,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_spring_web_cjs__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_spring_web_cjs__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils */ "./utils/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store_actions_userActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../store/actions/userActions */ "./src/store/actions/userActions.js");
+/* harmony import */ var _store_actions_session__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../store/actions/session */ "./src/store/actions/session.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -57793,7 +57793,8 @@ function LoginModal(props) {
 
   var handleClose = function handleClose() {
     setOpen(false);
-  };
+  }; // FIXME: Not used, check for removal down the line
+
 
   var validateLogin = function validateLogin(email, pass) {
     if (!Object(_utils__WEBPACK_IMPORTED_MODULE_5__["validateEmail"])(email) || pass == "") {
@@ -57830,7 +57831,7 @@ function LoginModal(props) {
   }, warningMessage), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: function onClick(e) {
       e.preventDefault();
-      props.loginUser(email, password);
+      props.sessionLogIn(email, password);
     }
   }, "Submit"))))));
 }
@@ -57839,16 +57840,9 @@ var mapStateToProps = function mapStateToProps() {
   return {};
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    loginUser: function loginUser(email) {
-      return dispatch(Object(_store_actions_userActions__WEBPACK_IMPORTED_MODULE_7__["loginUserAction"])({
-        email: email
-      }));
-    }
-  };
+var mapDispatchToProps = {
+  sessionLogIn: _store_actions_session__WEBPACK_IMPORTED_MODULE_7__["sessionLogIn"]
 };
-
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps, mapDispatchToProps)(LoginModal));
 
 /***/ }),
@@ -57893,7 +57887,7 @@ var Main = function Main(props) {
     to: "/landing"
   })));
 };
-/* Que es esto Manu? Estaba metido como texto entre los links;
+/* FIXME: Que es esto Manu? Estaba metido como texto entre los links;
 const Grid = styled.div` display: grid; grid-template-rows: 7.5% 1fr;
 grid-template-columns: 12.5% 1fr; grid-template-areas: "nav nav"
 "sidebar content"; height: 100vh; `;
@@ -57902,7 +57896,7 @@ grid-template-columns: 12.5% 1fr; grid-template-areas: "nav nav"
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    user: state.session
+    user: state.session.user
   };
 };
 
@@ -58279,36 +58273,51 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
-/***/ "./src/store/actions/userActions.js":
-/*!******************************************!*\
-  !*** ./src/store/actions/userActions.js ***!
-  \******************************************/
-/*! exports provided: loginUserAction, loginUser */
+/***/ "./src/store/actions/session.js":
+/*!**************************************!*\
+  !*** ./src/store/actions/session.js ***!
+  \**************************************/
+/*! exports provided: logOut, logIn, sessionLogIn */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loginUserAction", function() { return loginUserAction; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loginUser", function() { return loginUser; });
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./src/store/constants/index.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logOut", function() { return logOut; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logIn", function() { return logIn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sessionLogIn", function() { return sessionLogIn; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants */ "./src/store/constants/index.js");
 
-var loginUserAction = function loginUserAction(credentials) {
+
+var logOut = function logOut() {
   return {
-    type: _constants__WEBPACK_IMPORTED_MODULE_0__["LOG_IN"],
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["LOG_OUT"]
+  };
+};
+var logIn = function logIn(credentials) {
+  return {
+    type: _constants__WEBPACK_IMPORTED_MODULE_1__["LOG_IN"],
     credentials: credentials
   };
 };
-var loginUser = function loginUser(email, password) {
+var sessionLogIn = function sessionLogIn(email, password) {
   return function (dispatch) {
-    axios.post("/api/admin/login", {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/admin/login", {
       email: email,
       password: password
     }).then(function (res) {
-      return res.data;
-    }).then(function (credentials) {
-      return dispatch(loginUserAction(credentials));
+      var _res$data = res.data,
+          fullName = _res$data.fullName,
+          email = _res$data.email;
+      return {
+        fullName: fullName,
+        email: email
+      };
+    }).then(function (user) {
+      return dispatch(logIn(user));
     })["catch"](function (err) {
-      return console.error(err);
+      return console.log(err);
     });
   };
 };
@@ -58410,11 +58419,14 @@ var initialState = {
 
   switch (action.type) {
     case _constants__WEBPACK_IMPORTED_MODULE_0__["LOG_IN"]:
-      return _objectSpread({}, action.credentials);
+      return _objectSpread({}, state, {
+        user: action.credentials
+      });
 
     case _constants__WEBPACK_IMPORTED_MODULE_0__["LOG_OUT"]:
-      return;
-    //{ ...state, user: action.user };
+      return _objectSpread({}, state, {
+        user: {}
+      });
 
     default:
       return state;
