@@ -15,11 +15,9 @@ const port = process.env.PORT || 3002;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 //logger
 app.use(morgan("tiny"));
 app.use(express.static("dist"));
-
 
 //passport
 app.use(
@@ -28,8 +26,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
-
-
 
 //modular routes
 /* app.use("/*", (req, res) =>

@@ -60,15 +60,16 @@ export default function AdminRegisterModal(props) {
     setOpen(false);
   };
 
-  const registerUser = (email, password, fullName) => {
+  const registerUser = (email, password, fullName) =>
     axios
       .post("/api/admin/register", { email, password, fullName })
-      .then(user => console.log(user.config.data))
-      .then(() => {
-        handleClose();
+      .then(res => {
+        if (res.data === "Este email ya esta registrado.") {
+          setWarningMessage(res.data);
+          return;
+        }
       })
       .catch(console.error());
-  };
 
   const validateRegister = (email, pass, fullName) => {
     if (!validateEmail(email)) {
@@ -82,6 +83,14 @@ export default function AdminRegisterModal(props) {
     }
   };
 
+  const handleClick = e => {
+    e.preventDefault();
+    validateRegister(email, password, fullName);
+    if (warningMessage === "") {
+      registerUser(email, password, fullName);
+      handleClose();
+    }
+  };
   return (
     <div>
       <button type="button" onClick={handleOpen}>
@@ -110,17 +119,7 @@ export default function AdminRegisterModal(props) {
               {labelInputCreator("Nombre Completo", setfullName)}
               <br />
               <p style={{ color: "red" }}>{warningMessage}</p>
-              <button
-                onClick={e => {
-                  e.preventDefault();
-                  validateRegister(email, password, fullName);
-                  if (warningMessage === "") {
-                    registerUser(email, password, fullName);
-                  }
-                }}
-              >
-                Submit
-              </button>
+              <button onClick={handleClick}>Submit</button>
             </form>
           </div>
         </Fade>

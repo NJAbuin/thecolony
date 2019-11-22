@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const Card = styled.div`
   background-color: ${props => props.color};
+  display: flex;
+  flex-direction: column;
   justify-self: center;
   align-self: center;
   height: 90%;
