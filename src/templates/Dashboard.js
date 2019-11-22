@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const Dashboard = styled.div`
+gridArea: "contentDash";
 display: grid;
 height: 100%;
 width: 100%;
