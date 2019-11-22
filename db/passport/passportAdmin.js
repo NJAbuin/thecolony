@@ -20,10 +20,9 @@ passport.use("admin",
                 })
                 .catch(console.error);
         })
-        .catch(console.error);
-    }
-  )
-);
+
+)
+
 
 passport.serializeUser(function (user, done) {
     done(null, user.id);
