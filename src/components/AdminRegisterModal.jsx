@@ -5,6 +5,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is required for IE 11 support
 import axios from "axios";
 import { labelInputCreator, validateEmail } from "../../utils";
+import { func } from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -64,12 +65,10 @@ export default function AdminRegisterModal(props) {
     axios
       .post("/api/admin/register", { email, password, fullName })
       .then(res => {
-        if (res.data === "Este email ya esta registrado.") {
+        if (res.data === "Este email ya esta registrado.")
           setWarningMessage(res.data);
-          return;
-        }
-      })
-      .catch(console.error());
+        else setWarningMessage("");
+      });
 
   const validateRegister = (email, pass, fullName) => {
     if (!validateEmail(email)) {
@@ -81,20 +80,25 @@ export default function AdminRegisterModal(props) {
     } else {
       setWarningMessage("");
     }
+    return function(validateState) {
+      if (!validateState)
+        return registerUser(email, password, fullName)
+          .then(() => handleClose())
+          .catch(console.error());
+    };
   };
 
   const handleClick = e => {
+    console.log(email, password, fullName);
     e.preventDefault();
-    validateRegister(email, password, fullName);
-    if (warningMessage === "") {
-      registerUser(email, password, fullName);
-      handleClose();
-    }
+    console.log(e);
+    validateRegister(email, password, fullName)(warningMessage);
   };
+
   return (
     <div>
       <button type="button" onClick={handleOpen}>
-        Registrate (Admin)
+        Registrate
       </button>
       <Modal
         aria-labelledby="spring-modal-title"
@@ -119,7 +123,7 @@ export default function AdminRegisterModal(props) {
               {labelInputCreator("Nombre Completo", setfullName)}
               <br />
               <p style={{ color: "red" }}>{warningMessage}</p>
-              <button onClick={handleClick}>Submit</button>
+              <button onClick={e => handleClick(e)}>Submit</button>
             </form>
           </div>
         </Fade>

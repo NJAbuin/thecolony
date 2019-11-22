@@ -31,7 +31,6 @@ export const labelInputCreator = (fieldName, setFn) => {
         style={inputStyle}
       />
       <br />
-      <br />
     </label>
   );
 };

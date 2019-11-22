@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { MainGrid } from "../templates/MainGrid";
 import AuthContainer from "./AuthContainer";
 import { ThemeProvider } from "styled-components";
-
 import Landing from "../components/Landing";
 import Navbar from "../components/Navbar";
 
@@ -20,8 +19,7 @@ const Main = props => {
           <R path="/landing" component={Landing} />
           {/* {'Change route Auth to a Private Route later'} */}
           <R path="/auth" component={AuthContainer} />
-
-          <Redirect exact path="/" to="/landing" />
+          <Redirect path="/" to="/landing" />
         </Switch>
       </MainGrid>
     </ThemeProvider>
