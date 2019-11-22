@@ -3,17 +3,10 @@ const Client = require("../db/models/Client");
 const passport = require("../db/passport/passportClient");
 
 router.post("/register", function (req, res) {
-  Client.findOrCreate({ where: { email: req.body.email } })
+  Client.findOrCreate({ where: req.body })
     .then(([client, created]) => {
       if (created) {
-        req.login(client, function (err) {
-          if (err) {
-            console.log(err);
-          } else {
-            res.send(client);
-          }
-        }
-        )
+        res.send(client)
       } else {
         res.send("Este email ya esta registrado.")
       }

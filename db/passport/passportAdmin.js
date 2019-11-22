@@ -13,11 +13,8 @@ passport.use("admin",
                 where: { email: email }
             })
                 .then(user => {
-                    if (!user) {
-                        return done(null, false, { message: "Incorrect email." });
-                    }
-                    if (!user.validatePassword(password)) {
-                        return done(null, false, { message: "Incorrect password." });
+                    if (!user || !user.validatePassword(password)) {
+                        return done(null, false, { message: "Incorrect email or password." });
                     }
                     return done(null, user);
                 })
