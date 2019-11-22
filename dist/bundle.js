@@ -3300,7 +3300,7 @@ var defaultTheme = Object(_createMuiTheme__WEBPACK_IMPORTED_MODULE_0__["default"
 /*!************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/styles/index.js ***!
   \************************************************************/
-/*! exports provided: hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, createMuiTheme, createStyles, makeStyles, responsiveFontSizes, styled, easing, duration, formatMs, isString, isNumber, useTheme, withStyles, withTheme, createGenerateClassName, jssPreset, ServerStyleSheets, StylesProvider, MuiThemeProvider, ThemeProvider */
+/*! exports provided: createMuiTheme, createStyles, makeStyles, responsiveFontSizes, styled, useTheme, withStyles, withTheme, createGenerateClassName, jssPreset, ServerStyleSheets, StylesProvider, MuiThemeProvider, ThemeProvider, hexToRgb, rgbToHex, hslToRgb, decomposeColor, recomposeColor, getContrastRatio, getLuminance, emphasize, fade, darken, lighten, easing, duration, formatMs, isString, isNumber */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57847,67 +57847,6 @@ var mapDispatchToProps = {
 
 /***/ }),
 
-/***/ "./src/components/Main.jsx":
-/*!*********************************!*\
-  !*** ./src/components/Main.jsx ***!
-  \*********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _PrivateRoute__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PrivateRoute */ "./src/components/PrivateRoute.jsx");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _templates_MainGrid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../templates/MainGrid */ "./src/templates/MainGrid.js");
-/* harmony import */ var _containers_AuthContainer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../containers/AuthContainer */ "./src/containers/AuthContainer.jsx");
-/* harmony import */ var _Landing__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Landing */ "./src/components/Landing.jsx");
-/* harmony import */ var _components_Navbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Navbar */ "./src/components/Navbar.jsx");
-
-
-
-
-
-
-
-
-
-var Main = function Main(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_MainGrid__WEBPACK_IMPORTED_MODULE_4__["MainGrid"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_7__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: "/landing",
-    component: _Landing__WEBPACK_IMPORTED_MODULE_6__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: "/auth",
-    component: _containers_AuthContainer__WEBPACK_IMPORTED_MODULE_5__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
-    exact: true,
-    path: "/",
-    to: "/landing"
-  })));
-};
-/* FIXME: Que es esto Manu? Estaba metido como texto entre los links;
-const Grid = styled.div` display: grid; grid-template-rows: 7.5% 1fr;
-grid-template-columns: 12.5% 1fr; grid-template-areas: "nav nav"
-"sidebar content"; height: 100vh; `;
-*/
-
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    user: state.session.user
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, null)(Main));
-
-/***/ }),
-
 /***/ "./src/components/Navbar.jsx":
 /*!***********************************!*\
   !*** ./src/components/Navbar.jsx ***!
@@ -58241,6 +58180,67 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/containers/Main.jsx":
+/*!*********************************!*\
+  !*** ./src/containers/Main.jsx ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _components_PrivateRoute__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/PrivateRoute */ "./src/components/PrivateRoute.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _templates_MainGrid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../templates/MainGrid */ "./src/templates/MainGrid.js");
+/* harmony import */ var _AuthContainer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AuthContainer */ "./src/containers/AuthContainer.jsx");
+/* harmony import */ var _components_Landing__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Landing */ "./src/components/Landing.jsx");
+/* harmony import */ var _components_Navbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Navbar */ "./src/components/Navbar.jsx");
+
+
+
+
+
+
+
+
+
+var Main = function Main(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_MainGrid__WEBPACK_IMPORTED_MODULE_4__["MainGrid"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_7__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/landing",
+    component: _components_Landing__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/auth",
+    component: _AuthContainer__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+    exact: true,
+    path: "/",
+    to: "/landing"
+  })));
+};
+/* FIXME: Que es esto Manu? Estaba metido como texto entre los links;
+const Grid = styled.div` display: grid; grid-template-rows: 7.5% 1fr;
+grid-template-columns: 12.5% 1fr; grid-template-areas: "nav nav"
+"sidebar content"; height: 100vh; `;
+*/
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    user: state.session.user
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {};
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, null)(Main));
+
+/***/ }),
+
 /***/ "./src/index.jsx":
 /*!***********************!*\
   !*** ./src/index.jsx ***!
@@ -58254,7 +58254,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_Main__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Main */ "./src/components/Main.jsx");
+/* harmony import */ var _containers_Main__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./containers/Main */ "./src/containers/Main.jsx");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
@@ -58268,7 +58268,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
   store: _store__WEBPACK_IMPORTED_MODULE_3__["default"]
 }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
   path: "/",
-  component: _components_Main__WEBPACK_IMPORTED_MODULE_2__["default"]
+  component: _containers_Main__WEBPACK_IMPORTED_MODULE_2__["default"]
 }))), document.getElementById("root"));
 
 /***/ }),

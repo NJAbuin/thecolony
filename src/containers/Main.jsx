@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
 import { Route as R, Switch, Redirect } from "react-router-dom";
-import PrivateRoute from "./PrivateRoute";
+import PrivateRoute from "../components/PrivateRoute";
 import { connect } from "react-redux";
 import { MainGrid } from "../templates/MainGrid";
-import AuthContainer from "../containers/AuthContainer";
+import AuthContainer from "./AuthContainer";
 
-import Landing from "./Landing";
+import Landing from "../components/Landing";
 import Navbar from "../components/Navbar";
 
 const Main = props => {
