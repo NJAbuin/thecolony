@@ -9,9 +9,11 @@ import Landing from "../components/Landing";
 import Navbar from "../components/Navbar";
 
 const Main = props => {
+  const { user } = props;
+
   return (
     <MainGrid>
-      <Navbar />
+      <Navbar user={user} />
       <Switch>
         <R path="/landing" component={Landing} />
         {/* {'Change route Auth to a Private Route later'} */}
