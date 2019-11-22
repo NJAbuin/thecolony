@@ -57572,10 +57572,8 @@ function AdminRegisterModal(props) {
       email: email,
       password: password,
       fullName: fullName
-    }).then(function (res) {
-      if (res.data === "Este email ya esta registrado.") {
-        setWarningMessage(res.data);
-      }
+    }).then(function (user) {
+      return console.log(user.config.data);
     })["catch"](console.error());
   };
 
