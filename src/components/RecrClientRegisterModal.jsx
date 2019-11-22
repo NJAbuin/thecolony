@@ -52,6 +52,7 @@ export default function RecrClientRegisterModal(props) {
   const [fullName, setfullName] = React.useState("");
   const [logoURL, setLogoURL] = React.useState("");
   const [phone, setPhone] = React.useState("");
+  const [website, setWebsite] = React.useState("");
   let showWarning = "none";
 
   const handleOpen = () => {
@@ -62,19 +63,15 @@ export default function RecrClientRegisterModal(props) {
     setOpen(false);
   };
 
-  let routeToPost = "";
-  if (props.role === "Client") {
-    routeToPost = "/api/client/register";
-  } else {
-    routeToPost = "/api/recruiter/register";
-  }
+  let routeToPost;
+  if (props.role === "Client") routeToPost = "/api/client/register";
+  if (props.role === "Recruiter") routeToPost = "/api/recruiter/register";
 
-  const registerRecrClient = (email, password, fullName) => {
+  const register = (email, password, fullName, phone, logoURL, website) =>
     axios
-      .post(routeToPost, { email, password, fullName })
-      .then(user => res.json(user))
+      .post(routeToPost, { email, password, fullName, phone, logoURL, website })
+      .then(user => console.log(user.config.data))
       .catch(console.error());
-  };
 
   return (
     <div>
@@ -102,13 +99,13 @@ export default function RecrClientRegisterModal(props) {
               {labelInputCreator("Email", setEmail)}
               {labelInputCreator("Password", setPassword)}
               {labelInputCreator("Nombre Completo", setfullName)}
-              {labelInputCreator("Logo URL", setfullName)}
-              {labelInputCreator("Phone", setfullName)}
-
+              {labelInputCreator("Phone", setPhone)}
+              {labelInputCreator("Website", setWebsite)}
+              {labelInputCreator("Logo URL", setLogoURL)}
               <button
                 onClick={e => {
                   e.preventDefault();
-                  registerRecrClient(email, password, fullName, logoURL, phone);
+                  register(email, password, fullName, phone, logoURL, website);
                 }}
               >
                 Submit

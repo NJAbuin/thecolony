@@ -57648,25 +57648,34 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function (props) {
-  var landImgs = {
+  var _admin$recruiter$clie = {
     admin: "https://www.governmentciomedia.com/sites/default/files/styles/featured_article_image/public/2019-05/Closing%20the%20Cyber%20Workforce%20Gap%20by%20Improving%20the%20Pipeline.jpg?itok=3cDmcN0N",
     recruiter: "https://www.totalbusinessmagazine.com/Total-Business/wp-content/uploads/2018/07/Could-a-Diverse-Workforce-Win-You-More-Customers.jpg",
     client: "https://news.blr.com/app/uploads/sites/3/2018/07/Workers-Diverse-5.jpg"
-  };
+  },
+      admin = _admin$recruiter$clie.admin,
+      recruiter = _admin$recruiter$clie.recruiter,
+      client = _admin$recruiter$clie.client;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_LandingGrid__WEBPACK_IMPORTED_MODULE_1__["LandingGrid"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_Card__WEBPACK_IMPORTED_MODULE_2__["Card"], {
     color: "grey",
-    imgUrl: landImgs.admin
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Admin"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Lorem ipsum dolor"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoginModal__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminRegisterModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    imgUrl: admin
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Admin"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Lorem ipsum dolor"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoginModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    role: "Admin"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AdminRegisterModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
     role: "Admin"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_Card__WEBPACK_IMPORTED_MODULE_2__["Card"], {
     color: "yellow",
-    imgUrl: landImgs.recruiter
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Recrutadores"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Lorem ipsum dolor"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoginModal__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RecrClientRegisterModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    imgUrl: recruiter
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Recrutadores"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Lorem ipsum dolor"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoginModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    role: "Recruiter"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RecrClientRegisterModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
     role: "Recruiter"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_templates_Card__WEBPACK_IMPORTED_MODULE_2__["Card"], {
     color: "cyan",
-    imgUrl: landImgs.client
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Clientes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Lorem ipsum dolor"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoginModal__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RecrClientRegisterModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    imgUrl: client
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Clientes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Lorem ipsum dolor"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoginModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    role: "Client"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RecrClientRegisterModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
     role: "Client"
   })));
 });
@@ -57804,6 +57813,10 @@ function LoginModal(props) {
     }
   };
 
+  var routeToPost;
+  if (props.role === "Recruiter") routeToPost = "/api/recruiter/login";
+  if (props.role === "Client") routeToPost = "/api/client/login";
+  if (props.role === "Admin") routeToPost = "/api/admin/login";
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     onClick: handleOpen
@@ -57831,19 +57844,15 @@ function LoginModal(props) {
   }, warningMessage), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: function onClick(e) {
       e.preventDefault();
-      props.sessionLogIn(email, password);
+      props.sessionLogIn(routeToPost, email, password);
     }
   }, "Submit"))))));
 }
 
-var mapStateToProps = function mapStateToProps() {
-  return {};
-};
-
 var mapDispatchToProps = {
   sessionLogIn: _store_actions_session__WEBPACK_IMPORTED_MODULE_7__["sessionLogIn"]
 };
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps, mapDispatchToProps)(LoginModal));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(null, mapDispatchToProps)(LoginModal));
 
 /***/ }),
 
@@ -58041,6 +58050,11 @@ function RecrClientRegisterModal(props) {
       phone = _React$useState12[0],
       setPhone = _React$useState12[1];
 
+  var _React$useState13 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(""),
+      _React$useState14 = _slicedToArray(_React$useState13, 2),
+      website = _React$useState14[0],
+      setWebsite = _React$useState14[1];
+
   var showWarning = "none";
 
   var handleOpen = function handleOpen() {
@@ -58051,21 +58065,20 @@ function RecrClientRegisterModal(props) {
     setOpen(false);
   };
 
-  var routeToPost = "";
+  var routeToPost;
+  if (props.role === "Client") routeToPost = "/api/client/register";
+  if (props.role === "Recruiter") routeToPost = "/api/recruiter/register";
 
-  if (props.role === "Client") {
-    routeToPost = "/api/client/register";
-  } else {
-    routeToPost = "/api/recruiter/register";
-  }
-
-  var registerRecrClient = function registerRecrClient(email, password, fullName) {
-    axios__WEBPACK_IMPORTED_MODULE_5___default.a.post(routeToPost, {
+  var register = function register(email, password, fullName, phone, logoURL, website) {
+    return axios__WEBPACK_IMPORTED_MODULE_5___default.a.post(routeToPost, {
       email: email,
       password: password,
-      fullName: fullName
+      fullName: fullName,
+      phone: phone,
+      logoURL: logoURL,
+      website: website
     }).then(function (user) {
-      return res.json(user);
+      return console.log(user.config.data);
     })["catch"](console.error());
   };
 
@@ -58089,10 +58102,10 @@ function RecrClientRegisterModal(props) {
     className: classes.paper
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
     id: "spring-modal-title"
-  }, "Ingrese sus datos para registrarse"), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Email", setEmail), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Password", setPassword), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Nombre Completo", setfullName), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Logo URL", setfullName), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Phone", setfullName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, "Ingrese sus datos para registrarse"), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Email", setEmail), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Password", setPassword), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Nombre Completo", setfullName), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Phone", setPhone), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Website", setWebsite), Object(_utils__WEBPACK_IMPORTED_MODULE_6__["labelInputCreator"])("Logo URL", setLogoURL), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: function onClick(e) {
       e.preventDefault();
-      registerRecrClient(email, password, fullName, logoURL, phone);
+      register(email, password, fullName, phone, logoURL, website);
     }
   }, "Submit"))))));
 }
@@ -58309,9 +58322,9 @@ var logIn = function logIn(credentials) {
     credentials: credentials
   };
 };
-var sessionLogIn = function sessionLogIn(email, password) {
+var sessionLogIn = function sessionLogIn(url, email, password) {
   return function (dispatch) {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/admin/login", {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, {
       email: email,
       password: password
     }).then(function (res) {

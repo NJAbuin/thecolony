@@ -10,9 +10,9 @@ export const logIn = credentials => ({
   credentials
 });
 
-export const sessionLogIn = (email, password) => dispatch =>
+export const sessionLogIn = (url, email, password) => dispatch =>
   axios
-    .post("/api/admin/login", { email, password })
+    .post(url, { email, password })
     .then(res => {
       const { fullName, email } = res.data;
       return { fullName, email };

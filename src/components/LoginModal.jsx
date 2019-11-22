@@ -73,6 +73,11 @@ function LoginModal(props) {
     }
   };
 
+  let routeToPost;
+  if (props.role === "Recruiter") routeToPost = "/api/recruiter/login";
+  if (props.role === "Client") routeToPost = "/api/client/login";
+  if (props.role === "Admin") routeToPost = "/api/admin/login";
+
   return (
     <div>
       <button type="button" onClick={handleOpen}>
@@ -100,7 +105,7 @@ function LoginModal(props) {
               <button
                 onClick={e => {
                   e.preventDefault();
-                  props.sessionLogIn(email, password);
+                  props.sessionLogIn(routeToPost, email, password);
                 }}
               >
                 Submit
@@ -113,13 +118,11 @@ function LoginModal(props) {
   );
 }
 
-const mapStateToProps = () => ({});
-
 const mapDispatchToProps = {
   sessionLogIn
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(LoginModal);

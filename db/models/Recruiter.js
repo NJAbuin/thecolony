@@ -1,5 +1,6 @@
 const db = require("../index");
 const S = require("sequelize");
+const crypto = require("crypto");
 
 class Recruiter extends S.Model {}
 
@@ -41,5 +42,24 @@ Recruiter.init(
   },
   { sequelize: db, modelName: "recruiter" }
 );
+
+Recruiter.prototype.hashPassword = function(password) {
+  return crypto
+    .createHmac("sha1", this.salt)
+    .update(password)
+    .digest("hex");
+};
+Recruiter.prototype.randomSalt = function() {
+  return crypto.randomBytes(20).toString("hex");
+};
+Recruiter.prototype.validatePassword = function(password) {
+  let newPassword = this.hashPassword(password);
+  return newPassword === this.password;
+};
+
+Recruiter.beforeCreate(user => {
+  user.salt = user.randomSalt();
+  user.password = user.hashPassword(user.password);
+});
 
 module.exports = Recruiter;
