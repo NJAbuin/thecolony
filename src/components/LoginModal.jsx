@@ -79,10 +79,6 @@ function LoginModal(props) {
       props.sessionLogIn(routeToPost, email, password);
       handleClose();
     }
-
-    /*
-    return ;
-  });*/
   }
 
   let routeToPost;

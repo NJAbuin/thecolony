@@ -115,7 +115,6 @@ export default function RecrClientRegisterModal(props) {
               {labelInputCreator("Logo URL", setLogoURL)}
               {labelInputCreator("Phone", setPhone)}
               {labelInputCreator("Website", setWebsite)}
-              <br />
               <p style={{ color: "red" }}>{warningMessage}</p>
 
               <button
