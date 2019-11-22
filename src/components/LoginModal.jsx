@@ -5,7 +5,6 @@ import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is required for IE 11 support
 import { labelInputCreator, validateEmail } from "../../utils";
 import { connect } from "react-redux";
-import { loginUser } from "../store/actions/userActions";
 import { sessionLogIn } from "../store/actions/session";
 
 const useStyles = makeStyles(theme => ({
