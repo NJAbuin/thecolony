@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Route as R, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import { AuthGrid } from "../templates/AuthGrid";
 import DashboardAdmin from "./DashboardAdmin";
@@ -20,7 +20,7 @@ function AuthContainer(props) {
     <AuthGrid>
       <Sidebar />
       <Switch>
-        <R path="/auth/admin" component={DashboardAdmin} />
+        <Route path="/auth/admin" component={DashboardAdmin} />
         {/*         <R path="/auth/recruiter" component={DashboardRecruiter} />
         <R path="/auth/business" component={DashboardBusiness} /> */}
       </Switch>
