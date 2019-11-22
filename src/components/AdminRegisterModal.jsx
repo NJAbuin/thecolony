@@ -60,26 +60,35 @@ export default function AdminRegisterModal(props) {
     setOpen(false);
   };
 
-  const registerUser = (email, password, fullName) => {
+  const registerUser = (email, password, fullName) =>
     axios
       .post("/api/admin/register", { email, password, fullName })
-      .then((res) => {
+      .then(res => {
         if (res.data === "Este email ya esta registrado.") {
           setWarningMessage(res.data);
+          return;
         }
       })
       .catch(console.error());
-  };
 
   const validateRegister = (email, pass, fullName) => {
     if (!validateEmail(email)) {
-      setWarningMessage("Usuario o contraseña invalidos");
-    }
-    if (pass.length <= 2) {
+      setWarningMessage("Ingrese un email valido");
+    } else if (pass.length <= 2) {
       setWarningMessage("La contraseña debe tener al menos 2 caracteres");
-    }
-    if (fullName.length < 5) {
+    } else if (fullName.length < 5) {
       setWarningMessage("Ingrese un nombre valido");
+    } else {
+      setWarningMessage("");
+    }
+  };
+
+  const handleClick = e => {
+    e.preventDefault();
+    validateRegister(email, password, fullName);
+    if (warningMessage === "") {
+      registerUser(email, password, fullName);
+      handleClose();
     }
   };
   return (
@@ -109,18 +118,8 @@ export default function AdminRegisterModal(props) {
               {labelInputCreator("Password", setPassword)}
               {labelInputCreator("Nombre Completo", setfullName)}
               <br />
-              <p>{warningMessage}</p>
-              <button
-                onClick={e => {
-                  e.preventDefault();
-                  validateRegister(email, password, fullName);
-                  if (warningMessage === "") {
-                    registerUser(email, password, fullName);
-                  }
-                }}
-              >
-                Submit
-              </button>
+              <p style={{ color: "red" }}>{warningMessage}</p>
+              <button onClick={handleClick}>Submit</button>
             </form>
           </div>
         </Fade>
