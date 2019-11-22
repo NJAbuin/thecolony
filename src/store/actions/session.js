@@ -1,3 +1,4 @@
+import axios from "axios";
 import { LOG_IN, LOG_OUT } from "../constants";
 
 export const logOut = () => ({
@@ -9,9 +10,12 @@ export const logIn = credentials => ({
   credentials
 });
 
-export const sessionLogIn = (email, password) => dispatch =>
+export const sessionLogIn = (url, email, password) => dispatch =>
   axios
-    .post("/api/admin/login", { email, password })
-    .then(res => res.data)
+    .post(url, { email, password })
+    .then(res => {
+      const { fullName, email } = res.data;
+      return { fullName, email };
+    })
     .then(user => dispatch(logIn(user)))
     .catch(err => console.log(err));

@@ -6,6 +6,7 @@ import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is requir
 import { labelInputCreator, validateEmail } from "../../utils";
 import { connect } from "react-redux";
 import { loginUser } from "../store/actions/userActions";
+import { sessionLogIn } from "../store/actions/session";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -64,6 +65,7 @@ function LoginModal(props) {
     setOpen(false);
   };
 
+  // FIXME: Not used, check for removal down the line
   const validateLogin = (email, pass) => {
     if (!validateEmail(email) || pass == "") {
       setWarningMessage("Usuario o contraseña invalidos");
@@ -71,6 +73,11 @@ function LoginModal(props) {
       setWarningMessage("");
     }
   };
+
+  let routeToPost;
+  if (props.role === "Recruiter") routeToPost = "/api/recruiter/login";
+  if (props.role === "Client") routeToPost = "/api/client/login";
+  if (props.role === "Admin") routeToPost = "/api/admin/login";
 
   return (
     <div>
@@ -99,7 +106,7 @@ function LoginModal(props) {
               <button
                 onClick={e => {
                   e.preventDefault();
-                  loginUser(email, password);
+                  props.sessionLogIn(routeToPost, email, password);
                 }}
               >
                 Submit
@@ -112,12 +119,8 @@ function LoginModal(props) {
   );
 }
 
-const mapStateToProps = () => {
-  return {};
+const mapDispatchToProps = {
+  sessionLogIn
 };
 
-const mapDispatchToProps = dispatch => ({
-  loginUser: email => dispatch(loginUserAction({ email }))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);
+export default connect(null, mapDispatchToProps)(LoginModal);
