@@ -16,19 +16,26 @@ const Main = props => {
         <R path="/landing" component={Landing} />
         {/* {'Change route Auth to a Private Route later'} */}
         <R path="/auth" component={AuthContainer} />
-        const Grid = styled.div` display: grid; grid-template-rows: 7.5% 1fr;
-        grid-template-columns: 12.5% 1fr; grid-template-areas: "nav nav"
-        "sidebar content"; height: 100vh; `;
+
         <Redirect exact path="/" to="/landing" />
       </Switch>
     </MainGrid>
   );
 };
 
-const mapStateToProps = () => {
-  return { user };
-};
+/* Que es esto Manu? Estaba metido como texto entre los links;
+const Grid = styled.div` display: grid; grid-template-rows: 7.5% 1fr;
+grid-template-columns: 12.5% 1fr; grid-template-areas: "nav nav"
+"sidebar content"; height: 100vh; `;
+*/
+
+const mapStateToProps = state => ({
+  user: state.session
+});
 
 const mapDispatchToProps = dispatch => ({});
 
-export default connect(null, mapDispatchToProps)(Main);
+export default connect(
+  mapStateToProps,
+  null
+)(Main);
