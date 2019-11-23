@@ -9,3 +9,6 @@
 ```bash
 npm run dev
 ```
+#### Seed DB by using /api/seed/ route.
+---
+
