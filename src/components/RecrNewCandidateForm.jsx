@@ -1,6 +1,7 @@
 import React from "react";
 import { labelInputCreator } from "../../utils";
 import { H1 } from "../templates/H1";
+import CSVReader from "react-csv-reader";
 import Axios from "axios";
 
 export default function RecrNewCandidateForm(props) {
@@ -11,6 +12,7 @@ export default function RecrNewCandidateForm(props) {
   const [address, setAddress] = React.useState("");
   const [expectedSalary, setExpectedSalary] = React.useState("");
   const [warningMessage, setWarningMessage] = React.useState("");
+  const [csvValues, setCsvValues] = React.useState([]);
 
   const uploadPDF = e => {
     e.preventDefault();
@@ -40,6 +42,28 @@ export default function RecrNewCandidateForm(props) {
     }
   };
 
+  const handleChange = e => {
+    console.log(e.target.files[0]);
+  };
+
+  const papaparseOptions = {
+    header: true,
+    dynamicTyping: true,
+    skipEmptyLines: true
+    // transformHeader: header => header.toLowerCase().replace(/\W/g, "_")
+  };
+
+  const handleForce = data => {
+    setCsvValues(data);
+  };
+
+  const bulkCreateFromCsv = e => {
+    e.preventDefault();
+    Axios.post("/api/recruiter/candidatos/csvImport", [...csvValues]).then(() =>
+      console.log(res.data)
+    );
+  };
+
   return (
     <div>
       <form>
@@ -52,12 +76,31 @@ export default function RecrNewCandidateForm(props) {
         {labelInputCreator("Salario esperado", setExpectedSalary)}
         <label>
           Subir CV :{" "}
-          <button onClick={e => uploadPDF(e)}>Elija el archivo</button>
+          <input
+            type="file"
+            onChange={e => handleChange(e)}
+            /*onClick={e => uploadPDF(e)}*/
+          ></input>
         </label>
         <br />
         <p style={{ color: "red" }}>{warningMessage}</p>
         <button onClick={e => handleClick(e)}>Submit</button>
       </form>
+      <H1>Importe todos sus candidatos facilmente mediante un .csv</H1>
+      <p>
+        Puede extraer los datos de sus candidatos de una planilla propia al
+        exportarla como csv.
+        <br />
+        Debe contener poseer las columnas
+        DNI,fullName,age,jobTitle,address,expectedSalary
+      </p>
+      <CSVReader
+        cssClass="react-csv-input"
+        label="Elije el archivo a subir:  "
+        onFileLoaded={handleForce}
+        parserOptions={papaparseOptions}
+      />
+      <button onClick={e => bulkCreateFromCsv(e)}>Confirmar archivo</button>
     </div>
   );
 }
