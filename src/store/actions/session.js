@@ -15,8 +15,8 @@ export const sessionLogIn = (url, email, password) => dispatch =>
     .post(url, { email, password })
     .then(res => {
       console.log(res)
-      const { fullName, email } = res.data;
-      return { fullName, email };
+      const { fullName, email, userType } = res.data;
+      return { fullName, email, userType };
     })
     .then(user => dispatch(logIn(user)))
     .catch(err => console.log(err));

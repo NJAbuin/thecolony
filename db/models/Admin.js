@@ -15,6 +15,10 @@ Admin.init(
       allowNull: false,
       unique: true
     },
+    userType: {
+      type: S.STRING,
+      defaultValue: 'Admin'
+    },
     password: {
       type: S.STRING,
       allowNull: false
