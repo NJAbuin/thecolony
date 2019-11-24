@@ -14,6 +14,7 @@ export default function RecrNewCandidateForm(props) {
   const [expectedSalary, setExpectedSalary] = React.useState(0);
   const [warningMessage, setWarningMessage] = React.useState("");
   const [submitted, setSubmitted] = React.useState(false);
+  const recruiterID = props.session || 1;
 
   const uploadPDF = e => {
     e.preventDefault();
@@ -29,17 +30,18 @@ export default function RecrNewCandidateForm(props) {
   const doTheThing = () => {
     if (warningMessage === "" && !DNI.length < 8) {
       if (props.match.url === "/recruiter/candidate") {
-        () =>
+        (() =>
           Axios.post("/api/recruiter/candidatos", {
             DNI,
             fullName,
             age,
             jobTitle,
             address,
-            expectedSalary
-          }).then(candidate => {
-            console.log(candidate);
-          });
+            expectedSalary,
+            recruiterID
+          }))().then(candidate => {
+          console.log(candidate);
+        });
       } else if (
         props.match.path === "/candidatos/edit/:id" &&
         DNI.length < 8
