@@ -10,6 +10,14 @@ export const logIn = credentials => ({
   credentials
 });
 
+export const fetchUser = () => dispatch =>
+  axios
+    .get("/api/me")
+    .then(res => res.data)
+    .then(user => {
+      dispatch(logIn(user));
+    });
+
 export const sessionLogIn = (url, email, password) => dispatch =>
   axios
     .post(url, { email, password })
