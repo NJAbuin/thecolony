@@ -1,4 +1,5 @@
 import React from "react";
+import { Label } from "../src/templates/FormLabel";
 
 /**
  *labelInputCreator: output a label and an input determined by parameters
@@ -21,7 +22,7 @@ export const labelInputCreator = (fieldName, setFn) => {
   };
 
   return (
-    <label>
+    <Label>
       {fieldName}:{" "}
       <input
         onChange={e => {
@@ -31,7 +32,7 @@ export const labelInputCreator = (fieldName, setFn) => {
         style={inputStyle}
       />
       <br />
-    </label>
+    </Label>
   );
 };
 

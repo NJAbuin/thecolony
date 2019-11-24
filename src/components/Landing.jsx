@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import { LandingGrid } from "../templates/LandingGrid";
 import { Card } from "../templates/Card";
 import { H2 } from "../templates/Title";
@@ -7,8 +7,11 @@ import { P } from "../templates/Paragraph";
 import LoginModal from "./LoginModal";
 import AdminRegisterModal from "./AdminRegisterModal";
 import RecrClientRegisterModal from "./RecrClientRegisterModal";
+import { fetchUser } from "../store/actions/session"
+import { useState, useEffect } from "react"
+import { connect } from "react-redux";
 
-export default props => {
+function Landing(props) {
   const { admin, recruiter, client } = {
     admin:
       "https://www.governmentciomedia.com/sites/default/files/styles/featured_article_image/public/2019-05/Closing%20the%20Cyber%20Workforce%20Gap%20by%20Improving%20the%20Pipeline.jpg?itok=3cDmcN0N",
@@ -17,6 +20,10 @@ export default props => {
     client:
       "https://news.blr.com/app/uploads/sites/3/2018/07/Workers-Diverse-5.jpg"
   };
+
+  useEffect(() => {
+    props.fetchUser()
+  })
 
   return (
     <LandingGrid>
@@ -90,6 +97,9 @@ export default props => {
           <RecrClientRegisterModal role={"Client"} />
         </div>
       </Card>
+      <Link to="/recruiter/candidate">
+        TEST LINK to Recruiter new Candidate Form
+      </Link>
     </LandingGrid>
   );
 };
@@ -105,3 +115,15 @@ const botDivStyle = {
   height: "20%",
   textAlign: "center"
 };
+
+
+const mapDispatchToProps = dispatch => ({
+  fetchUser: () => dispatch(fetchUser())
+});
+
+const mapStateToProps = state => ({
+  user: state.session.user,
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Landing);

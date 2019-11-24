@@ -72,7 +72,8 @@ export default function AdminRegisterModal(props) {
         if (res.data === "Este email ya esta registrado.")
           setWarningMessage(res.data);
         else setWarningMessage("");
-      });
+      })
+      .catch(console.error());
 
   const validateRegister = (email, pass, fullName) => {
     if (!validateEmail(email)) {

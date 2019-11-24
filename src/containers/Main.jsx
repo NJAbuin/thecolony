@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Route as R, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import PrivateRoute from "../components/PrivateRoute";
 import { connect } from "react-redux";
 import { MainGrid } from "../templates/MainGrid";
@@ -7,6 +7,7 @@ import AuthContainer from "./AuthContainer";
 import { ThemeProvider } from "styled-components";
 import Landing from "../components/Landing";
 import Navbar from "../components/Navbar";
+import RecrNewCandidateForm from "../components/RecrNewCandidateForm";
 
 const Main = props => {
   const { user } = props;
@@ -16,9 +17,15 @@ const Main = props => {
       <MainGrid>
         <Navbar user={user} />
         <Switch>
-          <R path="/landing" component={Landing} />
+          <Route
+            exact
+            path="/recruiter/candidate"
+            component={RecrNewCandidateForm}
+          />
+
+          <Route path="/landing" component={Landing} />
           {/* {'Change route Auth to a Private Route later'} */}
-          <R path="/auth" component={AuthContainer} />
+          <Route path="/auth" component={AuthContainer} />
           <Redirect path="/" to="/landing" />
         </Switch>
       </MainGrid>
