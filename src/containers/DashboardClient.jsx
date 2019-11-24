@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Dashboard } from "../templates/Dashboard";
 import { DashboardR } from "../templates/DashboardR";
 import { DashboardL } from "../templates/DashboardL";
 
-function DashboardRecruiter(props) {
+function DashboardClient(props) {
   return (
     <Dashboard>
       <DashboardL>
@@ -19,4 +19,4 @@ function DashboardRecruiter(props) {
   );
 }
 
-export default DashboardRecruiter;
+export default DashboardClient;

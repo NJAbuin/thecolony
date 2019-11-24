@@ -1,13 +1,21 @@
-import React, { useEffect, Fragment } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
-import PrivateRoute from "../components/PrivateRoute";
+//node modules
 import { connect } from "react-redux";
-import { MainGrid } from "../templates/MainGrid";
-import AuthContainer from "./AuthContainer";
+import React, { useEffect } from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+
+//components / containers
+import AuthContainer from "./AuthContainer";
+
+import PrivateRoute from "../components/PrivateRoute";
 import Landing from "../components/Landing";
 import Navbar from "../components/Navbar";
 import RecrNewCandidateForm from "../components/RecrNewCandidateForm";
+
+//styles
+import { MainGrid } from "../templates/MainGrid";
+
+//actions
 import { fetchSession } from "../store/actions/session";
 
 function Main(props) {
