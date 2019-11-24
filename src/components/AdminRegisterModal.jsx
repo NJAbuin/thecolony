@@ -53,6 +53,10 @@ export default function AdminRegisterModal(props) {
   const [fullName, setfullName] = React.useState("");
   const [warningMessage, setWarningMessage] = React.useState("");
 
+  React.useEffect(() => {
+    if (warningMessage === "") handleClose();
+  }, [warningMessage]);
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -68,7 +72,8 @@ export default function AdminRegisterModal(props) {
         if (res.data === "Este email ya esta registrado.")
           setWarningMessage(res.data);
         else setWarningMessage("");
-      });
+      })
+      .catch(console.error());
 
   const validateRegister = (email, pass, fullName) => {
     if (!validateEmail(email)) {
@@ -89,9 +94,7 @@ export default function AdminRegisterModal(props) {
   };
 
   const handleClick = e => {
-    console.log(email, password, fullName);
     e.preventDefault();
-    console.log(e);
     validateRegister(email, password, fullName)(warningMessage);
   };
 

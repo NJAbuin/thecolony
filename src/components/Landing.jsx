@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import { LandingGrid } from "../templates/LandingGrid";
 import { Card } from "../templates/Card";
 import { H2 } from "../templates/Title";
@@ -90,6 +90,9 @@ export default props => {
           <RecrClientRegisterModal role={"Client"} />
         </div>
       </Card>
+      <Link to="/recruiter/candidate">
+        TEST LINK to Recruiter new Candidate Form
+      </Link>
     </LandingGrid>
   );
 };
