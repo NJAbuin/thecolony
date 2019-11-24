@@ -13,7 +13,7 @@ router.post("/register", function(req, res) {
 });
 
 router.post("/login", passport.authenticate("admin"), function(req, res) {
-  res.send(req.user); //checkear en front si el req.user existe
+  res.send(req.user);
 });
 
 router.get("/logout", function(req, res) {

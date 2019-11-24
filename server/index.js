@@ -7,6 +7,8 @@ const chalk = require("chalk");
 const passport = require("passport");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
+const routes = require("../routes");
+require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || Math.ceil(Math.random() * 10000);
@@ -31,7 +33,7 @@ app.use(cookieParser());
 /* app.use("/*", (req, res) =>
   res.sendFile(path.join(__dirname, "../dist/index.html"))
 ); */
-app.use("/api", require("../routes")); //TODO: declarar rutas afuera
+app.use("/api", routes);
 
 app.use("/*", (req, res) =>
   res.sendFile(path.join(__dirname, "../dist/index.html"))
