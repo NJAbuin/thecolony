@@ -23,6 +23,9 @@ JobPosting.init(
     salary: {
       type: S.STRING
     },
+    state: {
+      type: S.ENUM(["Activa", "Terminada"])
+    },
     workload: {
       type: S.INTEGER
     },

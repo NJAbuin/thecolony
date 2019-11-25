@@ -1,11 +1,15 @@
 const express = require("express");
 const seed = require("express").Router();
-const JobPosting = require("../db/models/JobPosting");
+const { JobPosting } = require("../db/models");
+const { Candidate } = require("../db/models");
 var faker = require("faker");
 
-const JobPostingArray = [];
+let JobPostingArray;
+let CandidateArray;
 
 const makeMeManyJobs = () => {
+  JobPostingArray = [];
+
   const JobCreator = (
     title,
     description,
@@ -15,6 +19,7 @@ const makeMeManyJobs = () => {
     workload,
     imgURL,
     benefits,
+    state,
     recruiterID
   ) => {
     return {
@@ -25,7 +30,8 @@ const makeMeManyJobs = () => {
       salary,
       workload,
       imgURL,
-      benefits
+      benefits,
+      state
     };
   };
 
@@ -34,12 +40,50 @@ const makeMeManyJobs = () => {
       JobCreator(
         faker.name.jobTitle(),
         faker.name.jobDescriptor(),
-        faker.date.month(),
+        new Date(),
         faker.random.number(),
         faker.random.number(),
         faker.random.number(),
         faker.random.image(),
-        faker.name.jobDescriptor()
+        faker.name.jobDescriptor(),
+        "Activa"
+      )
+    );
+  }
+};
+
+const makeMeManyCandidates = () => {
+  CandidateArray = [];
+
+  const candidateCreator = (
+    DNI,
+    fullName,
+    age,
+    jobTitle,
+    address,
+    expectedSalary,
+    CV
+  ) => {
+    return {
+      DNI,
+      fullName,
+      age,
+      jobTitle,
+      address,
+      expectedSalary,
+      CV
+    };
+  };
+
+  for (let i = 0; i <= 15; i++) {
+    CandidateArray.push(
+      candidateCreator(
+        faker.random.number(),
+        faker.name.findName(),
+        Math.random() * 25,
+        faker.name.jobDescriptor(),
+        faker.address.streetAddress(),
+        faker.random.number()
       )
     );
   }
@@ -47,10 +91,16 @@ const makeMeManyJobs = () => {
 
 seed.get("/", function (req, res) {
   makeMeManyJobs();
-  JobPosting.bulkCreate(JobPostingArray).then(a => {
-    console.log(a);
-    res.send("Your job offers are ready comrade ");
-  });
+  makeMeManyCandidates();
+  JobPosting.bulkCreate(JobPostingArray)
+    .then(() => {
+      console.log(JobPostingArray);
+    })
+    .then(() => {
+      Candidate.bulkCreate(CandidateArray).then(() => {
+        res.send("Your db now has legit candidates and postings comrade!");
+      });
+    });
 });
 
 module.exports = seed;
