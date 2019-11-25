@@ -19,8 +19,14 @@ import { MainGrid } from "../templates/MainGrid";
 import { fetchSession } from "../store/actions/session";
 
 function Main(props) {
-  const { user } = props;
-  useEffect(() => props.fetchSession(), []);
+  const { user, fetchSession, history } = props;
+  /*
+  useEffect(() => fetchSession(), []);
+
+  /*
+  if (props.user.userType)
+    useEffect(() => history.push(`/auth/${user.userType}`), [user]);
+*/
 
   return (
     <ThemeProvider theme={theme}>
