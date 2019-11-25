@@ -12,10 +12,9 @@ export const Dashboard = styled.div`
 `;
 
 export const Left = styled.div`
-  <<<<<<<headgrid-area: lSide;
+  grid-area: lSide;
   border: orchid 2px solid;
-  =======grid-area: "lSide";
-  >>>>>>>8cb5824f8162e81ac60fc87fdbd06fcc1ec23df0display: grid;
+  display: grid;
   height: 100%;
   width: 100%;
 
@@ -40,10 +39,9 @@ export const Right = styled.div`
 `;
 
 export const TitleL = styled.div`
-  <<<<<<<headborder-top: rgba(${props => props.theme.CoolGray}, 1);
+  border-top: rgba(${props => props.theme.CoolGray}, 1);
   border-right: rgba(${props => props.theme.CoolGray}, 1);
   border-left: rgba(${props => props.theme.CoolGray}, 1);
-  =======>>>>>>>8cb5824f8162e81ac60fc87fdbd06fcc1ec23df0
   display: block;
   height: 100%;
   width: 100%;
