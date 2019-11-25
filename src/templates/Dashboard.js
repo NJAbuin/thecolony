@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Dashboard = styled.div`
-  grid-area: "contentDash";
+  grid-area: contentDash;
   display: grid;
   height: 100%;
   width: 100%;
@@ -12,7 +12,7 @@ export const Dashboard = styled.div`
 `;
 
 export const Left = styled.div`
-  grid-area: "lSide";
+  grid-area: lSide;
   border: orchid 2px solid;
   display: grid;
   height: 100%;
@@ -25,7 +25,7 @@ export const Left = styled.div`
 `;
 
 export const Right = styled.div`
-  grid-area: "rSide";
+  grid-area: rSide;
   background-color: #333;
   display: grid;
 
@@ -39,27 +39,27 @@ export const Right = styled.div`
 `;
 
 export const TitleL = styled.div`
-  border-top: rgba(${props => props.theme.CoolGray},1);
-  border-right: rgba(${props => props.theme.CoolGray},1);
-  border-left: rgba(${props => props.theme.CoolGray},1);
+  border-top: rgba(${props => props.theme.CoolGray}, 1);
+  border-right: rgba(${props => props.theme.CoolGray}, 1);
+  border-left: rgba(${props => props.theme.CoolGray}, 1);
   display: block;
   height: 100%;
   width: 100%;
   text-align: center;
 
-  grid-area: "titlebarL";
+  grid-area: titlebarL;
 `;
 
 export const TitleR = styled.div`
-  border-top: rgba(${props => props.theme.CoolGray},1);
-  border-right: rgba(${props => props.theme.CoolGray},1);
-  border-left: rgba(${props => props.theme.CoolGray},1);
+  border-top: rgba(${props => props.theme.CoolGray}, 1);
+  border-right: rgba(${props => props.theme.CoolGray}, 1);
+  border-left: rgba(${props => props.theme.CoolGray}, 1);
   display: block;
   height: 100%;
   width: 100%;
   text-align: center;
 
-  grid-area: "titlebarR";
+  grid-area: titlebarR;
 `;
 
 export const ContentL = styled.div`
@@ -68,7 +68,7 @@ export const ContentL = styled.div`
   height: 100%;
   width: 100%;
 
-  grid-area: "contentL";
+  grid-area: contentL;
 `;
 
 export const ContentR = styled.div`
@@ -77,5 +77,5 @@ export const ContentR = styled.div`
   height: 100%;
   width: 100%;
 
-  grid-area: "contentR";
+  grid-area: contentR;
 `;

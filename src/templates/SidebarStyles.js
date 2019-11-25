@@ -24,5 +24,5 @@ export const SidebarButton = styled.p`
 
 export const SidebarStyle = styled.div`
   background-color: #000;
-  grid-area: "sidebar";
+  grid-area: sidebar;
 `;
