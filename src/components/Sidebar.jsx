@@ -18,7 +18,7 @@ export default props => {
       {POWERS.map((power, val) => (
         <Link to={LINKS[val]}>
           <label>
-            <SidebarButton>{power}</SidebarButton>
+            <SidebarButton key={`${power}`}>{power}</SidebarButton>
           </label>
         </Link>
       ))}

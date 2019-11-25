@@ -22,7 +22,7 @@ function Main(props) {
   const { user, fetchSession, history } = props;
   /*
   useEffect(() => fetchSession(), []);
-
+  when login, props.history.replace
   /*
   if (props.user.type)
     useEffect(() => history.push(`/auth/${user.type}`), [user]);

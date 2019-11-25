@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import JobPosting from "../components/JobPosting";
 import { Dashboard, DashboardR, DashboardL } from "../templates/Dashboard";
 
 function DashboardRecruiter(props) {
@@ -13,6 +14,7 @@ function DashboardRecruiter(props) {
               <li key={y}>{`${x} ${y * Math.random() * 6}`}</li>
             ))}
           </ul>
+          <JobPosting />
         </div>
       </DashboardL>
 
