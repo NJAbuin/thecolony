@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { SidebarButton, SidebarStyle } from "../templates/SidebarStyles";
 
 export default props => {
+  //const {POWERS, URLs} = props.user.XXXX
   const recruiterSidebar = {
     Dashboard: "/auth/recruiter",
     Busquedas: "/auth/recruiter/jobpostings",
@@ -11,17 +12,17 @@ export default props => {
   };
 
   const POWERS = Object.keys(recruiterSidebar);
-  const LINKS = Object.values(recruiterSidebar);
+  const URLs = Object.values(recruiterSidebar);
 
   return (
-    <div style={{ backgroundColor: "purple", gridArea: "sidebar" }}>
+    <SidebarStyle>
       {POWERS.map((power, val) => (
-        <Link to={LINKS[val]}>
+        <Link to={URLs[val]}>
           <label>
             <SidebarButton key={`${power}`}>{power}</SidebarButton>
           </label>
         </Link>
       ))}
-    </div>
+    </SidebarStyle>
   );
 };

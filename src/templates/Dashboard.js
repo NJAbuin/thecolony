@@ -5,31 +5,77 @@ export const Dashboard = styled.div`
   display: grid;
   height: 100%;
   width: 100%;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 1%;
   grid-template-areas: "lSide rSide";
   box-sizing: border-box;
 `;
 
-export const DashboardL = styled.div`
+export const Left = styled.div`
   grid-area: "lSide";
-  background: red;
+  border: orchid 2px solid;
   display: grid;
   height: 100%;
+  width: 100%;
 
-  grid-template-rows: 10% 1fr;
+  grid-template-rows: 7% 1fr;
   grid-template-areas:
     "titlebarL"
     "contentL";
 `;
 
-export const DashboardR = styled.div`
+export const Right = styled.div`
   grid-area: "rSide";
   background-color: #333;
   display: grid;
 
   height: 100%;
-  grid-template-rows: 10% 1fr;
+  width: 100%;
+
+  grid-template-rows: 7% 1fr;
   grid-template-areas:
     "titlebarR"
     "contentR";
+`;
+
+export const TitleL = styled.div`
+  border-top: rgba(${props => props.theme.CoolGray},1);
+  border-right: rgba(${props => props.theme.CoolGray},1);
+  border-left: rgba(${props => props.theme.CoolGray},1);
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+
+  grid-area: "titlebarL";
+`;
+
+export const TitleR = styled.div`
+  border-top: rgba(${props => props.theme.CoolGray},1);
+  border-right: rgba(${props => props.theme.CoolGray},1);
+  border-left: rgba(${props => props.theme.CoolGray},1);
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+
+  grid-area: "titlebarR";
+`;
+
+export const ContentL = styled.div`
+  border: red 2px solid;
+  display: block;
+  height: 100%;
+  width: 100%;
+
+  grid-area: "contentL";
+`;
+
+export const ContentR = styled.div`
+  border: green 2px solid;
+  display: block;
+  height: 100%;
+  width: 100%;
+
+  grid-area: "contentR";
 `;

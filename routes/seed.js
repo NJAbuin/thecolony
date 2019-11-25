@@ -89,7 +89,7 @@ const makeMeManyCandidates = () => {
   }
 };
 
-seed.get("/", function(req, res) {
+seed.get("/", function (req, res) {
   makeMeManyJobs();
   makeMeManyCandidates();
   JobPosting.bulkCreate(JobPostingArray)

@@ -32,9 +32,9 @@ function RecrNewCandidateForm(props) {
     console.log(recruiterID);
     console.log(props);
     if (warningMessage === "" && !DNI.length < 8) {
-      if (props.match.url === "/recruiter/candidate") {
+      if (props.match.url === "/recruiter/candidates") {
         (() =>
-          Axios.post("/api/recruiter/candidatos", {
+          Axios.post("/api/recruiter/candidates", {
             DNI,
             fullName,
             age,
@@ -43,13 +43,13 @@ function RecrNewCandidateForm(props) {
             expectedSalary,
             recruiterID
           }))().then(candidate => {
-          console.log(candidate);
-        });
+            console.log(candidate);
+          });
       } else if (
-        props.match.path === "/candidatos/edit/:id" &&
+        props.match.path === "/candidates/edit/:id" &&
         DNI.length < 8
       ) {
-        Axios.put(`/api/recruiter/candidatos/edit/${props.match.params.id}`, {
+        Axios.put(`/api/recruiter/candidates/edit/${props.match.params.id}`, {
           DNI,
           fullName,
           age,
@@ -65,7 +65,7 @@ function RecrNewCandidateForm(props) {
   };
 
   const form = (
-    <div>
+    <div style={{ gridArea: "contentDash" }}>
       <form>
         <H1>Ingrese los datos del candidato a agregar:</H1>
         {labelInputCreator("DNI*", setDNI)}

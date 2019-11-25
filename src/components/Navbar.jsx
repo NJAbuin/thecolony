@@ -4,8 +4,7 @@ export default props => {
   const { user } = props;
   return (
     <div style={navStyles.nav}>
-      <img src="./images/thecolonynavbar.jpg" style={navStyles.img} />
-      <span>{user.fullName ? "CYCK" : "Stonks go up"}</span>
+      <span>{user.fullName ? `CYCK ${user.fullName}` : `Stonks go up`}</span>
     </div>
   );
 };

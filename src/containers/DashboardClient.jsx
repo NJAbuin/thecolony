@@ -1,18 +1,18 @@
 import React from "react";
-import { Dashboard, DashboardL, DashboardR } from "../templates/Dashboard";
+import { Dashboard, Left, Right } from "../templates/Dashboard";
 
 function DashboardClient(props) {
   return (
     <Dashboard>
-      <DashboardL>
+      <Left>
         <div style={{ gridArea: "titlebarL" }}></div>
         <div style={{ gridArea: "contentL" }}></div>
-      </DashboardL>
+      </Left>
 
-      <DashboardR>
+      <Right>
         <div style={{ gridArea: "titlebarR" }}></div>
         <div style={{ gridArea: "contentR" }}></div>
-      </DashboardR>
+      </Right>
     </Dashboard>
   );
 }
