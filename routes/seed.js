@@ -3,9 +3,11 @@ const seed = require("express").Router();
 const JobPosting = require("../db/models/JobPosting");
 var faker = require("faker");
 
-const JobPostingArray = [];
+let JobPostingArray;
 
 const makeMeManyJobs = () => {
+  JobPostingArray = [];
+
   const JobCreator = (
     title,
     description,
@@ -15,6 +17,7 @@ const makeMeManyJobs = () => {
     workload,
     imgURL,
     benefits,
+    state,
     recruiterID
   ) => {
     return {
@@ -25,7 +28,8 @@ const makeMeManyJobs = () => {
       salary,
       workload,
       imgURL,
-      benefits
+      benefits,
+      state
     };
   };
 
@@ -34,12 +38,13 @@ const makeMeManyJobs = () => {
       JobCreator(
         faker.name.jobTitle(),
         faker.name.jobDescriptor(),
-        faker.date.month(),
+        new Date(),
         faker.random.number(),
         faker.random.number(),
         faker.random.number(),
         faker.random.image(),
-        faker.name.jobDescriptor()
+        faker.name.jobDescriptor(),
+        "Activa"
       )
     );
   }
@@ -47,7 +52,7 @@ const makeMeManyJobs = () => {
 
 seed.get("/", function(req, res) {
   makeMeManyJobs();
-  JobPosting.bulkCreate(...JobPostingArray).then(() => {
+  JobPosting.bulkCreate(JobPostingArray).then(() => {
     console.log(JobPostingArray);
     res.send("Your job offers are ready comrade ");
   });
