@@ -4,10 +4,12 @@ import { Route, Switch } from "react-router-dom";
 
 import DashboardRecruiter from './DashboardRecruiter'
 import RecruiterCandidates from '../components/RecruiterCandidates'
-import { candidateList } from '../store/actions/candidates'
+import { getCandidateList } from '../store/actions/candidates'
 
 function RecruiterContainer(props) {
-
+    useEffect(() => {
+        props.getCandidateList()
+    }, [])
 
     return (
         <Switch>
@@ -18,5 +20,8 @@ function RecruiterContainer(props) {
     );
 }
 
+const mapDispatchToProps = {
+    getCandidateList
+}
 
-export default connect()(RecruiterContainer)
+export default connect(null, mapDispatchToProps)(RecruiterContainer)

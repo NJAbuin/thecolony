@@ -45,7 +45,8 @@ router.post("/candidatos", function (req, res) {
     .then(candidate => res.send(candidate));
 });
 
-router.get('/candidates', (req, res) => Candidate.findAll({}).then(candidates => res.send(candidates)))
+router.get('/candidates', (req, res) => Candidate.findAll({}).then(
+  candidates => res.send(candidates)))
 
 router.get('/jobpostings', (req, res) => JobPosting.findAll({}).then(jobPostings => res.send(jobPostings)))
 
