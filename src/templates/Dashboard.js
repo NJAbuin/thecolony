@@ -13,7 +13,6 @@ export const Dashboard = styled.div`
 
 export const Left = styled.div`
   grid-area: "lSide";
-  border: orchid 2px solid;
   display: grid;
   height: 100%;
   width: 100%;
@@ -39,9 +38,6 @@ export const Right = styled.div`
 `;
 
 export const TitleL = styled.div`
-  border-top: rgba(${props => props.theme.CoolGray},1);
-  border-right: rgba(${props => props.theme.CoolGray},1);
-  border-left: rgba(${props => props.theme.CoolGray},1);
   display: block;
   height: 100%;
   width: 100%;
@@ -51,9 +47,6 @@ export const TitleL = styled.div`
 `;
 
 export const TitleR = styled.div`
-  border-top: rgba(${props => props.theme.CoolGray},1);
-  border-right: rgba(${props => props.theme.CoolGray},1);
-  border-left: rgba(${props => props.theme.CoolGray},1);
   display: block;
   height: 100%;
   width: 100%;
@@ -63,7 +56,7 @@ export const TitleR = styled.div`
 `;
 
 export const ContentL = styled.div`
-  border: red 2px solid;
+
   display: block;
   height: 100%;
   width: 100%;
@@ -72,10 +65,11 @@ export const ContentL = styled.div`
 `;
 
 export const ContentR = styled.div`
-  border: green 2px solid;
+
   display: block;
   height: 100%;
   width: 100%;
-
+  overflow-y: scroll;
+  overflow-x: hidden;
   grid-area: "contentR";
 `;

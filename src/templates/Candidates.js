@@ -5,8 +5,6 @@ grid-area: "contentDash";
 background-color: #000;
 height: 100%;
 width: 100%;
-overflow-y: scroll;
-overflow-x: hidden;
 `;
 
 export const CandidateStyle = styled.div`
