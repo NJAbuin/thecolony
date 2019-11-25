@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
-import { AuthGrid } from "../templates/AuthGrid";
+import { AuthGrid } from "../templates/LayoutGrids";
 import DashboardAdmin from "./DashboardAdmin";
-//import DashboardBusiness from "./DashboardBusiness";
-//import DashboardRecruiter from "./DashboardRecruiter";
+//import DashboardClient from "./DashboardClient";
+import DashboardRecruiter from "./DashboardRecruiter";
 
 import Sidebar from "../components/Sidebar";
 
@@ -15,14 +15,21 @@ function AuthContainer(props) {
 
   //needs a function to do redirect depending on
   // auth permissions
-
+  /*
+  useEffect(() => {
+    const { user, history } = props;
+    if (user.type === "Admin") history.push("/auth/admin");
+    if (user.type === "Client") history.push("/auth/client");
+    if (user.type === "Recruiter") history.push("/auth/recruiter");
+  }, []);
+*/
   return (
     <AuthGrid>
       <Sidebar />
       <Switch>
         <Route path="/auth/admin" component={DashboardAdmin} />
-        {/*         <R path="/auth/recruiter" component={DashboardRecruiter} />
-        <R path="/auth/business" component={DashboardBusiness} /> */}
+        <Route path="/auth/recruiter" component={DashboardRecruiter} />
+        {/* <R path="/auth/Client" component={DashboardClient} />  */}
       </Switch>
     </AuthGrid>
   );

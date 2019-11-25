@@ -4,15 +4,8 @@ const passport = require("../db/passport/passportAdmin");
 
 router.post("/register", function(req, res) {
   Admin.findOrCreate({ where: req.body }).then(([admin, created]) => {
-    console.log([admin, created]);
     if (created) {
-      req.login(admin, function(err) {
-        if (err) {
-          console.log(err);
-        } else {
-          res.send(admin);
-        }
-      });
+      res.send(admin);
     } else {
       res.send("Este email ya esta registrado.");
     }
@@ -20,7 +13,7 @@ router.post("/register", function(req, res) {
 });
 
 router.post("/login", passport.authenticate("admin"), function(req, res) {
-  res.send(req.user); //checkear en front si el req.user existe
+  res.send(req.user);
 });
 
 router.get("/logout", function(req, res) {

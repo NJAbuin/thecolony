@@ -9,7 +9,7 @@ passport.use(
       usernameField: "email",
       passwordField: "password"
     },
-    function(email, password, done) {
+    function (email, password, done) {
       Admin.findOne({
         where: { email: email }
       })
@@ -21,14 +21,13 @@ passport.use(
           }
           return done(null, user);
         })
-        .catch(console.error);
-    }
-  )
-);
-passport.serializeUser(function(user, done) {
+    }))
+
+
+passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
-passport.deserializeUser(function(id, done) {
+passport.deserializeUser(function (id, done) {
   Admin.findByPk(id).then(user => done(null, user));
 });
 

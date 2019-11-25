@@ -66,14 +66,9 @@ export default function RecrClientRegisterModal(props) {
 
   const handleClick = e => {
     e.preventDefault();
-    validateRegister(
-      email,
-      password,
-      fullName,
-      logoURL,
-      phone,
-      website
-    )(warningMessage);
+    validateRegister(email, password, fullName, logoURL, phone, website)(
+      warningMessage
+    );
   };
 
   const validateRegister = (email, pass, fullName) => {
@@ -86,12 +81,12 @@ export default function RecrClientRegisterModal(props) {
     } else {
       setWarningMessage("");
     }
-    return (function(validateState) {
+    return function(validateState) {
       if (!validateState)
         return registerUser(email, password, fullName, logoURL, phone, website)
           .then(() => handleClose())
           .catch(console.error());
-    })();
+    };
   };
 
   let routeToPost;
@@ -102,9 +97,9 @@ export default function RecrClientRegisterModal(props) {
     axios
       .post(routeToPost, { email, password, fullName, phone, logoURL, website })
       .then(res => {
-        if (res.data === "Este email ya esta registrado.") {
+        if (res.data === "Este email ya esta registrado.")
           setWarningMessage(res.data);
-        } else setWarningMessage("");
+        else setWarningMessage("");
       })
       .catch(console.error());
 

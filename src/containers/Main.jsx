@@ -1,16 +1,32 @@
-import React, { Fragment } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
-import PrivateRoute from "../components/PrivateRoute";
+//node modules
 import { connect } from "react-redux";
-import { MainGrid } from "../templates/MainGrid";
-import AuthContainer from "./AuthContainer";
+import React, { useEffect } from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+
+//components / containers
+import AuthContainer from "./AuthContainer";
+
+import PrivateRoute from "../components/PrivateRoute";
 import Landing from "../components/Landing";
 import Navbar from "../components/Navbar";
 import RecrNewCandidateForm from "../components/RecrNewCandidateForm";
 
-const Main = props => {
-  const { user } = props;
+//styles
+import { MainGrid } from "../templates/LayoutGrids";
+
+//actions
+import { fetchSession } from "../store/actions/session";
+
+function Main(props) {
+  const { user, fetchSession, history } = props;
+  /*
+  useEffect(() => fetchSession(), []);
+  when login, props.history.replace
+  /*
+  if (props.user.type)
+    useEffect(() => history.push(`/auth/${user.type}`), [user]);
+*/
 
   return (
     <ThemeProvider theme={theme}>
@@ -22,7 +38,6 @@ const Main = props => {
             path="/recruiter/candidate"
             component={RecrNewCandidateForm}
           />
-
           <Route path="/landing" component={Landing} />
           {/* {'Change route Auth to a Private Route later'} */}
           <Route path="/auth" component={AuthContainer} />
@@ -31,11 +46,13 @@ const Main = props => {
       </MainGrid>
     </ThemeProvider>
   );
-};
+}
 
 const mapStateToProps = state => ({
   user: state.session.user
 });
+
+const mapDispatchToProps = { fetchSession };
 
 const theme = {
   fontFamily: "PT Sans",
@@ -43,4 +60,7 @@ const theme = {
   color: "white"
 };
 
-export default connect(mapStateToProps)(Main);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Main);

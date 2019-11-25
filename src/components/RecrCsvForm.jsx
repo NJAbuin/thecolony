@@ -1,7 +1,7 @@
 import React from "react";
-import { InfoParagraph } from "../templates/InfoParagraph";
+import { InfoParagraph } from "../templates/Text";
 import CSVReader from "react-csv-reader";
-import { H1 } from "../templates/H1";
+import { H1 } from "../templates/Text";
 import Axios from "axios";
 
 export default function RecrCsvForm() {
@@ -19,9 +19,9 @@ export default function RecrCsvForm() {
 
   const bulkCreateFromCsv = e => {
     e.preventDefault();
-    Axios.post("/api/recruiter/candidatos/csvImport", [
-      ...csvValues
-    ]).then(res => console.log(res.data));
+    Axios.post("/api/recruiter/candidatos/csvImport", [...csvValues]).then(
+      res => console.log(res.data)
+    );
   };
 
   return (
