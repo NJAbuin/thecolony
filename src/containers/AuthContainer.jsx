@@ -4,10 +4,14 @@ import { Route, Switch } from "react-router-dom";
 
 import { AuthGrid } from "../templates/LayoutGrids";
 import DashboardAdmin from "./DashboardAdmin";
-//import DashboardClient from "./DashboardClient";
 import DashboardRecruiter from "./DashboardRecruiter";
 
 import Sidebar from "../components/Sidebar";
+import RecruiterCandidates from '../components/RecruiterCandidates'
+import RecrNewCandidateForm from "../components/RecrNewCandidateForm";
+
+
+
 
 function AuthContainer(props) {
   // !!! IF UNAUTH, REDIR TO HOME
@@ -28,8 +32,8 @@ function AuthContainer(props) {
       <Sidebar />
       <Switch>
         <Route path="/auth/admin" component={DashboardAdmin} />
-        <Route path="/auth/recruiter" component={DashboardRecruiter} />
-        {/* <R path="/auth/Client" component={DashboardClient} />  */}
+        <Route exact path="/auth/recruiter" component={DashboardRecruiter} />
+        <Route path='/auth/recruiter/candidates' component={RecruiterCandidates} />
       </Switch>
     </AuthGrid>
   );

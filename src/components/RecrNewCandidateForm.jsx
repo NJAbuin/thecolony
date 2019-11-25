@@ -60,7 +60,7 @@ export default function RecrNewCandidateForm(props) {
   };
 
   const form = (
-    <div>
+    <div style={{ gridArea: "contentDash" }}>
       <form>
         <H1>Ingrese los datos del candidato a agregar:</H1>
         {labelInputCreator("DNI*", setDNI)}

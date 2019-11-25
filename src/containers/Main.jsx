@@ -10,7 +10,6 @@ import AuthContainer from "./AuthContainer";
 import PrivateRoute from "../components/PrivateRoute";
 import Landing from "../components/Landing";
 import Navbar from "../components/Navbar";
-import RecrNewCandidateForm from "../components/RecrNewCandidateForm";
 
 //styles
 import { MainGrid } from "../templates/LayoutGrids";
@@ -33,11 +32,7 @@ function Main(props) {
       <MainGrid>
         <Navbar user={user} />
         <Switch>
-          <Route
-            exact
-            path="/recruiter/candidate"
-            component={RecrNewCandidateForm}
-          />
+
           <Route path="/landing" component={Landing} />
           {/* {'Change route Auth to a Private Route later'} */}
           <Route path="/auth" component={AuthContainer} />
@@ -59,11 +54,11 @@ const theme = {
   fontSize: "1rem",
   color: "white",
 
-  CeruleanBlue: "11, 119, 196, 1",
-  CoolGray: "102, 153, 196, 1",
-  SpanishOrange: "238, 185, 2, 1",
-  JadeGreen: "128, 222, 217, 1",
-  RichBlack: "5, 5, 7, 1"
+  CeruleanBlue: "11, 119, 196",
+  CoolGray: "102, 153, 196",
+  SpanishOrange: "238, 185, 2",
+  JadeGreen: "128, 222, 217",
+  RichBlack: "5, 5, 7"
 };
 
 export default connect(
