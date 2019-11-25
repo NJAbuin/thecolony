@@ -11,7 +11,7 @@ const routes = require("../routes");
 require("dotenv").config();
 
 const app = express();
-const port = process.env.PORT || Math.ceil(Math.random() * 10000);
+const port = process.env.PORT || 6969;
 
 //bodyṕarser config
 app.use(bodyParser.json());
