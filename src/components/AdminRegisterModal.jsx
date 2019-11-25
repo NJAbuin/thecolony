@@ -85,8 +85,8 @@ export default function AdminRegisterModal(props) {
     } else {
       setWarningMessage("");
     }
-    return function(validateState) {
-      if (!validateState)
+    return function(warningMessage) {
+      if (!warningMessage)
         return registerUser(email, password, fullName)
           .then(() => handleClose())
           .catch(console.error());

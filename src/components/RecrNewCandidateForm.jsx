@@ -29,9 +29,7 @@ function RecrNewCandidateForm(props) {
   };
 
   const doTheThing = () => {
-    console.log(recruiterID);
-    console.log(props);
-    if (warningMessage === "" && !DNI.length < 8) {
+    if (warningMessage === "") {
       if (props.match.url === "/recruiter/candidate") {
         (() =>
           Axios.post("/api/recruiter/candidatos", {
