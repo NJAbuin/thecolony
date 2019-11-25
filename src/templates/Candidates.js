@@ -5,7 +5,7 @@ grid-area: "contentDash";
 background-color: #000;
 `;
 
-export const Candidate = styled.div`
+export const CandidateStyle = styled.div`
 background-color: #fff;
 border: blue 3px solid;
 justify-self:center;

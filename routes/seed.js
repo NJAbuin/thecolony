@@ -45,10 +45,10 @@ const makeMeManyJobs = () => {
   }
 };
 
-seed.get("/", function(req, res) {
+seed.get("/", function (req, res) {
   makeMeManyJobs();
-  JobPosting.bulkCreate(...JobPostingArray).then(() => {
-    console.log(JobPostingArray);
+  JobPosting.bulkCreate(JobPostingArray).then(a => {
+    console.log(a);
     res.send("Your job offers are ready comrade ");
   });
 });

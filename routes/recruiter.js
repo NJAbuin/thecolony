@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const JobPosting = require('../db/models/JobPosting')
 const Recruiter = require("../db/models/Recruiter");
 const Candidate = require("../db/models/Candidate");
 const passport = require("../db/passport/passportRecruiter");
@@ -27,17 +28,19 @@ router.get("/logout", function (req, res) {
 
 // agregar y editar candidatos
 
-router.post("/candidatos/csvImport", function (req, res) {
+router.post("/candidates/csvImport", function (req, res) {
   Candidate.bulkCreate([...req.body]).then(candidates => res.send(candidates));
 });
 
-router.post("/candidatos", function (req, res) {
+router.post("/candidates", function (req, res) {
   Candidate.create(req.body).then(candidate => res.send(candidate));
 });
 
 router.get('/candidates', (req, res) => Candidate.findAll({}).then(candidates => res.send(candidates)))
 
-router.put("/candidatos/edit/:id", function (req, res) {
+router.get('/jobpostings', (req, res) => JobPosting.findAll({}).then(jobPostings => res.send(jobPostings)))
+
+router.put("/candidates/edit/:id", function (req, res) {
   Candidate.findOne({ where: { id: req.params.id } }).then(candidate => {
     console.log(candidate);
     console.log(req.body);

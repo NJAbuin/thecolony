@@ -30,7 +30,7 @@ export default function RecrNewCandidateForm(props) {
     if (warningMessage === "" && !DNI.length < 8) {
       if (props.match.url === "/recruiter/candidate") {
         () =>
-          Axios.post("/api/recruiter/candidatos", {
+          Axios.post("/api/recruiter/candidates", {
             DNI,
             fullName,
             age,
@@ -41,10 +41,10 @@ export default function RecrNewCandidateForm(props) {
             console.log(candidate);
           });
       } else if (
-        props.match.path === "/candidatos/edit/:id" &&
+        props.match.path === "/candidates/edit/:id" &&
         DNI.length < 8
       ) {
-        Axios.put(`/api/recruiter/candidatos/edit/${props.match.params.id}`, {
+        Axios.put(`/api/recruiter/candidates/edit/${props.match.params.id}`, {
           DNI,
           fullName,
           age,

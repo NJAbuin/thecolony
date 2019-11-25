@@ -4,10 +4,9 @@ import { Route, Switch } from "react-router-dom";
 
 import { AuthGrid } from "../templates/LayoutGrids";
 import DashboardAdmin from "./DashboardAdmin";
-import DashboardRecruiter from "./DashboardRecruiter";
+import RecruiterContainer from './RecruiterContainer'
 
 import Sidebar from "../components/Sidebar";
-import RecruiterCandidates from '../components/RecruiterCandidates'
 import RecrNewCandidateForm from "../components/RecrNewCandidateForm";
 
 
@@ -31,9 +30,8 @@ function AuthContainer(props) {
     <AuthGrid>
       <Sidebar />
       <Switch>
-        <Route path="/auth/admin" component={DashboardAdmin} />
-        <Route exact path="/auth/recruiter" component={DashboardRecruiter} />
-        <Route path='/auth/recruiter/candidates' component={RecruiterCandidates} />
+        {/* <Route path="/auth/admin" component={DashboardAdmin} /> */}
+        <Route path="/auth/recruiter" component={RecruiterContainer} />
       </Switch>
     </AuthGrid>
   );
