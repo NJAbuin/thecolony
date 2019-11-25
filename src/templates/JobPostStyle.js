@@ -5,9 +5,9 @@ export const JobPostStyle = styled.div`
   box-sizing: border-box;
 
   height: 20%;
-  /* FIXME: por que no anda 100%? */
-  width: 96.8%;
-  margin: 12px;
+  width: 95%;
+  margin: 2.5%;
+  
 
   background-color: #ffff00;
 

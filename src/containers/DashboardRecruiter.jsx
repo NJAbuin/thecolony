@@ -11,6 +11,7 @@ import {
   ContentR
 } from "../templates/Dashboard";
 
+
 function DashboardRecruiter(props) {
   return (
     <Dashboard>

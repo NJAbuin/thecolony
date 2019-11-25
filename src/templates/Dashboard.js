@@ -39,9 +39,9 @@ export const Right = styled.div`
 `;
 
 export const TitleL = styled.div`
-  border-top: rgba(${props => props.theme.CoolGray});
-  border-right: rgba(${props => props.theme.CoolGray});
-  border-left: rgba(${props => props.theme.CoolGray});
+  border-top: rgba(${props => props.theme.CoolGray},1);
+  border-right: rgba(${props => props.theme.CoolGray},1);
+  border-left: rgba(${props => props.theme.CoolGray},1);
   display: block;
   height: 100%;
   width: 100%;
@@ -51,9 +51,9 @@ export const TitleL = styled.div`
 `;
 
 export const TitleR = styled.div`
-  border-top: rgba(${props => props.theme.CoolGray});
-  border-right: rgba(${props => props.theme.CoolGray});
-  border-left: rgba(${props => props.theme.CoolGray});
+  border-top: rgba(${props => props.theme.CoolGray},1);
+  border-right: rgba(${props => props.theme.CoolGray},1);
+  border-left: rgba(${props => props.theme.CoolGray},1);
   display: block;
   height: 100%;
   width: 100%;
