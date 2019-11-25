@@ -24,8 +24,8 @@ function Main(props) {
   useEffect(() => fetchSession(), []);
 
   /*
-  if (props.user.userType)
-    useEffect(() => history.push(`/auth/${user.userType}`), [user]);
+  if (props.user.type)
+    useEffect(() => history.push(`/auth/${user.type}`), [user]);
 */
 
   return (

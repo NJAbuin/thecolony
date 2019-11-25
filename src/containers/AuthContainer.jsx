@@ -18,9 +18,9 @@ function AuthContainer(props) {
   /*
   useEffect(() => {
     const { user, history } = props;
-    if (user.userType === "Admin") history.push("/auth/admin");
-    if (user.userType === "Client") history.push("/auth/client");
-    if (user.userType === "Recruiter") history.push("/auth/recruiter");
+    if (user.type === "Admin") history.push("/auth/admin");
+    if (user.type === "Client") history.push("/auth/client");
+    if (user.type === "Recruiter") history.push("/auth/recruiter");
   }, []);
 */
   return (

@@ -2,7 +2,7 @@ const db = require("../index");
 const S = require("sequelize");
 const crypto = require("crypto");
 
-class Recruiter extends S.Model { }
+class Recruiter extends S.Model {}
 
 Recruiter.init(
   {
@@ -23,9 +23,9 @@ Recruiter.init(
         isEmail: true
       }
     },
-    userType: {
+    type: {
       type: S.STRING,
-      defaultValue: 'Recruiter'
+      defaultValue: "Recruiter"
     },
     password: {
       type: S.STRING,
@@ -47,16 +47,16 @@ Recruiter.init(
   { sequelize: db, modelName: "recruiter" }
 );
 
-Recruiter.prototype.hashPassword = function (password) {
+Recruiter.prototype.hashPassword = function(password) {
   return crypto
     .createHmac("sha1", this.salt)
     .update(password)
     .digest("hex");
 };
-Recruiter.prototype.randomSalt = function () {
+Recruiter.prototype.randomSalt = function() {
   return crypto.randomBytes(20).toString("hex");
 };
-Recruiter.prototype.validatePassword = function (password) {
+Recruiter.prototype.validatePassword = function(password) {
   let newPassword = this.hashPassword(password);
   return newPassword === this.password;
 };
