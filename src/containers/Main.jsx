@@ -57,7 +57,13 @@ const mapDispatchToProps = { fetchSession };
 const theme = {
   fontFamily: "PT Sans",
   fontSize: "1rem",
-  color: "white"
+  color: "white",
+
+  CeruleanBlue: "11, 119, 196, 1",
+  CoolGray: "102, 153, 196, 1",
+  SpanishOrange: "238, 185, 2, 1",
+  JadeGreen: "128, 222, 217, 1",
+  RichBlack: "5, 5, 7, 1"
 };
 
 export default connect(
