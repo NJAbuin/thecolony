@@ -1,12 +1,5 @@
 const router = require("express").Router();
-<<<<<<< HEAD
 const { Recruiter, Candidate, JobPosting } = require("../db/models/");
-=======
-const JobPosting = require('../db/models/JobPosting')
-
-const { Recruiter } = require("../db/models/");
-const { Candidate } = require("../db/models/");
->>>>>>> bcbe6fa3dcaa540a6d94c82dd4b77078aeacdd5b
 const passport = require("../db/passport/passportRecruiter");
 
 //register, login y logout
@@ -33,11 +26,7 @@ router.get("/logout", function (req, res) {
 
 // agregar y editar candidatos
 
-<<<<<<< HEAD
-router.post("/candidatos/csvImport", function (req, res) {
-=======
 router.post("/candidates/csvImport", function (req, res) {
->>>>>>> bcbe6fa3dcaa540a6d94c82dd4b77078aeacdd5b
   Candidate.bulkCreate([...req.body]).then(candidates => res.send(candidates));
 });
 
