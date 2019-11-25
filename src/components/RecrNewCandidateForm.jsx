@@ -4,8 +4,9 @@ import { H1 } from "../templates/Text";
 import Axios from "axios";
 import RecrCsvForm from "./RecrCsvForm";
 import { InfoParagraph } from "../templates/Text";
+import { connect } from "react-redux";
 
-export default function RecrNewCandidateForm(props) {
+function RecrNewCandidateForm(props) {
   const [DNI, setDNI] = React.useState(0);
   const [fullName, setfullName] = React.useState("");
   const [age, setAge] = React.useState(0);
@@ -14,7 +15,7 @@ export default function RecrNewCandidateForm(props) {
   const [expectedSalary, setExpectedSalary] = React.useState(0);
   const [warningMessage, setWarningMessage] = React.useState("");
   const [submitted, setSubmitted] = React.useState(false);
-  const recruiterID = props.session || 1;
+  const recruiterID = props.user.id;
 
   const uploadPDF = e => {
     e.preventDefault();
@@ -28,6 +29,8 @@ export default function RecrNewCandidateForm(props) {
   };
 
   const doTheThing = () => {
+    console.log(recruiterID);
+    console.log(props);
     if (warningMessage === "" && !DNI.length < 8) {
       if (props.match.url === "/recruiter/candidate") {
         (() =>
@@ -120,3 +123,9 @@ export default function RecrNewCandidateForm(props) {
 
   return form;
 }
+
+const mapStateToProps = state => ({
+  user: state.session.user
+});
+
+export default connect(mapStateToProps, null)(RecrNewCandidateForm);

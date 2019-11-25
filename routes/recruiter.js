@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const Recruiter = require("../db/models/Recruiter");
-const Candidate = require("../db/models/Candidate");
+const { Recruiter } = require("../db/models/");
+const { Candidate } = require("../db/models/");
 const passport = require("../db/passport/passportRecruiter");
 
 //register, login y logout
@@ -32,13 +32,19 @@ router.post("/candidatos/csvImport", function(req, res) {
 });
 
 router.post("/candidatos", function(req, res) {
-  Candidate.create(req.body).then(candidate => res.send(candidate));
+  console.log(req.body);
+  Recruiter.findOne({ where: { id: req.body.recruiterID } })
+    .then(recruiter => {
+      Candidate.create(req.body).then(candidate => {
+        console.log(recruiter);
+        candidate.setRecruiter(recruiter);
+      });
+    })
+    .then(candidate => res.send(candidate));
 });
 
 router.put("/candidatos/edit/:id", function(req, res) {
   Candidate.findOne({ where: { id: req.params.id } }).then(candidate => {
-    console.log(candidate);
-    console.log(req.body);
     candidate.update(req.body).then(updatedCandidate => {
       console.log(updatedCandidate);
       res.send(updatedCandidate);
