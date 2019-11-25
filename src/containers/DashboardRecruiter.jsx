@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
-import { Dashboard } from "../templates/Dashboard";
-import { DashboardR } from "../templates/DashboardR";
-import { DashboardL } from "../templates/DashboardL";
+import { Dashboard, DashboardR, DashboardL } from "../templates/Dashboard";
 
 function DashboardRecruiter(props) {
   return (

@@ -1,9 +1,9 @@
 import React from "react";
 import { labelInputCreator } from "../../utils";
-import { H1 } from "../templates/H1";
+import { H1 } from "../templates/Text";
 import Axios from "axios";
 import RecrCsvForm from "./RecrCsvForm";
-import { InfoParagraph } from "../templates/InfoParagraph";
+import { InfoParagraph } from "../templates/Text";
 
 export default function RecrNewCandidateForm(props) {
   const [DNI, setDNI] = React.useState(0);

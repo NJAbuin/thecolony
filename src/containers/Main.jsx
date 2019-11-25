@@ -13,7 +13,7 @@ import Navbar from "../components/Navbar";
 import RecrNewCandidateForm from "../components/RecrNewCandidateForm";
 
 //styles
-import { MainGrid } from "../templates/MainGrid";
+import { MainGrid } from "../templates/LayoutGrids";
 
 //actions
 import { fetchSession } from "../store/actions/session";

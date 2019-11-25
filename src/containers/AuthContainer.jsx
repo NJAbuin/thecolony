@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
-import { AuthGrid } from "../templates/AuthGrid";
+import { AuthGrid } from "../templates/LayoutGrids";
 import DashboardAdmin from "./DashboardAdmin";
 //import DashboardClient from "./DashboardClient";
 import DashboardRecruiter from "./DashboardRecruiter";

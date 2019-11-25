@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { SidebarButton } from "../templates/SidebarButton";
+import { SidebarButton, SidebarStyle } from "../templates/SidebarStyles";
 
 export default props => {
   const recruiterSidebar = {
@@ -14,7 +14,7 @@ export default props => {
   const LINKS = Object.values(recruiterSidebar);
 
   return (
-    <div style={{ backgroundColor: "cyan", gridArea: "sidebar" }}>
+    <div style={{ backgroundColor: "purple", gridArea: "sidebar" }}>
       {POWERS.map((power, val) => (
         <Link to={LINKS[val]}>
           <label>

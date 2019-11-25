@@ -1,7 +1,5 @@
 import React from "react";
-import { Dashboard } from "../templates/Dashboard";
-import { DashboardR } from "../templates/DashboardR";
-import { DashboardL } from "../templates/DashboardL";
+import { Dashboard, DashboardL, DashboardR } from "../templates/Dashboard";
 
 function DashboardClient(props) {
   return (

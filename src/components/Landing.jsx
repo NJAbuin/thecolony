@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { LandingGrid } from "../templates/LandingGrid";
+import { LandingGrid } from "../templates/LayoutGrids";
 import { Card } from "../templates/Card";
-import { H2 } from "../templates/Title";
-import { P } from "../templates/Paragraph";
+import { H2, P } from "../templates/Text";
+
 import LoginModal from "./LoginModal";
 import AdminRegisterModal from "./AdminRegisterModal";
 import RecrClientRegisterModal from "./RecrClientRegisterModal";
