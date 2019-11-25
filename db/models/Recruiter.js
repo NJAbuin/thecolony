@@ -23,6 +23,10 @@ Recruiter.init(
         isEmail: true
       }
     },
+    type: {
+      type: S.STRING,
+      defaultValue: "Recruiter"
+    },
     password: {
       type: S.STRING,
       allowNull: false

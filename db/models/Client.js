@@ -23,6 +23,10 @@ Client.init(
         isEmail: true
       }
     },
+    type: {
+      type: S.STRING,
+      defaultValue: "Client"
+    },
     password: {
       type: S.STRING,
       allowNull: false
