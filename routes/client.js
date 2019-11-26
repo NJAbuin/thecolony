@@ -3,16 +3,15 @@ const Client = require("../db/models/Client");
 const passport = require("../db/passport/passportClient");
 
 router.post("/register", function (req, res) {
-  Client.findOrCreate({ where: req.body })
-    .then(([client, created]) => {
-      if (created) {
-        res.send(client)
-      } else {
-        res.send("Este email ya esta registrado.")
-      }
+  Admin.findOne({ where: { email: req.body.email } }).then((user) => {
+    if (user) {
+      res.send("Este email ya esta registrado.")
+    } else {
+      Admin.create(req.body).then((admin) => res.send(admin))
     }
-    )
-});
+  }).catch((err) => console.log(err))
+})
+
 
 router.post("/login", passport.authenticate("client"), function (req, res) {
   console.log(req.body);

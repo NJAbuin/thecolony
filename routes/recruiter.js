@@ -71,4 +71,17 @@ router.post("/jobpostings/:id", function (req, res) {
   });
 });
 
+router.get("/jobpostings/:id", function (req, res) {
+  JobPosting.findOne({
+    include: [{
+      model: Candidate
+    }],
+    where: { id: req.params.id }
+  }).then(job => {
+    job.getCandidates().then(response => res.send(response));
+  });
+});
+
+
+
 module.exports = router;
