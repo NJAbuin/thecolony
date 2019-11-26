@@ -34,4 +34,4 @@ export const sessionLogIn = (url, email, password) => dispatch =>
       return { fullName, email, type, id };
     })
     .then(user => dispatch(logIn(user)))
-    .catch(err => console.log(err));
+    .catch(err => dispatch(logIn("Credenciales Incorrectas")));
