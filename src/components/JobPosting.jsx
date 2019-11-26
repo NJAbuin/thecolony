@@ -1,5 +1,8 @@
 import React from "react";
+
 import { JobPostStyle } from "../templates/JobPostStyle";
+
+import { selectPostingToState } from '../store/actions/jobPostings'
 
 export default props => {
   const {
@@ -13,6 +16,8 @@ export default props => {
     openings,
     client
   } = props.jobPost;
+
+
 
   return (
     <JobPostStyle>
