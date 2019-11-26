@@ -53,9 +53,6 @@ function Landing(props) {
           <RecrClientRegisterModal role={"Client"} />
         </div>
       </Card>
-      <Link to="/recruiter/candidate">
-        TEST LINK to Recruiter new Candidate Form
-      </Link>
     </LandingGrid>
   );
 }

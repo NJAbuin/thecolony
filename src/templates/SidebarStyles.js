@@ -13,7 +13,7 @@ export const SidebarButton = styled.p`
   padding: 20px;
   margin: 10px 0px;
 
-  transition: border-radius 0.475s;
+  transition: border-radius 0.4s;
 
   &:hover {
     cursor: pointer;
@@ -23,5 +23,6 @@ export const SidebarButton = styled.p`
 `;
 
 export const SidebarStyle = styled.div`
-  background-color: "black";
+  background-color: #000;
+  grid-area: sidebar;
 `;

@@ -19,7 +19,7 @@ export default function RecrCsvForm() {
 
   const bulkCreateFromCsv = e => {
     e.preventDefault();
-    Axios.post("/api/recruiter/candidatos/csvImport", [...csvValues]).then(
+    Axios.post("/api/recruiter/candidates/csvImport", [...csvValues]).then(
       res => console.log(res.data)
     );
   };
