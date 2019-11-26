@@ -1,7 +1,6 @@
 const express = require("express");
 const seed = require("express").Router();
-const { JobPosting } = require("../db/models");
-const { Candidate } = require("../db/models");
+const { JobPosting, Candidate } = require("../db/models");
 var faker = require("faker");
 
 const makeMeManyCandidatesAndJobs = () => {
@@ -37,8 +36,7 @@ const makeMeManyCandidatesAndJobs = () => {
     jobTitle,
     address,
     expectedSalary,
-    CV,
-    jobpostingId
+    CV
   ) => {
     return {
       DNI,
@@ -47,8 +45,7 @@ const makeMeManyCandidatesAndJobs = () => {
       jobTitle,
       address,
       expectedSalary,
-      CV,
-      jobpostingId
+      CV
     };
   };
 
@@ -70,7 +67,7 @@ const makeMeManyCandidatesAndJobs = () => {
         candidateCreator(
           faker.random.number(),
           faker.name.findName(),
-          faker.random.number(),
+          faker.random.number(70),
           faker.name.jobTitle(),
           faker.address.streetAddress(),
           faker.random.number()
@@ -80,7 +77,7 @@ const makeMeManyCandidatesAndJobs = () => {
         candidateCreator(
           faker.random.number(),
           faker.name.findName(),
-          faker.random.number(),
+          faker.random.number(70),
           faker.name.jobTitle(),
           faker.address.streetAddress(),
           faker.random.number()
@@ -90,7 +87,7 @@ const makeMeManyCandidatesAndJobs = () => {
         candidateCreator(
           faker.random.number(),
           faker.name.findName(),
-          faker.random.number(),
+          faker.random.number(70),
           faker.name.jobTitle(),
           faker.address.streetAddress(),
           faker.random.number()
