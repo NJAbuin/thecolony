@@ -10,6 +10,16 @@ export const logIn = credentials => ({
   credentials
 });
 
+/**
+ * Logout from backend, dispatch logOut action
+ */
+export const sessionLogOut = () => dispatch => {
+  axios
+    .get("/api/logout")
+    .then(res => res.data)
+    .then(() => dispatch(logOut()));
+};
+
 export const fetchSession = () => dispatch =>
   axios
     .get("/api/me")
