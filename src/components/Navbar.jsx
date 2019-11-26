@@ -1,7 +1,6 @@
 import React from "react";
 
-export default props => {
-  const { user } = props;
+export default ({ user }) => {
   return (
     <div style={navStyles.nav}>
       <span>{user.fullName ? `CYCK ${user.fullName}` : `Stonks go up`}</span>
