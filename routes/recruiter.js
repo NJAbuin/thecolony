@@ -40,10 +40,9 @@ router.post("/candidatos", function (req, res) {
     .then(candidate => res.send(candidate));
 });
 
-
-router.get('/candidates', (req, res) => Candidate.findAll({}).then(
-  candidates => res.send(candidates)))
-
+router.get("/candidates", (req, res) =>
+  Candidate.findAll({}).then(candidates => res.send(candidates))
+);
 
 router.put("/candidates/edit/:id", function (req, res) {
   Candidate.findOne({ where: { id: req.params.id } }).then(candidate => {
@@ -59,18 +58,17 @@ router.get("/jobpostings", function (req, res) {
     where: {
       state: "Activa"
     }
-  }).then((jobs) => res.send(jobs))
-})
+  }).then(jobs => res.send(jobs));
+});
 
 router.post("/jobpostings/:id", function (req, res) {
-  JobPosting.findOne({ where: { id: req.params.id } }).then((job) => {
-    Candidate.findOne({ where: { id: req.body.id } }).then((candidate) => {
-      job.addCandidate(candidate)
-        .then(() => {
-          job.getCandidates().then((response) => res.send(response))
-        })
-    })
-  })
-})
+  JobPosting.findOne({ where: { id: req.params.id } }).then(job => {
+    Candidate.findOne({ where: { id: req.body.id } }).then(candidate => {
+      job.addCandidate(candidate).then(() => {
+        job.getCandidates().then(response => res.send(response));
+      });
+    });
+  });
+});
 
 module.exports = router;

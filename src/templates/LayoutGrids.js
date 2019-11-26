@@ -21,11 +21,11 @@ export const LandingGrid = styled.div`
 `;
 
 export const AuthGrid = styled.div`
-  grid-area: "body";
+  grid-area: body;
   display: grid;
   grid-template-columns: 12vw 1fr;
   grid-column-gap: 1%;
   grid-template-areas: "sidebar contentDash";
   height: 100%;
-  width: 100%
+  width: 100%;
 `;
