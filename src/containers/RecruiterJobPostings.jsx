@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 
 import JobPosting from "../components/JobPosting";
-import Candidate from '../components/Candidate'
+import Candidate from "../components/Candidate";
 import {
   Dashboard,
   Left,
@@ -12,7 +12,6 @@ import {
   ContentL,
   ContentR
 } from "../templates/Dashboard";
-
 
 function RecruiterJobPostings(props) {
   return (
@@ -32,7 +31,11 @@ function RecruiterJobPostings(props) {
 
       <Right>
         <TitleR>CAANDIDATES</TitleR>
-        <ContentR>{props.candidateList.map(candidate => <Candidate candidate={candidate} />)}</ContentR>
+        <ContentR>
+          {props.candidateList.map(candidate => (
+            <Candidate candidate={candidate} />
+          ))}
+        </ContentR>
       </Right>
     </Dashboard>
   );
@@ -41,6 +44,6 @@ function RecruiterJobPostings(props) {
 const mapStateToProps = ({ candidateList, jobPostings }) => ({
   candidateList,
   jobPostings
-})
+});
 
-export default connect(mapStateToProps)(RecruiterJobPostings)
+export default connect(mapStateToProps)(RecruiterJobPostings);
