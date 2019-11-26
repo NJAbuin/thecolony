@@ -4,12 +4,7 @@ const { JobPosting } = require("../db/models");
 const { Candidate } = require("../db/models");
 var faker = require("faker");
 
-let JobPostingArray;
-let CandidateArray;
-
-const makeMeManyJobs = () => {
-  JobPostingArray = [];
-
+const makeMeManyCandidatesAndJobs = () => {
   const JobCreator = (
     title,
     description,
@@ -35,8 +30,30 @@ const makeMeManyJobs = () => {
     };
   };
 
-  for (let i = 0; i <= 10; i++) {
-    JobPostingArray.push(
+  const candidateCreator = (
+    DNI,
+    fullName,
+    age,
+    jobTitle,
+    address,
+    expectedSalary,
+    CV,
+    jobpostingId
+  ) => {
+    return {
+      DNI,
+      fullName,
+      age,
+      jobTitle,
+      address,
+      expectedSalary,
+      CV,
+      jobpostingId
+    };
+  };
+
+  for (let i = 0; i <= 6; i++) {
+    JobPosting.create(
       JobCreator(
         faker.name.jobTitle(),
         faker.name.jobDescriptor(),
@@ -48,59 +65,44 @@ const makeMeManyJobs = () => {
         faker.name.jobDescriptor(),
         "Activa"
       )
-    );
-  }
-};
-
-const makeMeManyCandidates = () => {
-  CandidateArray = [];
-
-  const candidateCreator = (
-    DNI,
-    fullName,
-    age,
-    jobTitle,
-    address,
-    expectedSalary,
-    CV
-  ) => {
-    return {
-      DNI,
-      fullName,
-      age,
-      jobTitle,
-      address,
-      expectedSalary,
-      CV
-    };
-  };
-
-  for (let i = 0; i <= 15; i++) {
-    CandidateArray.push(
-      candidateCreator(
-        faker.random.number(),
-        faker.name.findName(),
-        Math.random() * 25,
-        faker.name.jobDescriptor(),
-        faker.address.streetAddress(),
-        faker.random.number()
-      )
-    );
-  }
-};
-
-seed.get("/", function (req, res) {
-  makeMeManyJobs();
-  makeMeManyCandidates();
-  JobPosting.bulkCreate(JobPostingArray)
-    .then(() => {
-      console.log(JobPostingArray);
-    })
-    .then(() => {
-      Candidate.bulkCreate(CandidateArray).then(() => {
-        res.send("Your db now has legit candidates and postings comrade!");
-      });
+    ).then(jobposting => {
+      jobposting.createCandidate(
+        candidateCreator(
+          faker.random.number(),
+          faker.name.findName(),
+          faker.random.number(),
+          faker.name.jobTitle(),
+          faker.address.streetAddress(),
+          faker.random.number()
+        )
+      );
+      jobposting.createCandidate(
+        candidateCreator(
+          faker.random.number(),
+          faker.name.findName(),
+          faker.random.number(),
+          faker.name.jobTitle(),
+          faker.address.streetAddress(),
+          faker.random.number()
+        )
+      );
+      jobposting.createCandidate(
+        candidateCreator(
+          faker.random.number(),
+          faker.name.findName(),
+          faker.random.number(),
+          faker.name.jobTitle(),
+          faker.address.streetAddress(),
+          faker.random.number()
+        )
+      );
     });
+  }
+};
+
+seed.get("/", function(req, res) {
+  makeMeManyCandidatesAndJobs();
+  res.send("Seed created, relations done, stonks up!");
 });
 
 module.exports = seed;

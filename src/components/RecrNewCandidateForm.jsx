@@ -29,9 +29,7 @@ function RecrNewCandidateForm(props) {
   };
 
   const doTheThing = () => {
-    console.log(recruiterID);
-    console.log(props);
-    if (warningMessage === "" && !DNI.length < 8) {
+    if (warningMessage === "") {
       if (props.match.url === "/recruiter/candidates") {
         (() =>
           Axios.post("/api/recruiter/candidates", {
@@ -42,13 +40,8 @@ function RecrNewCandidateForm(props) {
             address,
             expectedSalary,
             recruiterID
-          }))().then(candidate => {
-            console.log(candidate);
-          });
-      } else if (
-        props.match.path === "/candidates/edit/:id" &&
-        DNI.length < 8
-      ) {
+          }))().then(candidate => {});
+      } else if (props.match.path === "/candidates/edit/:id") {
         Axios.put(`/api/recruiter/candidates/edit/${props.match.params.id}`, {
           DNI,
           fullName,
