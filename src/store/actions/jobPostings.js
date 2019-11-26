@@ -13,9 +13,15 @@ export const getJobPostings = () => dispatch =>
         .then(res => res.data)
         .then(candList => dispatch(jobPostings(candList)));
 
-export const selectJobPost = id => ({
+export const selectJobPost = jobPost => ({
     type: JOB_POSTING_SELECT,
-    id
+    jobPost
 })
 
-export const selectJobPostToState = () => dispatch => console.log()
+export const selectJobPostToState = id => dispatch =>
+    axios.get(`/api/recruiter/jobpostings/${id}`)
+        .then(res => {
+            console.log(res)
+            return res.data
+        })
+        .then(jobPost => dispatch(selectJobPost(jobPost)))

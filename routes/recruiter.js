@@ -77,11 +77,7 @@ router.get("/jobpostings/:id", function (req, res) {
       model: Candidate
     }],
     where: { id: req.params.id }
-  }).then(job => {
-    job.getCandidates().then(response => res.send(response));
-  });
+  }).then(job => res.send(job))
 });
-
-
 
 module.exports = router;
