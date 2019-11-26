@@ -35,7 +35,7 @@ const NavBar = props => {
           right: "0"
         }}
       >
-        Logout
+        {props.user.fullName ? "Logout" : ""}
       </span>
     </div>
   );

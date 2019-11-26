@@ -74,10 +74,18 @@ function LoginModal(props) {
     }
   };
 
+  React.useEffect(() => {
+    if (props.user != {} && props.user != "Credenciales Incorrectas")
+      handleClose();
+  }, [props.user]);
+
   function validateAndClose(routeToPost, email, password, res, err) {
     if (validateLogin(email, password)) {
       props.sessionLogIn(routeToPost, email, password);
-      handleClose();
+      if (props.user === "Credenciales Incorrectas") {
+        setWarningMessage("Usuario o contraseña invalidos");
+        forceUpdate();
+      }
     }
   }
 
@@ -126,9 +134,11 @@ function LoginModal(props) {
     </div>
   );
 }
-
+const mapStateToProps = state => ({
+  user: state.session.user
+});
 const mapDispatchToProps = {
   sessionLogIn
 };
 
-export default connect(null, mapDispatchToProps)(LoginModal);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);
