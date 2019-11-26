@@ -45,3 +45,21 @@ export function validateEmail(email) {
   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 }
+
+/**
+ * Validates if a given integer has 8 digits
+ * @param {Integer} dni number to check
+ * @returns {Boolean}
+ */
+export const validateDNI = dni => {
+  return dni.length === 8;
+};
+
+/**
+ * Validates if a given string contains at least 4 letters and 2 words
+ * @param {String} fullName name to check
+ * @returns {Boolean}
+ */
+export const validateFullName = fullName => {
+  return fullName.length > 4 && fullName.includes(" ");
+};

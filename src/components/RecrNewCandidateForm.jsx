@@ -43,8 +43,8 @@ function RecrNewCandidateForm(props) {
             expectedSalary,
             recruiterID
           }))().then(candidate => {
-            console.log(candidate);
-          });
+          console.log(candidate);
+        });
       } else if (
         props.match.path === "/candidates/edit/:id" &&
         DNI.length < 8

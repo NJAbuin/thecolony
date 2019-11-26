@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is required for IE 11 support
 import axios from "axios";
-import { labelInputCreator, validateEmail } from "../../utils";
+import {
+  labelInputCreator,
+  validateEmail,
+  validateDNI,
+  validateFullName
+} from "../../utils";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -46,15 +51,26 @@ const Fade = React.forwardRef(function Fade(props, ref) {
 
 export default function RecrClientRegisterModal(props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [email, setEmail] = React.useState("");
-  const [warningMessage, setWarningMessage] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [fullName, setfullName] = React.useState("");
-  const [logoURL, setLogoURL] = React.useState("");
-  const [phone, setPhone] = React.useState("");
-  const [website, setWebsite] = React.useState("");
-  let showWarning = "none";
+  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [warningMessage, setWarningMessage] = useState(null);
+  let [warningMessageBackend, setWarningMessageBackend] = useState(null);
+  const [password, setPassword] = useState("");
+  const [fullName, setfullName] = useState("");
+  const [logoURL, setLogoURL] = useState("");
+  const [phone, setPhone] = useState("");
+  const [website, setWebsite] = useState("");
+  let submitted = false;
+
+  React.useEffect(() => {
+    if (warningMessage === "") {
+      registerUser(email, password, fullName, logoURL, phone, website);
+    }
+    if (warningMessageBackend === "") {
+      handleClose();
+    }
+    console.log("useEffect");
+  }, [warningMessage, warningMessageBackend]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -66,27 +82,23 @@ export default function RecrClientRegisterModal(props) {
 
   const handleClick = e => {
     e.preventDefault();
-    validateRegister(email, password, fullName, logoURL, phone, website)(
-      warningMessage
-    );
+    validateRegister(email, password, fullName, logoURL, phone, website);
   };
 
   const validateRegister = (email, pass, fullName) => {
+    const passwordLength = 2;
     if (!validateEmail(email)) {
       setWarningMessage("Ingrese un email valido");
-    } else if (pass.length <= 2) {
-      setWarningMessage("La contraseña debe tener al menos 2 caracteres");
-    } else if (fullName.length < 5) {
-      setWarningMessage("Ingrese un nombre valido");
+    } else if (pass.length < passwordLength) {
+      setWarningMessage(
+        `La contraseña debe tener al menos ${passwordLength} caracteres`
+      );
+    } else if (fullName.length < 5 && !fullName.includes(" ")) {
+      setWarningMessage("Ingrese un nombre completo valido");
     } else {
       setWarningMessage("");
+      setWarningMessageBackend(null);
     }
-    return function(validateState) {
-      if (!validateState)
-        return registerUser(email, password, fullName, logoURL, phone, website)
-          .then(() => handleClose())
-          .catch(console.error());
-    };
   };
 
   let routeToPost;
@@ -97,11 +109,16 @@ export default function RecrClientRegisterModal(props) {
     axios
       .post(routeToPost, { email, password, fullName, phone, logoURL, website })
       .then(res => {
+        console.log(res.data);
         if (res.data === "Este email ya esta registrado.")
-          setWarningMessage(res.data);
-        else setWarningMessage("");
+          setWarningMessageBackend(res.data);
+        else {
+          setWarningMessageBackend("");
+        }
       })
-      .catch(console.error());
+      .catch(() => {
+        console.error("error");
+      });
 
   return (
     <div>
@@ -132,7 +149,10 @@ export default function RecrClientRegisterModal(props) {
               {labelInputCreator("Logo URL", setLogoURL)}
               {labelInputCreator("Phone", setPhone)}
               {labelInputCreator("Website", setWebsite)}
-              <p style={{ color: "red" }}>{warningMessage}</p>
+              <p style={{ color: "red" }}>
+                {warningMessage}
+                {warningMessageBackend}
+              </p>
 
               <button
                 onClick={e => {
