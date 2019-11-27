@@ -17,9 +17,20 @@ export function Candidate(props) {
     expectedSalary
   } = props.candidate;
 
+  const checker = function() {
+    return (
+      props.jobPostingSelected.candidates &&
+      Boolean(
+        props.jobPostingSelected.candidates.find(
+          element => element.id == props.candidate.id
+        )
+      )
+    );
+  };
+
   return (
     <CandidateStyle>
-      {window.location.href.includes("jobpostings") ? (
+      {window.location.href.includes("jobpostings") && !checker() ? (
         <input
           type="checkbox"
           onClick={e => {
@@ -36,9 +47,14 @@ export function Candidate(props) {
   );
 }
 
+const mapStateToProps = ({ jobPostingSelected, candidatesSelected }) => ({
+  jobPostingSelected,
+  candidatesSelected
+});
+
 const mapDispatchToProps = {
   candidateAdd,
   candidateRemove
 };
 
-export default connect(null, mapDispatchToProps)(Candidate);
+export default connect(mapStateToProps, mapDispatchToProps)(Candidate);
