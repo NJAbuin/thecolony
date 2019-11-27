@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 
 import JobPosting from "../components/JobPosting";
-import Candidate from '../components/Candidate'
+import Candidate from "../components/Candidate";
 import {
   Dashboard,
   Left,
@@ -13,8 +13,15 @@ import {
   ContentR
 } from "../templates/Dashboard";
 
+import { candidatesApplyToJob, candidatesClearListSelection } from '../store/actions/candidates'
+
 
 function RecruiterJobPostings(props) {
+  const clearAll = () => {
+    document.querySelectorAll('input').forEach(input => input.checked = false)
+    candidatesClearListSelection()
+  }
+
   return (
     <Dashboard>
       <Left>
@@ -25,22 +32,40 @@ function RecruiterJobPostings(props) {
         </TitleL>
         <ContentL>
           {props.jobPostings.map(jobPost => (
-            <JobPosting jobPost={jobPost} />
+            <JobPosting jobPost={jobPost} key={jobPost.id} />
           ))}
         </ContentL>
       </Left>
 
       <Right>
-        <TitleR>CAANDIDATES</TitleR>
-        <ContentR>{props.candidateList.map(candidate => <Candidate candidate={candidate} />)}</ContentR>
+        <TitleR>
+          CANDIDATES
+          <br />
+          <div>
+            <button onClick={() => props.candidatesApplyToJob(props.jobPostingSelected, props.candidatesSelected)}>ASIGNAR A BUSQUEDA SELECCIONADA</button>
+            <button onClick={() => clearAll()}>CANCELAR SELECCION</button>
+          </div>
+        </TitleR>
+        <ContentR>
+          {props.candidateList.map(candidate => (
+            <Candidate candidate={candidate} key={candidate.id} />
+          ))}
+        </ContentR>
       </Right>
     </Dashboard>
   );
 }
 
-const mapStateToProps = ({ candidateList, jobPostings }) => ({
-  candidateList,
-  jobPostings
-})
+const mapDispatchToProps = {
+  candidatesApplyToJob,
+  candidatesClearListSelection
+}
 
-export default connect(mapStateToProps)(RecruiterJobPostings)
+const mapStateToProps = ({ candidateList, jobPostings, jobPostingSelected, candidatesSelected }) => ({
+  candidateList,
+  jobPostings,
+  jobPostingSelected,
+  candidatesSelected
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecruiterJobPostings);
