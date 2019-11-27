@@ -1,8 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
+
+import { Button } from "../templates/Button";
 import { JobPostStyle } from "../templates/JobPostStyle";
 
-export default props => {
+import { selectJobPostToState } from "../store/actions/jobPostings";
+import { Link, withRouter } from "react-router-dom"
+
+function JobPosting(props) {
   const {
+    id,
     title,
     description,
     salary,
@@ -11,19 +18,30 @@ export default props => {
     imgURL,
     benefits,
     openings,
-    client,
-    id
+    client
   } = props.jobPost;
 
   return (
     <JobPostStyle>
-      <Link className="thumbnail" to={`/auth/recruiter/jobpostings/${id}`}>
-        <div style={{ boxSizing: "border-box", margin: "15px" }}>
-          <p>{title}</p>
-        </div>
+      <div style={{ boxSizing: "border-box", margin: "15px" }}>
+        <p>{title}</p>
+        <Button onClick={() => props.selectJobPostToState(id)}>
+          SELECCIONAR
+        </Button>
+        <Button onClick={() => {
+          props.selectJobPostToState(id)
+          props.history.push(`/auth/recruiter/jobpostings/${id}`)
+        }}> Ver detalles</Button>
 
-      </Link>
-
+      </div>
     </JobPostStyle>
   );
+}
+
+const mapDispatchToProps = {
+  selectJobPostToState
 };
+
+
+
+export default withRouter(connect(null, mapDispatchToProps)(JobPosting));

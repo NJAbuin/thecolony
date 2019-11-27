@@ -1,19 +1,19 @@
 const router = require("express").Router();
 const { Recruiter, Candidate, JobPosting } = require("../db/models/");
 const passport = require("../db/passport/passportRecruiter");
+const chalk = require("chalk");
 
 //register, login y logout
 
 router.post("/register", function (req, res) {
-  Recruiter.findOne({ where: { email: req.body.email } }).then((user) => {
-    if (user) {
-      res.send("Este email ya esta registrado.")
-    } else {
-      Recruiter.create(req.body).then((recruiter) => res.send(recruiter))
-    }
-  }).catch((err) => console.log(err))
-})
-
+  Recruiter.findOne({ where: { email: req.body.email } })
+    .then(user =>
+      user
+        ? res.send("Este email ya esta registrado.")
+        : Recruiter.create(req.body).then(recruiter => res.send(recruiter))
+    )
+    .catch(err => console.log(err));
+});
 
 router.post("/login", passport.authenticate("recruiter"), (req, res) => {
   res.send({
@@ -30,9 +30,13 @@ router.get("/logout", function (req, res) {
 });
 
 // agregar y editar candidatos
-
 router.post("/candidates/csvImport", function (req, res) {
-  Candidate.bulkCreate([...req.body]).then(candidates => res.send(candidates));
+  req.body.csvValues.forEach(candidate => {
+    Recruiter.findOne({ where: { id: req.body.user.id } }).then(recruiter =>
+      recruiter.createCandidate(candidate)
+    );
+  });
+  res.send("Created");
 });
 
 router.post("/candidatos", function (req, res) {
@@ -66,18 +70,16 @@ router.get("/jobpostings", function (req, res) {
   }).then(jobs => res.send(jobs));
 });
 
-
 router.post("/jobpostings", function (req, res) {
-  JobPosting.findOne({ where: { id: req.body.id } }).then(job => {
-    req.body.newCandidates.map(c => {
-      Candidate.findByPk(c.id).then(candidate => job.addCandidate(candidate))
+  JobPosting.findOne({ where: { id: req.body.id } })
+    .then(job => {
+      req.body.newCandidates.map(c => {
+        Candidate.findByPk(c.id).then(candidate => job.addCandidate(candidate));
+      });
+      return job.getCandidates();
     })
-    return job.getCandidates()
-  }
-  ).then((candidates) => res.send(candidates))
-})
-
-
+    .then(candidates => res.send(candidates));
+});
 
 //agregar un candidato desde el detalle de singleJobPosting
 
@@ -91,20 +93,15 @@ router.post("/jobpostings/:id", function (req, res) {
   });
 });
 
-
-
-//detalle del job post
 router.get("/jobpostings/:id", function (req, res) {
   JobPosting.findOne({
-    include: [{
-      model: Candidate
-    }],
+    include: [
+      {
+        model: Candidate
+      }
+    ],
     where: { id: req.params.id }
-  }).then(job => {
-    res.send(job)
-  })
+  }).then(job => res.send(job));
 });
-
-
 
 module.exports = router;

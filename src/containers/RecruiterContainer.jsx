@@ -13,6 +13,7 @@ import { getJobPostings } from '../store/actions/jobPostings'
 function RecruiterContainer(props) {
     useEffect(() => {
 
+
         props.getCandidateList()
         props.getJobPostings()
 

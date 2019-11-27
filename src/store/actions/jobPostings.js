@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_JOB_POSTINGS, FETCH_JOB_POSTING } from "../constants";
+import { FETCH_JOB_POSTINGS, JOB_POSTING_SELECT } from "../constants";
 
 
 export const jobPostings = (payload) => ({
@@ -19,8 +19,14 @@ export const getJobPostings = () => dispatch =>
         .then(res => res.data)
         .then(candList => dispatch(jobPostings(candList)));
 
-export const getJobPostingDetails = (id) => dispatch =>
-    axios
-        .get("/api/recruiter/jobpostings/" + id)
-        .then(res => res.data)
-        .then(candList => dispatch(jobPosting(candList)));
+export const selectJobPost = jobPost => ({
+    type: JOB_POSTING_SELECT,
+    jobPost
+})
+
+export const selectJobPostToState = id => dispatch =>
+    axios.get(`/api/recruiter/jobpostings/${id}`)
+        .then(res => {
+            return res.data
+        })
+        .then(jobPost => dispatch(selectJobPost(jobPost)))
