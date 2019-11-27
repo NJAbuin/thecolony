@@ -74,8 +74,9 @@ function LoginModal(props) {
     }
   };
 
-  function validateAndClose(routeToPost, email, password, res, err) {
+  function validateAndClose(routeToPost, email, password, validateLogin) {
     if (validateLogin(email, password)) {
+      console.log("siempre valida")
       props.sessionLogIn(routeToPost, email, password);
       handleClose();
     }
