@@ -69,7 +69,6 @@ export default function RecrClientRegisterModal(props) {
     if (warningMessageBackend === "") {
       handleClose();
     }
-    console.log("useEffect");
   }, [warningMessage, warningMessageBackend]);
 
   const handleOpen = () => {

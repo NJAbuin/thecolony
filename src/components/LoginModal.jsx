@@ -54,7 +54,7 @@ function LoginModal(props) {
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [warningMessage, setWarningMessage] = React.useState("");
+  const [warningMessage, setWarningMessage] = React.useState(null);
 
   const handleOpen = () => {
     setOpen(true);
@@ -74,11 +74,16 @@ function LoginModal(props) {
     }
   };
 
-  function validateAndClose(routeToPost, email, password, validateLogin) {
+  React.useEffect(() => {
+    if (props.user != "Credenciales Incorrectas") handleClose();
+    if (props.user === "Credenciales Incorrectas")
+      setWarningMessage("Usuario o contraseña invalidos");
+  }, [props.user]);
+
+  function validateAndClose(routeToPost, email, password) {
     if (validateLogin(email, password)) {
       console.log("siempre valida")
       props.sessionLogIn(routeToPost, email, password);
-      handleClose();
     }
   }
 
@@ -115,7 +120,7 @@ function LoginModal(props) {
               <button
                 onClick={e => {
                   e.preventDefault();
-                  validateAndClose(routeToPost, email, password, validateLogin);
+                  validateAndClose(routeToPost, email, password);
                 }}
               >
                 Submit
@@ -127,9 +132,11 @@ function LoginModal(props) {
     </div>
   );
 }
-
+const mapStateToProps = state => ({
+  user: state.session.user
+});
 const mapDispatchToProps = {
   sessionLogIn
 };
 
-export default connect(null, mapDispatchToProps)(LoginModal);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);
