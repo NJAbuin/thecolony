@@ -3,13 +3,12 @@ import { connect } from "react-redux";
 
 import Candidate from "./Candidate";
 
+import { candidatesApplyToJob, candidatesClearListSelection } from '../store/actions/candidates'
 import { CandidateContainer } from "../templates/Candidates";
 
 function RecruiterCandidates(props) {
   return (
     <CandidateContainer>
-      <button>ADD</button>
-      <button>SUBMIT</button>
       {props.candidateList.map(candidate => (
         <Candidate candidate={candidate} />
       ))}

@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import React from "react";
+import { connect } from 'react-redux'
 
 import { CandidateStyle } from "../templates/Candidates";
 
-export default props => {
+import { candidateAdd, candidateRemove } from '../store/actions/candidates'
+
+export function Candidate(props) {
   const {
     DNI,
     fullName,
@@ -19,10 +21,9 @@ export default props => {
       <input
         type="checkbox"
         onClick={e => {
-          const memes = e.target.checked
-            ? "S-senpai, my button feels funny"
-            : "Je suis Nisman.";
-          console.log(memes);
+          e.target.checked
+            ? props.candidateAdd(props.candidate)
+            : props.candidateRemove(props.candidate)
         }}
       ></input>
       <h3>{fullName}</h3>
@@ -30,3 +31,10 @@ export default props => {
     </CandidateStyle>
   );
 };
+
+const mapDispatchToProps = {
+  candidateAdd,
+  candidateRemove
+}
+
+export default connect(null, mapDispatchToProps)(Candidate)
