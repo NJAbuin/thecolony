@@ -1,9 +1,10 @@
 import React from "react";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 
+import { Button } from "../templates/Button";
 import { JobPostStyle } from "../templates/JobPostStyle";
 
-import { selectJobPostToState } from '../store/actions/jobPostings'
+import { selectJobPostToState } from "../store/actions/jobPostings";
 
 function JobPosting(props) {
   const {
@@ -19,19 +20,20 @@ function JobPosting(props) {
     client
   } = props.jobPost;
 
-
-
   return (
-    <JobPostStyle onClick={() => props.selectJobPostToState(id)}>
+    <JobPostStyle>
       <div style={{ boxSizing: "border-box", margin: "15px" }}>
         <p>{title}</p>
+        <Button onClick={() => props.selectJobPostToState(id)}>
+          SELECCIONAR
+        </Button>
       </div>
     </JobPostStyle>
   );
-};
+}
 
 const mapDispatchToProps = {
   selectJobPostToState
-}
+};
 
-export default connect(null, mapDispatchToProps)(JobPosting)
+export default connect(null, mapDispatchToProps)(JobPosting);

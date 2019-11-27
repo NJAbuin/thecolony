@@ -24,16 +24,22 @@ function RecruiterJobPostings(props) {
         </TitleL>
         <ContentL>
           {props.jobPostings.map(jobPost => (
-            <JobPosting jobPost={jobPost} />
+            <JobPosting jobPost={jobPost} key={jobPost.id} />
           ))}
         </ContentL>
       </Left>
 
       <Right>
-        <TitleR>CAANDIDATES</TitleR>
+        <TitleR>
+          CANDIDATES
+          <br />
+          <div>
+            <button>ASIGNAR A BUSQUEDA SELECCIONADA</button>
+          </div>
+        </TitleR>
         <ContentR>
           {props.candidateList.map(candidate => (
-            <Candidate candidate={candidate} />
+            <Candidate candidate={candidate} key={candidate.id} />
           ))}
         </ContentR>
       </Right>
