@@ -11,14 +11,19 @@ export default props => {
     imgURL,
     benefits,
     openings,
-    client
+    client,
+    id
   } = props.jobPost;
 
   return (
     <JobPostStyle>
-      <div style={{ boxSizing: "border-box", margin: "15px" }}>
-        <p>{title}</p>
-      </div>
+      <Link className="thumbnail" to={`/auth/recruiter/jobpostings/${id}`}>
+        <div style={{ boxSizing: "border-box", margin: "15px" }}>
+          <p>{title}</p>
+        </div>
+
+      </Link>
+
     </JobPostStyle>
   );
 };

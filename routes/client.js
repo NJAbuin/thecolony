@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Client = require("../db/models/Client");
+const Admin = require("../db/models/Client");
 const passport = require("../db/passport/passportClient");
 
 router.post("/register", function (req, res) {
@@ -13,10 +13,15 @@ router.post("/register", function (req, res) {
 })
 
 
-router.post("/login", passport.authenticate("client"), function (req, res) {
-  console.log(req.body);
-  res.send(req.user);
+router.post("/login", passport.authenticate("client"), (req, res) => {
+  res.send({
+    fullName: req.user.fullName,
+    email: req.user.email,
+    type: req.user.type,
+    id: req.user.id
+  });
 });
+
 
 router.get("/logout", function (req, res) {
   req.logout();

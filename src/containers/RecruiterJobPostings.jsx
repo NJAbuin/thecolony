@@ -31,7 +31,7 @@ function RecruiterJobPostings(props) {
       </Left>
 
       <Right>
-        <TitleR>CAANDIDATES</TitleR>
+        <TitleR>CANDIDATES</TitleR>
         <ContentR>{props.candidateList.map(candidate => <Candidate candidate={candidate} />)}</ContentR>
       </Right>
     </Dashboard>
