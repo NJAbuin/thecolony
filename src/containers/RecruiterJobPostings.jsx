@@ -13,18 +13,18 @@ import {
   ContentR
 } from "../templates/Dashboard";
 
+import {
+  candidatesApplyToJob,
+  candidatesClearListSelection
+} from "../store/actions/candidates";
+
 function RecruiterJobPostings(props) {
-  useEffect(
-    () =>
-      document
-        .querySelectorAll("input")
-        .forEach(input =>
-          props.jobPostingSelected.candidates.includes(input.candId)
-            ? (input.checked = true)
-            : null
-        ),
-    [props.jobPostingSelected]
-  );
+  const clearAll = () => {
+    document
+      .querySelectorAll("input")
+      .forEach(input => (input.checked = false));
+    candidatesClearListSelection();
+  };
 
   return (
     <Dashboard>
@@ -46,7 +46,17 @@ function RecruiterJobPostings(props) {
           CANDIDATES
           <br />
           <div>
-            <button>ASIGNAR A BUSQUEDA SELECCIONADA</button>
+            <button
+              onClick={() =>
+                props.candidatesApplyToJob(
+                  props.jobPostingSelected,
+                  props.candidatesSelected
+                )
+              }
+            >
+              ASIGNAR A BUSQUEDA SELECCIONADA
+            </button>
+            <button onClick={() => clearAll()}>CANCELAR SELECCION</button>
           </div>
         </TitleR>
         <ContentR>
@@ -59,14 +69,24 @@ function RecruiterJobPostings(props) {
   );
 }
 
+const mapDispatchToProps = {
+  candidatesApplyToJob,
+  candidatesClearListSelection
+};
+
 const mapStateToProps = ({
   candidateList,
   jobPostings,
-  jobPostingSelected
+  jobPostingSelected,
+  candidatesSelected
 }) => ({
   candidateList,
   jobPostings,
-  jobPostingSelected
+  jobPostingSelected,
+  candidatesSelected
 });
 
-export default connect(mapStateToProps)(RecruiterJobPostings);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RecruiterJobPostings);

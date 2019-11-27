@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import Candidate from "./Candidate";
 
+import { candidatesApplyToJob, candidatesClearListSelection } from '../store/actions/candidates'
 import { CandidateContainer } from "../templates/Candidates";
 
 function RecruiterCandidates(props) {

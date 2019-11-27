@@ -1,18 +1,17 @@
 const router = require("express").Router();
 const { Recruiter, Candidate, JobPosting } = require("../db/models/");
 const passport = require("../db/passport/passportRecruiter");
+const chalk = require("chalk");
 
 //register, login y logout
 
 router.post("/register", function(req, res) {
   Recruiter.findOne({ where: { email: req.body.email } })
-    .then(user => {
-      if (user) {
-        res.send("Este email ya esta registrado.");
-      } else {
-        Recruiter.create(req.body).then(recruiter => res.send(recruiter));
-      }
-    })
+    .then(user =>
+      user
+        ? res.send("Este email ya esta registrado.")
+        : Recruiter.create(req.body).then(recruiter => res.send(recruiter))
+    )
     .catch(err => console.log(err));
 });
 
@@ -31,9 +30,13 @@ router.get("/logout", function(req, res) {
 });
 
 // agregar y editar candidatos
-
 router.post("/candidates/csvImport", function(req, res) {
-  Candidate.bulkCreate([...req.body]).then(candidates => res.send(candidates));
+  req.body.csvValues.forEach(candidate => {
+    Recruiter.findOne({ where: { id: req.body.user.id } }).then(recruiter =>
+      recruiter.createCandidate(candidate)
+    );
+  });
+  res.send("Created");
 });
 
 router.post("/candidatos", function(req, res) {

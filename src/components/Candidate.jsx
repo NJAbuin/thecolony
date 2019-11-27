@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
-import axios from "axios";
-import { withRouter } from "react-router-dom";
+import React from "react";
+import { connect } from "react-redux";
 
 import { CandidateStyle } from "../templates/Candidates";
 
-function Candidate(props) {
+import { candidateAdd, candidateRemove } from "../store/actions/candidates";
+
+export function Candidate(props) {
   const {
     id,
     DNI,
@@ -15,24 +16,29 @@ function Candidate(props) {
     address,
     expectedSalary
   } = props.candidate;
-  /*
-  useEffect(() => {
-    const check = props.assigned && props.assigned.includes(fullName);
-    console.log(check);
-  }, [props.assigned]);
-*/
 
   return (
     <CandidateStyle>
-      {props.match.path.includes("jobpostings") ? (
-        <input candId={id} type="checkbox"></input>
-      ) : (
-        ""
-      )}
+      {window.location.href.includes("jobpostings") ? (
+        <input
+          type="checkbox"
+          onClick={e => {
+            e.target.checked
+              ? props.candidateAdd(props.candidate)
+              : props.candidateRemove(props.candidate);
+          }}
+        ></input>
+      ) : null}
+
       <h3>{fullName}</h3>
       <span>{jobTitle}</span>
     </CandidateStyle>
   );
 }
 
-export default withRouter(Candidate);
+const mapDispatchToProps = {
+  candidateAdd,
+  candidateRemove
+};
+
+export default connect(null, mapDispatchToProps)(Candidate);
