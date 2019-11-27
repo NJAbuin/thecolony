@@ -1,12 +1,13 @@
 import React from "react";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 
 import { CandidateStyle } from "../templates/Candidates";
 
-import { candidateAdd, candidateRemove } from '../store/actions/candidates'
+import { candidateAdd, candidateRemove } from "../store/actions/candidates";
 
 export function Candidate(props) {
   const {
+    id,
     DNI,
     fullName,
     age,
@@ -16,25 +17,44 @@ export function Candidate(props) {
     expectedSalary
   } = props.candidate;
 
+  const checker = function() {
+    return (
+      props.jobPostingSelected.candidates &&
+      Boolean(
+        props.jobPostingSelected.candidates.find(
+          element => element.id == props.candidate.id
+        )
+      )
+    );
+  };
+
   return (
     <CandidateStyle>
-      <input
-        type="checkbox"
-        onClick={e => {
-          e.target.checked
-            ? props.candidateAdd(props.candidate)
-            : props.candidateRemove(props.candidate)
-        }}
-      ></input>
+      {window.location.href.includes("jobpostings") && !checker() ? (
+        <input
+          type="checkbox"
+          onClick={e => {
+            e.target.checked
+              ? props.candidateAdd(props.candidate)
+              : props.candidateRemove(props.candidate);
+          }}
+        ></input>
+      ) : null}
+
       <h3>{fullName}</h3>
       <span>{jobTitle}</span>
     </CandidateStyle>
   );
-};
+}
+
+const mapStateToProps = ({ jobPostingSelected, candidatesSelected }) => ({
+  jobPostingSelected,
+  candidatesSelected
+});
 
 const mapDispatchToProps = {
   candidateAdd,
   candidateRemove
-}
+};
 
-export default connect(null, mapDispatchToProps)(Candidate)
+export default connect(mapStateToProps, mapDispatchToProps)(Candidate);
