@@ -8,16 +8,15 @@ import { CandidateContainer } from "../templates/Candidates";
 function RecruiterCandidates(props) {
   return (
     <CandidateContainer>
-      <button>ADD</button>
-      <button>SUBMIT</button>
       {props.candidateList.map(candidate => (
-        <Candidate candidate={candidate} />
+        <Candidate candidate={candidate} key={candidate.id} />
       ))}
     </CandidateContainer>
   );
 }
-const mapStateToProps = ({ candidateList }) => ({
-  candidateList
+const mapStateToProps = ({ candidateList, jobPostingSelected }) => ({
+  candidateList,
+  jobPostingSelected
 });
 
 export default connect(mapStateToProps)(RecruiterCandidates);

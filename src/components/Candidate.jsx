@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import axios from "axios";
+import { withRouter } from "react-router-dom";
 
 import { CandidateStyle } from "../templates/Candidates";
 
-export default props => {
+function Candidate(props) {
   const {
+    id,
     DNI,
     fullName,
     age,
@@ -13,20 +15,24 @@ export default props => {
     address,
     expectedSalary
   } = props.candidate;
+  /*
+  useEffect(() => {
+    const check = props.assigned && props.assigned.includes(fullName);
+    console.log(check);
+  }, [props.assigned]);
+*/
 
   return (
     <CandidateStyle>
-      <input
-        type="checkbox"
-        onClick={e => {
-          const memes = e.target.checked
-            ? "S-senpai, my button feels funny"
-            : "Je suis Nisman.";
-          console.log(memes);
-        }}
-      ></input>
+      {props.match.path.includes("jobpostings") ? (
+        <input candId={id} type="checkbox"></input>
+      ) : (
+        ""
+      )}
       <h3>{fullName}</h3>
       <span>{jobTitle}</span>
     </CandidateStyle>
   );
-};
+}
+
+export default withRouter(Candidate);

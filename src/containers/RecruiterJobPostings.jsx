@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 import JobPosting from "../components/JobPosting";
@@ -14,6 +14,18 @@ import {
 } from "../templates/Dashboard";
 
 function RecruiterJobPostings(props) {
+  useEffect(
+    () =>
+      document
+        .querySelectorAll("input")
+        .forEach(input =>
+          props.jobPostingSelected.candidates.includes(input.candId)
+            ? (input.checked = true)
+            : null
+        ),
+    [props.jobPostingSelected]
+  );
+
   return (
     <Dashboard>
       <Left>
@@ -47,9 +59,14 @@ function RecruiterJobPostings(props) {
   );
 }
 
-const mapStateToProps = ({ candidateList, jobPostings }) => ({
+const mapStateToProps = ({
   candidateList,
-  jobPostings
+  jobPostings,
+  jobPostingSelected
+}) => ({
+  candidateList,
+  jobPostings,
+  jobPostingSelected
 });
 
 export default connect(mapStateToProps)(RecruiterJobPostings);
