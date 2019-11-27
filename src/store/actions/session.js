@@ -10,6 +10,16 @@ export const logIn = credentials => ({
   credentials
 });
 
+/**
+ * Logout from backend, dispatch logOut action
+ */
+export const sessionLogOut = () => dispatch => {
+  axios
+    .get("/api/logout")
+    .then(res => res.data)
+    .then(() => dispatch(logOut()));
+};
+
 export const fetchSession = () => dispatch =>
   axios
     .get("/api/me")
@@ -24,4 +34,4 @@ export const sessionLogIn = (url, email, password) => dispatch =>
       return { fullName, email, type, id };
     })
     .then(user => dispatch(logIn(user)))
-    .catch(err => console.log(err));
+    .catch(err => dispatch(logIn("Credenciales Incorrectas")));

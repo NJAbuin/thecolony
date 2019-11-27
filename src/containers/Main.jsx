@@ -30,9 +30,8 @@ function Main(props) {
   return (
     <ThemeProvider theme={theme}>
       <MainGrid>
-        <Navbar user={user} />
+        <Navbar />
         <Switch>
-
           <Route path="/landing" component={Landing} />
           {/* {'Change route Auth to a Private Route later'} */}
           <Route path="/auth" component={AuthContainer} />
@@ -61,7 +60,4 @@ const theme = {
   RichBlack: "5, 5, 7"
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
