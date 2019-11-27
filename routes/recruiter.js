@@ -18,10 +18,10 @@ router.post("/register", function(req, res) {
 
 router.post("/login", passport.authenticate("recruiter"), (req, res) => {
   res.send({
-    fullName: req.body.fullName,
-    email: req.body.email,
-    type: req.body.type,
-    id: req.body.id
+    fullName: req.user.fullName,
+    email: req.user.email,
+    type: req.user.type,
+    id: req.user.id
   });
 });
 
