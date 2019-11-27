@@ -16,8 +16,13 @@ router.post("/register", function(req, res) {
     .catch(err => console.log(err));
 });
 
-router.post("/login", passport.authenticate("recruiter"), function(req, res) {
-  res.send(req.user);
+router.post("/login", passport.authenticate("recruiter"), (req, res) => {
+  res.send({
+    fullName: req.body.fullName,
+    email: req.body.email,
+    type: req.body.type,
+    id: req.body.id
+  });
 });
 
 router.get("/logout", function(req, res) {
@@ -61,6 +66,19 @@ router.get("/jobpostings", function(req, res) {
     }
   }).then(jobs => res.send(jobs));
 });
+
+router.post("/jobpostings", function(req, res) {
+  JobPosting.findOne({ where: { id: req.body.id } })
+    .then(job => {
+      req.body.newCandidates.map(c => {
+        Candidate.findByPk(c.id).then(candidate => job.addCandidate(candidate));
+      });
+      return job.getCandidates();
+    })
+    .then(candidates => res.send(candidates));
+});
+
+//agregar desde el detalle de singleJobPosting
 
 router.post("/jobpostings/:id", function(req, res) {
   JobPosting.findOne({ where: { id: req.params.id } }).then(job => {
