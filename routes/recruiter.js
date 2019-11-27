@@ -82,7 +82,7 @@ router.post("/jobpostings", function(req, res) {
     .then(candidates => res.send(candidates));
 });
 
-//agregar desde el detalle de singleJobPosting
+//agregar un candidato desde el detalle de singleJobPosting
 
 router.post("/jobpostings/:id", function(req, res) {
   JobPosting.findOne({ where: { id: req.params.id } }).then(job => {

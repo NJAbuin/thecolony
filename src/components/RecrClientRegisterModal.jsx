@@ -77,6 +77,7 @@ export default function RecrClientRegisterModal(props) {
 
   const handleClose = () => {
     setOpen(false);
+    alert("Cuenta registrada con exito! Log in para empezar a navegar");
   };
 
   const handleClick = e => {
@@ -92,7 +93,7 @@ export default function RecrClientRegisterModal(props) {
       setWarningMessage(
         `La contraseña debe tener al menos ${passwordLength} caracteres`
       );
-    } else if (fullName.length < 5 && !fullName.includes(" ")) {
+    } else if (!validateFullName(fullName)) {
       setWarningMessage("Ingrese un nombre completo valido");
     } else {
       setWarningMessage("");

@@ -13,9 +13,15 @@ router.post("/register", function (req, res) {
 })
 
 
-router.post("/login", passport.authenticate("admin"), function (req, res) {
-  res.send(req.user);
+router.post("/login", passport.authenticate("admin"), (req, res) => {
+  res.send({
+    fullName: req.user.fullName,
+    email: req.user.email,
+    type: req.user.type,
+    id: req.user.id
+  });
 });
+
 
 router.get("/logout", function (req, res) {
   req.logout();
