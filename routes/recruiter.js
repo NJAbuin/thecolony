@@ -34,6 +34,7 @@ router.post("/candidates/csvImport", function(req, res) {
       recruiter.createCandidate(candidate)
     );
   });
+  res.send("Created");
   //Candidate.bulkCreate([...req.body]).then(candidates => res.send(candidates));
 });
 

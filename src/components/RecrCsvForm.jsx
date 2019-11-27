@@ -10,8 +10,23 @@ function RecrCsvForm(props) {
   const papaparseOptions = {
     header: true,
     dynamicTyping: true,
-    skipEmptyLines: true
-    // transformHeader: header => header.toLowerCase().replace(/\W/g, "_")
+    skipEmptyLines: true,
+    transformHeader: header => {
+      switch (header) {
+        case "Nombre completo":
+          return "fullName";
+        case "Edad":
+          return "age";
+        case "Ocupacion":
+          return "jobTitle";
+        case "Direccion":
+          return "address";
+        case "Salario esperado":
+          return "expectedSalary";
+        default:
+          return header;
+      }
+    }
   };
 
   const handleForce = data => {
@@ -20,6 +35,7 @@ function RecrCsvForm(props) {
 
   const bulkCreateFromCsv = (e, user) => {
     e.preventDefault();
+    console.log(csvValues);
     Axios.post("/api/recruiter/candidates/csvImport", {
       csvValues,
       user
@@ -33,9 +49,10 @@ function RecrCsvForm(props) {
         Puede extraer los datos de sus candidatos de una planilla propia al
         exportarla como csv.
         <br />
-        Debe poseer las columnas
-        DNI*,fullName*,age*,jobTitle*,address,expectedSalary
+        Debe poseer las columnas DNI, Nombre completo, Edad, Ocupacion,
+        Direccion, Salario esperado
       </InfoParagraph>
+      <img src="/images/csvguide.jpg" alt="Imagen de ejemplo" />
       <CSVReader
         cssClass="react-csv-input"
         label="Elije el archivo a subir:  "
