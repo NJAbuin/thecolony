@@ -18,10 +18,7 @@ import { candidatesApplyToJob, candidatesClearListSelection } from '../store/act
 
 function RecruiterJobPostings(props) {
   const clearAll = () => {
-    document.querySelectorAll('input')
-      .forEach(input =>
-        input.checked ? input.checked = false : null
-      )
+    document.querySelectorAll('input').forEach(input => input.checked = false)
     candidatesClearListSelection()
   }
 
