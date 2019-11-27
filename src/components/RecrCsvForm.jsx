@@ -3,8 +3,9 @@ import { InfoParagraph } from "../templates/Text";
 import CSVReader from "react-csv-reader";
 import { H1 } from "../templates/Text";
 import Axios from "axios";
+import { connect } from "react-redux";
 
-export default function RecrCsvForm() {
+function RecrCsvForm(props) {
   const [csvValues, setCsvValues] = React.useState([]);
   const papaparseOptions = {
     header: true,
@@ -17,11 +18,12 @@ export default function RecrCsvForm() {
     setCsvValues(data);
   };
 
-  const bulkCreateFromCsv = e => {
+  const bulkCreateFromCsv = (e, user) => {
     e.preventDefault();
-    Axios.post("/api/recruiter/candidates/csvImport", [...csvValues]).then(
-      res => console.log(res.data)
-    );
+    Axios.post("/api/recruiter/candidates/csvImport", {
+      csvValues,
+      user
+    }).then(res => console.log(res.data));
   };
 
   return (
@@ -40,7 +42,15 @@ export default function RecrCsvForm() {
         onFileLoaded={handleForce}
         parserOptions={papaparseOptions}
       />
-      <button onClick={e => bulkCreateFromCsv(e)}>Confirmar archivo</button>
+      <button onClick={e => bulkCreateFromCsv(e, props.user)}>
+        Confirmar archivo
+      </button>
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  user: state.session.user
+});
+
+export default connect(mapStateToProps, null)(RecrCsvForm);
