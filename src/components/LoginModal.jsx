@@ -80,8 +80,9 @@ function LoginModal(props) {
       setWarningMessage("Usuario o contraseña invalidos");
   }, [props.user]);
 
-  function validateAndClose(routeToPost, email, password, res, err) {
+  function validateAndClose(routeToPost, email, password) {
     if (validateLogin(email, password)) {
+      console.log("siempre valida")
       props.sessionLogIn(routeToPost, email, password);
     }
   }
@@ -119,7 +120,7 @@ function LoginModal(props) {
               <button
                 onClick={e => {
                   e.preventDefault();
-                  validateAndClose(routeToPost, email, password, validateLogin);
+                  validateAndClose(routeToPost, email, password);
                 }}
               >
                 Submit
