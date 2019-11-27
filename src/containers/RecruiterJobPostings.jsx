@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 import JobPosting from "../components/JobPosting";
@@ -13,14 +13,18 @@ import {
   ContentR
 } from "../templates/Dashboard";
 
-import { candidatesApplyToJob, candidatesClearListSelection } from '../store/actions/candidates'
-
+import {
+  candidatesApplyToJob,
+  candidatesClearListSelection
+} from "../store/actions/candidates";
 
 function RecruiterJobPostings(props) {
   const clearAll = () => {
-    document.querySelectorAll('input').forEach(input => input.checked = false)
-    candidatesClearListSelection()
-  }
+    document
+      .querySelectorAll("input")
+      .forEach(input => (input.checked = false));
+    candidatesClearListSelection();
+  };
 
   return (
     <Dashboard>
@@ -42,7 +46,16 @@ function RecruiterJobPostings(props) {
           CANDIDATES
           <br />
           <div>
-            <button onClick={() => props.candidatesApplyToJob(props.jobPostingSelected, props.candidatesSelected)}>ASIGNAR A BUSQUEDA SELECCIONADA</button>
+            <button
+              onClick={() =>
+                props.candidatesApplyToJob(
+                  props.jobPostingSelected,
+                  props.candidatesSelected
+                )
+              }
+            >
+              ASIGNAR A BUSQUEDA SELECCIONADA
+            </button>
             <button onClick={() => clearAll()}>CANCELAR SELECCION</button>
           </div>
         </TitleR>
@@ -59,13 +72,21 @@ function RecruiterJobPostings(props) {
 const mapDispatchToProps = {
   candidatesApplyToJob,
   candidatesClearListSelection
-}
+};
 
-const mapStateToProps = ({ candidateList, jobPostings, jobPostingSelected, candidatesSelected }) => ({
+const mapStateToProps = ({
+  candidateList,
+  jobPostings,
+  jobPostingSelected,
+  candidatesSelected
+}) => ({
   candidateList,
   jobPostings,
   jobPostingSelected,
   candidatesSelected
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecruiterJobPostings);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RecruiterJobPostings);
