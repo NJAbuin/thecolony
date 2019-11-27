@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { Client, JobPosting } = require("../db/models");
 const passport = require("../db/passport/passportClient");
 
-router.post("/register", function(req, res) {
+router.post("/register", function (req, res) {
   Client.findOne({ where: { email: req.body.email } })
     .then(user => {
       if (user) {
@@ -14,16 +14,22 @@ router.post("/register", function(req, res) {
     .catch(err => console.log(err));
 });
 
-router.post("/login", passport.authenticate("client"), function(req, res) {
-  res.send(req.user);
+router.post("/login", passport.authenticate("client"), (req, res) => {
+  res.send({
+    fullName: req.user.fullName,
+    email: req.user.email,
+    type: req.user.type,
+    id: req.user.id
+  });
 });
 
-router.get("/logout", function(req, res) {
+
+router.get("/logout", function (req, res) {
   req.logout();
   res.sendStatus(200);
 });
 
-router.post("/jobposting", function(req, res) {
+router.post("/jobposting", function (req, res) {
   Client.findOne({ where: { id: 1 } })
     .then(client => {
       client.createJobposting({
