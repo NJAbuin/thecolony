@@ -82,7 +82,7 @@ function LoginModal(props) {
 
   function validateAndClose(routeToPost, email, password) {
     if (validateLogin(email, password)) {
-      console.log("siempre valida")
+      console.log("siempre valida");
       props.sessionLogIn(routeToPost, email, password);
     }
   }
