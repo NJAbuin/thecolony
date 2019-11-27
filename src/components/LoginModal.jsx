@@ -54,7 +54,7 @@ function LoginModal(props) {
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [warningMessage, setWarningMessage] = React.useState("");
+  const [warningMessage, setWarningMessage] = React.useState(null);
 
   const handleOpen = () => {
     setOpen(true);
@@ -75,17 +75,14 @@ function LoginModal(props) {
   };
 
   React.useEffect(() => {
-    if (props.user != {} && props.user != "Credenciales Incorrectas")
-      handleClose();
+    if (props.user != "Credenciales Incorrectas") handleClose();
+    if (props.user === "Credenciales Incorrectas")
+      setWarningMessage("Usuario o contraseña invalidos");
   }, [props.user]);
 
   function validateAndClose(routeToPost, email, password, res, err) {
     if (validateLogin(email, password)) {
       props.sessionLogIn(routeToPost, email, password);
-      if (props.user === "Credenciales Incorrectas") {
-        setWarningMessage("Usuario o contraseña invalidos");
-        forceUpdate();
-      }
     }
   }
 
