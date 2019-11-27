@@ -71,6 +71,7 @@ router.get("/jobpostings", function(req, res) {
 });
 
 router.post("/jobpostings", function(req, res) {
+  console.log(chalk.bgRed(JSON.stringify(req.body)));
   JobPosting.findOne({ where: { id: req.body.id } })
     .then(job => {
       req.body.newCandidates.map(c => {
