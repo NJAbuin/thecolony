@@ -80,7 +80,7 @@ export default function RecrClientRegisterModal(props) {
     alert("Cuenta registrada con exito! Log in para empezar a navegar");
   };
 
-  const handleClick = e => {
+  const handleSubmit = e => {
     e.preventDefault();
     validateRegister(email, password, fullName, logoURL, phone, website);
   };
@@ -109,16 +109,11 @@ export default function RecrClientRegisterModal(props) {
     axios
       .post(routeToPost, { email, password, fullName, phone, logoURL, website })
       .then(res => {
-        console.log(res.data);
-        if (res.data === "Este email ya esta registrado.")
-          setWarningMessageBackend(res.data);
-        else {
-          setWarningMessageBackend("");
-        }
+        res.data === "Este email ya esta registrado."
+          ? setWarningMessageBackend(res.data)
+          : setWarningMessageBackend("");
       })
-      .catch(() => {
-        console.error("error");
-      });
+      .catch(() => console.error("error"));
 
   return (
     <div>
@@ -154,13 +149,7 @@ export default function RecrClientRegisterModal(props) {
                 {warningMessageBackend}
               </p>
 
-              <button
-                onClick={e => {
-                  handleClick(e);
-                }}
-              >
-                Submit
-              </button>
+              <button onClick={e => handleSubmit(e)}>Submit</button>
             </form>
           </div>
         </Fade>
