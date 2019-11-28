@@ -28,6 +28,10 @@ export function Candidate(props) {
     );
   }; // chequea si el candidato ya está incluído en el posting seleccionado y retorna booleano
 
+  const showCV = e => {
+    window.open(`${CV.replace("dist", "")}`, "_blank");
+  };
+
   return (
     <CandidateStyle>
       {window.location.href.includes("jobpostings") && !checker() ? (
@@ -43,6 +47,8 @@ export function Candidate(props) {
 
       <h3>{fullName}</h3>
       <span>{jobTitle}</span>
+      <br />
+      <button onClick={e => showCV(e)}>Ver CV</button>
     </CandidateStyle>
   );
 }
