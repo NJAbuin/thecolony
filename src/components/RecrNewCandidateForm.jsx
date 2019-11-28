@@ -57,7 +57,7 @@ function RecrNewCandidateForm(props) {
 
   const doTheThing = () => {
     if (warningMessage === "") {
-      if (props.match.url === "/recruiter/candidates") {
+      if (props.match.url === "/auth/recruiter/candidates/new") {
         (() =>
           Axios.post("/api/recruiter/candidates", {
             DNI,
@@ -68,7 +68,7 @@ function RecrNewCandidateForm(props) {
             expectedSalary,
             recruiterID
           }))().then(candidate => {});
-      } else if (props.match.path === "/candidates/edit/:id") {
+      } else if (props.match.path === "/candidates/:id/edit") {
         Axios.put(`/api/recruiter/candidates/edit/${props.match.params.id}`, {
           DNI,
           fullName,

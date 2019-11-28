@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { LandingGrid } from "../templates/LayoutGrids";
 import { Card } from "../templates/Card";
@@ -91,7 +91,4 @@ const mapStateToProps = state => ({
   user: state.session.user
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(Landing);
+export default connect(mapStateToProps, null)(Landing);
