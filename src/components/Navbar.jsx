@@ -10,7 +10,7 @@ const NavBar = props => {
     props.history.push("/");
   };
 
-  let logoLinkURL = props.user.fullName ? "/auth" : "/landing";
+  let logoLinkURL = props.user.fullName ? "/auth/dashboard" : "/landing";
 
   return (
     <div style={navStyles.nav}>

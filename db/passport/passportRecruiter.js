@@ -9,13 +9,15 @@ passport.use(
       usernameField: "email",
       passwordField: "password"
     },
-    function (email, password, done) {
+    function(email, password, done) {
       Recruiter.findOne({
         where: { email: email }
       })
         .then(user => {
           if (!user || !user.validatePassword(password)) {
-            return done(null, false, { message: "Incorrect email or password." });
+            return done(null, false, {
+              message: "Incorrect email or password."
+            });
           }
           return done(null, user);
         })
@@ -24,10 +26,10 @@ passport.use(
   )
 );
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
-passport.deserializeUser(function (id, done) {
+passport.deserializeUser(function(id, done) {
   Recruiter.findByPk(id).then(user => done(null, user));
 });
 

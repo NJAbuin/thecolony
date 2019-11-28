@@ -7,7 +7,7 @@ import { ThemeProvider } from "styled-components";
 //components / containers
 import AuthContainer from "./AuthContainer";
 
-import PrivateRoute from "../components/PrivateRoute";
+import { PrivateRoute } from "../components/PrivateRoute";
 import Landing from "../components/Landing";
 import Navbar from "../components/Navbar";
 
@@ -44,9 +44,7 @@ function Main(props) {
         <Navbar />
         <Switch>
           <Route path="/landing" component={Landing} />
-          <Route path="/csvtestroute" component={RecrCsvForm} />
-          {/* {'Change route Auth to a Private Route later'} */}
-          <Route path="/auth" component={AuthContainer} />
+          <PrivateRoute path="/auth" component={AuthContainer} user={user} />
           <Redirect path="/" to="/landing" />
         </Switch>
       </MainGrid>

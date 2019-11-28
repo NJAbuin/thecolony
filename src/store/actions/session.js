@@ -30,8 +30,6 @@ export const sessionLogIn = (url, email, password) => dispatch =>
   axios
     .post(url, { email, password })
     .then(res => {
-      console.log("RES data session")
-      console.log(res.data)
       const { fullName, email, type, id } = res.data;
       return { fullName, email, type, id };
     })
