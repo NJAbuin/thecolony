@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { Recruiter, Candidate, JobPosting } = require("../db/models/");
-const passport = require("../db/passport/passportRecruiter");
+const passport = require("../db/passport/");
 const chalk = require("chalk");
 const multer = require("multer");
 const path = require("path");
