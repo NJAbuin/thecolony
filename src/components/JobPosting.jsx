@@ -29,7 +29,6 @@ function JobPosting(props) {
           SELECCIONAR
         </Button>
         <Button onClick={() => {
-          props.selectJobPostToState(id)
           props.history.push(`/auth/recruiter/jobpostings/${id}`)
         }}> Ver detalles</Button>
 
