@@ -26,7 +26,7 @@ export function Candidate(props) {
         )
       )
     );
-  };
+  }; // chequea si el candidato ya está incluído en el posting seleccionado y retorna booleano
 
   return (
     <CandidateStyle>
