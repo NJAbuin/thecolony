@@ -20,13 +20,23 @@ import RecrCsvForm from "../components/RecrCsvForm";
 
 function Main(props) {
   const { user, fetchSession, history } = props;
-  /*
-  useEffect(() => fetchSession(), []);
-  when login, props.history.replace
-  /*
-  if (props.user.type)
-    useEffect(() => history.push(`/auth/${user.type}`), [user]);
-*/
+  useEffect(() => {
+    switch (user.type) {
+      case "Recruiter":
+        history.replace("/auth/recruiter/jobpostings");
+        break;
+      case "Admin":
+        history.replace("/auth/admin/dashboard");
+        break;
+      case "Cliente":
+        history.replace("/auth/client/dashboard");
+        break;
+    }
+  }, [user.type]);
+
+  useEffect(() => {
+    fetchSession();
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
