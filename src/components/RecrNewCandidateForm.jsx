@@ -26,60 +26,26 @@ function RecrNewCandidateForm(props) {
     alert("What do???");
   };
 
-  const onSubmit = async e => {
+  const onSubmit = e => {
     e.preventDefault();
     validateForm(DNI, fullName, age, jobTitle);
-    const formData = new FormData();
+    let formData = new FormData();
     formData.append("DNI", DNI);
     formData.append("fullName", fullName);
     formData.append("age", age);
     formData.append("jobTitle", jobTitle);
-    formData.append("CV", file);
+    formData.append("file", file);
     formData.append("address", address);
     formData.append("expectedSalary", expectedSalary);
 
-    try {
-      const res = await Axios.post("/api/recruiter/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      });
-
-      setUploadedFile(res.data);
-    } catch (err) {
-      if (err.response.status === 500) {
-        console.log("Server problem");
-      } else {
-        console.log(err);
+    console.log(formData);
+    return Axios.post("/api/recruiter/upload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data"
       }
-    }
+    }).then(res => setUploadedFile(res.data));
   };
 
-  const doTheThing = () => {
-    if (warningMessage === "") {
-      if (props.match.url === "/auth/recruiter/candidates/new") {
-        (() =>
-          Axios.post("/api/recruiter/candidates", {
-            DNI,
-            fullName,
-            age,
-            jobTitle,
-            address,
-            expectedSalary,
-            recruiterID
-          }))().then(candidate => {});
-      } else if (props.match.path === "/candidates/:id/edit") {
-        Axios.put(`/api/recruiter/candidates/edit/${props.match.params.id}`, {
-          DNI,
-          fullName,
-          age,
-          jobTitle,
-          address,
-          expectedSalary
-        }).then(candidate => console.log(candidate));
-      }
-    }
-  };
   const handleChange = e => {
     console.log(e.target.files[0]);
   };
