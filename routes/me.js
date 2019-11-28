@@ -1,8 +1,8 @@
 const router = require("express").Router();
 
 router.get("/", function(req, res) {
-  console.log(req.user);
-  res.send(req.user);
+  const { fullName, email, type, id } = req.user;
+  res.send({ fullName, email, type, id });
 });
 
 module.exports = router;
