@@ -1,14 +1,15 @@
-import { Route as R, Redirect } from "react-router-dom";
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
 
 export const PrivateRoute = ({ component: Component, ...otherProps }) => (
-  <R
+  <Route
     {...otherProps}
-    render={props =>
-      isAuthenticated() ? (
+    render={() =>
+      Object.keys(otherProps.user).length ? (
         <Component {...otherProps} />
       ) : (
         <Redirect
-          to={{ pathname: "/", state: { from: props.location || "/" } }}
+          to={{ pathname: "/", state: { from: otherProps.location || "/" } }}
         />
       )
     }
