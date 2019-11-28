@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const { Client, JobPosting } = require("../db/models");
-const passport = require("../db/passport/passportClient");
+const passport = require("../db/passport/");
 
-router.post("/register", function (req, res) {
+router.post("/register", function(req, res) {
   Client.findOne({ where: { email: req.body.email } })
     .then(user => {
       if (user) {
@@ -23,13 +23,12 @@ router.post("/login", passport.authenticate("client"), (req, res) => {
   });
 });
 
-
-router.get("/logout", function (req, res) {
+router.get("/logout", function(req, res) {
   req.logout();
   res.sendStatus(200);
 });
 
-router.post("/jobposting", function (req, res) {
+router.post("/jobposting", function(req, res) {
   Client.findOne({ where: { id: 1 } })
     .then(client => {
       client.createJobposting({

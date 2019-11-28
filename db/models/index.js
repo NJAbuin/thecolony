@@ -12,6 +12,7 @@ JobPosting.hasMany(Candidate);
 Candidate.belongsTo(Recruiter);
 
 module.exports = {
+  Admin,
   Candidate,
   Recruiter,
   JobPosting,
