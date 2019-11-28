@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { labelInputCreator } from "../../utils";
 import { H1 } from "../templates/Text";
 import Axios from "axios";
 import RecrCsvForm from "./RecrCsvForm";
 import { InfoParagraph } from "../templates/Text";
 import { connect } from "react-redux";
+import FileUpload from "./FileUpload";
 
 function RecrNewCandidateForm(props) {
   const [DNI, setDNI] = React.useState(0);
@@ -15,6 +16,9 @@ function RecrNewCandidateForm(props) {
   const [expectedSalary, setExpectedSalary] = React.useState(0);
   const [warningMessage, setWarningMessage] = React.useState("");
   const [submitted, setSubmitted] = React.useState(false);
+  const [file, setFile] = useState("");
+  const [filename, setFilename] = useState("Elije el CV (formato PDF): ");
+  const [uploadedFile, setUploadedFile] = useState({});
   const recruiterID = props.user.id;
 
   const uploadPDF = e => {
@@ -22,10 +26,33 @@ function RecrNewCandidateForm(props) {
     alert("What do???");
   };
 
-  const handleClick = e => {
+  const onSubmit = async e => {
     e.preventDefault();
     validateForm(DNI, fullName, age, jobTitle);
-    doTheThing();
+    const formData = new FormData();
+    formData.append("DNI", DNI);
+    formData.append("fullName", fullName);
+    formData.append("age", age);
+    formData.append("jobTitle", jobTitle);
+    formData.append("CV", file);
+    formData.append("address", address);
+    formData.append("expectedSalary", expectedSalary);
+
+    try {
+      const res = await Axios.post("/api/recruiter/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
+
+      setUploadedFile(res.data);
+    } catch (err) {
+      if (err.response.status === 500) {
+        console.log("Server problem");
+      } else {
+        console.log(err);
+      }
+    }
   };
 
   const doTheThing = () => {
@@ -57,9 +84,14 @@ function RecrNewCandidateForm(props) {
     console.log(e.target.files[0]);
   };
 
+  const onChange = e => {
+    setFile(e.target.files[0]);
+    setFilename(e.target.files[0].name);
+  };
+
   const form = (
     <div style={{ gridArea: "contentDash" }}>
-      <form>
+      <form onSubmit={e => onSubmit(e)}>
         <H1>Ingrese los datos del candidato a agregar:</H1>
         {labelInputCreator("DNI*", setDNI)}
         {labelInputCreator("Nombre Completo*", setfullName)}
@@ -67,17 +99,11 @@ function RecrNewCandidateForm(props) {
         {labelInputCreator("Puesto*", setJobTitle)}
         {labelInputCreator("Direccion", setAddress)}
         {labelInputCreator("Salario esperado", setExpectedSalary)}
-        <label>
-          Subir CV :{" "}
-          <input
-            type="file"
-            onChange={e => handleChange(e)}
-            onClick={e => uploadPDF(e)}
-          ></input>
-        </label>
+        <input type="file" onChange={onChange} />
+        <label>{filename}</label>
         <br />
         <p style={{ color: "red" }}>{warningMessage}</p>
-        <button onClick={e => handleClick(e)}>Submit</button>
+        <button>Submit</button>
       </form>
       <hr />
       <RecrCsvForm />
