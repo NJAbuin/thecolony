@@ -4,6 +4,7 @@ const Client = require("./Client");
 const Candidate = require("./Candidate");
 const Admin = require("./Admin");
 
+Admin.hasMany(JobPosting);
 Client.hasMany(JobPosting);
 JobPosting.belongsTo(Client);
 Recruiter.hasMany(JobPosting);
