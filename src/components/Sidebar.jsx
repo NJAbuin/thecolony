@@ -6,7 +6,7 @@ import { SidebarButton, SidebarStyle } from "../templates/SidebarStyles";
 export default props => {
   //const {POWERS, URLs} = props.user.XXXX
   const recruiterSidebar = {
-    Dashboard: "/auth/recruiter",
+    Dashboard: "/auth/recruiter/dashboard",
     Busquedas: "/auth/recruiter/jobpostings",
     Candidatos: "/auth/recruiter/candidates"
   };
