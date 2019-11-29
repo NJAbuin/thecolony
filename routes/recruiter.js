@@ -1,50 +1,48 @@
 const router = require("express").Router();
 const { Recruiter, Candidate, JobPosting } = require("../db/models/");
-const passport = require("../db/passport/passportRecruiter");
+const passport = require("../db/passport/");
 const chalk = require("chalk");
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
-const pdf = require('pdf-parse');
-const dateFormat = require('dateformat');
+const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
+const pdf = require("pdf-parse");
+const dateFormat = require("dateformat");
 
 const storage = multer.diskStorage({
   destination(res, file, cb) {
-    let dir = './dist/uploads'
+    let dir = "./dist/uploads";
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir);
-      fs.mkdirSync(dir + '/cv');
+      fs.mkdirSync(dir + "/cv");
     }
-    cb(null, './dist/uploads/cv');
+    cb(null, "./dist/uploads/cv");
   },
   filename(req, file, cb) {
-    const renowned = file.originalname.replace(/[^a-zA-Z0-9]/g, '_');
+    const renowned = file.originalname.replace(/[^a-zA-Z0-9]/g, "_");
     cb(null, `${renowned}-${Date.now()}${path.extname(file.originalname)}`);
-  },
+  }
 });
 
 const upload = multer({ storage });
 
-router.post('/upload', upload.single('file'), (req, res) => {
-  Recruiter.findOne({ where: { fullName: 'Carola Marini' } }).then((recruiter) => {
-    recruiter.createCandidate({
-      fullName: req.body.fullName,
-      DNI: req.body.DNI,
-      age: req.body.age,
-      jobTitle: req.body.jobTitle,
-      address: req.body.adress,
-      exprectedSalary: req.body.exprectedSalary,
-      CV: req.file.path
-    }).then((candidate) => {
-      let dataBuffer = fs.readFileSync(req.file.path);
-      pdf(dataBuffer)
-        .then(data => res.status(200).send(data))
-    });
-  })
-
-
-})
-
+router.post("/upload", upload.single("file"), (req, res) => {
+  Recruiter.findOne({ where: { id: req.user.id } }).then(recruiter => {
+    recruiter
+      .createCandidate({
+        fullName: req.body.fullName,
+        DNI: req.body.DNI,
+        age: req.body.age,
+        jobTitle: req.body.jobTitle,
+        address: req.body.adress,
+        exprectedSalary: req.body.exprectedSalary,
+        CV: req.file.path
+      })
+      .then(() => {
+        let dataBuffer = fs.readFileSync(req.file.path);
+        pdf(dataBuffer).then(data => res.status(200).send(data));
+      });
+  });
+});
 
 //register, login y logout
 

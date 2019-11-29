@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { labelInputCreator } from "../../utils";
 import { H1 } from "../templates/Text";
 import Axios from "axios";
 import RecrCsvForm from "./RecrCsvForm";
 import { InfoParagraph } from "../templates/Text";
 import { connect } from "react-redux";
+import FileUpload from "./FileUpload";
 
 function RecrNewCandidateForm(props) {
   const [DNI, setDNI] = React.useState(0);
@@ -15,6 +16,9 @@ function RecrNewCandidateForm(props) {
   const [expectedSalary, setExpectedSalary] = React.useState(0);
   const [warningMessage, setWarningMessage] = React.useState("");
   const [submitted, setSubmitted] = React.useState(false);
+  const [file, setFile] = useState("");
+  const [filename, setFilename] = useState("Elije el CV (formato PDF): ");
+  const [uploadedFile, setUploadedFile] = useState({});
   const recruiterID = props.user.id;
 
   const uploadPDF = e => {
@@ -22,44 +26,38 @@ function RecrNewCandidateForm(props) {
     alert("What do???");
   };
 
-  const handleClick = e => {
+  const onSubmit = e => {
     e.preventDefault();
     validateForm(DNI, fullName, age, jobTitle);
-    doTheThing();
+    let formData = new FormData();
+    formData.append("DNI", DNI);
+    formData.append("fullName", fullName);
+    formData.append("age", age);
+    formData.append("jobTitle", jobTitle);
+    formData.append("file", file);
+    formData.append("address", address);
+    formData.append("expectedSalary", expectedSalary);
+
+    console.log(formData);
+    return Axios.post("/api/recruiter/upload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    }).then(res => setUploadedFile(res.data));
   };
 
-  const doTheThing = () => {
-    if (warningMessage === "") {
-      if (props.match.url === "/recruiter/candidates") {
-        (() =>
-          Axios.post("/api/recruiter/candidates", {
-            DNI,
-            fullName,
-            age,
-            jobTitle,
-            address,
-            expectedSalary,
-            recruiterID
-          }))().then(candidate => {});
-      } else if (props.match.path === "/candidates/edit/:id") {
-        Axios.put(`/api/recruiter/candidates/edit/${props.match.params.id}`, {
-          DNI,
-          fullName,
-          age,
-          jobTitle,
-          address,
-          expectedSalary
-        }).then(candidate => console.log(candidate));
-      }
-    }
-  };
   const handleChange = e => {
     console.log(e.target.files[0]);
   };
 
+  const onChange = e => {
+    setFile(e.target.files[0]);
+    setFilename(e.target.files[0].name);
+  };
+
   const form = (
     <div style={{ gridArea: "contentDash" }}>
-      <form>
+      <form onSubmit={e => onSubmit(e)}>
         <H1>Ingrese los datos del candidato a agregar:</H1>
         {labelInputCreator("DNI*", setDNI)}
         {labelInputCreator("Nombre Completo*", setfullName)}
@@ -67,17 +65,11 @@ function RecrNewCandidateForm(props) {
         {labelInputCreator("Puesto*", setJobTitle)}
         {labelInputCreator("Direccion", setAddress)}
         {labelInputCreator("Salario esperado", setExpectedSalary)}
-        <label>
-          Subir CV :{" "}
-          <input
-            type="file"
-            onChange={e => handleChange(e)}
-            onClick={e => uploadPDF(e)}
-          ></input>
-        </label>
+        <input type="file" onChange={onChange} />
+        <label>{filename}</label>
         <br />
         <p style={{ color: "red" }}>{warningMessage}</p>
-        <button onClick={e => handleClick(e)}>Submit</button>
+        <button>Submit</button>
       </form>
       <hr />
       <RecrCsvForm />
