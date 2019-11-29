@@ -89,11 +89,6 @@ export default function RecrClientRegisterModal(props) {
     }
   };
 
-  const handleClick = e => {
-    e.preventDefault();
-    validateRegister(email, password, fullName, logoURL, phone, website);
-  };
-
   const validateRegister = (email, pass, fullName) => {
     const passwordLength = 2;
     if (!validateEmail(email)) {
@@ -168,7 +163,15 @@ export default function RecrClientRegisterModal(props) {
 
               <button
                 onClick={e => {
-                  handleClick(e);
+                  e.preventDefault();
+                  validateRegister(
+                    email,
+                    password,
+                    fullName,
+                    logoURL,
+                    phone,
+                    website
+                  );
                 }}
               >
                 Submit
