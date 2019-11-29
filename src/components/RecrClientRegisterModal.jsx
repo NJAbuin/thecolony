@@ -60,21 +60,7 @@ export default function RecrClientRegisterModal(props) {
     setWarningMessage("");
   };
 
-<<<<<<< HEAD
   React.useEffect(() => setWarningMessage(null), [password, fullName, email]);
-=======
-  const handleSubmit = e => {
-    e.preventDefault();
-    registerUser(
-      email,
-      password,
-      fullName,
-      phone,
-      logoURL,
-      website
-    ).then(wasItAlreadyRegistered => console.log(wasItAlreadyRegistered));
-  };
->>>>>>> 85735996d06750c8f43bbc5c1b5625712b5ff0a8
 
   const validateAndRegister = (email, password, fullName) => {
     if (!validateEmail(email)) return setWarningMessage(ERROR_EMAIL);
