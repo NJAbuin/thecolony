@@ -1,6 +1,16 @@
 import React from "react";
 import { Label } from "../src/templates/FormLabel";
 
+export const [ERROR_FULLNAME, ERROR_PASSWORD, ERROR_EMAIL] = [
+  "Ingrese un nombre valido",
+  "La contraseña debe tener al menos 2 caracteres",
+  "Ingrese un email valido"
+];
+
+export function validatePass(pass) {
+  return pass.length <= 2 ? false : true;
+}
+
 /**
  *labelInputCreator: output a label and an input determined by parameters
  * @param {String} fieldName label name to show
@@ -25,9 +35,7 @@ export const labelInputCreator = (fieldName, setFn) => {
     <Label>
       {fieldName}:{" "}
       <input
-        onChange={e => {
-          setFn(e.target.value);
-        }}
+        onChange={e => setFn(e.target.value)}
         type={fieldType(fieldName)}
         style={inputStyle}
       />
@@ -60,6 +68,5 @@ export const validateDNI = dni => {
  * @param {String} fullName name to check
  * @returns {Boolean}
  */
-export const validateFullName = fullName => {
-  return fullName.length > 4 && fullName.includes(" ");
-};
+export const validateFullName = fullName =>
+  fullName.length > 4 && fullName.includes(" ");

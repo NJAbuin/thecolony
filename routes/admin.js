@@ -6,7 +6,7 @@ router.post("/register", function(req, res) {
   Admin.findOne({ where: { email: req.body.email } })
     .then(user =>
       user
-        ? res.send("Este email ya esta registrado.")
+        ? res.send({ found: true })
         : Admin.create(req.body).then(admin => res.send(admin))
     )
     .catch(err => console.log(err));

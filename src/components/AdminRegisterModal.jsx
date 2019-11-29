@@ -4,8 +4,15 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is required for IE 11 support
 import axios from "axios";
-import { labelInputCreator, validateEmail } from "../../utils";
-import { func } from "prop-types";
+import {
+  labelInputCreator,
+  validateEmail,
+  validateFullName,
+  validatePass,
+  ERROR_EMAIL,
+  ERROR_PASSWORD,
+  ERROR_FULLNAME
+} from "../../utils";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -53,9 +60,7 @@ export default function AdminRegisterModal(props) {
   const [fullName, setfullName] = React.useState("");
   const [warningMessage, setWarningMessage] = React.useState("");
 
-  React.useEffect(() => {
-    if (warningMessage === "") handleClose();
-  }, [warningMessage]);
+  React.useEffect(() => setWarningMessage(null), [password, fullName, email]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -65,37 +70,27 @@ export default function AdminRegisterModal(props) {
     setOpen(false);
   };
 
-  const registerUser = (email, password, fullName) =>
+  const registerUser = (warningMessage, email, password, fullName) => {
+    if (warningMessage) return;
+
     axios
       .post("/api/admin/register", { email, password, fullName })
-      .then(res => {
-        if (res.data === "Este email ya esta registrado.")
-          setWarningMessage(res.data);
-        else setWarningMessage("");
-      })
+      .then(res =>
+        res.data.found
+          ? setWarningMessage("Este email ya esta registrado")
+          : alert("Successfully registered!")
+      )
       .catch(console.error());
-
-  const validateRegister = (email, pass, fullName) => {
-    if (!validateEmail(email)) {
-      setWarningMessage("Ingrese un email valido");
-    } else if (pass.length <= 2) {
-      setWarningMessage("La contraseña debe tener al menos 2 caracteres");
-    } else if (fullName.length < 5) {
-      setWarningMessage("Ingrese un nombre valido");
-    } else {
-      setWarningMessage("");
-    }
-    return function(warningMessage) {
-      if (!warningMessage)
-        return registerUser(email, password, fullName)
-          .then(() => handleClose())
-          .catch(console.error());
-    };
   };
 
-  const handleClick = e => {
-    e.preventDefault();
-    validateRegister(email, password, fullName)(warningMessage);
+  const validateAndRegister = (event, email, password, fullName) => {
+    event.preventDefault();
+
+    if (!validateEmail(email)) return setWarningMessage(ERROR_EMAIL);
+    if (!validatePass(password)) return setWarningMessage(ERROR_PASSWORD);
+    if (!validateFullName(fullName)) return setWarningMessage(ERROR_FULLNAME);
+
+    return registerUser(warningMessage, email, password, fullName);
   };
 
   return (
@@ -126,7 +121,14 @@ export default function AdminRegisterModal(props) {
               {labelInputCreator("Nombre Completo", setfullName)}
               <br />
               <p style={{ color: "red" }}>{warningMessage}</p>
-              <button onClick={e => handleClick(e)}>Submit</button>
+              <button
+                onClick={event => {
+                  event.preventDefault();
+                  validateAndRegister(event, email, password, fullName);
+                }}
+              >
+                Submit
+              </button>
             </form>
           </div>
         </Fade>
