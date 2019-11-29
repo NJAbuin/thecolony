@@ -33,7 +33,7 @@ export default function AdminRegisterModal(props) {
     axios
       .post("/api/admin/register", { email, password, fullName })
       .then(res =>
-        res.data.found
+        res.data.alreadyInDB
           ? setWarningMessage("Este email ya esta registrado")
           : alert("Successfully registered!")
       )

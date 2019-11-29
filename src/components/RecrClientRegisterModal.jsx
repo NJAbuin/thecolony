@@ -105,7 +105,7 @@ export default function RecrClientRegisterModal(props) {
     return axios
       .post(routeToPost, { email, password, fullName, phone, logoURL, website })
       .then(res =>
-        res.data.found
+        res.data.alreadyInDB
           ? setWarningMessageBackend("Este email ya esta registrado")
           : setWarningMessageBackend("")
       )

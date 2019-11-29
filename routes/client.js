@@ -6,7 +6,7 @@ router.post("/register", function(req, res) {
   Client.findOne({ where: { email: req.body.email } })
     .then(user =>
       user
-        ? res.send({ found: true })
+        ? res.send({ alreadyInDB: true })
         : Client.create(req.body).then(client => res.send(client))
     )
     .catch(err => console.log(err));

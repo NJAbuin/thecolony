@@ -50,7 +50,7 @@ router.post("/register", function(req, res) {
   Recruiter.findOne({ where: { email: req.body.email } })
     .then(user =>
       user
-        ? res.send({ found: true })
+        ? res.send({ alreadyInDB: true })
         : Recruiter.create(req.body).then(recruiter => res.send(recruiter))
     )
     .catch(err => console.log(err));
