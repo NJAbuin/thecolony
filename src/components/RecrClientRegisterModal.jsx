@@ -82,6 +82,7 @@ export default function RecrClientRegisterModal(props) {
     setPassword("");
     setfullName("");
     setWarningMessage("");
+    setWarningMessageBackend("");
     if (email !== "" && password !== "" && fullName !== "" && submitted) {
       submitted = false;
       alert("Cuenta registrada con exito! Log in para empezar a navegar");
