@@ -7,49 +7,12 @@ import axios from "axios";
 import {
   labelInputCreator,
   validateEmail,
-  validateDNI,
-  validateFullName
+  validateFullName,
+  validatePass,
+  ERROR_EMAIL,
+  ERROR_PASSWORD,
+  ERROR_FULLNAME
 } from "../../utils";
-
-const useStyles = makeStyles(theme => ({
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3)
-  }
-}));
-
-const Fade = React.forwardRef(function Fade(props, ref) {
-  const { in: open, children, onEnter, onExited, ...other } = props;
-  const style = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: open ? 1 : 0 },
-    onStart: () => {
-      if (open && onEnter) {
-        onEnter();
-      }
-    },
-    onRest: () => {
-      if (!open && onExited) {
-        onExited();
-      }
-    }
-  });
-
-  return (
-    <animated.div ref={ref} style={style} {...other}>
-      {children}
-    </animated.div>
-  );
-});
-
-var submitted = false;
 
 export default function RecrClientRegisterModal(props) {
   const classes = useStyles();
@@ -64,22 +27,18 @@ export default function RecrClientRegisterModal(props) {
   const [website, setWebsite] = useState("");
 
   React.useEffect(() => {
-    if (warningMessage === '') {
-      registerUser(email, password, fullName, logoURL, phone, website)
+    if (warningMessage === "") {
+      registerUser(email, password, fullName, logoURL, phone, website);
     }
-    if (warningMessageBackend === '')
-      handleClose()
-  }
-    , [warningMessage, warningMessageBackend])
+    if (warningMessageBackend === "") handleClose();
+  }, [warningMessage, warningMessageBackend]);
 
   const handleOpen = () => {
-    setOpen(true)
+    setOpen(true);
     setEmail("");
     setPassword("");
     setfullName("");
-  }
-    ;
-
+  };
   const handleClose = () => {
     setOpen(false);
     setWarningMessage("");
@@ -92,9 +51,14 @@ export default function RecrClientRegisterModal(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    registerUser(email, password, fullName, phone, logoURL, website).then(
-      wasItAlreadyRegistered => console.log(wasItAlreadyRegistered)
-    );
+    registerUser(
+      email,
+      password,
+      fullName,
+      phone,
+      logoURL,
+      website
+    ).then(wasItAlreadyRegistered => console.log(wasItAlreadyRegistered));
   };
 
   const validateRegister = (email, pass, fullName) => {
@@ -128,9 +92,7 @@ export default function RecrClientRegisterModal(props) {
           ? setWarningMessageBackend("Este email ya esta registrado")
           : setWarningMessageBackend("")
       )
-      .then(() =>
-        submitted = true
-      )
+      .then(() => (submitted = true))
       .catch(() => console.error("error"));
   };
 
@@ -176,3 +138,43 @@ export default function RecrClientRegisterModal(props) {
     </div>
   );
 }
+
+const useStyles = makeStyles(theme => ({
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3)
+  }
+}));
+
+const Fade = React.forwardRef(function Fade(props, ref) {
+  const { in: open, children, onEnter, onExited, ...other } = props;
+  const style = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: open ? 1 : 0 },
+    onStart: () => {
+      if (open && onEnter) {
+        onEnter();
+      }
+    },
+    onRest: () => {
+      if (!open && onExited) {
+        onExited();
+      }
+    }
+  });
+
+  return (
+    <animated.div ref={ref} style={style} {...other}>
+      {children}
+    </animated.div>
+  );
+});
+
+var submitted = false;
