@@ -14,7 +14,10 @@ import {
   ERROR_FULLNAME
 } from "../../utils";
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 85735996d06750c8f43bbc5c1b5625712b5ff0a8
 export default function RecrClientRegisterModal(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -26,6 +29,7 @@ export default function RecrClientRegisterModal(props) {
   const [website, setWebsite] = useState("");
   const [warningMessage, setWarningMessage] = useState(null);
 
+<<<<<<< HEAD
   let routeToPost;
   if (props.role === "Client") routeToPost = "/api/client/register";
   if (props.role === "Recruiter") routeToPost = "/api/recruiter/register";
@@ -33,6 +37,21 @@ export default function RecrClientRegisterModal(props) {
   const handleOpen = () => setOpen(true)
 
 
+=======
+  React.useEffect(() => {
+    if (warningMessage === "") {
+      registerUser(email, password, fullName, logoURL, phone, website);
+    }
+    if (warningMessageBackend === "") handleClose();
+  }, [warningMessage, warningMessageBackend]);
+
+  const handleOpen = () => {
+    setOpen(true);
+    setEmail("");
+    setPassword("");
+    setfullName("");
+  };
+>>>>>>> 85735996d06750c8f43bbc5c1b5625712b5ff0a8
   const handleClose = () => {
     setOpen(false);
     setEmail("");
@@ -41,7 +60,21 @@ export default function RecrClientRegisterModal(props) {
     setWarningMessage("");
   };
 
+<<<<<<< HEAD
   React.useEffect(() => setWarningMessage(null), [password, fullName, email]);
+=======
+  const handleSubmit = e => {
+    e.preventDefault();
+    registerUser(
+      email,
+      password,
+      fullName,
+      phone,
+      logoURL,
+      website
+    ).then(wasItAlreadyRegistered => console.log(wasItAlreadyRegistered));
+  };
+>>>>>>> 85735996d06750c8f43bbc5c1b5625712b5ff0a8
 
   const validateAndRegister = (email, password, fullName) => {
     if (!validateEmail(email)) return setWarningMessage(ERROR_EMAIL);
@@ -58,9 +91,16 @@ export default function RecrClientRegisterModal(props) {
       .post(routeToPost, { email, password, fullName, phone, logoURL, website })
       .then(res =>
         res.data.alreadyInDB
+<<<<<<< HEAD
           ? setWarningMessage("Este email ya esta registrado")
           : (alert("Successfully registered!"), handleClose())
       )
+=======
+          ? setWarningMessageBackend("Este email ya esta registrado")
+          : setWarningMessageBackend("")
+      )
+      .then(() => (submitted = true))
+>>>>>>> 85735996d06750c8f43bbc5c1b5625712b5ff0a8
       .catch(() => console.error("error"));
   };
 
@@ -147,4 +187,8 @@ const Fade = React.forwardRef(function Fade(props, ref) {
   );
 });
 
+<<<<<<< HEAD
 var submitted = false;
+=======
+var submitted = false;
+>>>>>>> 85735996d06750c8f43bbc5c1b5625712b5ff0a8
