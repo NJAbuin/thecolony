@@ -60,15 +60,10 @@ export default function AdminRegisterModal(props) {
   const [fullName, setfullName] = React.useState("");
   const [warningMessage, setWarningMessage] = React.useState("");
 
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   React.useEffect(() => setWarningMessage(null), [password, fullName, email]);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const registerUser = (warningMessage, email, password, fullName) => {
     if (warningMessage) return;
@@ -83,9 +78,7 @@ export default function AdminRegisterModal(props) {
       .catch(console.error());
   };
 
-  const validateAndRegister = (event, email, password, fullName) => {
-    event.preventDefault();
-
+  const validateAndRegister = (email, password, fullName) => {
     if (!validateEmail(email)) return setWarningMessage(ERROR_EMAIL);
     if (!validatePass(password)) return setWarningMessage(ERROR_PASSWORD);
     if (!validateFullName(fullName)) return setWarningMessage(ERROR_FULLNAME);
@@ -124,7 +117,7 @@ export default function AdminRegisterModal(props) {
               <button
                 onClick={event => {
                   event.preventDefault();
-                  validateAndRegister(event, email, password, fullName);
+                  validateAndRegister(email, password, fullName);
                 }}
               >
                 Submit
