@@ -35,11 +35,10 @@ function RecrCsvForm(props) {
 
   const bulkCreateFromCsv = (e, user) => {
     e.preventDefault();
-    console.log(csvValues);
     Axios.post("/api/recruiter/candidates/csvImport", {
       csvValues,
       user
-    }).then(res => console.log(res.data));
+    }).then(res => res.data);
   };
 
   return (
@@ -70,4 +69,7 @@ const mapStateToProps = state => ({
   user: state.session.user
 });
 
-export default connect(mapStateToProps, null)(RecrCsvForm);
+export default connect(
+  mapStateToProps,
+  null
+)(RecrCsvForm);

@@ -4,8 +4,93 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is required for IE 11 support
 import axios from "axios";
-import { labelInputCreator, validateEmail } from "../../utils";
-import { func } from "prop-types";
+import {
+  labelInputCreator,
+  validateEmail,
+  validateFullName,
+  validatePass,
+  ERROR_EMAIL,
+  ERROR_PASSWORD,
+  ERROR_FULLNAME
+} from "../../utils";
+
+export default function AdminRegisterModal(props) {
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [fullName, setfullName] = React.useState("");
+  const [warningMessage, setWarningMessage] = React.useState("");
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  React.useEffect(() => setWarningMessage(null), [password, fullName, email]);
+
+  const registerUser = (warningMessage, email, password, fullName) => {
+    if (warningMessage) return;
+
+    axios
+      .post("/api/admin/register", { email, password, fullName })
+      .then(res =>
+        res.data.alreadyInDB
+          ? setWarningMessage("Este email ya esta registrado")
+          : alert("Successfully registered!")
+      )
+      .catch(console.error());
+  };
+
+  const validateAndRegister = (email, password, fullName) => {
+    if (!validateEmail(email)) return setWarningMessage(ERROR_EMAIL);
+    if (!validatePass(password)) return setWarningMessage(ERROR_PASSWORD);
+    if (!validateFullName(fullName)) return setWarningMessage(ERROR_FULLNAME);
+
+    return registerUser(warningMessage, email, password, fullName);
+  };
+
+  return (
+    <div>
+      <button type="button" onClick={handleOpen}>
+        Registrate
+      </button>
+      <Modal
+        aria-labelledby="spring-modal-title"
+        aria-describedby="spring-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.paper}>
+            <form>
+              <h2 id="spring-modal-title">
+                Ingrese sus datos para registrarse
+              </h2>
+              {labelInputCreator("Email", setEmail)}
+              {labelInputCreator("Password", setPassword)}
+              {labelInputCreator("Nombre Completo", setfullName)}
+              <br />
+              <p style={{ color: "red" }}>{warningMessage}</p>
+              <button
+                onClick={event => {
+                  event.preventDefault();
+                  validateAndRegister(email, password, fullName);
+                }}
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </Fade>
+      </Modal>
+    </div>
+  );
+}
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -44,93 +129,3 @@ const Fade = React.forwardRef(function Fade(props, ref) {
     </animated.div>
   );
 });
-
-export default function AdminRegisterModal(props) {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [fullName, setfullName] = React.useState("");
-  const [warningMessage, setWarningMessage] = React.useState("");
-
-  React.useEffect(() => {
-    if (warningMessage === "") handleClose();
-  }, [warningMessage]);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const registerUser = (email, password, fullName) =>
-    axios
-      .post("/api/admin/register", { email, password, fullName })
-      .then(res => {
-        if (res.data === "Este email ya esta registrado.")
-          setWarningMessage(res.data);
-        else setWarningMessage("");
-      })
-      .catch(console.error());
-
-  const validateRegister = (email, pass, fullName) => {
-    if (!validateEmail(email)) {
-      setWarningMessage("Ingrese un email valido");
-    } else if (pass.length <= 2) {
-      setWarningMessage("La contraseña debe tener al menos 2 caracteres");
-    } else if (fullName.length < 5) {
-      setWarningMessage("Ingrese un nombre valido");
-    } else {
-      setWarningMessage("");
-    }
-    return function(warningMessage) {
-      if (!warningMessage)
-        return registerUser(email, password, fullName)
-          .then(() => handleClose())
-          .catch(console.error());
-    };
-  };
-
-  const handleClick = e => {
-    e.preventDefault();
-    validateRegister(email, password, fullName)(warningMessage);
-  };
-
-  return (
-    <div>
-      <button type="button" onClick={handleOpen}>
-        Registrate
-      </button>
-      <Modal
-        aria-labelledby="spring-modal-title"
-        aria-describedby="spring-modal-description"
-        className={classes.modal}
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500
-        }}
-      >
-        <Fade in={open}>
-          <div className={classes.paper}>
-            <form>
-              <h2 id="spring-modal-title">
-                Ingrese sus datos para registrarse
-              </h2>
-              {labelInputCreator("Email", setEmail)}
-              {labelInputCreator("Password", setPassword)}
-              {labelInputCreator("Nombre Completo", setfullName)}
-              <br />
-              <p style={{ color: "red" }}>{warningMessage}</p>
-              <button onClick={e => handleClick(e)}>Submit</button>
-            </form>
-          </div>
-        </Fade>
-      </Modal>
-    </div>
-  );
-}

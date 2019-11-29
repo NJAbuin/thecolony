@@ -37,7 +37,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sequelize": "^5.21.2",
-    "styled-components": "^4.4.1"
+    "styled-components": "^4.4.1",
+    "use-state-with-callback": "^1.0.18"
   },
   "devDependencies": {
     "faker": "^4.1.0",

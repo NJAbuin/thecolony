@@ -4,13 +4,11 @@ const passport = require("../db/passport/");
 
 router.post("/register", function(req, res) {
   Client.findOne({ where: { email: req.body.email } })
-    .then(user => {
-      if (user) {
-        res.send("Este email ya esta registrado.");
-      } else {
-        Client.create(req.body).then(client => res.send(client));
-      }
-    })
+    .then(user =>
+      user
+        ? res.send({ alreadyInDB: true })
+        : Client.create(req.body).then(client => res.send(client))
+    )
     .catch(err => console.log(err));
 });
 
