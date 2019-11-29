@@ -47,12 +47,10 @@ export default function RecrClientRegisterModal(props) {
     if (!validatePass(password)) return setWarningMessage(ERROR_PASSWORD);
     if (!validateFullName(fullName)) return setWarningMessage(ERROR_FULLNAME);
 
-    return registerUser(warningMessage, email, password, fullName, phone, logoURL, website);
+    return registerUser(email, password, fullName, phone, logoURL, website);
   };
 
-  const registerUser = (warningMessage, email, password, fullName, phone, logoURL, website) => {
-    if (warningMessage) return;
-
+  const registerUser = (email, password, fullName, phone, logoURL, website) => {
     axios
       .post(routeToPost, { email, password, fullName, phone, logoURL, website })
       .then(res =>

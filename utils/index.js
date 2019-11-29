@@ -1,10 +1,11 @@
 import React from "react";
 import { Label } from "../src/templates/FormLabel";
 
-export const [ERROR_FULLNAME, ERROR_PASSWORD, ERROR_EMAIL] = [
+export const [ERROR_FULLNAME, ERROR_PASSWORD, ERROR_EMAIL, ERROR_LOGIN] = [
   "Ingrese un nombre valido",
   "La contraseña debe tener al menos 2 caracteres",
-  "Ingrese un email valido"
+  "Ingrese un email valido",
+  "Usuario o contraseña invalidos"
 ];
 
 export function validatePass(pass) {
