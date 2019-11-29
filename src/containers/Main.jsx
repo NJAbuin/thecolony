@@ -16,8 +16,6 @@ import { MainGrid } from "../templates/LayoutGrids";
 
 //actions
 import { fetchSession } from "../store/actions/session";
-import RecrCsvForm from "../components/RecrCsvForm";
-import RecrNewCandidateForm from "../components/RecrNewCandidateForm";
 
 function Main(props) {
   const { user, fetchSession, history } = props;
@@ -45,9 +43,7 @@ function Main(props) {
         <Navbar />
         <Switch>
           <Route path="/landing" component={Landing} />
-          <Route path="/csvtestroute" component={RecrNewCandidateForm} />
-          {/* {'Change route Auth to a Private Route later'} */}
-          <Route path="/auth" component={AuthContainer} />
+          <PrivateRoute path="/auth" component={AuthContainer} user={user} />
           <Redirect path="/" to="/landing" />
         </Switch>
       </MainGrid>
