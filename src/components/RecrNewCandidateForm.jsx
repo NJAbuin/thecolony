@@ -38,18 +38,12 @@ function RecrNewCandidateForm(props) {
     formData.append("address", address);
     formData.append("expectedSalary", expectedSalary);
 
-    console.log(formData);
     return Axios.post("/api/recruiter/upload", formData, {
       headers: {
         "Content-Type": "multipart/form-data"
       }
     }).then(res => setUploadedFile(res.data));
   };
-
-  const handleChange = e => {
-    console.log(e.target.files[0]);
-  };
-
   const onChange = e => {
     setFile(e.target.files[0]);
     setFilename(e.target.files[0].name);
@@ -113,4 +107,7 @@ const mapStateToProps = state => ({
   user: state.session.user
 });
 
-export default connect(mapStateToProps, null)(RecrNewCandidateForm);
+export default connect(
+  mapStateToProps,
+  null
+)(RecrNewCandidateForm);

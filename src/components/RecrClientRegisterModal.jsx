@@ -56,7 +56,7 @@ export default function RecrClientRegisterModal(props) {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [warningMessage, setWarningMessage] = useState(null);
-  let [warningMessageBackend, setWarningMessageBackend] = useState(null);
+  const [warningMessageBackend, setWarningMessageBackend] = useState(null);
   const [password, setPassword] = useState("");
   const [fullName, setfullName] = useState("");
   const [logoURL, setLogoURL] = useState("");
@@ -64,48 +64,51 @@ export default function RecrClientRegisterModal(props) {
   const [website, setWebsite] = useState("");
 
   React.useEffect(() => {
-    if (warningMessage === "") {
-      registerUser(email, password, fullName, logoURL, phone, website);
+    if (warningMessage === '') {
+      registerUser(email, password, fullName, logoURL, phone, website)
     }
-    if (warningMessageBackend === "") {
-      handleClose();
-    }
-  }, [warningMessage, warningMessageBackend]);
+    if (warningMessageBackend === '')
+      handleClose()
+  }
+    , [warningMessage, warningMessageBackend])
 
   const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
+    setOpen(true)
     setEmail("");
     setPassword("");
     setfullName("");
+  }
+    ;
+
+  const handleClose = () => {
+    setOpen(false);
     setWarningMessage("");
+    setWarningMessageBackend("");
     if (email !== "" && password !== "" && fullName !== "" && submitted) {
       submitted = false;
       alert("Cuenta registrada con exito! Log in para empezar a navegar");
     }
   };
 
-  const handleClick = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    validateRegister(email, password, fullName, logoURL, phone, website);
+    registerUser(email, password, fullName, phone, logoURL, website).then(
+      wasItAlreadyRegistered => console.log(wasItAlreadyRegistered)
+    );
   };
 
   const validateRegister = (email, pass, fullName) => {
     const passwordLength = 2;
     if (!validateEmail(email)) {
-      setWarningMessage("Ingrese un email valido");
+      return setWarningMessage("Ingrese un email valido");
     } else if (pass.length < passwordLength) {
-      setWarningMessage(
+      return setWarningMessage(
         `La contraseña debe tener al menos ${passwordLength} caracteres`
       );
     } else if (!validateFullName(fullName)) {
-      setWarningMessage("Ingrese un nombre completo valido");
+      return setWarningMessage("Ingrese un nombre completo valido");
     } else {
-      setWarningMessage("");
-      setWarningMessageBackend(null);
+      return setWarningMessage("");
     }
   };
 
@@ -113,23 +116,23 @@ export default function RecrClientRegisterModal(props) {
   if (props.role === "Client") routeToPost = "/api/client/register";
   if (props.role === "Recruiter") routeToPost = "/api/recruiter/register";
 
-  const registerUser = (email, password, fullName, phone, logoURL, website) =>
-    axios
+  const registerUser = (email, password, fullName, phone, logoURL, website) => {
+    //first, validate front end;
+    validateRegister(email, password, fullName, logoURL, phone, website);
+    if (warningMessage) return warningMessage;
+
+    return axios
       .post(routeToPost, { email, password, fullName, phone, logoURL, website })
-      .then(res => {
-        console.log(res.data);
-        if (res.data === "Este email ya esta registrado.")
-          setWarningMessageBackend(res.data);
-        else {
-          setWarningMessageBackend("");
-        }
-      })
-      .then(() => {
-        submitted = true;
-      })
-      .catch(() => {
-        console.error("error");
-      });
+      .then(res =>
+        res.data.alreadyInDB
+          ? setWarningMessageBackend("Este email ya esta registrado")
+          : setWarningMessageBackend("")
+      )
+      .then(() =>
+        submitted = true
+      )
+      .catch(() => console.error("error"));
+  };
 
   return (
     <div>
@@ -165,13 +168,7 @@ export default function RecrClientRegisterModal(props) {
                 {warningMessageBackend}
               </p>
 
-              <button
-                onClick={e => {
-                  handleClick(e);
-                }}
-              >
-                Submit
-              </button>
+              <button onClick={e => handleSubmit(e)}>Submit</button>
             </form>
           </div>
         </Fade>

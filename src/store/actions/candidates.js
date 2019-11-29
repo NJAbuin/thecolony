@@ -39,10 +39,7 @@ export const candidatesApplyToJob = (job, arrOfCandidates) => dispatch =>
       id: job.id,
       newCandidates: arrOfCandidates
     })
-    .then(res => {
-      console.log(res.data);
-      return res.data;
-    })
+    .then(res => res.data)
     .then(candsApplied => dispatch(candidatesSumbitOrEmpty()));
 
 export const candidatesClearListSelection = () => dispatch =>
