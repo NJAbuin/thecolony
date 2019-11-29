@@ -7,7 +7,7 @@ import { ThemeProvider } from "styled-components";
 //components / containers
 import AuthContainer from "./AuthContainer";
 
-import { PrivateRoute } from "../components/PrivateRoute";
+import { PrivateRouteAuth } from "../components/PrivateRouteAuth";
 import Landing from "../components/Landing";
 import Navbar from "../components/Navbar";
 
@@ -43,7 +43,7 @@ function Main(props) {
         <Navbar />
         <Switch>
           <Route path="/landing" component={Landing} />
-          <PrivateRoute path="/auth" component={AuthContainer} user={user} />
+          <PrivateRouteAuth path="/auth" component={AuthContainer} user={user} MainProps={props} />
           <Redirect path="/" to="/landing" />
         </Switch>
       </MainGrid>
