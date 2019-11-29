@@ -26,7 +26,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.post('/upload', upload.single('file'), (req, res) => {
-  console.log(req.file)
   Recruiter.findOne({ where: { fullName: 'Carola Marini' } }).then((recruiter) => {
     recruiter.createCandidate({
       fullName: req.body.fullName,
@@ -36,7 +35,7 @@ router.post('/upload', upload.single('file'), (req, res) => {
       address: req.body.adress,
       exprectedSalary: req.body.exprectedSalary,
       CV: req.file.path
-    }).then(() => {
+    }).then((candidate) => {
       let dataBuffer = fs.readFileSync(req.file.path);
       pdf(dataBuffer)
         .then(data => res.status(200).send(data))
