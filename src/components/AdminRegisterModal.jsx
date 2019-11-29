@@ -23,9 +23,23 @@ export default function AdminRegisterModal(props) {
   const [warningMessage, setWarningMessage] = React.useState("");
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setEmail("");
+    setfullName("");
+    setPassword("");
+    setWarningMessage("");
+  };
 
   React.useEffect(() => setWarningMessage(null), [password, fullName, email]);
+
+  const validateAndRegister = (email, password, fullName) => {
+    if (!validateEmail(email)) return setWarningMessage(ERROR_EMAIL);
+    if (!validatePass(password)) return setWarningMessage(ERROR_PASSWORD);
+    if (!validateFullName(fullName)) return setWarningMessage(ERROR_FULLNAME);
+
+    return registerUser(warningMessage, email, password, fullName);
+  };
 
   const registerUser = (warningMessage, email, password, fullName) => {
     if (warningMessage) return;
@@ -35,17 +49,9 @@ export default function AdminRegisterModal(props) {
       .then(res =>
         res.data.alreadyInDB
           ? setWarningMessage("Este email ya esta registrado")
-          : alert("Successfully registered!")
+          : (alert("Successfully registered!"), handleClose())
       )
       .catch(console.error());
-  };
-
-  const validateAndRegister = (email, password, fullName) => {
-    if (!validateEmail(email)) return setWarningMessage(ERROR_EMAIL);
-    if (!validatePass(password)) return setWarningMessage(ERROR_PASSWORD);
-    if (!validateFullName(fullName)) return setWarningMessage(ERROR_FULLNAME);
-
-    return registerUser(warningMessage, email, password, fullName);
   };
 
   return (

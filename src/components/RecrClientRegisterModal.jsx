@@ -18,81 +18,48 @@ export default function RecrClientRegisterModal(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const [warningMessage, setWarningMessage] = useState(null);
-  const [warningMessageBackend, setWarningMessageBackend] = useState(null);
   const [password, setPassword] = useState("");
   const [fullName, setfullName] = useState("");
   const [logoURL, setLogoURL] = useState("");
   const [phone, setPhone] = useState("");
   const [website, setWebsite] = useState("");
-
-  React.useEffect(() => {
-    if (warningMessage === "") {
-      registerUser(email, password, fullName, logoURL, phone, website);
-    }
-    if (warningMessageBackend === "") handleClose();
-  }, [warningMessage, warningMessageBackend]);
-
-  const handleOpen = () => {
-    setOpen(true);
-    setEmail("");
-    setPassword("");
-    setfullName("");
-  };
-  const handleClose = () => {
-    setOpen(false);
-    setWarningMessage("");
-    setWarningMessageBackend("");
-    if (email !== "" && password !== "" && fullName !== "" && submitted) {
-      submitted = false;
-      alert("Cuenta registrada con exito! Log in para empezar a navegar");
-    }
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    registerUser(
-      email,
-      password,
-      fullName,
-      phone,
-      logoURL,
-      website
-    ).then(wasItAlreadyRegistered => console.log(wasItAlreadyRegistered));
-  };
-
-  const validateRegister = (email, pass, fullName) => {
-    const passwordLength = 2;
-    if (!validateEmail(email)) {
-      return setWarningMessage("Ingrese un email valido");
-    } else if (pass.length < passwordLength) {
-      return setWarningMessage(
-        `La contraseña debe tener al menos ${passwordLength} caracteres`
-      );
-    } else if (!validateFullName(fullName)) {
-      return setWarningMessage("Ingrese un nombre completo valido");
-    } else {
-      return setWarningMessage("");
-    }
-  };
+  const [warningMessage, setWarningMessage] = useState(null);
 
   let routeToPost;
   if (props.role === "Client") routeToPost = "/api/client/register";
   if (props.role === "Recruiter") routeToPost = "/api/recruiter/register";
 
-  const registerUser = (email, password, fullName, phone, logoURL, website) => {
-    //first, validate front end;
-    validateRegister(email, password, fullName, logoURL, phone, website);
-    if (warningMessage) return warningMessage;
+  const handleOpen = () => setOpen(true)
 
-    return axios
+
+  const handleClose = () => {
+    setOpen(false);
+    setEmail("");
+    setfullName("");
+    setPassword("");
+    setWarningMessage("");
+  };
+
+  React.useEffect(() => setWarningMessage(null), [password, fullName, email]);
+
+  const validateAndRegister = (email, password, fullName) => {
+    if (!validateEmail(email)) return setWarningMessage(ERROR_EMAIL);
+    if (!validatePass(password)) return setWarningMessage(ERROR_PASSWORD);
+    if (!validateFullName(fullName)) return setWarningMessage(ERROR_FULLNAME);
+
+    return registerUser(warningMessage, email, password, fullName, phone, logoURL, website);
+  };
+
+  const registerUser = (warningMessage, email, password, fullName, phone, logoURL, website) => {
+    if (warningMessage) return;
+
+    axios
       .post(routeToPost, { email, password, fullName, phone, logoURL, website })
       .then(res =>
         res.data.alreadyInDB
-          ? setWarningMessageBackend("Este email ya esta registrado")
-          : setWarningMessageBackend("")
+          ? setWarningMessage("Este email ya esta registrado")
+          : (alert("Successfully registered!"), handleClose())
       )
-      .then(() => (submitted = true))
       .catch(() => console.error("error"));
   };
 
@@ -127,15 +94,17 @@ export default function RecrClientRegisterModal(props) {
               {labelInputCreator("Website", setWebsite)}
               <p style={{ color: "red" }}>
                 {warningMessage}
-                {warningMessageBackend}
               </p>
 
-              <button onClick={e => handleSubmit(e)}>Submit</button>
+              <button onClick={event => {
+                event.preventDefault();
+                validateAndRegister(email, password, fullName, phone, logoURL, website)
+              }}>Submit</button>
             </form>
           </div>
         </Fade>
       </Modal>
-    </div>
+    </div >
   );
 }
 
@@ -176,5 +145,3 @@ const Fade = React.forwardRef(function Fade(props, ref) {
     </animated.div>
   );
 });
-
-var submitted = false;
