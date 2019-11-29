@@ -38,12 +38,10 @@ export default function AdminRegisterModal(props) {
     if (!validatePass(password)) return setWarningMessage(ERROR_PASSWORD);
     if (!validateFullName(fullName)) return setWarningMessage(ERROR_FULLNAME);
 
-    return registerUser(warningMessage, email, password, fullName);
+    return registerUser(email, password, fullName);
   };
 
-  const registerUser = (warningMessage, email, password, fullName) => {
-    if (warningMessage) return;
-
+  const registerUser = (email, password, fullName) => {
     axios
       .post("/api/admin/register", { email, password, fullName })
       .then(res =>
