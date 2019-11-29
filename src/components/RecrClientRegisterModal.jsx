@@ -55,23 +55,33 @@ export default function RecrClientRegisterModal(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const [warningMessage, setWarningMessage] = useState("");
-  const [warningMessageBackend, setWarningMessageBackend] = useState("");
+  const [warningMessage, setWarningMessage] = useState(null);
+  const [warningMessageBackend, setWarningMessageBackend] = useState(null);
   const [password, setPassword] = useState("");
   const [fullName, setfullName] = useState("");
   const [logoURL, setLogoURL] = useState("");
   const [phone, setPhone] = useState("");
   const [website, setWebsite] = useState("");
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  React.useEffect(() => {
+    if (warningMessage === '') {
+      registerUser(email, password, fullName, logoURL, phone, website)
+    }
+    if (warningMessageBackend === '')
+      handleClose()
+  }
+    , [warningMessage, warningMessageBackend])
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleOpen = () => {
+    setOpen(true)
     setEmail("");
     setPassword("");
     setfullName("");
+  }
+    ;
+
+  const handleClose = () => {
+    setOpen(false);
     setWarningMessage("");
     setWarningMessageBackend("");
     if (email !== "" && password !== "" && fullName !== "" && submitted) {
