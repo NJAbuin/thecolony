@@ -49,6 +49,8 @@ const Fade = React.forwardRef(function Fade(props, ref) {
   );
 });
 
+var submitted = false;
+
 export default function RecrClientRegisterModal(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -60,7 +62,6 @@ export default function RecrClientRegisterModal(props) {
   const [logoURL, setLogoURL] = useState("");
   const [phone, setPhone] = useState("");
   const [website, setWebsite] = useState("");
-  let submitted = false;
 
   const handleOpen = () => {
     setOpen(true);
@@ -68,7 +69,15 @@ export default function RecrClientRegisterModal(props) {
 
   const handleClose = () => {
     setOpen(false);
-    //   alert("Cuenta registrada con exito! Log in para empezar a navegar");
+    setEmail("");
+    setPassword("");
+    setfullName("");
+    setWarningMessage("");
+    setWarningMessageBackend("");
+    if (email !== "" && password !== "" && fullName !== "" && submitted) {
+      submitted = false;
+      alert("Cuenta registrada con exito! Log in para empezar a navegar");
+    }
   };
 
   const handleSubmit = e => {
@@ -108,6 +117,9 @@ export default function RecrClientRegisterModal(props) {
         res.data.alreadyInDB
           ? setWarningMessageBackend("Este email ya esta registrado")
           : setWarningMessageBackend("")
+      )
+      .then(() =>
+        submitted = true
       )
       .catch(() => console.error("error"));
   };

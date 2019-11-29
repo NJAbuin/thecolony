@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import RecruiterJobPostings from "../containers/RecruiterJobPostings";
 import RecruiterCandidates from "../components/RecruiterCandidates";
 import JobPostingDetails from "../components/JobPostingDetails";
+import DashboardRecruiter from "../containers/DashboardRecruiter";
 
 import { getCandidateList } from "../store/actions/candidates";
 import { getJobPostings } from "../store/actions/jobPostings";
@@ -18,7 +19,7 @@ function RecruiterContainer(props) {
 
   return (
     <Switch>
-      {/* <Route path="/auth/recruiter/dashboard" component={DashboardRecruiter} /> */}
+      <Route path="/auth/recruiter/dashboard" component={DashboardRecruiter} />
       <Route
         exact
         path="/auth/recruiter/jobpostings/:id"
