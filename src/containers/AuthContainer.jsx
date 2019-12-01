@@ -9,16 +9,17 @@ import Sidebar from "../components/Sidebar";
 import AdminContainer from "./AdminContainer";
 
 function AuthContainer(props) {
+  const { user } = props;
   useEffect(() => {
     if (props.location.path) {
-      if (`${props.location.path}/${props.user.type}` !== `/auth/${props.user.type}`)
-        props.history.replace(`/auth/${props.user.type}`)
+      if (`${props.location.path}/${user.type}` !== `/auth/${user.type}`)
+        props.history.replace(`/auth/${user.type}`);
     }
-  }, [props.location])
+  }, [props.location]);
 
   return (
     <AuthGrid>
-      <Sidebar />
+      <Sidebar type={user.type} />
       <Switch>
         <Route path="/auth/admin" component={AdminContainer} />
         <Route path="/auth/recruiter" component={RecruiterContainer} />
