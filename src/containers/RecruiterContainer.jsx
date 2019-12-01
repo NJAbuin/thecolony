@@ -11,10 +11,10 @@ import { getCandidateList } from "../store/actions/candidates";
 import { getJobPostings } from "../store/actions/jobPostings";
 import RecrNewCandidateForm from "../components/RecrNewCandidateForm";
 
-function RecruiterContainer(props) {
+function RecruiterContainer({ getCandidateList, getJobPostings }) {
   useEffect(() => {
-    props.getCandidateList();
-    props.getJobPostings();
+    getCandidateList();
+    getJobPostings();
   }, []);
 
   return (
@@ -45,4 +45,7 @@ const mapDispatchToProps = {
   getJobPostings
 };
 
-export default connect(null, mapDispatchToProps)(RecruiterContainer);
+export default connect(
+  null,
+  mapDispatchToProps
+)(RecruiterContainer);

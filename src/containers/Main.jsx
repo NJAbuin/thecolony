@@ -17,9 +17,7 @@ import { MainGrid } from "../templates/LayoutGrids";
 //actions
 import { fetchSession } from "../store/actions/session";
 
-function Main(props) {
-  const { user, fetchSession, history } = props;
-
+function Main({ user, fetchSession, history }) {
   useEffect(() => {
     fetchSession();
     if (user.type) history.replace(`/auth/${user.type}/jobpostings`);
