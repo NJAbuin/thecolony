@@ -19,9 +19,9 @@ function LoginModal(props) {
   const [warningMessage, setWarningMessage] = React.useState(null);
 
   let routeToPost;
-  if (props.role === "Recruiter") routeToPost = "/api/recruiter/login";
-  if (props.role === "Client") routeToPost = "/api/client/login";
-  if (props.role === "Admin") routeToPost = "/api/admin/login";
+  if (props.role === "recruiter") routeToPost = "/api/recruiter/login";
+  if (props.role === "client") routeToPost = "/api/client/login";
+  if (props.role === "admin") routeToPost = "/api/admin/login";
 
   const handleOpen = () => setOpen(true);
 

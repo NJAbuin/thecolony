@@ -18,13 +18,13 @@ export const clientSidebar = {
 
 export function mapSidebar(userType) {
   switch (userType) {
-    case "Admin":
+    case "admin":
       return [Object.keys(adminSidebar), Object.values(adminSidebar)];
 
-    case "Recruiter":
+    case "recruiter":
       return [Object.keys(recruiterSidebar), Object.values(recruiterSidebar)];
 
-    case "Client":
+    case "client":
       return [Object.keys(clientSidebar), Object.values(clientSidebar)];
   }
 }

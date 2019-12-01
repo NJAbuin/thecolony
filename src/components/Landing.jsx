@@ -28,8 +28,8 @@ function Landing(props) {
           <P>{lor.em}</P>
         </div>
         <div style={botDivStyle}>
-          <LoginModal role={"Admin"} />
-          <AdminRegisterModal role={"Admin"} />
+          <LoginModal role={"admin"} />
+          <AdminRegisterModal role={"admin"} />
         </div>
       </Card>
 
@@ -39,8 +39,8 @@ function Landing(props) {
           <P>{lor.em}</P>
         </div>
         <div style={botDivStyle}>
-          <LoginModal role={"Recruiter"} />
-          <RecrClientRegisterModal role={"Recruiter"} />
+          <LoginModal role={"recruiter"} />
+          <RecrClientRegisterModal role={"recruiter"} />
         </div>
       </Card>
       <Card color="cyan" imgUrl={client}>
@@ -49,8 +49,8 @@ function Landing(props) {
           <P>{lor.em}</P>
         </div>
         <div style={botDivStyle}>
-          <LoginModal role={"Client"} />
-          <RecrClientRegisterModal role={"Client"} />
+          <LoginModal role={"client"} />
+          <RecrClientRegisterModal role={"client"} />
         </div>
       </Card>
     </LandingGrid>
@@ -91,4 +91,7 @@ const mapStateToProps = state => ({
   user: state.session.user
 });
 
-export default connect(mapStateToProps, null)(Landing);
+export default connect(
+  mapStateToProps,
+  null
+)(Landing);
