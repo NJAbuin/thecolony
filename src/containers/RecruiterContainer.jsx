@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import RecruiterJobPostings from "../containers/RecruiterJobPostings";
 import RecruiterCandidates from "../components/RecruiterCandidates";
@@ -36,6 +36,7 @@ function RecruiterContainer({ getCandidateList, getJobPostings }) {
         path="/auth/recruiter/candidates"
         component={RecruiterCandidates}
       />
+      <Redirect path="/" to="/auth/recruiter/dashboard" />
     </Switch>
   );
 }
