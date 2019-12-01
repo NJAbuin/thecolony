@@ -1,17 +1,17 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-export const PrivateRouteAuth = ({ component: Component, ...otherProps }) => (
+export default ({ component: Component, path, ...otherProps }) => (
   <Route
-    {...otherProps}
+    {...path}
     render={() =>
       otherProps.user.type ? (
         <Component {...otherProps} />
       ) : (
-          <Redirect
-            to={{ pathname: "/", state: { from: otherProps.location || "/" } }}
-          />
-        )
+        <Redirect
+          to={{ pathname: "/", state: { from: otherProps.location || "/" } }}
+        />
+      )
     }
   />
 );

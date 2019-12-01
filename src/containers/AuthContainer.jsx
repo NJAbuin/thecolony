@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import { AuthGrid } from "../templates/LayoutGrids";
 import RecruiterContainer from "./RecruiterContainer";
@@ -8,18 +8,17 @@ import RecruiterContainer from "./RecruiterContainer";
 import Sidebar from "../components/Sidebar";
 import AdminContainer from "./AdminContainer";
 
-function AuthContainer(props) {
-  const { user } = props;
+function AuthContainer({ user, location, history }) {
   useEffect(() => {
-    if (props.location.path) {
-      if (`${props.location.path}/${user.type}` !== `/auth/${user.type}`)
-        props.history.replace(`/auth/${user.type}`);
+    if (location.path) {
+      if (`${location.path}/${user.type}` !== `/auth/${user.type}`)
+        history.replace(`/auth/${user.type}`);
     }
-  }, [props.location]);
+  }, [location]);
 
   return (
     <AuthGrid>
-      <Sidebar user={user} />
+      <Sidebar userType={user.type} />
       <Switch>
         <Route path="/auth/admin" component={AdminContainer} />
         <Route path="/auth/recruiter" component={RecruiterContainer} />
@@ -28,4 +27,4 @@ function AuthContainer(props) {
   );
 }
 
-export default withRouter(AuthContainer);
+export default AuthContainer;

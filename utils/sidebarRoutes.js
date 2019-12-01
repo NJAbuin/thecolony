@@ -16,8 +16,8 @@ export const clientSidebar = {
   Candidatos: "/auth/client/candidates"
 };
 
-export function mapSidebar(user) {
-  switch (user.type) {
+export function mapSidebar(userType) {
+  switch (userType) {
     case "Admin":
       return [Object.keys(adminSidebar), Object.values(adminSidebar)];
 

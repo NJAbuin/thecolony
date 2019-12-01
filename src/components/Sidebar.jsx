@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { SidebarButton, SidebarStyle } from "../templates/SidebarStyles";
 import { mapSidebar } from "../../utils/sidebarRoutes";
 
-export default props => {
-  const [POWERS, URLs] = mapSidebar(props.user);
+export default ({ userType }) => {
+  const [POWERS, URLs] = mapSidebar(userType);
 
   return (
     <SidebarStyle>

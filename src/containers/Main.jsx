@@ -7,7 +7,7 @@ import { ThemeProvider } from "styled-components";
 //components / containers
 import AuthContainer from "./AuthContainer";
 
-import { PrivateRouteAuth } from "../components/PrivateRouteAuth";
+import PrivateRouteAuth from "../components/PrivateRouteAuth";
 import Landing from "../components/Landing";
 import Navbar from "../components/Navbar";
 
@@ -19,19 +19,7 @@ import { fetchSession } from "../store/actions/session";
 
 function Main(props) {
   const { user, fetchSession, history } = props;
-  useEffect(() => {
-    switch (user.type) {
-      case "Recruiter":
-        history.replace("/auth/recruiter/jobpostings");
-        break;
-      case "Admin":
-        history.replace("/auth/admin/dashboard");
-        break;
-      case "Cliente":
-        history.replace("/auth/client/dashboard");
-        break;
-    }
-  }, [user.type]);
+  useEffect(() => history.replace(`/auth/${user.type}/jobpostings`), [user]);
 
   useEffect(() => {
     fetchSession();
@@ -43,7 +31,11 @@ function Main(props) {
         <Navbar />
         <Switch>
           <Route path="/landing" component={Landing} />
-          <PrivateRouteAuth path="/auth" component={AuthContainer} user={user} MainProps={props} />
+          <PrivateRouteAuth
+            path="/auth"
+            component={AuthContainer}
+            user={user}
+          />
           <Redirect path="/" to="/landing" />
         </Switch>
       </MainGrid>
@@ -69,4 +61,7 @@ const theme = {
   RichBlack: "5, 5, 7"
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Main);
