@@ -3,7 +3,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is required for IE 11 support
-import { labelInputCreator, validateEmail, ERROR_LOGIN } from "../../utils";
+import {
+  labelInputCreator,
+  validateEmail,
+  ERROR_LOGIN
+} from "../../utils/formLoginRegister";
 import { connect } from "react-redux";
 import { sessionLogIn } from "../store/actions/session";
 
@@ -19,30 +23,27 @@ function LoginModal(props) {
   if (props.role === "Client") routeToPost = "/api/client/login";
   if (props.role === "Admin") routeToPost = "/api/admin/login";
 
-  const handleOpen = () => setOpen(true)
+  const handleOpen = () => setOpen(true);
 
   function handleClose() {
     setOpen(false);
-    setEmail('')
-    setPassword('')
-    setWarningMessage('')
+    setEmail("");
+    setPassword("");
+    setWarningMessage("");
   }
 
   React.useEffect(() => setWarningMessage(null), [password, email]);
 
-  const goLogIn = (routeToPost, email, password) => {
-    props.sessionLogIn(routeToPost, email, password)
-      .then(result => {
-        if (!result) return setWarningMessage(ERROR_LOGIN)
-      })
-  };
+  const goLogIn = (routeToPost, email, password) =>
+    props.sessionLogIn(routeToPost, email, password).then(result => {
+      if (!result) return setWarningMessage(ERROR_LOGIN);
+    });
 
   function validateAndLogIn(routeToPost, email, password) {
     if (!validateEmail(email) || !password)
       return setWarningMessage(ERROR_LOGIN);
-    else
-      setWarningMessage('')
-    return goLogIn(routeToPost, email, password)
+    else setWarningMessage("");
+    return goLogIn(routeToPost, email, password);
   }
 
   return (
