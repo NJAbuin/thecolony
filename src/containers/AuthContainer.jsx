@@ -19,7 +19,7 @@ function AuthContainer(props) {
 
   return (
     <AuthGrid>
-      <Sidebar type={user.type} />
+      <Sidebar user={user} />
       <Switch>
         <Route path="/auth/admin" component={AdminContainer} />
         <Route path="/auth/recruiter" component={RecruiterContainer} />
