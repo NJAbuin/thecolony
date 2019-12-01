@@ -7,7 +7,7 @@ import { ThemeProvider } from "styled-components";
 //components / containers
 import AuthContainer from "./AuthContainer";
 
-import PrivateRouteAuth from "../components/PrivateRouteAuth";
+import PrivateRoute from "../components/PrivateRoute";
 import Landing from "../components/Landing";
 import Navbar from "../components/Navbar";
 
@@ -19,11 +19,11 @@ import { fetchSession } from "../store/actions/session";
 
 function Main(props) {
   const { user, fetchSession, history } = props;
-  useEffect(() => history.replace(`/auth/${user.type}/jobpostings`), [user]);
 
   useEffect(() => {
     fetchSession();
-  }, []);
+    if (user.type) history.replace(`/auth/${user.type}/jobpostings`);
+  }, [user.type]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -31,11 +31,7 @@ function Main(props) {
         <Navbar />
         <Switch>
           <Route path="/landing" component={Landing} />
-          <PrivateRouteAuth
-            path="/auth"
-            component={AuthContainer}
-            user={user}
-          />
+          <PrivateRoute path="/auth" component={AuthContainer} user={user} />
           <Redirect path="/" to="/landing" />
         </Switch>
       </MainGrid>
