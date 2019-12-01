@@ -13,6 +13,7 @@ import Navbar from "../components/Navbar";
 
 //styles
 import { MainGrid } from "../templates/LayoutGrids";
+import { MainTheme } from "../templates/MainTheme";
 
 //actions
 import { fetchSession } from "../store/actions/session";
@@ -20,11 +21,11 @@ import { fetchSession } from "../store/actions/session";
 function Main({ user, fetchSession, history }) {
   useEffect(() => {
     fetchSession();
-    if (user.type) history.replace(`/auth/${user.type}/jobpostings`);
+    if (user.type) history.replace(`/auth/${user.type}/`);
   }, [user.type]);
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={MainTheme}>
       <MainGrid>
         <Navbar />
         <Switch>
@@ -42,18 +43,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = { fetchSession };
-
-const theme = {
-  fontFamily: "PT Sans",
-  fontSize: "1rem",
-  color: "white",
-
-  CeruleanBlue: "11, 119, 196",
-  CoolGray: "102, 153, 196",
-  SpanishOrange: "238, 185, 2",
-  JadeGreen: "128, 222, 217",
-  RichBlack: "5, 5, 7"
-};
 
 export default connect(
   mapStateToProps,
