@@ -1,15 +1,17 @@
 import React from "react";
 import { Label } from "../src/templates/FormLabel";
 
+const minPasswordLength = 2;
+
 export const [ERROR_FULLNAME, ERROR_PASSWORD, ERROR_EMAIL, ERROR_LOGIN] = [
   "Ingrese un nombre valido",
-  "La contraseña debe tener al menos 2 caracteres",
+  `La contraseña debe tener al menos ${minPasswordLength} caracteres`,
   "Ingrese un email valido",
   "Usuario o contraseña invalidos"
 ];
 
 export function validatePass(pass) {
-  return pass.length <= 2 ? false : true;
+  return pass.length <= minPasswordLength ? false : true;
 }
 
 /**
