@@ -1,8 +1,6 @@
 import React from "react";
 import { Label } from "../src/templates/FormLabel";
 
-const minPasswordLength = 2;
-
 export const [ERROR_FULLNAME, ERROR_PASSWORD, ERROR_EMAIL, ERROR_LOGIN] = [
   "Ingrese un nombre valido",
   `La contraseña debe tener al menos ${minPasswordLength} caracteres`,
@@ -10,6 +8,12 @@ export const [ERROR_FULLNAME, ERROR_PASSWORD, ERROR_EMAIL, ERROR_LOGIN] = [
   "Usuario o contraseña invalidos"
 ];
 
+const minPasswordLength = 2;
+/**
+ * Checks if given string is complies with the minPasswordLength required.
+ * @param {String} pass string to check
+ * @returns {Boolean}
+ */
 export function validatePass(pass) {
   return pass.length <= minPasswordLength ? false : true;
 }
