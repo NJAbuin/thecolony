@@ -6,6 +6,7 @@ import RecruiterContainer from "./RecruiterContainer";
 
 import Sidebar from "../components/Sidebar";
 import AdminContainer from "./AdminContainer";
+import NewJobPostingForm from "../components/NewJobPostingForm";
 
 export default ({ user }) => (
   <AuthGrid>

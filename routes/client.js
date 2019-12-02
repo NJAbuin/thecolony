@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { Client, JobPosting } = require("../db/models");
 const passport = require("../db/passport/");
 
-router.post("/register", function(req, res) {
+router.post("/register", function (req, res) {
   Client.findOne({ where: { email: req.body.email } })
     .then(user =>
       user
@@ -21,24 +21,15 @@ router.post("/login", passport.authenticate("client"), (req, res) => {
   });
 });
 
-router.get("/logout", function(req, res) {
+router.get("/logout", function (req, res) {
   req.logout();
   res.sendStatus(200);
 });
 
-router.post("/jobposting", function(req, res) {
-  Client.findOne({ where: { id: 1 } })
+router.post("/jobposting", function (req, res) {
+  Client.findOne({ where: { id: req.user.id } })
     .then(client => {
-      client.createJobposting({
-        title: "Titulo",
-        description: "Descripcion del trabajo",
-        startingDate: "02/02/2020",
-        openings: 5,
-        salary: "20000",
-        state: "Activa",
-        workload: "5",
-        benefits: "muchos benefits"
-      });
+      client.createJobposting(req.body);
     })
     .then(() => {
       res.status(201).send("Jobpost created");
