@@ -6,7 +6,7 @@ import axios from "axios";
 export default function NewJobPostingForm() {
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
-  const [startDate, setStartDate] = useState(new Date());
+  const [startingDate, setStartingDate] = useState(new Date());
   const [openings, setOpenings] = useState(0);
   const [salary, setSalary] = useState(0);
   const [workload, setWorkload] = useState(0);
@@ -20,7 +20,7 @@ export default function NewJobPostingForm() {
       .post("/api/client/jobposting", {
         title,
         description,
-        startDate,
+        startingDate,
         openings,
         salary,
         workload,
@@ -33,7 +33,7 @@ export default function NewJobPostingForm() {
   React.useEffect(() => setWarningMessage(null), [
     title,
     description,
-    startDate,
+    startingDate,
     openings
   ]);
 
@@ -42,8 +42,7 @@ export default function NewJobPostingForm() {
       <form onSubmit={e => handleSubmit(e)}>
         {labelInputCreator("Nombre de la busqueda ", setTitle)}
         <Label>
-          Descripcion: <br />
-          (Max 255 caracteres)
+          Descripcion: (Max 255 caracteres)
           <textarea
             style={{
               width: "100%",
@@ -55,7 +54,7 @@ export default function NewJobPostingForm() {
             }}
           />{" "}
         </Label>
-        {labelInputCreator("Fecha de inicio ", setStartDate)}
+        {labelInputCreator("Fecha de inicio (YYYY-MM-DD)", setStartingDate)}
         {labelInputCreator("Cantidad de puestos disponibles ", setOpenings)}
         {labelInputCreator("Salario ", setSalary)}
         {labelInputCreator("Horas de trabajo al dia ", setWorkload)}
@@ -73,7 +72,7 @@ export default function NewJobPostingForm() {
             }}
           />{" "}
         </Label>
-        {warningMessage}
+        <p style={{ color: "red" }}>{warningMessage}</p>
         <button>Crear busqueda</button>
       </form>
     </div>
