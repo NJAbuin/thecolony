@@ -28,11 +28,7 @@ const upload = multer({ storage });
 router.post("/upload", upload.single("file"), (req, res) => {
   Recruiter.findOne({ where: { id: 1 } }).then(recruiter => {
     let cv;
-    req.file ?
-
-      cv = req.file.path
-      : cv = "n/a"
-
+    req.file ? cv = req.file.path : cv = "n/a"
     recruiter
       .createCandidate({
         fullName: req.body.fullName,
@@ -168,6 +164,14 @@ router.get("/jobpostings/:jobID/:candidateID/report", function (req, res) {
       candidateID: req.params.candidateID,
       jobPostingID: req.params.jobID
     }
+  }).then(report => res.send(report.informe))
+})
+
+router.post("/jobpostings/:jobID/:candidateID/report", function (req, res) {
+  Report.create({
+    candidateID: req.params.candidateID,
+    jobPostingID: req.params.jobID,
+    informe: req.body.informe
   }).then(report => res.send(report.informe))
 })
 
