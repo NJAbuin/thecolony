@@ -8,11 +8,11 @@ import {
   candidatesApplyToJob,
   candidatesClearListSelection
 } from "../store/actions/candidates";
-import { CandidateContainer } from "../templates/Candidates";
+import { FullDash } from "../templates/Dashboard";
 
 function RecruiterCandidates(props) {
   return (
-    <CandidateContainer>
+    <FullDash>
       <Link to="/auth/recruiter/candidates/new">
         <button>CARGAR CANDIDATO</button>
       </Link>
@@ -20,7 +20,7 @@ function RecruiterCandidates(props) {
       {props.candidateList.map(candidate => (
         <Candidate candidate={candidate} key={candidate.id} />
       ))}
-    </CandidateContainer>
+    </FullDash>
   );
 }
 const mapStateToProps = ({ candidateList, jobPostingSelected }) => ({
