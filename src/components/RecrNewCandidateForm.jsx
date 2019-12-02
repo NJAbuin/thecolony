@@ -38,7 +38,9 @@ function RecrNewCandidateForm(props) {
       headers: {
         "Content-Type": "multipart/form-data"
       }
-    }).then(res => setUploadedFile(res.data));
+    }).then(res => {
+      setUploadedFile(res.data);
+    });
   };
   const onChange = e => {
     setFile(e.target.files[0]);

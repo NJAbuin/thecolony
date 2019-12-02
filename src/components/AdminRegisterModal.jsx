@@ -76,7 +76,7 @@ export default function AdminRegisterModal(props) {
                 Ingrese sus datos para registrarse
               </h2>
               {labelInputCreator("Email", setEmail)}
-              {labelInputCreator("Password", setPassword)}
+              {labelInputCreator("Password", setPassword, "password")}
               {labelInputCreator("Nombre Completo", setfullName)}
               <br />
               <p style={{ color: "red" }}>{warningMessage}</p>
