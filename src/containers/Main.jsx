@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import React, { useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import NewJobPostingForm from "../components/NewJobPostingForm";
 
 //components / containers
 import AuthContainer from "./AuthContainer";
@@ -43,7 +44,14 @@ function Main(props) {
         <Navbar />
         <Switch>
           <Route path="/landing" component={Landing} />
-          <PrivateRouteAuth path="/auth" component={AuthContainer} user={user} MainProps={props} />
+          <Route path="/buditest" component={NewJobPostingForm} />
+
+          <PrivateRouteAuth
+            path="/auth"
+            component={AuthContainer}
+            user={user}
+            MainProps={props}
+          />
           <Redirect path="/" to="/landing" />
         </Switch>
       </MainGrid>
