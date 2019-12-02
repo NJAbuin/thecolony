@@ -1,13 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
+
+import { Client } from '../components/Client'
 import { FullDash } from '../templates/Dashboard'
 
-function AdminClients(props) {
+function AdminClients({ clientList }) {
+
     return (<FullDash>
-
+        {clientList.map(client =>
+            <Client client={client} />
+        )}
     </FullDash>
-
     );
 }
 
-export default connect(null)(AdminContainer);
+const mapStateToProps = ({ clientList }) => ({
+    clientList
+})
+
+export default connect(mapStateToProps)(AdminClients);

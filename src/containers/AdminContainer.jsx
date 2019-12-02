@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import AdminDashboard from "../containers/AdminDashboard";
 import AdminClients from './AdminClients'
+import { fetchClientList } from '../store/actions/clients'
 
-function AdminContainer(props) {
+function AdminContainer({ fetchClientList }) {
+  useEffect(() => fetchClientList(), [])
+
   return (
     <Switch>
       <Route path="/auth/admin/dashboard" component={AdminDashboard} />
@@ -17,4 +20,8 @@ function AdminContainer(props) {
   );
 }
 
-export default connect(null)(AdminContainer);
+const mapDispatchToProps = {
+  fetchClientList
+}
+
+export default connect(null, mapDispatchToProps)(AdminContainer);
