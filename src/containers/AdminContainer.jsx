@@ -6,6 +6,7 @@ import AdminClients from './AdminClients'
 import { fetchClientList } from '../store/actions/clients'
 
 function AdminContainer({ fetchClientList }) {
+
   useEffect(() => fetchClientList(), [])
 
   return (
