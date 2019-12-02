@@ -1,9 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { CandidateStyle } from "../templates/Candidates";
 
-import { candidateAdd, candidateRemove } from "../store/actions/candidates";
+import {
+  candidateAdd,
+  candidateRemove,
+  candidateFetchDetails
+} from "../store/actions/candidates";
 
 export function Candidate(props) {
   const {
@@ -49,18 +54,29 @@ export function Candidate(props) {
       <span>{jobTitle}</span>
       <br />
       <button onClick={e => showCV(e)}>Ver CV</button>
+      <Link to={`/auth/${props.userType}/candidates/${id}`}>
+        <button onClick={e => props.candidateFetchDetails(id)}>
+          Ver detalles
+        </button>
+      </Link>
     </CandidateStyle>
   );
 }
 
-const mapStateToProps = ({ jobPostingSelected, candidatesSelected }) => ({
+const mapStateToProps = ({
   jobPostingSelected,
-  candidatesSelected
+  candidatesSelected,
+  session
+}) => ({
+  jobPostingSelected,
+  candidatesSelected,
+  userType: session.user.type
 });
 
 const mapDispatchToProps = {
   candidateAdd,
-  candidateRemove
+  candidateRemove,
+  candidateFetchDetails
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Candidate);

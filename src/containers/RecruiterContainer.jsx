@@ -3,13 +3,15 @@ import { connect } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import RecruiterJobPostings from "../containers/RecruiterJobPostings";
+import DashboardRecruiter from "../containers/DashboardRecruiter";
+
 import RecruiterCandidates from "../components/RecruiterCandidates";
 import JobPostingDetails from "../components/JobPostingDetails";
-import DashboardRecruiter from "../containers/DashboardRecruiter";
+import RecrNewCandidateForm from "../components/RecrNewCandidateForm";
+import CandidateDetails from "../components/CandidateDetails";
 
 import { getCandidateList } from "../store/actions/candidates";
 import { getJobPostings } from "../store/actions/jobPostings";
-import RecrNewCandidateForm from "../components/RecrNewCandidateForm";
 
 function RecruiterContainer({ getCandidateList, getJobPostings }) {
   useEffect(() => {
@@ -33,6 +35,10 @@ function RecruiterContainer({ getCandidateList, getJobPostings }) {
         component={RecrNewCandidateForm}
       />
       <Route
+        path="/auth/recruiter/candidates/:id"
+        component={CandidateDetails}
+      />
+      <Route
         path="/auth/recruiter/candidates"
         component={RecruiterCandidates}
       />
@@ -46,7 +52,4 @@ const mapDispatchToProps = {
   getJobPostings
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(RecruiterContainer);
+export default connect(null, mapDispatchToProps)(RecruiterContainer);
