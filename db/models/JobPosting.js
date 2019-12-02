@@ -14,7 +14,8 @@ JobPosting.init(
     },
     startingDate: {
       type: S.DATE,
-      allowNull: false
+      allowNull: false,
+      defaultValue: S.NOW
     },
     openings: {
       type: S.INTEGER,
@@ -24,7 +25,8 @@ JobPosting.init(
       type: S.STRING
     },
     state: {
-      type: S.ENUM(["Activa", "Terminada"])
+      type: S.ENUM(["Activa", "Terminada"]),
+      defaultValue: "Activa"
     },
     workload: {
       type: S.INTEGER
