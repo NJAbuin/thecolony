@@ -31,7 +31,6 @@ function Main({ user, fetchSession, history }) {
         <Navbar />
         <Switch>
           <Route path="/landing" component={Landing} />
-          <Route path="/buditest" component={NewJobPostingForm} />
 
           <PrivateRoute path="/auth" component={AuthContainer} user={user} />
           <Redirect path="/" to="/landing" />
