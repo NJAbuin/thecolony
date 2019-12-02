@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { labelInputCreator } from "../../utils/formLoginRegister";
 import { H1 } from "../templates/Text";
 import Axios from "axios";
+import { validateDNI, validateFullName } from "../../utils/formLoginRegister";
 import RecrCsvForm from "./RecrCsvForm";
 import { InfoParagraph } from "../templates/Text";
 import { connect } from "react-redux";
@@ -20,11 +21,6 @@ function RecrNewCandidateForm(props) {
   const [filename, setFilename] = useState("Elije el CV (formato PDF): ");
   const [uploadedFile, setUploadedFile] = useState({});
   const recruiterID = props.user.id;
-
-  const uploadPDF = e => {
-    e.preventDefault();
-    alert("What do???");
-  };
 
   const onSubmit = e => {
     e.preventDefault();
@@ -70,15 +66,6 @@ function RecrNewCandidateForm(props) {
     </div>
   );
 
-  const success = (
-    <div>
-      <H1>Exito!</H1>
-      <InfoParagraph>
-        El candidato {fullName} con DNI: {DNI} ha sido creado
-      </InfoParagraph>
-    </div>
-  );
-
   const validateForm = (
     DNI,
     fullName,
@@ -87,9 +74,9 @@ function RecrNewCandidateForm(props) {
     address,
     expectedSalary
   ) => {
-    if (DNI.length !== 8) {
+    if (!validateDNI(DNI)) {
       setWarningMessage("Ingrese un DNI valido sin puntos ni guiones.");
-    } else if (fullName.length <= 4 || !fullName.includes(" ")) {
+    } else if (!validateFullName(fullName)) {
       setWarningMessage("Ingrese el nombre completo del candidato.");
     } else if (!age) {
       setWarningMessage("Ingrese la edad de su candidato.");
@@ -107,7 +94,4 @@ const mapStateToProps = state => ({
   user: state.session.user
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(RecrNewCandidateForm);
+export default connect(mapStateToProps, null)(RecrNewCandidateForm);

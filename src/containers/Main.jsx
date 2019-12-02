@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import React, { useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import NewJobPostingForm from "../components/NewJobPostingForm";
 
 //components / containers
 import AuthContainer from "./AuthContainer";
@@ -30,6 +31,8 @@ function Main({ user, fetchSession, history }) {
         <Navbar />
         <Switch>
           <Route path="/landing" component={Landing} />
+          <Route path="/buditest" component={NewJobPostingForm} />
+
           <PrivateRoute path="/auth" component={AuthContainer} user={user} />
           <Redirect path="/" to="/landing" />
         </Switch>
@@ -44,7 +47,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { fetchSession };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
