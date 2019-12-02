@@ -1,7 +1,7 @@
 const db = require("../index");
 const S = require("sequelize");
 
-class Candidate extends S.Model { }
+class Candidate extends S.Model {}
 
 Candidate.init(
   {
@@ -26,6 +26,10 @@ Candidate.init(
     },
     address: {
       type: S.STRING
+    },
+    description: {
+      type: S.TEXT,
+      allowNull: true //cambiar a false
     },
     expectedSalary: {
       type: S.INTEGER

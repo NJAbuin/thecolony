@@ -1,7 +1,7 @@
 const db = require("../index");
 const S = require("sequelize");
 
-class JobPosting extends S.Model {}
+class JobPosting extends S.Model { }
 JobPosting.init(
   {
     title: {
@@ -14,7 +14,8 @@ JobPosting.init(
     },
     startingDate: {
       type: S.DATE,
-      allowNull: false
+      allowNull: false,
+      defaultValue: S.NOW
     },
     openings: {
       type: S.INTEGER,
@@ -24,7 +25,11 @@ JobPosting.init(
       type: S.STRING
     },
     state: {
-      type: S.ENUM(["Activa", "Terminada"])
+      type: S.ENUM(["Activa", "Terminada"]),
+      defaultValue: "Activa"
+    },
+    webpage: {
+      type: S.STRING
     },
     workload: {
       type: S.INTEGER
