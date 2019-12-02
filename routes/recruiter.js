@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Recruiter, Candidate, JobPosting } = require("../db/models/");
+const { Recruiter, Candidate, JobPosting, Report } = require("../db/models/");
 const passport = require("../db/passport/");
 const chalk = require("chalk");
 const multer = require("multer");
@@ -26,7 +26,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.post("/upload", upload.single("file"), (req, res) => {
-  Recruiter.findOne({ where: { id: req.user.id } }).then(recruiter => {
+  Recruiter.findOne({ where: { id: 1 } }).then(recruiter => {
+    let cv;
+    req.file ? (cv = req.file.path) : (cv = "n/a");
     recruiter
       .createCandidate({
         fullName: req.body.fullName,
@@ -35,11 +37,15 @@ router.post("/upload", upload.single("file"), (req, res) => {
         jobTitle: req.body.jobTitle,
         address: req.body.adress,
         exprectedSalary: req.body.exprectedSalary,
-        CV: req.file.path
+        CV: cv
       })
-      .then(() => {
-        let dataBuffer = fs.readFileSync(req.file.path);
-        pdf(dataBuffer).then(data => res.status(200).send(data));
+      .then(candidate => {
+        if (cv != "n/a") {
+          let dataBuffer = fs.readFileSync(req.file.path);
+          pdf(dataBuffer).then(data => res.status(200).send(data));
+        } else {
+          res.send(candidate);
+        }
       });
   });
 });
@@ -91,7 +97,9 @@ router.post("/candidatos", function (req, res) {
 });
 
 router.get("/candidates", (req, res) =>
-  Candidate.findAll({}).then(candidates => res.send(candidates))
+  Candidate.findAll({ where: { recruiterId: req.user.id } }).then(candidates =>
+    res.send(candidates)
+  )
 );
 
 router.put("/candidates/edit/:id", function (req, res) {
@@ -100,6 +108,14 @@ router.put("/candidates/edit/:id", function (req, res) {
       res.send(updatedCandidate);
     });
   });
+});
+
+router.get("/candidate/:id", function (req, res) {
+  Candidate.findOne({
+    where: { id: req.params.id }
+  })
+    .then(candidate => res.send(candidate))
+    .catch(e => res.send(e));
 });
 
 //encuentra TODAS las busquedas activas, cuando el admin pueda asignar recruiters a las busquedas hay que cambiar que el recruiter solo acceda a esas
@@ -145,5 +161,22 @@ router.get("/jobpostings/:id", function (req, res) {
     where: { id: req.params.id }
   }).then(job => res.send(job));
 });
+
+router.get("/jobpostings/:jobID/:candidateID/report", function (req, res) {
+  Report.findOne({
+    where: {
+      candidateID: req.params.candidateID,
+      jobPostingID: req.params.jobID
+    }
+  }).then(report => res.send(report.informe));
+});
+
+router.post("/jobpostings/:jobID/:candidateID/report", function (req, res) {
+  Report.create({
+    candidateID: req.params.candidateID,
+    jobPostingID: req.params.jobID,
+    informe: req.body.informe
+  }).then(report => res.send(report.informe))
+})
 
 module.exports = router;

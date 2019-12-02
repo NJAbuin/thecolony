@@ -3,8 +3,8 @@ const JobPosting = require("./JobPosting");
 const Client = require("./Client");
 const Candidate = require("./Candidate");
 const Admin = require("./Admin");
+const Report = require("./Informe")
 
-Admin.hasMany(JobPosting);
 Client.hasMany(JobPosting);
 JobPosting.belongsTo(Client);
 Recruiter.hasMany(JobPosting);
@@ -17,5 +17,6 @@ module.exports = {
   Candidate,
   Recruiter,
   JobPosting,
-  Client
+  Client,
+  Report
 };
