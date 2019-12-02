@@ -8,7 +8,7 @@ import DashboardRecruiter from "../containers/DashboardRecruiter";
 import RecruiterCandidates from "../components/RecruiterCandidates";
 import JobPostingDetails from "../components/JobPostingDetails";
 import RecrNewCandidateForm from "../components/RecrNewCandidateForm";
-import CandidateDetails from '../components/CandidateDetails'
+import CandidateDetails from "../components/CandidateDetails";
 
 import { getCandidateList } from "../store/actions/candidates";
 import { getJobPostings } from "../store/actions/jobPostings";
@@ -52,7 +52,4 @@ const mapDispatchToProps = {
   getJobPostings
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(RecruiterContainer);
+export default connect(null, mapDispatchToProps)(RecruiterContainer);
