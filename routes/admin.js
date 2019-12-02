@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const Admin = require("../db/models/Admin");
 const passport = require("../db/passport/");
+const { Admin, Candidate, JobPosting } = require("../db/models/");
 
-router.post("/register", function(req, res) {
+router.post("/register", function (req, res) {
   Admin.findOne({ where: { email: req.body.email } })
     .then(user =>
       user
@@ -18,12 +18,29 @@ router.post("/login", passport.authenticate("admin"), (req, res) => {
     email: req.user.email,
     type: req.user.type,
     id: req.user.id
-  });
+  }).catch(e => res.send(e));;
 });
 
-router.get("/logout", function(req, res) {
+router.get("/logout", function (req, res) {
   req.logout();
   res.sendStatus(200); //que se mande solo al logoutear exitosamente
 });
+
+router.get("/jobpostings", function (req, res) {
+  JobPosting.findAll({
+    include: [
+      {
+        model: Candidate
+      }
+    ]
+  }).then(job => res.send(job))
+    .catch(e => res.send(e));;
+});
+
+router.get("/candidate/:id", function (req, res) {
+  Candidate.findOne({
+    where: { id: req.params.id }
+  }).then(candidate => res.send(candidate)).catch(e => res.send(e));
+})
 
 module.exports = router;
