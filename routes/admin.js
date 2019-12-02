@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const passport = require("../db/passport/");
-const { Admin, Candidate, JobPosting } = require("../db/models/");
+const { Admin, Candidate, JobPosting, Report } = require("../db/models/");
 
 router.post("/register", function (req, res) {
   Admin.findOne({ where: { email: req.body.email } })
@@ -42,5 +42,15 @@ router.get("/candidate/:id", function (req, res) {
     where: { id: req.params.id }
   }).then(candidate => res.send(candidate)).catch(e => res.send(e));
 })
+
+router.get("/jobpostings/:jobID/:candidateID/report", function (req, res) {
+  Report.findOne({
+    where: {
+      candidateID: req.params.candidateID,
+      jobPostingID: req.params.jobID
+    }
+  }).then(report => res.send(report.informe))
+})
+
 
 module.exports = router;
