@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 
 import { CandidateStyle } from "../templates/Candidates";
 
@@ -17,7 +18,7 @@ export function Candidate(props) {
     expectedSalary
   } = props.candidate;
 
-  const checker = function() {
+  const checker = function () {
     return (
       props.jobPostingSelected.candidates &&
       Boolean(
@@ -49,13 +50,17 @@ export function Candidate(props) {
       <span>{jobTitle}</span>
       <br />
       <button onClick={e => showCV(e)}>Ver CV</button>
+      <Link to={`/auth/${props.userType}/candidates/${id}`} >
+        <button >Ver detalles</button>
+      </Link>
     </CandidateStyle>
   );
 }
 
-const mapStateToProps = ({ jobPostingSelected, candidatesSelected }) => ({
+const mapStateToProps = ({ jobPostingSelected, candidatesSelected, session }) => ({
   jobPostingSelected,
-  candidatesSelected
+  candidatesSelected,
+  userType: session.user.type
 });
 
 const mapDispatchToProps = {
