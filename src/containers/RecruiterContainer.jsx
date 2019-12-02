@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import RecruiterJobPostings from "../containers/RecruiterJobPostings";
 import RecruiterCandidates from "../components/RecruiterCandidates";
@@ -11,10 +11,10 @@ import { getCandidateList } from "../store/actions/candidates";
 import { getJobPostings } from "../store/actions/jobPostings";
 import RecrNewCandidateForm from "../components/RecrNewCandidateForm";
 
-function RecruiterContainer(props) {
+function RecruiterContainer({ getCandidateList, getJobPostings }) {
   useEffect(() => {
-    props.getCandidateList();
-    props.getJobPostings();
+    getCandidateList();
+    getJobPostings();
   }, []);
 
   return (
@@ -36,6 +36,7 @@ function RecruiterContainer(props) {
         path="/auth/recruiter/candidates"
         component={RecruiterCandidates}
       />
+      <Redirect path="/" to="/auth/recruiter/dashboard" />
     </Switch>
   );
 }
@@ -45,4 +46,7 @@ const mapDispatchToProps = {
   getJobPostings
 };
 
-export default connect(null, mapDispatchToProps)(RecruiterContainer);
+export default connect(
+  null,
+  mapDispatchToProps
+)(RecruiterContainer);

@@ -17,7 +17,7 @@ Admin.init(
     },
     type: {
       type: S.STRING,
-      defaultValue: "Admin"
+      defaultValue: "admin"
     },
     password: {
       type: S.STRING,

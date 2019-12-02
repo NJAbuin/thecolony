@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { labelInputCreator } from "../../utils";
+import { labelInputCreator } from "../../utils/formLoginRegister";
 import { H1 } from "../templates/Text";
 import Axios from "axios";
 import { validateDNI, validateFullName } from "../../utils";

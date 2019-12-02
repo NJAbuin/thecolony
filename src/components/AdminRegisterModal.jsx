@@ -12,7 +12,7 @@ import {
   ERROR_EMAIL,
   ERROR_PASSWORD,
   ERROR_FULLNAME
-} from "../../utils";
+} from "../../utils/formLoginRegister";
 
 export default function AdminRegisterModal(props) {
   const classes = useStyles();
