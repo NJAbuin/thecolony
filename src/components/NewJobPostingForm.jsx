@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { labelInputCreator } from "../../utils";
+import { labelInputCreator } from "../../utils/formLoginRegister";
 import { Label } from "../templates/FormLabel";
 
 export default function NewJobPostingForm() {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { labelInputCreator } from "../../utils/formLoginRegister";
 import { H1 } from "../templates/Text";
 import Axios from "axios";
-import { validateDNI, validateFullName } from "../../utils";
+import { validateDNI, validateFullName } from "../../utils/formLoginRegister";
 import RecrCsvForm from "./RecrCsvForm";
 import { InfoParagraph } from "../templates/Text";
 import { connect } from "react-redux";
