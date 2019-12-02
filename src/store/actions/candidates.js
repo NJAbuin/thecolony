@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   FETCH_CANDIDATES,
+  FETCH_CANDIDATE_DETAILS,
   CANDIDATES_SUBMIT_OR_EMPTY,
   CANDIDATE_ADD,
   CANDIDATE_REMOVE
@@ -29,6 +30,12 @@ export const candidateRemove = payload => ({
   payload
 });
 
+export const candidateDetails = payload => ({
+  type: FETCH_CANDIDATE_DETAILS,
+  payload
+});
+
+
 export const candidatesSumbitOrEmpty = payload => ({
   type: CANDIDATES_SUBMIT_OR_EMPTY
 });
@@ -44,3 +51,8 @@ export const candidatesApplyToJob = (job, arrOfCandidates) => dispatch =>
 
 export const candidatesClearListSelection = () => dispatch =>
   dispatch(candidatesSumbitOrEmpty());
+
+export const candidateFetchDetails = candId => dispatch =>
+  axios.get(`/api/candidates/${candId}`)
+    .then(res => res.data)
+    .then(candidate => dispatch(candidateDetails(candidate)))
