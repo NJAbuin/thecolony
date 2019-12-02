@@ -34,7 +34,7 @@ router.post("/upload", upload.single("file"), (req, res) => {
         age: req.body.age,
         jobTitle: req.body.jobTitle,
         address: req.body.adress,
-        exprectedSalary: req.body.exprectedSalary,
+        expectedSalary: req.body.expectedSalary,
         CV: req.file.path
       })
       .then(() => {
@@ -90,6 +90,7 @@ router.post("/candidatos", function (req, res) {
     .then(candidate => res.send(candidate));
 });
 
+
 router.get("/candidates", (req, res) =>
   Candidate.findAll({}).then(candidates => res.send(candidates))
 );
@@ -101,6 +102,8 @@ router.put("/candidates/edit/:id", function (req, res) {
     });
   });
 });
+
+
 
 //encuentra TODAS las busquedas activas, cuando el admin pueda asignar recruiters a las busquedas hay que cambiar que el recruiter solo acceda a esas
 router.get("/jobpostings", function (req, res) {
