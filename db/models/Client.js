@@ -25,7 +25,7 @@ Client.init(
     },
     type: {
       type: S.STRING,
-      defaultValue: "Client"
+      defaultValue: "client"
     },
     password: {
       type: S.STRING,

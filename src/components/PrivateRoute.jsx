@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-export const PrivateRoute = ({ component: Component, ...otherProps }) => (
+export default ({ component: Component, path, ...otherProps }) => (
   <Route
-    {...otherProps}
+    {...path}
     render={() =>
-      Object.keys(otherProps.user).length ? (
+      otherProps.user.type ? (
         <Component {...otherProps} />
       ) : (
         <Redirect

@@ -2,17 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { SidebarButton, SidebarStyle } from "../templates/SidebarStyles";
+import { mapSidebar } from "../../utils/sidebarRoutes";
 
-export default props => {
-  //const {POWERS, URLs} = props.user.XXXX
-  const recruiterSidebar = {
-    Dashboard: "/auth/recruiter/dashboard",
-    Busquedas: "/auth/recruiter/jobpostings",
-    Candidatos: "/auth/recruiter/candidates"
-  };
-
-  const POWERS = Object.keys(recruiterSidebar);
-  const URLs = Object.values(recruiterSidebar);
+export default ({ userType }) => {
+  const [POWERS, URLs] = mapSidebar(userType);
 
   return (
     <SidebarStyle>

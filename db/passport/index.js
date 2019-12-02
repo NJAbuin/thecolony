@@ -9,7 +9,7 @@ passport.use(
       usernameField: "email",
       passwordField: "password"
     },
-    function (email, password, done) {
+    function(email, password, done) {
       Admin.findOne({
         where: { email: email }
       }).then(user => {
@@ -31,7 +31,7 @@ passport.use(
       usernameField: "email",
       passwordField: "password"
     },
-    function (email, password, done) {
+    function(email, password, done) {
       Client.findOne({
         where: { email: email }
       })
@@ -55,7 +55,7 @@ passport.use(
       usernameField: "email",
       passwordField: "password"
     },
-    function (email, password, done) {
+    function(email, password, done) {
       Recruiter.findOne({
         where: { email: email }
       })
@@ -78,15 +78,15 @@ passport.deserializeUser((savedParam, done) => {
   const [uType, uId] = savedParam.split(" ");
 
   switch (uType) {
-    case "Admin":
+    case "admin":
       Admin.findByPk(uId).then(user => done(null, user));
       break;
 
-    case "Recruiter":
+    case "recruiter":
       Recruiter.findByPk(uId).then(user => done(null, user));
       break;
 
-    case "Client":
+    case "client":
       Client.findByPk(uId).then(user => done(null, user));
       break;
   }

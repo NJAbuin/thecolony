@@ -25,7 +25,7 @@ Recruiter.init(
     },
     type: {
       type: S.STRING,
-      defaultValue: "Recruiter"
+      defaultValue: "recruiter"
     },
     password: {
       type: S.STRING,

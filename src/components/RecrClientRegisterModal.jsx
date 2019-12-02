@@ -12,7 +12,7 @@ import {
   ERROR_EMAIL,
   ERROR_PASSWORD,
   ERROR_FULLNAME
-} from "../../utils";
+} from "../../utils/formLoginRegister";
 
 export default function RecrClientRegisterModal(props) {
   const classes = useStyles();
@@ -26,11 +26,10 @@ export default function RecrClientRegisterModal(props) {
   const [warningMessage, setWarningMessage] = useState(null);
 
   let routeToPost;
-  if (props.role === "Client") routeToPost = "/api/client/register";
-  if (props.role === "Recruiter") routeToPost = "/api/recruiter/register";
+  if (props.role === "client") routeToPost = "/api/client/register";
+  if (props.role === "recruiter") routeToPost = "/api/recruiter/register";
 
-  const handleOpen = () => setOpen(true)
-
+  const handleOpen = () => setOpen(true);
 
   const handleClose = () => {
     setOpen(false);
@@ -90,19 +89,28 @@ export default function RecrClientRegisterModal(props) {
               {labelInputCreator("Logo URL", setLogoURL)}
               {labelInputCreator("Phone", setPhone)}
               {labelInputCreator("Website", setWebsite)}
-              <p style={{ color: "red" }}>
-                {warningMessage}
-              </p>
+              <p style={{ color: "red" }}>{warningMessage}</p>
 
-              <button onClick={event => {
-                event.preventDefault();
-                validateAndRegister(email, password, fullName, phone, logoURL, website)
-              }}>Submit</button>
+              <button
+                onClick={event => {
+                  event.preventDefault();
+                  validateAndRegister(
+                    email,
+                    password,
+                    fullName,
+                    phone,
+                    logoURL,
+                    website
+                  );
+                }}
+              >
+                Submit
+              </button>
             </form>
           </div>
         </Fade>
       </Modal>
-    </div >
+    </div>
   );
 }
 
