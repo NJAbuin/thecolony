@@ -26,8 +26,8 @@ export default function RecrClientRegisterModal(props) {
   const [warningMessage, setWarningMessage] = useState(null);
 
   let routeToPost;
-  if (props.role === "client") routeToPost = "/api/client/register";
-  if (props.role === "recruiter") routeToPost = "/api/recruiter/register";
+  if (props.role === "client") routeToPost = "/api/session/client/register";
+  if (props.role === "recruiter") routeToPost = "/api/session/recruiter/register";
 
   const handleOpen = () => setOpen(true);
 
