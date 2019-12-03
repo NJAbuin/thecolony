@@ -15,13 +15,24 @@ router.get("/clients", function (req, res) {
   Client.findAll().then(clients => res.send(clients));
 });
 
-//RUD Recruiters (falta edit)
+//get all recruiters
 
 router.get("/recruiters", function (req, res) {
   Recruiter.findAll().then(recruiters => res.send(recruiters));
 });
 
-//edit iria aca
+//edit recruiters
+
+router.put("/recruiters/:id", function (req, res) {
+  Recruiter.findOne({ where: { id: req.params.id } }).then(recruiter => {
+    if (!recruiter) { res.send("No se encontro ningun recruiter") }
+    recruiter.update(req.body).then(updated => {
+      res.send(updated);
+    });
+  })
+})
+
+//delete recruiters
 
 router.delete("/recruiters/delete/:id", function (req, res) {
   Recruiter.findOne({ where: { id: req.params.id } })
@@ -29,13 +40,15 @@ router.delete("/recruiters/delete/:id", function (req, res) {
       recruiter.destroy();
     })
     .then(() => res.send("Recrutador eliminado con exito"));
-});
+})
 
-//RUD ADMINS
+//get admins
 
 router.get("/admins", function (req, res) {
   Admin.findAll().then(admins => res.send(admins));
 });
+
+//edit admins
 
 router.put("admins/edit/:id", function (req, res) {
   Admin.findOne({ where: { id: req.params.id } }).then(admin => {
@@ -44,6 +57,8 @@ router.put("admins/edit/:id", function (req, res) {
     });
   });
 });
+
+//delete admins
 
 router.delete("/admins/delete/:id", function (req, res) {
   Admin.findOne({ where: { id: req.params.id } })

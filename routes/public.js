@@ -269,7 +269,21 @@ router.get("/jobpostings/:jobID/:candidateID/report", function (req, res) {
 
 //5.c editar reporte
 
-
+router.put("/jobpostings/:jobID/:candidateID/report", function (req, res) {
+    if (req.user.type === "admin") {
+        Report.findOne({
+            where: {
+                candidateID: req.params.candidateID,
+                jobPostingID: req.params.jobID
+            }
+        }).then(report => {
+            if (!report) { res.send("No se encontro el reporte") }
+            return report.update(req.body)
+        }).then(updated => res.send(updated))
+    } else {
+        res.send("Solo los administradores pueden editar el reporte")
+    }
+});
 
 
 module.exports = router
