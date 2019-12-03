@@ -5,7 +5,7 @@ import { Button } from "../templates/Button";
 import { JobPostStyle } from "../templates/JobPostStyle";
 
 import { selectJobPostToState } from "../store/actions/jobPostings";
-import { Link, withRouter } from "react-router-dom"
+import { Link, withRouter } from "react-router-dom";
 
 function JobPosting(props) {
   const {
@@ -28,10 +28,16 @@ function JobPosting(props) {
         <Button onClick={() => props.selectJobPostToState(id)}>
           SELECCIONAR
         </Button>
-        <Button onClick={() => {
-          props.history.push(`/auth/recruiter/jobpostings/${id}`)
-        }}> Ver detalles</Button>
-
+        <Button
+          onClick={() => {
+            props.match.url.includes("/auth/admin/jobposting")
+              ? props.history.push(`/auth/admin/jobposting/${id}`)
+              : props.history.push(`/auth/recruiter/jobpostings/${id}`);
+          }}
+        >
+          {" "}
+          Ver detalles
+        </Button>
       </div>
     </JobPostStyle>
   );
@@ -40,7 +46,5 @@ function JobPosting(props) {
 const mapDispatchToProps = {
   selectJobPostToState
 };
-
-
 
 export default withRouter(connect(null, mapDispatchToProps)(JobPosting));
