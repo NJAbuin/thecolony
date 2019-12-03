@@ -5,9 +5,11 @@ import {
   validateDate
 } from "../../utils/formLoginRegister";
 import { Label } from "../templates/FormLabel";
+import { connect } from "react-redux";
 import axios from "axios";
+import {} from "../store/actions/candidates";
 
-export default function NewJobPostingForm() {
+function NewJobPostingForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [startingDate, setStartingDate] = useState("");
@@ -116,3 +118,9 @@ export default function NewJobPostingForm() {
     </div>
   );
 }
+
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewJobPostingForm);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { labelInputCreator } from "../../utils/formLoginRegister";
 import { H1 } from "../templates/Text";
 import Axios from "axios";
@@ -22,9 +22,23 @@ function RecrNewCandidateForm(props) {
   const [uploadedFile, setUploadedFile] = useState({});
   const recruiterID = props.user.id;
 
+  useEffect(() => {
+    if (!validateDNI(DNI)) {
+      setWarningMessage("Ingrese un DNI valido sin puntos ni guiones.");
+    } else if (!validateFullName(fullName)) {
+      setWarningMessage("Ingrese el nombre completo del candidato.");
+    } else if (!age) {
+      setWarningMessage("Ingrese la edad de su candidato.");
+    } else if (jobTitle.length <= 1) {
+      setWarningMessage("Ingrese un titulo valido para su candidato");
+    } else {
+      setWarningMessage("");
+    }
+  }, [DNI, fullName, age, jobTitle, warningMessage]);
+
   const onSubmit = e => {
     e.preventDefault();
-    validateForm(DNI, fullName, age, jobTitle);
+
     let formData = new FormData();
     formData.append("DNI", DNI);
     formData.append("fullName", fullName);
@@ -34,13 +48,27 @@ function RecrNewCandidateForm(props) {
     formData.append("address", address);
     formData.append("expectedSalary", expectedSalary);
 
-    return Axios.post("/api/recruiter/upload", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
-    }).then(res => {
-      setUploadedFile(res.data);
-    });
+    if (warningMessage === "") {
+      return Axios.post("/api/recruiter/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }).then(res => {
+        if (res.data) {
+          setDNI(0), setfullName("");
+          setAge(0);
+          setJobTitle("");
+          setFile("");
+          setAddress("");
+          setExpectedSalary("");
+          document.querySelectorAll("input").forEach(i => (i.value = ""));
+          alert("Candidato creado con exito!");
+        } else {
+          alert("Hubo un problema al crear su candidato");
+        }
+        // setUploadedFile(res.data);
+      });
+    }
   };
   const onChange = e => {
     setFile(e.target.files[0]);
