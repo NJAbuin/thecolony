@@ -1,10 +1,16 @@
-import { ClientStyle } from '../templates/ClientStyle'
+import { ClientStyle } from "../templates/ClientStyle";
 
 import React from "react";
 
 export function Client({ client }) {
-    return (<ClientStyle>
-        {Object.keys(client).map(x => <p>{x}</p>)}
+  return (
+    <ClientStyle>
+      <h2> {client.fullName}</h2>
+      <ul>
+        <li>email: {client.email}</li>
+      </ul>
+      {client.logoURL && <img src={client.logoURL} alt="" />}
+      {client.website && <a href={client.website}>Visitar el website.</a>}
     </ClientStyle>
-    );
+  );
 }
