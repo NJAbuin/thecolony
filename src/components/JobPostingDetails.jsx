@@ -4,7 +4,9 @@ import { selectJobPostToState } from "../store/actions/jobPostings";
 import { connect } from "react-redux";
 
 function JobPostingDetails(props) {
-  useEffect(() => props.selectJobPostToState(props.match.params.id), []);
+  useEffect(() => {
+    props.selectJobPostToState(props.match.params.id);
+  }, []);
   return (
     <JobPostStyle>
       <div>
@@ -38,7 +40,4 @@ const mapDispatchToProps = {
   selectJobPostToState
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(JobPostingDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(JobPostingDetails);
