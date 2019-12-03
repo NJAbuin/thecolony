@@ -7,6 +7,6 @@ export const clientList = payload => ({
 });
 
 export const fetchClientList = () => dispatch =>
-    axios.get(`/api/client`)
+    axios.get(`/api/admin/clients`)
         .then(res => res.data)
         .then(allClients => dispatch(clientList(allClients)))
