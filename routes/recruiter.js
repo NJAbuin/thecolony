@@ -4,7 +4,7 @@ const passport = require("../db/passport/");
 const chalk = require("chalk");
 const dateFormat = require("dateformat");
 
-
+//agrega candidatos de a muchos a un jobposting
 
 router.post("/jobpostings", function (req, res) {
   console.log(chalk.bgRed(JSON.stringify(req.body)));
@@ -31,7 +31,7 @@ router.post("/jobpostings/:id", function (req, res) {
 });
 
 
-
+//agarra el report
 router.get("/jobpostings/:jobID/:candidateID/report", function (req, res) {
   Report.findOne({
     where: {
@@ -41,6 +41,8 @@ router.get("/jobpostings/:jobID/:candidateID/report", function (req, res) {
   }).then(report => res.send(report.informe));
 });
 
+
+//crea el report
 router.post("/jobpostings/:jobID/:candidateID/report", function (req, res) {
   Report.create({
     candidateID: req.params.candidateID,
