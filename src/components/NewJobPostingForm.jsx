@@ -50,7 +50,7 @@ function NewJobPostingForm({ clientList, fetchClientList, session }) {
 
     if (!warningMessage) {
       axios
-        .post("/api/jobposting", {
+        .post("/api/jobpostings", {
           title,
           description,
           startingDate: dateToSend,
