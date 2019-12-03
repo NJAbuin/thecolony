@@ -49,7 +49,7 @@ function RecrNewCandidateForm(props) {
     formData.append("expectedSalary", expectedSalary);
 
     if (warningMessage === "") {
-      return Axios.post("/api/recruiter/upload", formData, {
+      return Axios.post("/api/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }

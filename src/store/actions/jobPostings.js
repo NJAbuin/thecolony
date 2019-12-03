@@ -14,7 +14,7 @@ export const jobPosting = (payload) => ({
 
 export const getJobPostings = () => dispatch =>
     axios
-        .get("/api/recruiter/jobpostings")
+        .get("/api/jobpostings")
         .then(res => res.data)
         .then(candList => dispatch(jobPostings(candList)));
 
@@ -25,7 +25,7 @@ export const selectJobPost = jobPost => ({
 
 export const selectJobPostToState = id => dispatch =>
     axios
-        .get(`/api/recruiter/jobpostings/${id}`)
+        .get(`/api/jobpostings/${id}`)
         .then(res => {
             return res.data;
         })

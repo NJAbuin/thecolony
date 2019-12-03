@@ -2,10 +2,6 @@ const router = require("express").Router();
 const { Recruiter, Candidate, JobPosting, Report } = require("../db/models/");
 const passport = require("../db/passport/");
 const chalk = require("chalk");
-const multer = require("multer");
-const path = require("path");
-const fs = require("fs");
-const pdf = require("pdf-parse");
 const dateFormat = require("dateformat");
 
 const storage = multer.diskStorage({
@@ -123,17 +119,6 @@ router.post("/jobpostings/:id", function(req, res) {
       });
     });
   });
-});
-
-router.get("/jobpostings/:id", function(req, res) {
-  JobPosting.findOne({
-    include: [
-      {
-        model: Candidate
-      }
-    ],
-    where: { id: req.params.id }
-  }).then(job => res.send(job));
 });
 
 router.get("/jobpostings/:jobID/:candidateID/report", function(req, res) {

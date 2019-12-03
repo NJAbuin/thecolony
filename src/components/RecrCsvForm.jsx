@@ -35,7 +35,7 @@ function RecrCsvForm(props) {
 
   const bulkCreateFromCsv = (e, user) => {
     e.preventDefault();
-    Axios.post("/api/recruiter/candidates/csvImport", {
+    Axios.post("/api/candidates/csvImport", {
       csvValues,
       user
     }).then(res => res.data);
