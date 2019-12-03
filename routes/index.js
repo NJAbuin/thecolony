@@ -7,7 +7,6 @@ const sessionRouter = require("./session")
 
 const recruiterRouter = require("./recruiter");
 
-
 router.use("/seed", seed);
 router.use("/me", meRouter);
 
@@ -21,7 +20,7 @@ router.use("/admin", adminRouter);
 
 router.use("/", publicRouter)
 
-/* router.use("/client", clientRouter);
+/* 
 router.use("/recruiter", recruiterRouter);
 */
 

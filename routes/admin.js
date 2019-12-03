@@ -18,7 +18,7 @@ router.get("/jobpostings/:jobID/:candidateID/report", function(req, res) {
   }).then(report => res.send(report.informe));
 });
 
-//ruta duplicada en Clients
+//get all clients
 router.get("/clients", function(req, res) {
   Client.findAll().then(clients => res.send(clients));
 });
