@@ -46,13 +46,42 @@ router.post("/upload", upload.single("file"), (req, res) => {
         } else {
           res.send(candidate);
         }
-      });
+      })
+      .catch(e => res.send(false));
   });
 });
 
+<<<<<<< HEAD
+=======
+//register, login y logout
+
+router.post("/register", function(req, res) {
+  Recruiter.findOne({ where: { email: req.body.email } })
+    .then(user =>
+      user
+        ? res.send({ alreadyInDB: true })
+        : Recruiter.create(req.body).then(recruiter => res.send(recruiter))
+    )
+    .catch(err => console.log(err));
+});
+
+router.post("/login", passport.authenticate("recruiter"), (req, res) => {
+  res.send({
+    fullName: req.user.fullName,
+    email: req.user.email,
+    type: req.user.type,
+    id: req.user.id
+  });
+});
+
+router.get("/logout", function(req, res) {
+  req.logout();
+  res.sendStatus(200);
+});
+>>>>>>> b32dd9967cb13ea2ab46c4e309feb0a689484e76
 
 // agregar y editar candidatos
-router.post("/candidates/csvImport", function (req, res) {
+router.post("/candidates/csvImport", function(req, res) {
   req.body.csvValues.forEach(candidate => {
     Recruiter.findOne({ where: { id: req.body.user.id } }).then(recruiter =>
       recruiter.createCandidate(candidate)
@@ -61,7 +90,7 @@ router.post("/candidates/csvImport", function (req, res) {
   res.send("Created");
 });
 
-router.post("/candidatos", function (req, res) {
+router.post("/candidatos", function(req, res) {
   Recruiter.findOne({ where: { id: req.body.recruiterID } })
     .then(recruiter => {
       Candidate.create(req.body).then(candidate => {
@@ -77,7 +106,7 @@ router.get("/candidates", (req, res) =>
   )
 );
 
-router.put("/candidates/edit/:id", function (req, res) {
+router.put("/candidates/edit/:id", function(req, res) {
   Candidate.findOne({ where: { id: req.params.id } }).then(candidate => {
     candidate.update(req.body).then(updatedCandidate => {
       res.send(updatedCandidate);
@@ -85,7 +114,7 @@ router.put("/candidates/edit/:id", function (req, res) {
   });
 });
 
-router.get("/candidate/:id", function (req, res) {
+router.get("/candidate/:id", function(req, res) {
   Candidate.findOne({
     where: { id: req.params.id }
   })
@@ -94,7 +123,7 @@ router.get("/candidate/:id", function (req, res) {
 });
 
 //encuentra TODAS las busquedas activas, cuando el admin pueda asignar recruiters a las busquedas hay que cambiar que el recruiter solo acceda a esas
-router.get("/jobpostings", function (req, res) {
+router.get("/jobpostings", function(req, res) {
   JobPosting.findAll({
     where: {
       state: "Activa"
@@ -102,7 +131,7 @@ router.get("/jobpostings", function (req, res) {
   }).then(jobs => res.send(jobs));
 });
 
-router.post("/jobpostings", function (req, res) {
+router.post("/jobpostings", function(req, res) {
   console.log(chalk.bgRed(JSON.stringify(req.body)));
   JobPosting.findOne({ where: { id: req.body.id } })
     .then(job => {
@@ -116,7 +145,7 @@ router.post("/jobpostings", function (req, res) {
 
 //agregar un candidato desde el detalle de singleJobPosting
 
-router.post("/jobpostings/:id", function (req, res) {
+router.post("/jobpostings/:id", function(req, res) {
   JobPosting.findOne({ where: { id: req.params.id } }).then(job => {
     Candidate.findOne({ where: { id: req.body.id } }).then(candidate => {
       job.addCandidate(candidate).then(() => {
@@ -126,7 +155,7 @@ router.post("/jobpostings/:id", function (req, res) {
   });
 });
 
-router.get("/jobpostings/:id", function (req, res) {
+router.get("/jobpostings/:id", function(req, res) {
   JobPosting.findOne({
     include: [
       {
@@ -137,7 +166,7 @@ router.get("/jobpostings/:id", function (req, res) {
   }).then(job => res.send(job));
 });
 
-router.get("/jobpostings/:jobID/:candidateID/report", function (req, res) {
+router.get("/jobpostings/:jobID/:candidateID/report", function(req, res) {
   Report.findOne({
     where: {
       candidateID: req.params.candidateID,
@@ -146,12 +175,12 @@ router.get("/jobpostings/:jobID/:candidateID/report", function (req, res) {
   }).then(report => res.send(report.informe));
 });
 
-router.post("/jobpostings/:jobID/:candidateID/report", function (req, res) {
+router.post("/jobpostings/:jobID/:candidateID/report", function(req, res) {
   Report.create({
     candidateID: req.params.candidateID,
     jobPostingID: req.params.jobID,
     informe: req.body.informe
-  }).then(report => res.send(report.informe))
-})
+  }).then(report => res.send(report.informe));
+});
 
 module.exports = router;

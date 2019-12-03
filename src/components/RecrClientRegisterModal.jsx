@@ -84,7 +84,7 @@ export default function RecrClientRegisterModal(props) {
                 Ingrese sus datos para registrarse
               </h2>
               {labelInputCreator("Email", setEmail)}
-              {labelInputCreator("Password", setPassword)}
+              {labelInputCreator("Password", setPassword, "password")}
               {labelInputCreator("Nombre Completo", setfullName)}
               {labelInputCreator("Logo URL", setLogoURL)}
               {labelInputCreator("Phone", setPhone)}

@@ -22,10 +22,11 @@ export function validatePass(pass) {
  *labelInputCreator: output a label and an input determined by parameters
  * @param {String} fieldName label name to show
  * @param {Function} setFn setFunction for controlled input use
- * @returns {Any} returns JSX with styled label and form, using setter function passed
+ * @param {String} inputType desired input type, "text" for default
+ * @returns {Any} JSX with styled label and input of optional type, using setter function passed
  */
 
-export const labelInputCreator = (fieldName, setFn) => {
+export const labelInputCreator = (fieldName, setFn, inputType = "text") => {
   const inputStyle = {
     width: "100%",
     padding: "12px 20px",
@@ -33,17 +34,12 @@ export const labelInputCreator = (fieldName, setFn) => {
     boxSizing: "border-box"
   };
 
-  const fieldType = labelName => {
-    if (labelName === "Password") return "password";
-    else return "text";
-  };
-
   return (
     <Label>
       {fieldName}:{" "}
       <input
         onChange={e => setFn(e.target.value)}
-        type={fieldType(fieldName)}
+        type={inputType}
         style={inputStyle}
       />
       <br />
@@ -77,3 +73,27 @@ export const validateDNI = dni => {
  */
 export const validateFullName = fullName =>
   fullName.length > 4 && fullName.includes(" ");
+
+/**
+ * Checks if given string is at least of N length
+ * @param {String} string string to check
+ * @param {Integer} length  minimum length for the string
+ * @returns {Boolean}
+ */
+export const validateLength = (string, length) =>
+  string.length < length ? true : false;
+
+/**
+ * Checks if given string is in valid YYYY-MM-DD format
+ * @param {String} date string to check
+ * @returns {Boolean}
+ */
+export const validateDate = date => {
+  if (date.split("-").length !== 3) return false;
+  let [year, month, day] = date.split("-").reverse();
+
+  if (year.length !== 4) return false;
+  if (month < 1 || month > 12) return false;
+  if (day < 1 || day > 31) return false;
+  else return true;
+};
