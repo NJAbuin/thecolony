@@ -11,8 +11,8 @@ Client.init(
       allowNull: false
     },
     permissions: {
-      type: S.BOOLEAN,
-      defaultValue: false,
+      type: S.ENUM(["activo", "pendiente", "inactivo"]),
+      defaultValue: "inactivo",
       allowNull: false
     },
     email: {

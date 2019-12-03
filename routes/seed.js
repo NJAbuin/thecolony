@@ -54,14 +54,14 @@ const makeMeManyCandidatesAndJobs = () => {
 
   Recruiter.create({
     fullName: "Mario Soyseedeado",
-    permissions: true,
+    permissions: "activo",
     email: "recruiter@seed.com",
     password: "recruiter"
   }).then(recruiter => {
     for (let i = 0; i < 2; i++) {
       Client.create({
         fullName: `Enrique Soyseedeado ${i}`,
-        permissions: true,
+        permissions: "activo",
         email: `cliente${i}@seed.com`,
         password: `cliente`
       }).then(client => {
