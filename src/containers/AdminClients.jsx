@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import { Client } from '../components/Client'
 import { FullDash } from '../templates/Dashboard'
 
-function AdminClients({ clientList }) {
+import { fetchClientList } from '../store/actions/clients'
+
+
+function AdminClients({ clientList, fetchClientList }) {
+    useEffect(() => fetchClientList(), [])
 
     return (<FullDash>
         {clientList.map(client =>
@@ -17,5 +21,7 @@ function AdminClients({ clientList }) {
 const mapStateToProps = ({ clientList }) => ({
     clientList
 })
-
-export default connect(mapStateToProps)(AdminClients);
+const mapDispatchToProps = {
+    fetchClientList
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AdminClients);

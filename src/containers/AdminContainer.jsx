@@ -3,11 +3,8 @@ import { connect } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import AdminDashboard from "../containers/AdminDashboard";
 import AdminClients from './AdminClients'
-import { fetchClientList } from '../store/actions/clients'
 
-function AdminContainer({ fetchClientList }) {
-
-  useEffect(() => fetchClientList(), [])
+function AdminContainer(props) {
 
   return (
     <Switch>
@@ -21,8 +18,6 @@ function AdminContainer({ fetchClientList }) {
   );
 }
 
-const mapDispatchToProps = {
-  fetchClientList
-}
 
-export default connect(null, mapDispatchToProps)(AdminContainer);
+
+export default connect(null, null)(AdminContainer);
