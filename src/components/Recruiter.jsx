@@ -8,12 +8,16 @@ export function Recruiter({ recruiter }) {
       <h2> {recruiter.fullName}</h2>
       <ul>
         <li>email: {recruiter.email}</li>
+        <li>
+          estado:
+          <select defaultValue={recruiter.permissions}>
+            <option>pendiente</option>
+            <option>activo</option>
+            <option>inactivo</option>
+          </select>
+        </li>
       </ul>
-      <select defaultValue={recruiter.permissions}>
-        <option>pendiente</option>
-        <option>activo</option>
-        <option>inactivo</option>
-      </select>
+
       {recruiter.logoURL && <img src={recruiter.logoURL} alt="" />}
       {recruiter.website && <a href={recruiter.website}>Visitar el website.</a>}
     </ClientStyle>

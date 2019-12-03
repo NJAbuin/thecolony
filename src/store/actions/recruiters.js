@@ -7,7 +7,6 @@ export const fetchRecruiters = payload => ({
 });
 
 export const fetchRecruiterList = () => dispatch => {
-  console.log(FETCH_RECRUITERS);
   axios
     .get(`/api/admin/recruiters`)
     .then(res => res.data)
