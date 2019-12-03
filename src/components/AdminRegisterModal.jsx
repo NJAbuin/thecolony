@@ -31,7 +31,9 @@ export default function AdminRegisterModal(props) {
     setWarningMessage("");
   };
 
-  React.useEffect(() => setWarningMessage(null), [password, fullName, email]);
+  React.useEffect(() => {
+    setWarningMessage(null);
+  }, [password, fullName, email]);
 
   const validateAndRegister = (email, password, fullName) => {
     if (!validateEmail(email)) return setWarningMessage(ERROR_EMAIL);

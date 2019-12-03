@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const { Recruiter, Candidate, JobPosting, Report } = require("../db/models/");
-const passport = require("../db/passport/");
+const { Candidate, JobPosting, Report } = require("../db/models/");
 const chalk = require("chalk");
-const dateFormat = require("dateformat");
+
+//agrega candidatos de a muchos a un jobposting
 
 router.post("/jobpostings", function(req, res) {
   JobPosting.findOne({ where: { id: req.body.id } })

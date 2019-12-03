@@ -6,6 +6,7 @@ import AdminClients from "./AdminClients";
 import AdminJobPosting from "./AdminJobPosting";
 import JobPostingDetails from "../components/JobPostingDetails";
 import NewJobPostingForm from "../components/NewJobPostingForm";
+import AdminRecruiters from "./AdminRecruiters";
 
 function AdminContainer(props) {
   return (
@@ -19,9 +20,6 @@ function AdminContainer(props) {
       <Route path="/auth/admin/jobposting/:id" component={JobPostingDetails} />
       <Route path="/auth/admin/jobposting" component={AdminJobPosting} />
 
-      {/* <Route path="/auth/admin/recruiters" component={AdminDashboard} />
-      <Route path="/auth/admin/candidates" component={AdminDashboard} />
-      <Route path="/auth/admin/admins" component={AdminDashboard} /> */}
       <Redirect path="/" to="/auth/admin/dashboard" />
     </Switch>
   );

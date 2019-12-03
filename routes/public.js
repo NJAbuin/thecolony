@@ -176,7 +176,7 @@ router.get("/jobpostings", function(req, res) {
   if (req.user.type === "recruiter") {
     JobPosting.findAll({
       where: {
-        state: "Activa"
+        state: "activa"
       }
     })
       .then(jobs => res.send(jobs))
@@ -266,6 +266,46 @@ router.post("/jobposting", function(req, res) {
     .then(client => client.createJobposting(req.body))
     .then(() => res.status(201).send(true))
     .catch(e => res.send(e));
+});
+
+//5. Reportes
+//5.a crear reporte
+
+router.post("/jobpostings/:jobID/:candidateID/report", function(req, res) {
+  Report.create(req.body).then(report => res.send(report.informe));
+});
+
+//5.b ver reporte
+
+router.get("/jobpostings/:jobID/:candidateID/report", function(req, res) {
+  Report.findOne({
+    where: {
+      candidateID: req.params.candidateID,
+      jobPostingID: req.params.jobID
+    }
+  }).then(report => res.send(report));
+});
+
+//5.c editar reporte
+
+router.put("/jobpostings/:jobID/:candidateID/report", function(req, res) {
+  if (req.user.type === "admin") {
+    Report.findOne({
+      where: {
+        candidateID: req.params.candidateID,
+        jobPostingID: req.params.jobID
+      }
+    })
+      .then(report => {
+        if (!report) {
+          res.send("No se encontro el reporte");
+        }
+        return report.update(req.body);
+      })
+      .then(updated => res.send(updated));
+  } else {
+    res.send("Solo los administradores pueden editar el reporte");
+  }
 });
 
 module.exports = router;

@@ -8,4 +8,5 @@ export const ClientStyle = styled.div`
   width: 95%;
   margin: 2.5%;
   display: block;
+  align-content: center;
 `;

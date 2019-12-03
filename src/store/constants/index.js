@@ -18,3 +18,9 @@ export const DELETE_JOBPOSTING = "DELETE_JOBPOSTING";
 
 //Clients
 export const FETCH_CLIENTS = "FETCH_CLIENTS";
+
+//Clients
+export const FETCH_CLIENTS = "FETCH_CLIENTS";
+
+//Recruiters
+export const FETCH_RECRUITERS = "FETCH_RECRUITERS";

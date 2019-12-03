@@ -1,41 +1,54 @@
 const router = require("express").Router();
 const passport = require("../db/passport/");
-const { Admin, Candidate, JobPosting, Report, Client, Recruiter } = require("../db/models/");
+const {
+  Admin,
+  Candidate,
+  JobPosting,
+  Report,
+  Client,
+  Recruiter
+} = require("../db/models/");
 
 
-router.get("/jobpostings/:jobID/:candidateID/report", function (req, res) {
-  Report.findOne({
-    where: {
-      candidateID: req.params.candidateID,
-      jobPostingID: req.params.jobID
-    }
-  }).then(report => res.send(report.informe))
-})
-
-//ruta duplicada en Clients
+//get all clients
 router.get("/clients", function (req, res) {
-  Client.findAll().then(clients => res.send(clients))
-})
+  Client.findAll().then(clients => res.send(clients));
+});
 
-//RUD Recruiters (falta edit)
+//get all recruiters
 
 router.get("/recruiters", function (req, res) {
-  Recruiter.findAll().then(recruiters => res.send(recruiters))
+  Recruiter.findAll().then(recruiters => res.send(recruiters));
+});
+
+//edit recruiters
+
+router.put("/recruiters/:id", function (req, res) {
+  Recruiter.findOne({ where: { id: req.params.id } }).then(recruiter => {
+    if (!recruiter) { res.send("No se encontro ningun recruiter") }
+    recruiter.update(req.body).then(updated => {
+      res.send(updated);
+    });
+  })
 })
 
-//edit iria aca 
+//delete recruiters
 
 router.delete("/recruiters/delete/:id", function (req, res) {
-  Recruiter.findOne({ where: { id: req.params.id } }).then(recruiter => {
-    recruiter.destroy()
-  }).then(() => res.send("Recrutador eliminado con exito"))
+  Recruiter.findOne({ where: { id: req.params.id } })
+    .then(recruiter => {
+      recruiter.destroy();
+    })
+    .then(() => res.send("Recrutador eliminado con exito"));
 })
 
-//RUD ADMINS
+//get admins
 
 router.get("/admins", function (req, res) {
-  Admin.findAll().then(admins => res.send(admins))
-})
+  Admin.findAll().then(admins => res.send(admins));
+});
+
+//edit admins
 
 router.put("admins/edit/:id", function (req, res) {
   Admin.findOne({ where: { id: req.params.id } }).then(admin => {
@@ -45,11 +58,14 @@ router.put("admins/edit/:id", function (req, res) {
   });
 });
 
-router.delete("/admins/delete/:id", function (req, res) {
-  Admin.findOne({ where: { id: req.params.id } }).then(admin => {
-    admin.destroy()
-  }).then(() => res.send("Admin eliminado con exito"))
-})
+//delete admins
 
+router.delete("/admins/delete/:id", function (req, res) {
+  Admin.findOne({ where: { id: req.params.id } })
+    .then(admin => {
+      admin.destroy();
+    })
+    .then(() => res.send("Admin eliminado con exito"));
+});
 
 module.exports = router;
