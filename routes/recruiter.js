@@ -51,6 +51,8 @@ router.post("/upload", upload.single("file"), (req, res) => {
   });
 });
 
+<<<<<<< HEAD
+=======
 //register, login y logout
 
 router.post("/register", function(req, res) {
@@ -76,6 +78,7 @@ router.get("/logout", function(req, res) {
   req.logout();
   res.sendStatus(200);
 });
+>>>>>>> b32dd9967cb13ea2ab46c4e309feb0a689484e76
 
 // agregar y editar candidatos
 router.post("/candidates/csvImport", function(req, res) {

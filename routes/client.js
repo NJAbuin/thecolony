@@ -2,6 +2,11 @@ const router = require("express").Router();
 const { Client, JobPosting } = require("../db/models");
 const passport = require("../db/passport/");
 
+<<<<<<< HEAD
+
+
+router.post("/jobposting", function (req, res) {
+=======
 router.post("/register", function(req, res) {
   Client.findOne({ where: { email: req.body.email } })
     .then(user =>
@@ -27,6 +32,7 @@ router.get("/logout", function(req, res) {
 });
 
 router.post("/jobposting", function(req, res) {
+>>>>>>> b32dd9967cb13ea2ab46c4e309feb0a689484e76
   Client.findOne({ where: { id: req.user.id } })
     .then(client => {
       client.createJobposting(req.body);

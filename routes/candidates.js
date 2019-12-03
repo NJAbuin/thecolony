@@ -10,7 +10,6 @@ router.get("/:id", function (req, res) {
             recruiterId: req.user.id
         }
     }).then(candidate => {
-        console.log(candidate)
         res.send(candidate)
     }
     );
