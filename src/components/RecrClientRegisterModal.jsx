@@ -27,7 +27,8 @@ export default function RecrClientRegisterModal(props) {
 
   let routeToPost;
   if (props.role === "client") routeToPost = "/api/session/client/register";
-  if (props.role === "recruiter") routeToPost = "/api/session/recruiter/register";
+  if (props.role === "recruiter")
+    routeToPost = "/api/session/recruiter/register";
 
   const handleOpen = () => setOpen(true);
 
@@ -39,7 +40,9 @@ export default function RecrClientRegisterModal(props) {
     setWarningMessage("");
   };
 
-  React.useEffect(() => setWarningMessage(null), [password, fullName, email]);
+  React.useEffect(() => {
+    setWarningMessage(null);
+  }, [password, fullName, email]);
 
   const validateAndRegister = (email, password, fullName) => {
     if (!validateEmail(email)) return setWarningMessage(ERROR_EMAIL);
