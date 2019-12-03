@@ -18,7 +18,7 @@ function NewJobPostingForm({ clientList, fetchClientList, session }) {
   const [workload, setWorkload] = useState(0);
   const [imgURL, setImgURL] = useState("");
   const [benefits, setBenefits] = useState("");
-  const [selectedClientID, setSelectedClientID] = useState(0);
+  const [selectedClientID, setSelectedClientID] = useState(null);
   const [warningMessage, setWarningMessage] = useState(null);
 
   useEffect(() => {
@@ -87,12 +87,14 @@ function NewJobPostingForm({ clientList, fetchClientList, session }) {
         {true ? ( //poner como condicional session.user.type === "admin" en deploy
           <label>
             Crear como:
-            <select>
+            <select
+              onChange={e => {
+                e.persist();
+                return setSelectedClientID(e.target.value);
+              }}
+            >
               {clientList.map(client => (
-                <option
-                  onChange={e => setSelectedClientID(client.id)}
-                  key={client.fullName}
-                >
+                <option key={client.id} value={client.id} clientId={client.id}>
                   {client.fullName}
                 </option>
               ))}
