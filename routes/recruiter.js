@@ -5,39 +5,6 @@ const chalk = require("chalk");
 const dateFormat = require("dateformat");
 
 
-// agregar y editar candidatos
-
-
-router.get("/candidates", (req, res) =>
-  Candidate.findAll({ where: { recruiterId: req.user.id } }).then(candidates =>
-    res.send(candidates)
-  )
-);
-
-router.put("/candidates/edit/:id", function (req, res) {
-  Candidate.findOne({ where: { id: req.params.id } }).then(candidate => {
-    candidate.update(req.body).then(updatedCandidate => {
-      res.send(updatedCandidate);
-    });
-  });
-});
-
-router.get("/candidate/:id", function (req, res) {
-  Candidate.findOne({
-    where: { id: req.params.id }
-  })
-    .then(candidate => res.send(candidate))
-    .catch(e => res.send(e));
-});
-
-//encuentra TODAS las busquedas activas, cuando el admin pueda asignar recruiters a las busquedas hay que cambiar que el recruiter solo acceda a esas
-router.get("/jobpostings", function (req, res) {
-  JobPosting.findAll({
-    where: {
-      state: "Activa"
-    }
-  }).then(jobs => res.send(jobs));
-});
 
 router.post("/jobpostings", function (req, res) {
   console.log(chalk.bgRed(JSON.stringify(req.body)));
@@ -63,16 +30,7 @@ router.post("/jobpostings/:id", function (req, res) {
   });
 });
 
-router.get("/jobpostings/:id", function (req, res) {
-  JobPosting.findOne({
-    include: [
-      {
-        model: Candidate
-      }
-    ],
-    where: { id: req.params.id }
-  }).then(job => res.send(job));
-});
+
 
 router.get("/jobpostings/:jobID/:candidateID/report", function (req, res) {
   Report.findOne({

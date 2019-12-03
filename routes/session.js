@@ -22,7 +22,7 @@ router.post("/admin/login", passport.authenticate("admin"), (req, res) => {
         email: req.user.email,
         type: req.user.type,
         id: req.user.id
-    }).catch(e => res.send(e));;
+    })
 });
 
 

@@ -15,7 +15,7 @@ export const candidateList = payload => ({
 
 export const getCandidateList = () => dispatch =>
   axios
-    .get("/api/recruiter/candidates")
+    .get("/api/candidates")
     .then(res => res.data)
     .then(candList => dispatch(candidateList(candList)));
 
