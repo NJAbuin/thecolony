@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { fetchClientList } from "../store/actions/clients";
 
-function NewJobPostingForm(props) {
+function NewJobPostingForm({ clientList, fetchClientList, session }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [startingDate, setStartingDate] = useState("");
@@ -18,6 +18,7 @@ function NewJobPostingForm(props) {
   const [workload, setWorkload] = useState(0);
   const [imgURL, setImgURL] = useState("");
   const [benefits, setBenefits] = useState("");
+  const [selectedClientID, setSelectedClientID] = useState(0);
   const [warningMessage, setWarningMessage] = useState(null);
 
   useEffect(() => {
@@ -57,7 +58,8 @@ function NewJobPostingForm(props) {
           salary,
           workload,
           imgURL,
-          benefits
+          benefits,
+          clientId: selectedClientID
         })
         .then(res => {
           if (res.data === true) {
@@ -82,6 +84,22 @@ function NewJobPostingForm(props) {
   return (
     <div>
       <form>
+        {true ? ( //poner como condicional session.user.type === "admin" en deploy
+          <label>
+            Crear como:
+            <select>
+              {clientList.map(client => (
+                <option
+                  onChange={e => setSelectedClientID(client.id)}
+                  key={client.fullName}
+                >
+                  {client.fullName}
+                </option>
+              ))}
+            </select>
+            <br />
+          </label>
+        ) : null}
         {labelInputCreator("Nombre de la busqueda ", setTitle)}
         <Label>
           Descripcion: (Max 255 caracteres)
@@ -116,6 +134,7 @@ function NewJobPostingForm(props) {
             }}
           />{" "}
         </Label>
+
         <p style={{ color: "red" }}>{warningMessage}</p>
         <button onClick={e => handleSubmit(e)}>Crear busqueda</button>
       </form>
@@ -123,7 +142,10 @@ function NewJobPostingForm(props) {
   );
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = ({ clientList, session }) => ({
+  clientList,
+  session
+});
 
 const mapDispatchToProps = {
   fetchClientList
