@@ -14,7 +14,7 @@ function AdminClients({ clientList, fetchClientList }) {
   return (
     <FullDash>
       {clientList.map(client => (
-        <Client client={client} />
+        <Client client={client} key={client.id} />
       ))}
     </FullDash>
   );
