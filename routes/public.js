@@ -240,16 +240,13 @@ router.delete("/jobpostings/delete/:id", function (req, res) {
 })
 
 //4. Crear Busquedas
-/*
+
 router.post("/jobposting", function (req, res) {
-    Client.findOne({ where: { id: req.user.id } })
-      .then(client => {
-        client.createJobposting(req.body);
-      })
-      .then(() => {
-        res.status(201).send("Jobpost created");
-      })
-      .catch(e => res.send(e));
-  }); */
+    const uId = req.user.type === "client" ? req.body.clientId : req.user.id;
+    Client.findOne({ where: { id: uId } })
+        .then(client => client.createJobposting(req.body))
+        .then(() => res.status(201).send(true))
+        .catch(e => res.send(e));
+});
 
 module.exports = router
