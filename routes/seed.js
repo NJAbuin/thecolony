@@ -1,6 +1,6 @@
 const express = require("express");
 const seed = require("express").Router();
-const { JobPosting, Candidate } = require("../db/models");
+const { JobPosting, Candidate, Recruiter, Client } = require("../db/models");
 var faker = require("faker");
 
 const makeMeManyCandidatesAndJobs = () => {
@@ -14,7 +14,7 @@ const makeMeManyCandidatesAndJobs = () => {
     imgURL,
     benefits,
     state,
-    recruiterID
+    clientId
   ) => {
     return {
       title,
@@ -25,7 +25,8 @@ const makeMeManyCandidatesAndJobs = () => {
       workload,
       imgURL,
       benefits,
-      state
+      state,
+      clientId
     };
   };
 
@@ -36,7 +37,8 @@ const makeMeManyCandidatesAndJobs = () => {
     jobTitle,
     address,
     expectedSalary,
-    CV
+    CV,
+    recruiterId
   ) => {
     return {
       DNI,
@@ -45,56 +47,81 @@ const makeMeManyCandidatesAndJobs = () => {
       jobTitle,
       address,
       expectedSalary,
-      CV
+      CV,
+      recruiterId
     };
   };
 
-  for (let i = 0; i <= 6; i++) {
-    JobPosting.create(
-      JobCreator(
-        faker.name.jobTitle(),
-        faker.name.jobDescriptor(),
-        new Date(),
-        faker.random.number(),
-        faker.random.number(),
-        faker.random.number(),
-        faker.random.image(),
-        faker.name.jobDescriptor(),
-        "Activa"
-      )
-    ).then(jobposting => {
-      jobposting.createCandidate(
-        candidateCreator(
-          faker.random.number(),
-          faker.name.findName(),
-          faker.random.number(70),
-          faker.name.jobTitle(),
-          faker.address.streetAddress(),
-          faker.random.number()
-        )
-      );
-      jobposting.createCandidate(
-        candidateCreator(
-          faker.random.number(),
-          faker.name.findName(),
-          faker.random.number(70),
-          faker.name.jobTitle(),
-          faker.address.streetAddress(),
-          faker.random.number()
-        )
-      );
-      jobposting.createCandidate(
-        candidateCreator(
-          faker.random.number(),
-          faker.name.findName(),
-          faker.random.number(70),
-          faker.name.jobTitle(),
-          faker.address.streetAddress(),
-          faker.random.number()
-        )
-      );
-    });
-  }
+  Recruiter.create({
+    fullName: "Mario Soyseedeado",
+    permissions: true,
+    email: "recruiter@seed.com",
+    password: "recruiter"
+  }).then(recruiter => {
+    for (let i = 0; i < 2; i++) {
+      Client.create({
+        fullName: `Enrique Soyseedeado ${i}`,
+        permissions: true,
+        email: `cliente${i}@seed.com`,
+        password: `cliente`
+      }).then(client => {
+        for (let i = 0; i <= 3; i++) {
+          client
+            .createJobposting(
+              JobCreator(
+                faker.name.jobTitle(),
+                faker.name.jobDescriptor(),
+                new Date(),
+                faker.random.number(),
+                faker.random.number(),
+                faker.random.number(),
+                faker.random.image(),
+                faker.name.jobDescriptor(),
+                "Activa"
+              )
+            )
+            .then(jobposting => {
+              jobposting.createCandidate(
+                candidateCreator(
+                  faker.random.number(),
+                  faker.name.findName(),
+                  faker.random.number(70),
+                  faker.name.jobTitle(),
+                  faker.address.streetAddress(),
+                  faker.random.number(),
+                  "",
+                  1
+                )
+              );
+              jobposting.createCandidate(
+                candidateCreator(
+                  faker.random.number(),
+                  faker.name.findName(),
+                  faker.random.number(70),
+                  faker.name.jobTitle(),
+                  faker.address.streetAddress(),
+                  faker.random.number(),
+                  "",
+                  1
+                )
+              );
+              jobposting.createCandidate(
+                candidateCreator(
+                  faker.random.number(),
+                  faker.name.findName(),
+                  faker.random.number(70),
+                  faker.name.jobTitle(),
+                  faker.address.streetAddress(),
+                  faker.random.number(),
+                  "",
+                  1
+                )
+              );
+            });
+        }
+      });
+    }
+  });
 };
 
 seed.get("/", function(req, res) {

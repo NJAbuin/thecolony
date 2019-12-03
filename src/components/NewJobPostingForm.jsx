@@ -7,9 +7,9 @@ import {
 import { Label } from "../templates/FormLabel";
 import { connect } from "react-redux";
 import axios from "axios";
-import {} from "../store/actions/candidates";
+import { fetchClientList } from "../store/actions/clients";
 
-function NewJobPostingForm() {
+function NewJobPostingForm(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [startingDate, setStartingDate] = useState("");
@@ -19,6 +19,10 @@ function NewJobPostingForm() {
   const [imgURL, setImgURL] = useState("");
   const [benefits, setBenefits] = useState("");
   const [warningMessage, setWarningMessage] = useState(null);
+
+  useEffect(() => {
+    fetchClientList();
+  }, []);
 
   const clearForm = () => {
     document.querySelectorAll("input").forEach(i => (i.value = ""));
@@ -121,6 +125,8 @@ function NewJobPostingForm() {
 
 const mapStateToProps = state => ({});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  fetchClientList
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewJobPostingForm);
