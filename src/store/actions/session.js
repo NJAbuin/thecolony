@@ -15,7 +15,7 @@ export const logIn = credentials => ({
  */
 export const sessionLogOut = () => dispatch => {
   axios
-    .get("/api/logout")
+    .get("/api/session/logout")
     .then(res => res.data)
     .then(() => dispatch(logOut()));
 };

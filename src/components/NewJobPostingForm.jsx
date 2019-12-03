@@ -1,64 +1,107 @@
 import React, { useState, useEffect } from "react";
-import { labelInputCreator } from "../../utils/formLoginRegister";
+import {
+  labelInputCreator,
+  validateLength,
+  validateDate
+} from "../../utils/formLoginRegister";
 import { Label } from "../templates/FormLabel";
+import { connect } from "react-redux";
 import axios from "axios";
+import { fetchClientList } from "../store/actions/clients";
 
-export default function NewJobPostingForm() {
-  const [title, setTitle] = useState(null);
-  const [description, setDescription] = useState(null);
-  const [startDate, setStartDate] = useState(new Date());
+function NewJobPostingForm(props) {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [startingDate, setStartingDate] = useState("");
   const [openings, setOpenings] = useState(0);
   const [salary, setSalary] = useState(0);
   const [workload, setWorkload] = useState(0);
-  const [imgURL, setImgURL] = useState(null);
-  const [benefits, setBenefits] = useState(null);
+  const [imgURL, setImgURL] = useState("");
+  const [benefits, setBenefits] = useState("");
   const [warningMessage, setWarningMessage] = useState(null);
+
+  useEffect(() => {
+    fetchClientList();
+  }, []);
+
+  const clearForm = () => {
+    document.querySelectorAll("input").forEach(i => (i.value = ""));
+    document.querySelectorAll("textarea").forEach(i => (i.value = ""));
+    return (
+      setTitle(""),
+      setDescription(""),
+      setStartingDate(""),
+      setOpenings(0),
+      setSalary(0),
+      setWorkload(0),
+      setImgURL(""),
+      setBenefits(""),
+      setWarningMessage(null)
+    );
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
-    axios
-      .post("/api/client/jobposting", {
-        title,
-        description,
-        startDate,
-        openings,
-        salary,
-        workload,
-        imgURL,
-        benefits
-      })
-      .then(data => console.log("Created", data));
+    let dateToSend = startingDate
+      .split("-")
+      .reverse()
+      .join("-");
+
+    if (!warningMessage) {
+      axios
+        .post("/api/client/jobposting", {
+          title,
+          description,
+          startingDate: dateToSend,
+          openings,
+          salary,
+          workload,
+          imgURL,
+          benefits
+        })
+        .then(res => {
+          if (res.data === true) {
+            return clearForm(), alert("Busqueda laboral creada");
+          } else alert("Hubo un problema al cargar su busqueda.");
+        });
+    }
   };
 
-  React.useEffect(() => setWarningMessage(null), [
-    title,
-    description,
-    startDate,
-    openings
-  ]);
+  useEffect(() => {
+    if (title.length < 3)
+      setWarningMessage("Ingrese un titulo de busqueda valido");
+    else if (!validateLength(description, 255) || description.length < 5)
+      setWarningMessage("Ingrese una descripcion valida");
+    else if (!validateDate(startingDate))
+      setWarningMessage("Ingrese una fecha valida");
+    else if (!openings)
+      setWarningMessage("Seleccione la cantidad de puestos disponibles");
+    else setWarningMessage("");
+  }, [title, description, startingDate, openings]);
 
   return (
     <div>
-      <form onSubmit={e => handleSubmit(e)}>
+      <form>
         {labelInputCreator("Nombre de la busqueda ", setTitle)}
         <Label>
-          Descripcion: <br />
-          (Max 255 caracteres)
+          Descripcion: (Max 255 caracteres)
           <textarea
             style={{
               width: "100%",
               height: "100px"
             }}
             type="text"
-            onChange={e => {
-              setDescription(e.target.value);
-            }}
+            onChange={e => setDescription(e.target.value)}
           />{" "}
         </Label>
-        {labelInputCreator("Fecha de inicio ", setStartDate)}
-        {labelInputCreator("Cantidad de puestos disponibles ", setOpenings)}
-        {labelInputCreator("Salario ", setSalary)}
-        {labelInputCreator("Horas de trabajo al dia ", setWorkload)}
+        {labelInputCreator("Fecha de inicio (DD-MM-YYYY)", setStartingDate)}
+        {labelInputCreator(
+          "Cantidad de puestos disponibles ",
+          setOpenings,
+          "number"
+        )}
+        {labelInputCreator("Salario ", setSalary, "number")}
+        {labelInputCreator("Horas de trabajo al dia ", setWorkload, "number")}
         {labelInputCreator("Link al logo de la empresa ", setImgURL)}
         <Label>
           Beneficios: <br />
@@ -73,9 +116,17 @@ export default function NewJobPostingForm() {
             }}
           />{" "}
         </Label>
-        {warningMessage}
-        <button>Crear busqueda</button>
+        <p style={{ color: "red" }}>{warningMessage}</p>
+        <button onClick={e => handleSubmit(e)}>Crear busqueda</button>
       </form>
     </div>
   );
 }
+
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {
+  fetchClientList
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewJobPostingForm);

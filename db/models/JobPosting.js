@@ -14,8 +14,7 @@ JobPosting.init(
     },
     startingDate: {
       type: S.DATE,
-      allowNull: false,
-      defaultValue: S.NOW
+      allowNull: false
     },
     openings: {
       type: S.INTEGER,

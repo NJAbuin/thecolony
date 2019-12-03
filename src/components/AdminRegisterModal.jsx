@@ -43,7 +43,7 @@ export default function AdminRegisterModal(props) {
 
   const registerUser = (email, password, fullName) => {
     axios
-      .post("/api/admin/register", { email, password, fullName })
+      .post("/api/session/admin/register", { email, password, fullName })
       .then(res =>
         res.data.alreadyInDB
           ? setWarningMessage("Este email ya esta registrado")
@@ -76,7 +76,7 @@ export default function AdminRegisterModal(props) {
                 Ingrese sus datos para registrarse
               </h2>
               {labelInputCreator("Email", setEmail)}
-              {labelInputCreator("Password", setPassword)}
+              {labelInputCreator("Password", setPassword, "password")}
               {labelInputCreator("Nombre Completo", setfullName)}
               <br />
               <p style={{ color: "red" }}>{warningMessage}</p>

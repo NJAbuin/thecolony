@@ -46,35 +46,11 @@ router.post("/upload", upload.single("file"), (req, res) => {
         } else {
           res.send(candidate);
         }
-      });
+      })
+      .catch(e => res.send(false));
   });
 });
 
-//register, login y logout
-
-router.post("/register", function (req, res) {
-  Recruiter.findOne({ where: { email: req.body.email } })
-    .then(user =>
-      user
-        ? res.send({ alreadyInDB: true })
-        : Recruiter.create(req.body).then(recruiter => res.send(recruiter))
-    )
-    .catch(err => console.log(err));
-});
-
-router.post("/login", passport.authenticate("recruiter"), (req, res) => {
-  res.send({
-    fullName: req.user.fullName,
-    email: req.user.email,
-    type: req.user.type,
-    id: req.user.id
-  });
-});
-
-router.get("/logout", function (req, res) {
-  req.logout();
-  res.sendStatus(200);
-});
 
 // agregar y editar candidatos
 router.post("/candidates/csvImport", function (req, res) {
@@ -176,7 +152,7 @@ router.post("/jobpostings/:jobID/:candidateID/report", function (req, res) {
     candidateID: req.params.candidateID,
     jobPostingID: req.params.jobID,
     informe: req.body.informe
-  }).then(report => res.send(report.informe))
-})
+  }).then(report => res.send(report.informe));
+});
 
 module.exports = router;
