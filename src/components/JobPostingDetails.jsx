@@ -6,7 +6,9 @@ import { userInfo } from "os";
 import { deleteJobPosting } from "../store/actions/jobPostings";
 
 function JobPostingDetails(props) {
-  useEffect(() => props.selectJobPostToState(props.match.params.id), []);
+  useEffect(() => {
+    props.selectJobPostToState(props.match.params.id);
+  }, []);
 
   const deleteHandler = e => {
     let confirmation = confirm(
