@@ -37,4 +37,8 @@ router.post("/jobposting", function(req, res) {
     .catch(e => res.send(e));
 });
 
+router.get("/", (req, res) =>
+  Client.findAll({}).then(allClients => res.send(allClients))
+);
+
 module.exports = router;

@@ -5,6 +5,7 @@ import jobPostingsReducer from './jobPostingsReducer'
 import candidatesSelectedReducer from './candidatesSelectedReducer'
 import jobPostingSelectedReducer from './jobPostingSelectedReducer'
 import candidateDetailsReducer from "./candidateDetailsReducer";
+import clientListReducer from './clientListReducer'
 
 const reducers = {
     session: sessionReducer,
@@ -12,7 +13,8 @@ const reducers = {
     jobPostingSelected: jobPostingSelectedReducer,
     candidateDetails: candidateDetailsReducer,
     candidateList: candidatesListReducer,
-    candidatesSelected: candidatesSelectedReducer
+    candidatesSelected: candidatesSelectedReducer,
+    clientList: clientListReducer
 };
 
 export default combineReducers(reducers);
