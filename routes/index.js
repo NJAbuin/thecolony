@@ -20,7 +20,7 @@ router.use("/admin", adminRouter);
 
 //router de todos (admin, client, recruiter) con acceso a candidatos y busquedas
 
-/* router.use("/", publicRouter) */
+router.use("/", publicRouter)
 
 /* router.use("/client", clientRouter);
 router.use("/recruiter", recruiterRouter);
