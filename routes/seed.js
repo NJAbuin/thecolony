@@ -77,7 +77,7 @@ const makeMeManyCandidatesAndJobs = () => {
                 faker.random.number(),
                 faker.random.image(),
                 faker.name.jobDescriptor(),
-                "Activa"
+                "activa"
               )
             )
             .then(jobposting => {

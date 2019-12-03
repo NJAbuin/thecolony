@@ -3,7 +3,7 @@ const JobPosting = require("./JobPosting");
 const Client = require("./Client");
 const Candidate = require("./Candidate");
 const Admin = require("./Admin");
-const Report = require("./Informe")
+const Report = require("./Report");
 
 Client.hasMany(JobPosting);
 JobPosting.belongsTo(Client);
