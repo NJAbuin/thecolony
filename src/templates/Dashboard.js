@@ -11,6 +11,15 @@ export const Dashboard = styled.div`
   box-sizing: border-box;
 `;
 
+export const FullDash = styled.div`
+  grid-area: contentDash;
+  background-color: #000;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+`;
+
 export const Left = styled.div`
   grid-area: lSide;
   border: orchid 2px solid;

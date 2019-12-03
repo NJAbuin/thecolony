@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CandidateStyle = styled.div`
+export const ClientStyle = styled.div`
   background-color: #fff;
   border: blue 3px solid;
   justify-self: center;

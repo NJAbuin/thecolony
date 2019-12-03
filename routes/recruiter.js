@@ -50,31 +50,6 @@ router.post("/upload", upload.single("file"), (req, res) => {
   });
 });
 
-//register, login y logout
-
-router.post("/register", function (req, res) {
-  Recruiter.findOne({ where: { email: req.body.email } })
-    .then(user =>
-      user
-        ? res.send({ alreadyInDB: true })
-        : Recruiter.create(req.body).then(recruiter => res.send(recruiter))
-    )
-    .catch(err => console.log(err));
-});
-
-router.post("/login", passport.authenticate("recruiter"), (req, res) => {
-  res.send({
-    fullName: req.user.fullName,
-    email: req.user.email,
-    type: req.user.type,
-    id: req.user.id
-  });
-});
-
-router.get("/logout", function (req, res) {
-  req.logout();
-  res.sendStatus(200);
-});
 
 // agregar y editar candidatos
 router.post("/candidates/csvImport", function (req, res) {
