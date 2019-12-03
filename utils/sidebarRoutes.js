@@ -8,13 +8,13 @@ export const adminSidebar = {
   Dashboard: "/auth/admin/dashboard",
   Clientes: "/auth/admin/clients",
   Reclutadoras: "/auth/admin/recruiters",
-  Candidatos: '/auth/admin/candidates',
-  Admins: '/auth/admin/admins',
+  Candidatos: "/auth/admin/candidates",
+  Admins: "/auth/admin/admins"
 };
 
 export const clientSidebar = {
   Dashboard: "/auth/client/dashboard",
-  Busquedas: "/auth/client/jobpostings",
+  Busquedas: "/auth/client/jobposting"
 };
 
 export function mapSidebar(userType) {

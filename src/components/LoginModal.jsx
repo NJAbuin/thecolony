@@ -68,7 +68,7 @@ function LoginModal(props) {
             <form>
               <h2 id="spring-modal-title">Ingrese sus credenciales</h2>
               {labelInputCreator("Email", setEmail)}
-              {labelInputCreator("Password", setPassword)}
+              {labelInputCreator("Password", setPassword, "password")}
               <br />
               <p style={{ color: "red" }}>{warningMessage}</p>
               <button
@@ -95,10 +95,7 @@ const mapDispatchToProps = {
   sessionLogIn
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginModal);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);
 
 const useStyles = makeStyles(theme => ({
   modal: {
