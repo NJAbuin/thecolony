@@ -241,12 +241,35 @@ router.delete("/jobpostings/delete/:id", function (req, res) {
 
 //4. Crear Busquedas
 
-router.post("/jobposting", function (req, res) {
+router.post("/jobpostings", function (req, res) {
     const uId = req.user.type === "client" ? req.body.clientId : req.user.id;
     Client.findOne({ where: { id: uId } })
         .then(client => client.createJobposting(req.body))
         .then(() => res.status(201).send(true))
         .catch(e => res.send(e));
 });
+
+//5. Reportes
+//5.a crear reporte
+
+router.post("/jobpostings/:jobID/:candidateID/report", function (req, res) {
+    Report.create(req.body).then(report => res.send(report.informe));
+})
+
+//5.b ver reporte
+
+router.get("/jobpostings/:jobID/:candidateID/report", function (req, res) {
+    Report.findOne({
+        where: {
+            candidateID: req.params.candidateID,
+            jobPostingID: req.params.jobID
+        }
+    }).then(report => res.send(report));
+});
+
+//5.c editar reporte
+
+
+
 
 module.exports = router

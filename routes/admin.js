@@ -3,14 +3,6 @@ const passport = require("../db/passport/");
 const { Admin, Candidate, JobPosting, Report, Client, Recruiter } = require("../db/models/");
 
 
-router.get("/jobpostings/:jobID/:candidateID/report", function (req, res) {
-  Report.findOne({
-    where: {
-      candidateID: req.params.candidateID,
-      jobPostingID: req.params.jobID
-    }
-  }).then(report => res.send(report.informe))
-})
 
 //get all clients
 router.get("/clients", function (req, res) {

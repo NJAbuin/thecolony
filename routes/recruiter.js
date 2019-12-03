@@ -1,8 +1,6 @@
 const router = require("express").Router();
-const { Recruiter, Candidate, JobPosting, Report } = require("../db/models/");
-const passport = require("../db/passport/");
+const { Candidate, JobPosting, Report } = require("../db/models/");
 const chalk = require("chalk");
-const dateFormat = require("dateformat");
 
 //agrega candidatos de a muchos a un jobposting
 
@@ -30,25 +28,5 @@ router.post("/jobpostings/:id", function (req, res) {
   });
 });
 
-
-//agarra el report
-router.get("/jobpostings/:jobID/:candidateID/report", function (req, res) {
-  Report.findOne({
-    where: {
-      candidateID: req.params.candidateID,
-      jobPostingID: req.params.jobID
-    }
-  }).then(report => res.send(report.informe));
-});
-
-
-//crea el report
-router.post("/jobpostings/:jobID/:candidateID/report", function (req, res) {
-  Report.create({
-    candidateID: req.params.candidateID,
-    jobPostingID: req.params.jobID,
-    informe: req.body.informe
-  }).then(report => res.send(report.informe));
-});
 
 module.exports = router;

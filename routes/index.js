@@ -4,7 +4,6 @@ const meRouter = require("./me");
 const adminRouter = require("./admin");
 const publicRouter = require("./public")
 const sessionRouter = require("./session")
-
 const recruiterRouter = require("./recruiter");
 
 router.use("/seed", seed);
@@ -20,9 +19,9 @@ router.use("/admin", adminRouter);
 
 router.use("/", publicRouter)
 
-/* 
+//Solo para agregar candidatos a busquedas
 router.use("/recruiter", recruiterRouter);
-*/
+
 
 
 module.exports = router;
