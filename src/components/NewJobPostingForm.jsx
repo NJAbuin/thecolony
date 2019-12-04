@@ -111,7 +111,7 @@ function NewJobPostingForm({
             clientId: selectedClientID
           })
           .then(res => {
-            if (res.data === true) {
+            if (res.data) {
               return clearForm(), alert("Busqueda laboral creada");
             } else alert("Hubo un problema al cargar su busqueda.");
           });
