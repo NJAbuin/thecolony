@@ -15,6 +15,28 @@ router.get("/clients", function (req, res) {
   Client.findAll().then(clients => res.send(clients));
 });
 
+//edit clients
+
+router.put("/clients/:id", function (req, res) {
+  Client.findOne({ where: { id: req.params.id } }).then(client => {
+    if (!client) { res.send("No se encontro ningun cliente") }
+    client.update(req.body).then(updated => {
+      res.send(updated);
+    });
+  })
+})
+
+//delete clients
+
+router.delete("/clients/delete/:id", function (req, res) {
+  Client.findOne({ where: { id: req.params.id } })
+    .then(client => {
+      client.destroy();
+    })
+    .then(() => res.send("Cliente eliminado con exito"));
+})
+
+
 //get all recruiters
 
 router.get("/recruiters", function (req, res) {

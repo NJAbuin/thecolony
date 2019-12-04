@@ -8,7 +8,8 @@ export function Recruiter({ recruiter }) {
   const changePermissions = value => {
     axios
       .put(`/api/admin/recruiters/${recruiter.id}`, { permissions: value })
-      .then(res => console.log(res));
+      .then(res => res.data)
+      .then(updated => console.log(updated));
   };
 
   return (
