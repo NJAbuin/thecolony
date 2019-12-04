@@ -37,9 +37,16 @@ function NewJobPostingForm({
       match.path === "/auth/admin/jobpostings/edit/:id" &&
       clientList.length
     ) {
+      let date = jobPostingSelected.startingDate;
+      date = date
+        .substring(0, 10)
+        .split("-")
+        .reverse()
+        .join("-");
+
       setTitle(jobPostingSelected.title);
       setDescription(jobPostingSelected.description);
-      setStartingDate(jobPostingSelected.startingDate);
+      setStartingDate(date);
       setOpenings(jobPostingSelected.openings);
       setSalary(jobPostingSelected.salary);
       setWorkload(jobPostingSelected.workload);
