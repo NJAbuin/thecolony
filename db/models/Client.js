@@ -12,7 +12,7 @@ Client.init(
     },
     permissions: {
       type: S.ENUM(["activo", "pendiente", "inactivo"]),
-      defaultValue: "inactivo",
+      defaultValue: "activo",
       allowNull: false
     },
     email: {

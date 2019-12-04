@@ -32,7 +32,9 @@ function LoginModal(props) {
     setWarningMessage("");
   }
 
-  React.useEffect(() => setWarningMessage(null), [password, email]);
+  React.useEffect(() => {
+    setWarningMessage(null);
+  }, [password, email]);
 
   const goLogIn = (routeToPost, email, password) =>
     props.sessionLogIn(routeToPost, email, password).then(result => {

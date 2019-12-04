@@ -9,7 +9,8 @@ export const adminSidebar = {
   Clientes: "/auth/admin/clients",
   Reclutadoras: "/auth/admin/recruiters",
   Candidatos: "/auth/admin/candidates",
-  Admins: "/auth/admin/admins"
+  Admins: "/auth/admin/admins",
+  Busquedas: "/auth/admin/jobposting"
 };
 
 export const clientSidebar = {

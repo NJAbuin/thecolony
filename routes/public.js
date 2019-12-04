@@ -1,5 +1,12 @@
 const router = require("express").Router();
-const { Recruiter, Candidate, JobPosting, Report, Client, Admin } = require("../db/models/");
+const {
+    Recruiter,
+    Candidate,
+    JobPosting,
+    Report,
+    Client,
+    Admin
+} = require("../db/models/");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
@@ -54,7 +61,7 @@ router.post("/upload", upload.single("file"), (req, res) => {
     });
 });
 
-//1.b agregarlos con el archivo CSV 
+//1.b agregarlos con el archivo CSV
 
 router.post("/candidates/csvImport", function (req, res) {
     req.body.csvValues.forEach(candidate => {
@@ -68,15 +75,13 @@ router.post("/candidates/csvImport", function (req, res) {
 //1.c agregarlos uno por uno
 
 router.post("/candidates", function (req, res) {
-    Recruiter.findOne({ where: { id: req.user.id } })
-        .then(recruiter => {
-            Candidate.create(req.body).then(candidate => {
-                candidate.setRecruiter(recruiter);
-                res.send(candidate)
-            })
-        })
+    Recruiter.findOne({ where: { id: req.user.id } }).then(recruiter => {
+        Candidate.create(req.body).then(candidate => {
+            candidate.setRecruiter(recruiter);
+            res.send(candidate);
+        });
+    });
 });
-
 
 //2. ver candidatos (como recruiter y como admin)
 
@@ -84,14 +89,12 @@ router.post("/candidates", function (req, res) {
 
 router.get("/candidates", (req, res) => {
     if (req.user.type === "recruiter") {
-        Candidate.findAll({ where: { recruiterId: req.user.id } }).then(candidates =>
-            res.send(candidates)
-        )
+        Candidate.findAll({
+            where: { recruiterId: req.user.id }
+        }).then(candidates => res.send(candidates));
     }
     if (req.user.type === "admin") {
-        Candidate.findAll().then(candidates =>
-            res.send(candidates)
-        )
+        Candidate.findAll().then(candidates => res.send(candidates));
     }
 });
 
@@ -108,7 +111,9 @@ router.get("/candidates/:id", function (req, res) {
     if (req.user.type === "admin") {
         Candidate.findOne({
             where: { id: req.params.id }
-        }).then(candidate => res.send(candidate)).catch(e => res.send(e));
+        })
+            .then(candidate => res.send(candidate))
+            .catch(e => res.send(e));
     }
 });
 
@@ -116,8 +121,12 @@ router.get("/candidates/:id", function (req, res) {
 
 router.put("/candidates/edit/:id", function (req, res) {
     if (req.user.type === "recruiter") {
-        Candidate.findOne({ where: { id: req.params.id, recruiterId: req.user.id } }).then(candidate => {
-            if (!candidate) { res.send("No tienes ningun candidato con el ID indicado") }
+        Candidate.findOne({
+            where: { id: req.params.id, recruiterId: req.user.id }
+        }).then(candidate => {
+            if (!candidate) {
+                res.send("No tienes ningun candidato con el ID indicado");
+            }
             candidate.update(req.body).then(updatedCandidate => {
                 res.send(updatedCandidate);
             });
@@ -206,42 +215,49 @@ router.get("/jobpostings/:id", function (req, res) {
             where: { id: req.params.id }
         }).then(job => res.send(job));
     }
-
 });
 
 //2. Editar busquedas
 
 router.put("/jobpostings/edit/:id", function (req, res) {
     if (req.user.type === "client") {
-        JobPosting.findOne({ where: { id: req.params.id, clientId: req.user.id } }).then(job => {
-            return job.update(req.body)
-        }).then(updated => res.send(updated))
+        JobPosting.findOne({ where: { id: req.params.id, clientId: req.user.id } })
+            .then(job => {
+                return job.update(req.body);
+            })
+            .then(updated => res.send(updated));
     }
     if (req.user.type === "admin") {
-        JobPosting.findOne({ where: { id: req.params.id } }).then(job => {
-            return job.update(req.body)
-        }).then(updated => res.send(updated))
+        JobPosting.findOne({ where: { id: req.params.id } })
+            .then(job => {
+                return job.update(req.body);
+            })
+            .then(updated => res.send(updated));
     }
-})
+});
 
 //3. Eliminar busquedas
 
 router.delete("/jobpostings/delete/:id", function (req, res) {
     if (req.user.type === "client") {
-        JobPosting.findOne({ where: { id: req.params.id, clientId: req.user.id } }).then(job => {
-            job.destroy()
-        }).then(() => res.send("Busqueda eliminada con exito"))
+        JobPosting.findOne({ where: { id: req.params.id, clientId: req.user.id } })
+            .then(job => {
+                job.destroy();
+            })
+            .then(() => res.send("Busqueda eliminada con exito"));
     }
     if (req.user.type === "admin") {
-        JobPosting.findOne({ where: { id: req.params.id } }).then(job => {
-            job.destroy()
-        }).then(() => res.send("Busqueda eliminada con exito"))
+        JobPosting.findOne({ where: { id: req.params.id } })
+            .then(job => {
+                job.destroy();
+            })
+            .then(() => res.send("Busqueda eliminada con exito"));
     }
-})
+});
 
 //4. Crear Busquedas
 
-router.post("/jobpostings", function (req, res) {
+router.post("/jobposting", function (req, res) {
     const uId = req.user.type === "client" ? req.body.clientId : req.user.id;
     Client.findOne({ where: { id: uId } })
         .then(client => client.createJobposting(req.body))
@@ -254,7 +270,7 @@ router.post("/jobpostings", function (req, res) {
 
 router.post("/jobpostings/:jobID/:candidateID/report", function (req, res) {
     Report.create(req.body).then(report => res.send(report.informe));
-})
+});
 
 //5.b ver reporte
 
@@ -276,14 +292,17 @@ router.put("/jobpostings/:jobID/:candidateID/report", function (req, res) {
                 candidateID: req.params.candidateID,
                 jobPostingID: req.params.jobID
             }
-        }).then(report => {
-            if (!report) { res.send("No se encontro el reporte") }
-            return report.update(req.body)
-        }).then(updated => res.send(updated))
+        })
+            .then(report => {
+                if (!report) {
+                    res.send("No se encontro el reporte");
+                }
+                return report.update(req.body);
+            })
+            .then(updated => res.send(updated));
     } else {
-        res.send("Solo los administradores pueden editar el reporte")
+        res.send("Solo los administradores pueden editar el reporte");
     }
 });
 
-
-module.exports = router
+module.exports = router;
