@@ -36,7 +36,7 @@ function RecruiterJobPostings(props) {
         </TitleL>
         <ContentL>
           {props.jobPostings.map(jobPost =>
-            <JobPosting key={jobPost.id} />
+            <JobPosting key={jobPost.id} jobPost={jobPost} />
           )}
         </ContentL>
       </Left>

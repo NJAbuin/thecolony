@@ -5,9 +5,10 @@ import { Button } from "../templates/Button";
 import { JobPostStyle } from "../templates/JobPostStyle";
 
 import { selectJobPostToState } from "../store/actions/jobPostings";
-import { Link, withRouter } from "react-router-dom";
+
 
 function JobPosting(props) {
+  const userType = props.session.user.type
   const {
     id,
     title,
@@ -25,14 +26,14 @@ function JobPosting(props) {
     <JobPostStyle>
       <div style={{ boxSizing: "border-box", margin: "15px" }}>
         <p>{title}</p>
-        {props.match.path.includes("recruiter") ? (
+        {userType === "recruiter" ? (
           <Button onClick={() => props.selectJobPostToState(id)}>
             SELECCIONAR
           </Button>
         ) : null}
         <Button
           onClick={() => {
-            props.match.url.includes("/auth/admin/jobposting")
+            userType === 'admin'
               ? props.history.push(`/auth/admin/jobposting/${id}`)
               : props.history.push(`/auth/recruiter/jobpostings/${id}`);
           }}
@@ -45,8 +46,11 @@ function JobPosting(props) {
   );
 }
 
+const mapStateToProps = ({ session }) => ({
+  session
+})
 const mapDispatchToProps = {
   selectJobPostToState
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(JobPosting));
+export default connect(mapStateToProps, mapDispatchToProps)(JobPosting)
