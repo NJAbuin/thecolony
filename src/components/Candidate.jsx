@@ -38,7 +38,13 @@ export function Candidate(props) {
   };
 
   return (
-    <CandidateStyle backgroundColor={checker() ? "#0be325" : "#fff"}>
+    <CandidateStyle
+      backgroundColor={
+        checker() && props.match.path.includes("jobpostings")
+          ? "#0be325"
+          : "#fff"
+      }
+    >
       {props.match.path.includes("jobpostings") && !checker() ? (
         <input
           type="checkbox"
