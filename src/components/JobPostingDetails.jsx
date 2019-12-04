@@ -18,12 +18,12 @@ function JobPostingDetails(props) {
     if (confirmation) {
       props.deleteJobPosting(props.match.params.id);
       alert("Busqueda borrada con exito");
-      props.history.push("/auth/admin/jobposting/");
+      props.history.push("/auth/admin/jobpostings/");
     }
   };
 
   const editHandler = e => {
-    props.history.push(`/auth/admin/jobposting/edit/${props.match.params.id}`);
+    props.history.push(`/auth/admin/jobpostings/edit/${props.match.params.id}`);
   };
 
   return (
