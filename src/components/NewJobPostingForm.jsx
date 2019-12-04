@@ -9,7 +9,13 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { fetchClientList } from "../store/actions/clients";
 
-function NewJobPostingForm({ clientList, fetchClientList, session }) {
+function NewJobPostingForm({
+  clientList,
+  fetchClientList,
+  session,
+  match,
+  jobPostingSelected
+}) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [startingDate, setStartingDate] = useState("");
@@ -19,11 +25,35 @@ function NewJobPostingForm({ clientList, fetchClientList, session }) {
   const [imgURL, setImgURL] = useState("");
   const [benefits, setBenefits] = useState("");
   const [selectedClientID, setSelectedClientID] = useState(null);
+  const [selectedClientFullName, setSelectedClientFullName] = useState(null);
   const [warningMessage, setWarningMessage] = useState(null);
 
   useEffect(() => {
     fetchClientList();
-  }, []);
+  }, [fetchClientList]); //convencion, buuena practica no dejarlo vacio
+
+  useEffect(() => {
+    if (
+      match.path === "/auth/admin/jobpostings/edit/:id" &&
+      clientList.length
+    ) {
+      setTitle(jobPostingSelected.title);
+      setDescription(jobPostingSelected.description);
+      setStartingDate(jobPostingSelected.startingDate);
+      setOpenings(jobPostingSelected.openings);
+      setSalary(jobPostingSelected.salary);
+      setWorkload(jobPostingSelected.workload);
+      setImgURL(jobPostingSelected.imgURL);
+      setBenefits(jobPostingSelected.benefits);
+      setSelectedClientID(
+        clientList.find(client => client.id === jobPostingSelected.clientId).id
+      );
+      setSelectedClientFullName(
+        clientList.find(client => client.id === jobPostingSelected.clientId)
+          .fullName
+      );
+    }
+  }, [clientList]);
 
   const clearForm = () => {
     document.querySelectorAll("input").forEach(i => (i.value = ""));
@@ -49,23 +79,43 @@ function NewJobPostingForm({ clientList, fetchClientList, session }) {
       .join("-");
 
     if (!warningMessage) {
-      axios
-        .post("/api/jobpostings", {
-          title,
-          description,
-          startingDate: dateToSend,
-          openings,
-          salary,
-          workload,
-          imgURL,
-          benefits,
-          clientId: selectedClientID
-        })
-        .then(res => {
-          if (res.data === true) {
-            return clearForm(), alert("Busqueda laboral creada");
-          } else alert("Hubo un problema al cargar su busqueda.");
-        });
+      if (match.path === "/auth/admin/jobpostings/edit/:id") {
+        axios
+          .put(`/api/jobpostings/edit/${jobPostingSelected.id}`, {
+            title,
+            description,
+            startingDate: dateToSend,
+            openings,
+            salary,
+            workload,
+            imgURL,
+            benefits,
+            clientId: selectedClientID
+          })
+          .then(res => {
+            if (res.data === true) {
+              return clearForm(), alert("Busqueda laboral editada");
+            } else alert("Hubo un problema al editar su busqueda.");
+          });
+      } else {
+        axios
+          .post("/api/jobpostings", {
+            title,
+            description,
+            startingDate: dateToSend,
+            openings,
+            salary,
+            workload,
+            imgURL,
+            benefits,
+            clientId: selectedClientID
+          })
+          .then(res => {
+            if (res.data) {
+              return clearForm(), alert("Busqueda laboral creada");
+            } else alert("Hubo un problema al cargar su busqueda.");
+          });
+      }
     }
   };
 
@@ -84,25 +134,23 @@ function NewJobPostingForm({ clientList, fetchClientList, session }) {
   return (
     <div>
       <form>
-        {true ? ( //poner como condicional session.user.type === "admin" en deploy
+        {session.user.type === "admin" ? (
           <label>
             Crear como:
             <select
-              onChange={e => {
-                e.persist();
-                return setSelectedClientID(e.target.value);
-              }}
+              onChange={e => setSelectedClientID(e.target.value)}
+              value={selectedClientFullName}
             >
+              {/* value={client.id}
+                  name={client.fullName} */}
               {clientList.map(client => (
-                <option key={client.id} value={client.id} clientId={client.id}>
-                  {client.fullName}
-                </option>
+                <option key={client.id}>{client.fullName}</option>
               ))}
             </select>
             <br />
           </label>
         ) : null}
-        {labelInputCreator("Nombre de la busqueda ", setTitle)}
+        {labelInputCreator("Nombre de la busqueda ", setTitle, "text", title)}
         <Label>
           Descripcion: (Max 255 caracteres)
           <textarea
@@ -110,19 +158,36 @@ function NewJobPostingForm({ clientList, fetchClientList, session }) {
               width: "100%",
               height: "100px"
             }}
+            value={description}
             type="text"
             onChange={e => setDescription(e.target.value)}
           />{" "}
         </Label>
-        {labelInputCreator("Fecha de inicio (DD-MM-YYYY)", setStartingDate)}
+        {labelInputCreator(
+          "Fecha de inicio (DD-MM-YYYY)",
+          setStartingDate,
+          "text",
+          startingDate
+        )}
         {labelInputCreator(
           "Cantidad de puestos disponibles ",
           setOpenings,
-          "number"
+          "number",
+          openings
         )}
-        {labelInputCreator("Salario ", setSalary, "number")}
-        {labelInputCreator("Horas de trabajo al dia ", setWorkload, "number")}
-        {labelInputCreator("Link al logo de la empresa ", setImgURL)}
+        {labelInputCreator("Salario ", setSalary, "number", salary)}
+        {labelInputCreator(
+          "Horas de trabajo al dia ",
+          setWorkload,
+          "number",
+          workload
+        )}
+        {labelInputCreator(
+          "Link al logo de la empresa ",
+          setImgURL,
+          "text",
+          imgURL
+        )}
         <Label>
           Beneficios: <br />
           <textarea
@@ -131,6 +196,7 @@ function NewJobPostingForm({ clientList, fetchClientList, session }) {
               height: "100px"
             }}
             type="text"
+            value={benefits}
             onChange={e => {
               setBenefits(e.target.value);
             }}
@@ -144,9 +210,10 @@ function NewJobPostingForm({ clientList, fetchClientList, session }) {
   );
 }
 
-const mapStateToProps = ({ clientList, session }) => ({
+const mapStateToProps = ({ clientList, session, jobPostingSelected }) => ({
   clientList,
-  session
+  session,
+  jobPostingSelected
 });
 
 const mapDispatchToProps = {

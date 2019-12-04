@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 
 import AdminAdmins from "./AdminAdmins";
 import AdminClients from "./AdminClients";
-import AdminCandidates from './AdminCandidates'
+import AdminCandidates from "./AdminCandidates";
 import AdminDashboard from "../containers/AdminDashboard";
 import AdminJobPosting from "./AdminJobPosting";
 import AdminRecruiters from "./AdminRecruiters";
@@ -23,6 +23,8 @@ function AdminContainer(props) {
         path="/auth/admin/jobpostings/edit/:id"
         component={NewJobPostingForm}
       />
+      <Route path="/auth/admin/jobpostings/new" component={NewJobPostingForm} />
+
       <Route path="/auth/admin/jobpostings/:id" component={JobPostingDetails} />
       <Route path="/auth/admin/jobpostings" component={AdminJobPosting} />
       <Route path="/auth/admin/recruiters" component={AdminRecruiters}></Route>

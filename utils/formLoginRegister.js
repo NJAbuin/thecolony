@@ -23,10 +23,16 @@ export function validatePass(pass) {
  * @param {String} fieldName label name to show
  * @param {Function} setFn setFunction for controlled input use
  * @param {String} inputType desired input type, "text" for default
+ * @param {String} value default value of the field
  * @returns {Any} JSX with styled label and input of optional type, using setter function passed
  */
 
-export const labelInputCreator = (fieldName, setFn, inputType = "text") => {
+export const labelInputCreator = (
+  fieldName,
+  setFn,
+  inputType = "text",
+  value = null
+) => {
   const inputStyle = {
     width: "100%",
     padding: "12px 20px",
@@ -41,6 +47,7 @@ export const labelInputCreator = (fieldName, setFn, inputType = "text") => {
         onChange={e => setFn(e.target.value)}
         type={inputType}
         style={inputStyle}
+        value={value}
       />
       <br />
     </Label>
