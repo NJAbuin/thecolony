@@ -30,8 +30,8 @@ function JobPosting(props) {
         </Button>
         <Button
           onClick={() => {
-            props.match.url.includes("/auth/admin/jobposting")
-              ? props.history.push(`/auth/admin/jobposting/${id}`)
+            props.match.url.includes("/auth/admin/jobpostings")
+              ? props.history.push(`/auth/admin/jobpostings/${id}`)
               : props.history.push(`/auth/recruiter/jobpostings/${id}`);
           }}
         >

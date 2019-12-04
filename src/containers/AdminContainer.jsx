@@ -14,11 +14,12 @@ function AdminContainer(props) {
       <Route path="/auth/admin/dashboard" component={AdminDashboard} />
       <Route path="/auth/admin/clients" component={AdminClients} />
       <Route
-        path="/auth/admin/jobposting/edit/:id"
+        path="/auth/admin/jobpostings/edit/:id"
         component={NewJobPostingForm}
       />
-      <Route path="/auth/admin/jobposting/:id" component={JobPostingDetails} />
-      <Route path="/auth/admin/jobposting" component={AdminJobPosting} />
+      <Route path="/auth/admin/jobpostings/new" component={NewJobPostingForm} />
+      <Route path="/auth/admin/jobpostings/:id" component={JobPostingDetails} />
+      <Route path="/auth/admin/jobpostings" component={AdminJobPosting} />
 
       <Redirect path="/" to="/auth/admin/dashboard" />
     </Switch>
