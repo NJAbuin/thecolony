@@ -26,17 +26,6 @@ function JobPosting(props) {
 
   let [showCands, setShowCands] = useState(false);
 
-  let detailsRoute;
-
-  switch (userType) {
-    case "admin":
-      detailsRoute = `/auth/admin/jobpostingss/${id}`;
-    case "recruiter":
-      detailsRoute = `/auth/admin/recruiter/${id}`;
-    case "client":
-      detailsRoute = `/auth/admin/client/${id}`;
-  }
-
   return (
     <JobPostStyle>
       <div style={{ boxSizing: "border-box", margin: "15px", heigth: "100%" }}>
@@ -50,7 +39,7 @@ function JobPosting(props) {
             SELECCIONAR
           </Button>
         )}
-        <Link to={detailsRoute}>
+        <Link to={`/auth/${userType}/jobpostings/${id}`}>
           <Button>Ver detalles</Button>
         </Link>
         {showCands
