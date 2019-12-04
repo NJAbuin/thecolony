@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { Button } from "../templates/Button";
 import { JobPostStyle } from "../templates/JobPostStyle";
@@ -22,33 +23,40 @@ function JobPosting(props) {
     client
   } = props.jobPost;
 
+  let detailsRoute;
+
+  switch (userType) {
+    case 'admin':
+      detailsRoute = `/auth/admin/jobpostingss/${id}`
+    case 'recruiter':
+      detailsRoute = `/auth/admin/recruiter/${id}`
+    case 'client':
+      detailsRoute = `/auth/admin/client/${id}`
+  }
+
   return (
     <JobPostStyle>
       <div style={{ boxSizing: "border-box", margin: "15px" }}>
         <p>{title}</p>
-        {userType === "recruiter" ? (
-          <Button onClick={() => props.selectJobPostToState(id)}>
-            SELECCIONAR
+        {userType !== 'recruiter' ?
+          <Button onClick={() => console.log('Haceme el dropdown')}>
+            VER CANDIDATOS
           </Button>
-        ) : null}
-        <Button
-          onClick={() => {
-            userType === 'admin'
-              ? props.history.push(`/auth/admin/jobposting/${id}`)
-              : props.history.push(`/auth/recruiter/jobpostings/${id}`);
-          }}
-        >
-          {" "}
-          Ver detalles
-        </Button>
+          : <Button onClick={() => props.selectJobPostToState(id)}>
+            SELECCIONAR
+          </Button>}
+        <Link to={detailsRoute}>
+          <Button>Ver detalles</Button>
+        </Link>
       </div>
-    </JobPostStyle>
+    </JobPostStyle >
   );
 }
 
 const mapStateToProps = ({ session }) => ({
   session
 })
+
 const mapDispatchToProps = {
   selectJobPostToState
 };
