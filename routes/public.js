@@ -165,7 +165,7 @@ router.get("/jobpostings", function (req, res) {
     if (req.user.type === "recruiter") {
         JobPosting.findAll({
             where: {
-                state: "Activa"
+                state: "activa"
             }
         }).then(jobs => res.send(jobs))
             .catch(e => res.send(e))
