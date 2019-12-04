@@ -25,9 +25,11 @@ function JobPosting(props) {
     <JobPostStyle>
       <div style={{ boxSizing: "border-box", margin: "15px" }}>
         <p>{title}</p>
-        <Button onClick={() => props.selectJobPostToState(id)}>
-          SELECCIONAR
-        </Button>
+        {props.match.path.includes("recruiter") ? (
+          <Button onClick={() => props.selectJobPostToState(id)}>
+            SELECCIONAR
+          </Button>
+        ) : null}
         <Button
           onClick={() => {
             props.match.url.includes("/auth/admin/jobposting")

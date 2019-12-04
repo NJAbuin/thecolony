@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CandidateStyle = styled.div`
-  background-color: #fff;
+  background-color: ${props => props.backgroundColor};
   border: blue 3px solid;
   justify-self: center;
   height: 8rem;
