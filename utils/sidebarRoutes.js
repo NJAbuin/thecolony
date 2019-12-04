@@ -15,7 +15,7 @@ export const adminSidebar = {
 
 export const clientSidebar = {
   Dashboard: "/auth/client/dashboard",
-  Busquedas: "/auth/client/jobposting"
+  Busquedas: "/auth/client/jobpostings"
 };
 
 export function mapSidebar(userType) {
