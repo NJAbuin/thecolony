@@ -25,6 +25,7 @@ function NewJobPostingForm({
   const [imgURL, setImgURL] = useState("");
   const [benefits, setBenefits] = useState("");
   const [selectedClientID, setSelectedClientID] = useState(null);
+  const [selectedClientFullName, setSelectedClientFullName] = useState(null);
   const [warningMessage, setWarningMessage] = useState(null);
 
   useEffect(() => {
@@ -45,6 +46,9 @@ function NewJobPostingForm({
       setImgURL(jobPostingSelected.imgURL);
       setBenefits(jobPostingSelected.benefits);
       setSelectedClientID(
+        clientList.find(client => client.id === jobPostingSelected.clientId).id
+      );
+      setSelectedClientFullName(
         clientList.find(client => client.id === jobPostingSelected.clientId)
           .fullName
       );
@@ -76,7 +80,6 @@ function NewJobPostingForm({
 
     if (!warningMessage) {
       if (match.path === "/auth/admin/jobpostings/edit/:id") {
-        console.log("clientid", selectedClientID);
         axios
           .put(`/api/jobpostings/edit/${jobPostingSelected.id}`, {
             title,
@@ -87,7 +90,6 @@ function NewJobPostingForm({
             workload,
             imgURL,
             benefits,
-
             clientId: selectedClientID
           })
           .then(res => {
@@ -137,7 +139,7 @@ function NewJobPostingForm({
             Crear como:
             <select
               onChange={e => setSelectedClientID(e.target.value)}
-              value={selectedClientID}
+              value={selectedClientFullName}
             >
               {/* value={client.id}
                   name={client.fullName} */}
