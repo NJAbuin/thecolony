@@ -10,9 +10,9 @@ export default ({ userType }) => {
   return (
     <SidebarStyle>
       {POWERS.map((power, val) => (
-        <Link to={URLs[val]}>
+        <Link key={`${power}`} to={URLs[val]}>
           <label>
-            <SidebarButton key={`${power}`}>{power}</SidebarButton>
+            <SidebarButton>{power}</SidebarButton>
           </label>
         </Link>
       ))}
