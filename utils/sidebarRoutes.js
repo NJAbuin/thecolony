@@ -10,12 +10,12 @@ export const adminSidebar = {
   Reclutadoras: "/auth/admin/recruiters",
   Candidatos: "/auth/admin/candidates",
   Admins: "/auth/admin/admins",
-  Busquedas: "/auth/admin/jobposting"
+  Busquedas: "/auth/admin/jobpostings"
 };
 
 export const clientSidebar = {
   Dashboard: "/auth/client/dashboard",
-  Busquedas: "/auth/client/jobposting"
+  Busquedas: "/auth/client/jobpostings"
 };
 
 export function mapSidebar(userType) {
