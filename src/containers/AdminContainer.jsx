@@ -17,6 +17,7 @@ function AdminContainer(props) {
         path="/auth/admin/jobposting/edit/:id"
         component={NewJobPostingForm}
       />
+      <Route path="/auth/admin/recruiters" component={AdminRecruiters}></Route>
       <Route path="/auth/admin/jobposting/:id" component={JobPostingDetails} />
       <Route path="/auth/admin/jobposting" component={AdminJobPosting} />
 
