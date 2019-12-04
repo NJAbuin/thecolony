@@ -32,7 +32,10 @@ function NewJobPostingForm({
   }, [fetchClientList]); //convencion, buuena practica no dejarlo vacio
 
   useEffect(() => {
-    if (match.path === "/auth/admin/jobposting/edit/:id" && clientList.length) {
+    if (
+      match.path === "/auth/admin/jobpostings/edit/:id" &&
+      clientList.length
+    ) {
       setTitle(jobPostingSelected.title);
       setDescription(jobPostingSelected.description);
       setStartingDate(jobPostingSelected.startingDate);
@@ -72,23 +75,45 @@ function NewJobPostingForm({
       .join("-");
 
     if (!warningMessage) {
-      axios
-        .post("/api/jobpostings", {
-          title,
-          description,
-          startingDate: dateToSend,
-          openings,
-          salary,
-          workload,
-          imgURL,
-          benefits,
-          clientId: selectedClientID
-        })
-        .then(res => {
-          if (res.data === true) {
-            return clearForm(), alert("Busqueda laboral creada");
-          } else alert("Hubo un problema al cargar su busqueda.");
-        });
+      if (match.path === "/auth/admin/jobpostings/edit/:id") {
+        console.log("clientid", selectedClientID);
+        axios
+          .put(`/api/jobpostings/edit/${jobPostingSelected.id}`, {
+            title,
+            description,
+            startingDate: dateToSend,
+            openings,
+            salary,
+            workload,
+            imgURL,
+            benefits,
+
+            clientId: selectedClientID
+          })
+          .then(res => {
+            if (res.data === true) {
+              return clearForm(), alert("Busqueda laboral editada");
+            } else alert("Hubo un problema al editar su busqueda.");
+          });
+      } else {
+        axios
+          .post("/api/jobpostings", {
+            title,
+            description,
+            startingDate: dateToSend,
+            openings,
+            salary,
+            workload,
+            imgURL,
+            benefits,
+            clientId: selectedClientID
+          })
+          .then(res => {
+            if (res.data === true) {
+              return clearForm(), alert("Busqueda laboral creada");
+            } else alert("Hubo un problema al cargar su busqueda.");
+          });
+      }
     }
   };
 
@@ -141,10 +166,6 @@ function NewJobPostingForm({
           setStartingDate,
           "text",
           startingDate
-            .split("T")[0]
-            .split("-")
-            .reverse()
-            .join("-")
         )}
         {labelInputCreator(
           "Cantidad de puestos disponibles ",
