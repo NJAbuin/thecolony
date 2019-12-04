@@ -2,6 +2,9 @@
 export const LOG_IN = "LOG_IN";
 export const LOG_OUT = "LOG_OUT";
 
+//Admins
+export const FETCH_ADMINS = 'FETCH_ADMINS'
+
 //Selected Candidates
 export const CANDIDATE_ADD = "CANDIDATE_ADD";
 export const CANDIDATE_REMOVE = "CANDIDATE_REMOVE";
