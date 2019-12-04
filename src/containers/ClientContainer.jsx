@@ -3,13 +3,15 @@ import { connect } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import DashboardClient from "../containers/DashboardClient";
-import NewJobPostingForm from "../components/NewJobPostingForm";
+import ClientJobPostings from './ClientJobPostings'
 
 function ClientContainer() {
   return (
     <Switch>
       <Route path="/auth/client/dashboard" component={DashboardClient} />
-      <Route path="/auth/client/jobposting" component={NewJobPostingForm} />
+      <Route path="/auth/client/jobpostings" component={ClientJobPostings} />
+
+      {/* <Route path="/auth/client/jobpostings" component={NewJobPostingForm} /> */}
 
       <Redirect path="/" to="/auth/client/dashboard" />
     </Switch>

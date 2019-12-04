@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import { CandidateStyle } from "../templates/Candidates";
 
@@ -24,6 +24,7 @@ export function Candidate(props) {
 
   const checker = function() {
     return (
+      props.jobPostingSelected &&
       props.jobPostingSelected.candidates &&
       Boolean(
         props.jobPostingSelected.candidates.find(
@@ -38,8 +39,14 @@ export function Candidate(props) {
   };
 
   return (
-    <CandidateStyle>
-      {window.location.href.includes("jobpostings") && !checker() ? (
+    <CandidateStyle
+      backgroundColor={
+        checker() && props.match.path.includes("jobpostings")
+          ? "#0be325"
+          : "#fff"
+      }
+    >
+      {props.match && props.match.path.includes("jobpostings") && !checker() ? (
         <input
           type="checkbox"
           onClick={e => {
@@ -79,4 +86,6 @@ const mapDispatchToProps = {
   candidateFetchDetails
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Candidate);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Candidate)
+);

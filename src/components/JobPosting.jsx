@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { Button } from "../templates/Button";
 import { JobPostStyle } from "../templates/JobPostStyle";
+import { Candidate } from "../components/Candidate";
 
 import { selectJobPostToState } from "../store/actions/jobPostings";
-import { Link, withRouter } from "react-router-dom";
 
 function JobPosting(props) {
+  const userType = props.session.user.type;
   const {
     id,
     title,
@@ -18,33 +20,55 @@ function JobPosting(props) {
     imgURL,
     benefits,
     openings,
-    client
+    client,
+    candidates
   } = props.jobPost;
+
+  let [showCands, setShowCands] = useState(false);
+
+  let detailsRoute;
+
+  switch (userType) {
+    case "admin":
+      detailsRoute = `/auth/admin/jobpostingss/${id}`;
+    case "recruiter":
+      detailsRoute = `/auth/admin/recruiter/${id}`;
+    case "client":
+      detailsRoute = `/auth/admin/client/${id}`;
+  }
 
   return (
     <JobPostStyle>
-      <div style={{ boxSizing: "border-box", margin: "15px" }}>
+      <div style={{ boxSizing: "border-box", margin: "15px", heigth: "100%" }}>
         <p>{title}</p>
-        <Button onClick={() => props.selectJobPostToState(id)}>
-          SELECCIONAR
-        </Button>
-        <Button
-          onClick={() => {
-            props.match.url.includes("/auth/admin/jobpostings")
-              ? props.history.push(`/auth/admin/jobpostings/${id}`)
-              : props.history.push(`/auth/recruiter/jobpostings/${id}`);
-          }}
-        >
-          {" "}
-          Ver detalles
-        </Button>
+        {userType !== "recruiter" ? (
+          <Button onClick={() => setShowCands(!showCands)}>
+            {showCands ? "OCULTAR CANDIDATOS" : "VER CANDIDATOS"}
+          </Button>
+        ) : (
+          <Button onClick={() => props.selectJobPostToState(id)}>
+            SELECCIONAR
+          </Button>
+        )}
+        <Link to={detailsRoute}>
+          <Button>Ver detalles</Button>
+        </Link>
+        {showCands
+          ? candidates.map(candidate => (
+              <Candidate candidate={candidate} key={candidate.id} />
+            ))
+          : null}
       </div>
     </JobPostStyle>
   );
 }
 
+const mapStateToProps = ({ session }) => ({
+  session
+});
+
 const mapDispatchToProps = {
   selectJobPostToState
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(JobPosting));
+export default connect(mapStateToProps, mapDispatchToProps)(JobPosting);

@@ -43,8 +43,13 @@ app.use("/*", (req, res) =>
 db.sync({ force: false })
   .then(() => {
     console.log(chalk.bgGreen.black("Connected to database..."));
-    app.listen(port, () =>
-      console.log(chalk.bgRed.black(`Listening on port ${port}`))
-    );
+    app.listen(port, () => console.log(`Listening on port ${port}`, stonks));
   })
   .catch(console.error); //error catcher
+
+const stonks = `                               
+_____ _____ _____ _____ _____ _____ 
+|   __|_   _|     |   | |  |  |   __|
+|__   | | | |  |  | | | |    -|__   |
+|_____| |_| |_____|_|___|__|__|_____|                                                                                                                
+`;

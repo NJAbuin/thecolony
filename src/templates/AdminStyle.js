@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export const CandidateStyle = styled.div`
+export const AdminStyle = styled.div`
   background-color: ${props => props.backgroundColor};
-  border: blue 3px solid;
+  border: red 3px solid;
   justify-self: center;
   height: 8rem;
   width: 95%;

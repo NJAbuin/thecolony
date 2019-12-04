@@ -1,13 +1,11 @@
 import styled from "styled-components";
 
 export const JobPostStyle = styled.div`
-  
   box-sizing: border-box;
 
-  height: 20%;
+  height: minmax(20%, auto);
   width: 95%;
   margin: 2.5%;
-  
 
   background-color: #ffff00;
 
