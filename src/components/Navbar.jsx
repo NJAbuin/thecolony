@@ -14,16 +14,24 @@ const NavBar = props => {
 
   return (
     <div style={navStyles.nav}>
-      <Link to={logoLinkURL}>
-        <label>
-          <div>
-            <span>
-              {props.user.fullName
-                ? `CYCK ${props.user.fullName}`
-                : `Stonks go up`}
-            </span>
-          </div>
-        </label>
+      <label>
+        <div>
+          <span>
+            {props.user.fullName
+              ? `Bienvenido ${props.user.fullName}!`
+              : `Registrese para comenzar a navegar!`}
+          </span>
+        </div>
+      </label>
+
+      <Link
+        to={logoLinkURL}
+        style={{ alignSelf: "center", marginLeft: "19rem" }}
+      >
+        <img
+          src="https://via.placeholder.com/150/000000/FFFFFF/?text=DevFlowLogo"
+          alt="Logo"
+        />
       </Link>
 
       <span
