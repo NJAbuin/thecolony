@@ -13,7 +13,8 @@ export function CandidateDetails({ candidateDetails }) {
     jobTitle,
     CV,
     address,
-    expectedSalary
+    expectedSalary,
+    jobpostingId
   } = candidateDetails;
 
   const showCV = () => window.open(`${CV.replace("dist", "")}`, "_blank");
@@ -21,13 +22,16 @@ export function CandidateDetails({ candidateDetails }) {
   return Object.keys(candidateDetails).length == 0 ? (
     "No details found"
   ) : (
-    <CandidateStyle>
-      <h3>{fullName}</h3>
-      <span>{jobTitle}</span>
-      <br />
-      <button onClick={e => showCV(e)}>Ver CV</button>
-    </CandidateStyle>
-  );
+      <CandidateStyle>
+        <h3>{fullName}</h3>
+        <span>{jobTitle}</span>
+        <br />
+        <button onClick={e => showCV(e)}>Ver CV</button>
+        <p>BUSQUEDAS ASIGNADAS</p>
+        <br />
+        {jobpostingId}
+      </CandidateStyle>
+    );
 }
 
 const mapStateToProps = ({ candidateDetails }) => ({
