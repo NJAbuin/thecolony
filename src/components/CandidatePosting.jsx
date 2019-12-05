@@ -42,7 +42,14 @@ export function CandidatePosting({ posting, candidate }) {
       <br />
       <br />
       {report.report ? (
-        <a href={report.report} target="_blank">
+        <a
+          href={
+            report.report.includes("http")
+              ? report.report
+              : "http://" + report.report
+          }
+          target="_blank"
+        >
           LINK AL INFORME
         </a>
       ) : (
