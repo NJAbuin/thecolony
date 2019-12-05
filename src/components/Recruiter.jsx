@@ -32,6 +32,7 @@ export function Recruiter({ recruiter }) {
 
       {recruiter.logoURL && <img src={recruiter.logoURL} alt="" />}
       {recruiter.website && <a href={recruiter.website}>Visitar el website.</a>}
+      <button>Editar recrutador</button>
     </ClientStyle>
   );
 }

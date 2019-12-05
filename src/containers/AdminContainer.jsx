@@ -27,7 +27,7 @@ function AdminContainer(props) {
 
       <Route path="/auth/admin/jobpostings/:id" component={JobPostingDetails} />
       <Route path="/auth/admin/jobpostings" component={AdminJobPosting} />
-      <Route path="/auth/admin/recruiters" component={AdminRecruiters}></Route>
+      <Route path="/auth/admin/recruiters" component={AdminRecruiters} />
 
       <Redirect path="/" to="/auth/admin/dashboard" />
     </Switch>
