@@ -97,7 +97,7 @@ const makeMeManyCandidatesAndJobs = () => {
                     faker.address.streetAddress(),
                     faker.random.number(),
                     "",
-                    1
+                    2
                   )
                 );
                 jobposting.createCandidate(
@@ -109,7 +109,7 @@ const makeMeManyCandidatesAndJobs = () => {
                     faker.address.streetAddress(),
                     faker.random.number(),
                     "",
-                    1
+                    2
                   )
                 );
                 jobposting.createCandidate(
@@ -121,7 +121,7 @@ const makeMeManyCandidatesAndJobs = () => {
                     faker.address.streetAddress(),
                     faker.random.number(),
                     "",
-                    1
+                    2
                   )
                 );
               });
