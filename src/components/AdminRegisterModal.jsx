@@ -57,7 +57,7 @@ export default function AdminRegisterModal(props) {
   return (
     <div>
       <button type="button" onClick={handleOpen}>
-        Registrate
+        Registrar Admin nuevo
       </button>
       <Modal
         aria-labelledby="spring-modal-title"

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from 'react-redux'
 
+import AdminRegisterModal from '../components/AdminRegisterModal'
 import Admin from '../components/Admin'
 import { getAdminList } from '../store/actions/admins'
 
@@ -13,6 +14,7 @@ function AdminAdmins(props) {
 
     return (
         <FullDash>
+            <AdminRegisterModal />
             {props.adminList.map(admin => <Admin key={admin.id} admin={admin} />)}
         </FullDash>
     );
