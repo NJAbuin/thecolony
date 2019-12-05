@@ -1,11 +1,13 @@
 import React from "react";
 
 import { AdminStyle } from '../templates/AdminStyle'
-function Admin(props) {
 
+function Admin(props) {
     return (<AdminStyle>
-        {Object.keys(props.admin).map(prop => <p key={prop}>{prop}</p>)}
-    </AdminStyle>
+        <div style={{ color: "blue", backgroundColor: "grey" }}>
+            {Object.keys(props.admin).map(prop => <p key={prop} style={{ margin: '2px' }}>{prop}</p>)}
+        </div>
+    </AdminStyle >
     );
 }
 
