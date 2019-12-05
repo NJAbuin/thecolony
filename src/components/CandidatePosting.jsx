@@ -3,11 +3,14 @@ import axios from 'axios';
 import { PostingStyle } from "../templates/Candidates";
 
 export function CandidatePosting({ posting, candidate }) {
+  const { id, title, report } = posting
   const [comment, setComment] = useState("");
+  const [link, setLink] = useState("");
 
   useEffect(() => {
-    setComment(posting.report.comment || "");
+    setComment(report.comment || "");
   }, [posting]);
+
 
   const jobStates = ["postulado/a",
     "1° entrevista",
@@ -15,35 +18,37 @@ export function CandidatePosting({ posting, candidate }) {
     "ingresado/a",
     "rechazado/a"]
 
-  const changeCandidateStatus = value =>
-    axios
-      .put(`/api/jobpostings/${posting.id}/${candidate.id}/report`, { status: value })
+  const updateCandidateStatus = (field, value) =>
+    (axios
+      .put(`/api/jobpostings/${id}/${candidate.id}/report`, { [field]: value })
       .then(res => res.data)
-      .then(updated => console.log(updated));
-  ;
+      .then(updated => console.log(updated)), alert('Candidato actualizado'));
 
   return (
     <PostingStyle>
-      <h2>{posting.title}</h2>
+      <h2>{title}</h2>
       <select
-        defaultValue={posting.report.status}
-        onChange={e => changeCandidateStatus(e.target.value)}
+        defaultValue={report.status}
+        onChange={e => updateCandidateStatus('status', e.target.value)}
       >
         {jobStates.map(state =>
           <option value={state} key={state}>{state}</option>
         )}
       </select>
 
-      {posting.report.report ?
-        <a href={posting.report.report} target="_blank">
+      {report.report ?
+        <a href={report.report} target="_blank">
           LINK AL INFORME
         </a>
         :
         <div>
-          <button>AGREGAR LINK AL INFORME</button>
-          <input type="text" />
+          <button onClick={() => updateCandidateStatus('report', link)}>AGREGAR LINK AL INFORME</button>
+          <input type="text" defaultValue={link} onChange={e => setLink(e.target.value)} />
         </div>
       }
+      <h4>
+        Comentario
+      </h4>
       <textarea
         name="comment"
         defaultValue={comment}
@@ -51,7 +56,8 @@ export function CandidatePosting({ posting, candidate }) {
           setComment(e.target.value);
         }}
       />
-      <button onClick={() => console.log(comment)}>
+      <br />
+      <button onClick={() => updateCandidateStatus('comment', comment)}>
         ENVIAR NUEVO COMENTARIO
       </button>
     </PostingStyle>
