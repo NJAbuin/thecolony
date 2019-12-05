@@ -4,13 +4,15 @@ const {
     Candidate,
     JobPosting,
     Report,
-    Client,
-    Admin
+    Client
 } = require("../db/models/");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 const pdf = require("pdf-parse");
+
+
+//async await ???
 
 //CANDIDATOS
 
@@ -103,16 +105,30 @@ router.get("/candidates", (req, res) => {
 router.get("/candidates/:id", function (req, res) {
     if (req.user.type === "recruiter") {
         Candidate.findOne({
+            include: [
+                {
+                    model: JobPosting
+                }
+            ],
             where: { id: req.params.id, recruiterId: req.user.id }
         })
-            .then(candidate => res.send(candidate))
+            .then(candidate => {
+                res.send(candidate)
+            })
             .catch(e => res.send(e));
     }
     if (req.user.type === "admin") {
         Candidate.findOne({
+            include: [
+                {
+                    model: JobPosting
+                }
+            ],
             where: { id: req.params.id }
         })
-            .then(candidate => res.send(candidate))
+            .then(candidate => {
+                res.send(candidate)
+            })
             .catch(e => res.send(e));
     }
 });
@@ -141,6 +157,10 @@ router.put("/candidates/edit/:id", function (req, res) {
     }
 });
 
+//4. Ver las busquedas a las que esta asignado un candidato
+
+
+
 //BUSQUEDAS
 
 //1. Ver busquedas
@@ -167,16 +187,26 @@ router.get("/jobpostings", function (req, res) {
                     model: Candidate
                 }
             ]
-        }).then(job => res.send(job))
+        }).then(job => {
+            res.send(job)
+        })
             .catch(e => res.send(e))
     }
     //por ahora el recruiter ve todas, pero luego deberia ver solo las que tiene asignadas
     if (req.user.type === "recruiter") {
         JobPosting.findAll({
+            include: [
+                {
+                    model: Candidate
+                }
+            ],
             where: {
                 state: "activa"
             }
-        }).then(jobs => res.send(jobs))
+        }).then(jobs => {
+            console.log(jobs)
+            res.send(jobs)
+        })
             .catch(e => res.send(e))
     }
 });
@@ -213,7 +243,10 @@ router.get("/jobpostings/:id", function (req, res) {
                 }
             ],
             where: { id: req.params.id }
-        }).then(job => res.send(job));
+        }).then(job => {
+            console.log(job)
+            res.send(job)
+        });
     }
 });
 
