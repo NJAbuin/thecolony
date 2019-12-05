@@ -6,7 +6,7 @@ import { FullDash } from "../templates/Dashboard";
 
 import { fetchClientList } from "../store/actions/clients";
 
-function AdminClients({ clientList, fetchClientList }) {
+function AdminClients({ clientList, fetchClientList, session }) {
   useEffect(() => {
     fetchClientList();
   }, []);
@@ -14,14 +14,15 @@ function AdminClients({ clientList, fetchClientList }) {
   return (
     <FullDash>
       {clientList.map(client => (
-        <Client client={client} key={client.id} />
+        <Client client={client} session={session} key={client.id} />
       ))}
     </FullDash>
   );
 }
 
-const mapStateToProps = ({ clientList }) => ({
-  clientList
+const mapStateToProps = ({ clientList, session }) => ({
+  clientList,
+  session
 });
 const mapDispatchToProps = {
   fetchClientList
