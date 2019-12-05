@@ -56,14 +56,14 @@ const makeMeManyCandidatesAndJobs = () => {
     fullName: "Mario Soyseedeado",
     permissions: "activo",
     email: "recruiter@seed.com",
-    password: "recruiter"
+    password: "recruiter@seed.com"
   }).then(recruiter => {
     for (let i = 0; i < 2; i++) {
       Client.create({
         fullName: `Enrique Soyseedeado ${i}`,
         permissions: "activo",
         email: `cliente${i}@seed.com`,
-        password: `cliente`
+        password: `cliente${i}@seed.com`
       }).then(client => {
         for (let i = 0; i <= 3; i++) {
           client
@@ -124,7 +124,7 @@ const makeMeManyCandidatesAndJobs = () => {
   });
 };
 
-seed.get("/", function(req, res) {
+seed.get("/", function (req, res) {
   makeMeManyCandidatesAndJobs();
   res.send("Seed created, relations done, stonks up!");
 });
