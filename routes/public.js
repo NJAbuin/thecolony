@@ -290,7 +290,7 @@ router.delete("/jobpostings/delete/:id", function (req, res) {
 
 //4. Crear Busquedas
 
-router.post("/jobposting", function (req, res) {
+router.post("/jobpostings", function (req, res) {
     const uId = req.user.type === "client" ? req.body.clientId : req.user.id;
     Client.findOne({ where: { id: uId } })
         .then(client => client.createJobposting(req.body))
