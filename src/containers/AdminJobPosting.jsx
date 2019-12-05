@@ -11,7 +11,7 @@ function AdminJobPosting(props) {
 
   useEffect(() => {
     props.getJobPostings();
-    return setJobList(props.jobPostings);
+    setJobList(props.jobPostings);
   }, []);
 
   useEffect(() => {
