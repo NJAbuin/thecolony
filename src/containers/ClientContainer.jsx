@@ -13,7 +13,7 @@ function ClientContainer() {
 
       {/* <Route path="/auth/client/jobpostings" component={NewJobPostingForm} /> */}
 
-      <Redirect path="/" to="/auth/client/dashboard" />
+      <Redirect path="/" to="/auth/client/jobpostings" />
     </Switch>
   );
 }

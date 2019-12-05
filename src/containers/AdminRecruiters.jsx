@@ -24,7 +24,9 @@ function AdminRecruiters(props) {
 const mapStateToProps = ({ recruitersList }) => ({
   recruitersList
 });
+
 const mapDispatchToProps = {
   fetchRecruiterList
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(AdminRecruiters);

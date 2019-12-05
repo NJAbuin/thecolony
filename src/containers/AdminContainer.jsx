@@ -32,7 +32,7 @@ function AdminContainer(props) {
       <Route path="/auth/admin/jobpostings" component={AdminJobPosting} />
       <Route path="/auth/admin/recruiters" component={AdminRecruiters} />
 
-      <Redirect path="/" to="/auth/admin/dashboard" />
+      <Redirect path="/" to="/auth/admin/clients" />
     </Switch>
   );
 }

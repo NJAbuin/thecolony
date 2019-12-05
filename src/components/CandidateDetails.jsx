@@ -24,20 +24,21 @@ export function CandidateDetails({ candidateDetails }) {
   return Object.keys(candidateDetails).length == 0 ? (
     "No details found"
   ) : (
-    <CandidateStyle>
-      <h3>{fullName}</h3>
-      <span>{jobTitle}</span>
-      <br />
-      <button onClick={e => showCV(e)}>Ver CV</button>
-      {jobpostings.length > 0
-        ? jobpostings.map(posting => (
-            <CandidatePosting posting={posting} key={posting.id} />
-          ))
-        : null}
+      <CandidateStyle>
+        <h3>{fullName}</h3>
+        <span>{jobTitle}</span>
+        <br />
+        <button onClick={e => showCV(e)}>Ver CV</button>
 
-      <br />
-    </CandidateStyle>
-  );
+        {jobpostings.length > 0
+          ? jobpostings.map(posting => (
+            <CandidatePosting posting={posting} key={posting.id} candidate={candidateDetails} />
+          ))
+          : null}
+
+        <br />
+      </CandidateStyle>
+    );
 }
 
 const mapStateToProps = ({ candidateDetails }) => ({
