@@ -19,7 +19,7 @@ const NavBar = props => {
         <div>
           <span>
             {props.user.fullName
-              ? `Bienvenido ${props.user.fullName}!`
+              ? `Bienvenido ${props.user.fullName.split(" ")[0]}!`
               : `Registrese para comenzar a navegar!`}
           </span>
         </div>
@@ -27,12 +27,13 @@ const NavBar = props => {
 
       <Link
         to={logoLinkURL}
-        style={{ alignSelf: "center", marginLeft: "19rem" }}
+        style={{
+          alignSelf: "center",
+          marginLeft: "19rem",
+          textAlign: "center"
+        }}
       >
-        <img
-          src="https://via.placeholder.com/75/000000/FFFFFF/?text=DevFlowLogo"
-          alt="Logo"
-        />
+        <p style={{ backgroundColor: "black", color: "white" }}>DEVFLOWLOGO</p>
       </Link>
 
       <span

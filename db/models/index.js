@@ -9,8 +9,9 @@ Client.hasMany(JobPosting);
 JobPosting.belongsTo(Client);
 Recruiter.hasMany(JobPosting);
 Recruiter.hasMany(Candidate);
-JobPosting.hasMany(Candidate);
 Candidate.belongsTo(Recruiter);
+JobPosting.belongsToMany(Candidate, { through: "report", foreignKey: "jobPostingId" })
+Candidate.belongsToMany(JobPosting, { through: "report", foreignKey: "candidateId" })
 
 module.exports = {
   Admin,

@@ -1,14 +1,14 @@
 const db = require("../index");
 const S = require("sequelize");
 
-class Report extends S.Model {}
+class Report extends S.Model { }
 
 Report.init(
   {
-    candidateID: {
+    candidateId: {
       type: S.INTEGER
     },
-    jobPostingID: {
+    jobPostingId: {
       type: S.INTEGER
     },
     report: {

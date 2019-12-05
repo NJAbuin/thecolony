@@ -13,7 +13,7 @@ export const Dashboard = styled.div`
 
 export const FullDash = styled.div`
   grid-area: contentDash;
-  background-color: #000;
+  background-color: #fff;
   height: 100%;
   width: 100%;
   overflow-y: scroll;
