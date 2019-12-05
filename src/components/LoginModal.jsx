@@ -39,6 +39,7 @@ function LoginModal(props) {
   const goLogIn = (routeToPost, email, password) =>
     props.sessionLogIn(routeToPost, email, password).then(result => {
       if (!result) return setWarningMessage(ERROR_LOGIN);
+      else return handleClose();
     });
 
   function validateAndLogIn(routeToPost, email, password) {
@@ -51,7 +52,7 @@ function LoginModal(props) {
   return (
     <div>
       <button type="button" onClick={handleOpen}>
-        Login
+        {props.role === "admin" ? "Login As Admin" : "Login"}
       </button>
       <Modal
         aria-labelledby="spring-modal-title"

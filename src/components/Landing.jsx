@@ -22,17 +22,6 @@ function Landing(props) {
 
   return (
     <LandingGrid>
-      <Card color="grey" imgUrl={admin}>
-        <div style={topDivStyle}>
-          <H2>Admin</H2>
-          <P>{lor.em}</P>
-        </div>
-        <div style={botDivStyle}>
-          <LoginModal role={"admin"} />
-          <AdminRegisterModal role={"admin"} />
-        </div>
-      </Card>
-
       <Card color="yellow" imgUrl={recruiter}>
         <div style={topDivStyle}>
           <H2>Reclutadoras</H2>
@@ -91,7 +80,4 @@ const mapStateToProps = state => ({
   user: state.session.user
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(Landing);
+export default connect(mapStateToProps, null)(Landing);
