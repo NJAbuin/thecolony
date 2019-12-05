@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import { CandidatePosting } from "../components/CandidatePosting";
+
 import { CandidateStyle } from "../templates/Candidates";
 import { candidateFetchDetails } from "../store/actions/candidates";
 
@@ -14,7 +16,7 @@ export function CandidateDetails({ candidateDetails }) {
     CV,
     address,
     expectedSalary,
-    jobpostingId
+    jobpostings
   } = candidateDetails;
 
   const showCV = () => window.open(`${CV.replace("dist", "")}`, "_blank");
@@ -27,9 +29,14 @@ export function CandidateDetails({ candidateDetails }) {
         <span>{jobTitle}</span>
         <br />
         <button onClick={e => showCV(e)}>Ver CV</button>
-        <p>BUSQUEDAS ASIGNADAS</p>
+
+        {jobpostings.length > 0
+          ? jobpostings.map(posting => (
+            <CandidatePosting posting={posting} key={posting.id} candidate={candidateDetails} />
+          ))
+          : null}
+
         <br />
-        {jobpostingId}
       </CandidateStyle>
     );
 }

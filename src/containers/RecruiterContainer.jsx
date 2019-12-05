@@ -42,7 +42,7 @@ function RecruiterContainer({ getCandidateList, getJobPostings }) {
         path="/auth/recruiter/candidates"
         component={RecruiterCandidates}
       />
-      <Redirect path="/" to="/auth/recruiter/dashboard" />
+      <Redirect path="/" to="/auth/recruiter/jobpostings" />
     </Switch>
   );
 }

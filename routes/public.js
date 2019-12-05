@@ -301,41 +301,41 @@ router.post("/jobpostings", function (req, res) {
 //5. Reportes
 //5.a crear reporte
 
-router.post("/jobpostings/:jobID/:candidateID/report", function (req, res) {
+router.post("/jobpostings/:jobID/:candidateId/report", function (req, res) {
     Report.create(req.body).then(report => res.send(report.informe));
 });
 
 //5.b ver reporte
 
-router.get("/jobpostings/:jobID/:candidateID/report", function (req, res) {
+router.get("/jobpostings/:jobID/:candidateId/report", function (req, res) {
     Report.findOne({
         where: {
-            candidateID: req.params.candidateID,
-            jobPostingID: req.params.jobID
+            candidateId: req.params.candidateId,
+            jobPostingId: req.params.jobID
         }
     }).then(report => res.send(report));
 });
 
 //5.c editar reporte
 
-router.put("/jobpostings/:jobID/:candidateID/report", function (req, res) {
-    if (req.user.type === "admin") {
+router.put("/jobpostings/:jobId/:candidateId/report", function (req, res) {
+    if (req.user.type !== "client") {
         Report.findOne({
             where: {
-                candidateID: req.params.candidateID,
-                jobPostingID: req.params.jobID
+                candidateId: req.params.candidateId,
+                jobPostingId: req.params.jobId
             }
         })
             .then(report => {
-                if (!report) {
+                if (!report)
                     res.send("No se encontro el reporte");
-                }
+
                 return report.update(req.body);
             })
             .then(updated => res.send(updated));
-    } else {
+    } else
         res.send("Solo los administradores pueden editar el reporte");
-    }
+
 });
 
 module.exports = router;
