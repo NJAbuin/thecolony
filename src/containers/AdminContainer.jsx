@@ -13,12 +13,12 @@ import JobPostingDetails from "../components/JobPostingDetails";
 import NewJobPostingForm from "../components/NewJobPostingForm";
 
 function AdminContainer(props) {
+  //<Route path="/auth/admin/dashboard" component={AdminDashboard} />
   return (
     <Switch>
       <Route path="/auth/admin/admins" component={AdminAdmins} />
       <Route path="/auth/admin/candidates" component={AdminCandidates} />
       <Route path="/auth/admin/clients" component={AdminClients} />
-      <Route path="/auth/admin/dashboard" component={AdminDashboard} />
       <Route
         path="/auth/admin/jobpostings/edit/:id"
         component={NewJobPostingForm}
