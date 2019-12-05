@@ -24,6 +24,7 @@ export function Candidate(props) {
 
   const checker = function() {
     return (
+      props.jobPostingSelected &&
       props.jobPostingSelected.candidates &&
       Boolean(
         props.jobPostingSelected.candidates.find(
@@ -38,8 +39,14 @@ export function Candidate(props) {
   };
 
   return (
-    <CandidateStyle backgroundColor={checker() ? "#0be325" : "#fff"}>
-      {props.match.path.includes("jobpostings") && !checker() ? (
+    <CandidateStyle
+      backgroundColor={
+        checker() && props.match.path.includes("jobpostings")
+          ? "#0be325"
+          : "#fff"
+      }
+    >
+      {props.match && props.match.path.includes("jobpostings") && !checker() ? (
         <input
           type="checkbox"
           onClick={e => {
