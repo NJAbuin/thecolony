@@ -204,7 +204,6 @@ router.get("/jobpostings", function (req, res) {
                 state: "activa"
             }
         }).then(jobs => {
-            console.log(jobs)
             res.send(jobs)
         })
             .catch(e => res.send(e))
