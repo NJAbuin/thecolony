@@ -19,6 +19,8 @@ import {
 } from "../store/actions/candidates";
 
 function RecruiterJobPostings(props) {
+  const [search, setSearch] = useState("");
+  const [candidateList, setCandidateList] = useState(props.candidateList);
   const clearAll = () => {
     document
       .querySelectorAll("input")
@@ -26,6 +28,32 @@ function RecruiterJobPostings(props) {
     candidatesClearListSelection();
   };
 
+  useEffect(() => {
+    return setCandidateList(props.candidateList);
+  }, []);
+
+  useEffect(() => {
+    if (search === "") return setCandidateList(props.candidateList);
+
+    return setCandidateList(
+      candidateList.filter(
+        candidate =>
+          candidate.fullName.includes(search) ||
+          candidate.jobTitle.includes(search)
+      )
+    );
+  }, [search]);
+
+  const handleSearch = e => {
+    let filteredList = props.candidateList.filter(
+      candidate =>
+        candidate.fullName
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase()) ||
+        candidate.jobTitle.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    return setCandidateList(filteredList);
+  };
   return (
     <Dashboard>
       <Left>
@@ -35,9 +63,9 @@ function RecruiterJobPostings(props) {
           </span>
         </TitleL>
         <ContentL>
-          {props.jobPostings.map(jobPost =>
+          {props.jobPostings.map(jobPost => (
             <JobPosting key={jobPost.id} jobPost={jobPost} />
-          )}
+          ))}
         </ContentL>
       </Left>
 
@@ -56,11 +84,17 @@ function RecruiterJobPostings(props) {
             >
               ASIGNAR A BUSQUEDA SELECCIONADA
             </button>
-            <button onClick={() => clearAll()}>CANCELAR SELECCION</button>
+            <button onClick={() => clearAll()}>CANCELAR SELECCION</button>{" "}
+            <br />
+            <input
+              type="text"
+              placeholder="Search.."
+              onChange={e => handleSearch(e)}
+            />
           </div>
         </TitleR>
         <ContentR>
-          {props.candidateList.map(candidate => (
+          {candidateList.map(candidate => (
             <Candidate candidate={candidate} key={candidate.id} />
           ))}
         </ContentR>
