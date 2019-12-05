@@ -19,7 +19,7 @@ export const getJobPostings = () => dispatch =>
   axios
     .get("/api/jobpostings")
     .then(res => res.data)
-    .then(candList => dispatch(jobPostings(candList)));
+    .then(JPList => dispatch(jobPostings(JPList)));
 
 export const selectJobPost = jobPost => ({
   type: JOB_POSTING_SELECT,

@@ -6,10 +6,7 @@ import { connect } from "react-redux";
 import LoginModal from "./LoginModal";
 
 const NavBar = props => {
-  const handleLogout = () => {
-    props.sessionLogOut();
-    props.history.push("/");
-  };
+  const handleLogout = () => (props.sessionLogOut(), props.history.push("/"));
 
   let logoLinkURL = props.user.fullName ? "/auth/dashboard" : "/landing";
 
@@ -74,4 +71,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { sessionLogOut };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavBar));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(NavBar));

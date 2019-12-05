@@ -31,7 +31,7 @@ export const labelInputCreator = (
   fieldName,
   setFn,
   inputType = "text",
-  value = null
+  value = ""
 ) => {
   const inputStyle = {
     width: "100%",
@@ -47,7 +47,7 @@ export const labelInputCreator = (
         onChange={e => setFn(e.target.value)}
         type={inputType}
         style={inputStyle}
-        value={value}
+        defaultValue={value}
       />
       <br />
     </Label>

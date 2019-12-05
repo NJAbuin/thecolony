@@ -24,7 +24,12 @@ const mapStateToProps = ({ clientList, session }) => ({
   clientList,
   session
 });
+
 const mapDispatchToProps = {
   fetchClientList
 };
-export default connect(mapStateToProps, mapDispatchToProps)(AdminClients);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdminClients);

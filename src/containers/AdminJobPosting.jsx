@@ -29,11 +29,7 @@ function AdminJobPosting(props) {
   return (
     <div>
       <H1>BUSQUEDAS LABORALES</H1>
-      <button
-        onClick={e => {
-          props.history.push("/auth/admin/jobpostings/new");
-        }}
-      >
+      <button onClick={e => props.history.push("/auth/admin/jobpostings/new")}>
         Crear Busqueda
       </button>
       <input
@@ -42,7 +38,7 @@ function AdminJobPosting(props) {
         onChange={e => handleSearch(e)}
       />
       <hr />
-      {search == ""
+      {search === ""
         ? props.jobPostings.map(jobPost => (
             <JobPosting jobPost={jobPost} key={jobPost.id} />
           ))
@@ -62,4 +58,7 @@ const mapDispatchToProps = {
   getJobPostings
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminJobPosting);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdminJobPosting);

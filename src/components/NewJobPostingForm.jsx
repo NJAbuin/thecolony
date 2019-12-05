@@ -27,10 +27,11 @@ function NewJobPostingForm({
   const [selectedClientID, setSelectedClientID] = useState(null);
   const [selectedClientFullName, setSelectedClientFullName] = useState(null);
   const [warningMessage, setWarningMessage] = useState(null);
+  const userType = session.user.type;
 
   useEffect(() => {
-    fetchClientList();
-  }, [fetchClientList]); //convencion, buuena practica no dejarlo vacio
+    if (userType === "admin") fetchClientList();
+  }, [userType]);
 
   useEffect(() => {
     if (
@@ -104,7 +105,7 @@ function NewJobPostingForm({
               return clearForm(), alert("Busqueda laboral editada");
             } else alert("Hubo un problema al editar su busqueda.");
           });
-      } else {
+      } else
         axios
           .post("/api/jobpostings", {
             title,
@@ -117,12 +118,11 @@ function NewJobPostingForm({
             benefits,
             clientId: selectedClientID
           })
-          .then(res => {
-            if (res.data) {
-              return clearForm(), alert("Busqueda laboral creada");
-            } else alert("Hubo un problema al cargar su busqueda.");
-          });
-      }
+          .then(res =>
+            res.data
+              ? (clearForm(), alert("Busqueda laboral creada"))
+              : alert("Hubo un problema al cargar su busqueda.")
+          );
     }
   };
 
@@ -141,17 +141,21 @@ function NewJobPostingForm({
   return (
     <div>
       <form>
-        {session.user.type === "admin" ? (
+        {userType === "admin" ? (
           <label>
             Crear como:
             <select
-              onChange={e => setSelectedClientID(e.target.value)}
-              value={selectedClientFullName}
+              onChange={e => {
+                let newVal = e.target.value;
+                setSelectedClientID(
+                  newVal.match(/\d\w*\:/g)[0].slice(0, newVal.indexOf(":"))
+                );
+              }}
             >
-              {/* value={client.id}
-                  name={client.fullName} */}
               {clientList.map(client => (
-                <option key={client.id}>{client.fullName}</option>
+                <option key={client.id}>
+                  {client.id}: {client.fullName}
+                </option>
               ))}
             </select>
             <br />
@@ -168,7 +172,7 @@ function NewJobPostingForm({
             value={description}
             type="text"
             onChange={e => setDescription(e.target.value)}
-          />{" "}
+          />
         </Label>
         {labelInputCreator(
           "Fecha de inicio (DD-MM-YYYY)",
@@ -207,7 +211,7 @@ function NewJobPostingForm({
             onChange={e => {
               setBenefits(e.target.value);
             }}
-          />{" "}
+          />
         </Label>
 
         <p style={{ color: "red" }}>{warningMessage}</p>
@@ -227,4 +231,7 @@ const mapDispatchToProps = {
   fetchClientList
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewJobPostingForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewJobPostingForm);
