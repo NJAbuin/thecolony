@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { sessionLogOut } from "../store/actions/session";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
+import LoginModal from "./LoginModal";
 
 const NavBar = props => {
   const handleLogout = () => {
@@ -18,7 +19,7 @@ const NavBar = props => {
         <div>
           <span>
             {props.user.fullName
-              ? `Bienvenido ${props.user.fullName.split(' ')[0]}!`
+              ? `Bienvenido ${props.user.fullName.split(" ")[0]}!`
               : `Registrese para comenzar a navegar!`}
           </span>
         </div>
@@ -26,15 +27,16 @@ const NavBar = props => {
 
       <Link
         to={logoLinkURL}
-        style={{ alignSelf: "center", marginLeft: "19rem", textAlign: 'center' }}
+        style={{
+          alignSelf: "center",
+          marginLeft: "19rem",
+          textAlign: "center"
+        }}
       >
-        <p style={{ backgroundColor: 'black', color: 'white' }}>
-          DEVFLOWLOGO
-        </p>
+        <p style={{ backgroundColor: "black", color: "white" }}>DEVFLOWLOGO</p>
       </Link>
 
       <span
-        onClick={handleLogout}
         style={{
           color: "blue",
           display: "inline-block",
@@ -42,7 +44,11 @@ const NavBar = props => {
           right: "0"
         }}
       >
-        {props.user.fullName ? "Logout" : ""}
+        {!props.user.type ? (
+          <LoginModal role={"admin"} />
+        ) : (
+          <span onClick={handleLogout}>Logout</span>
+        )}
       </span>
     </div>
   );
