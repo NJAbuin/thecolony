@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
 import { PostingStyle } from "../templates/Candidates";
 
-export function CandidatePosting({ posting, candidate }) {
+export function CandidatePosting({ posting, candidate, userType }) {
   const { id, title, report } = posting;
   const [comment, setComment] = useState("");
   const [link, setLink] = useState("");
@@ -28,7 +30,9 @@ export function CandidatePosting({ posting, candidate }) {
 
   return (
     <PostingStyle>
-      <h2>{title}</h2>
+      <Link to={`/auth/${userType}/jobpostings/${id}`}>
+        <h2>{title}</h2>
+      </Link>
       <select
         defaultValue={report.status}
         onChange={e => updateCandidateStatus("status", e.target.value)}

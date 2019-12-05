@@ -128,14 +128,14 @@ function NewJobPostingForm({
 
   useEffect(() => {
     if (title.length < 3)
-      setWarningMessage("Ingrese un titulo de busqueda valido");
-    else if (!validateLength(description, 255) || description.length < 5)
-      setWarningMessage("Ingrese una descripcion valida");
-    else if (!validateDate(startingDate))
-      setWarningMessage("Ingrese una fecha valida");
-    else if (!openings)
-      setWarningMessage("Seleccione la cantidad de puestos disponibles");
-    else setWarningMessage("");
+      return setWarningMessage("Ingrese un titulo de busqueda valido");
+    if (!validateLength(description, 255) || description.length < 5)
+      return setWarningMessage("Ingrese una descripcion valida");
+    if (!validateDate(startingDate))
+      return setWarningMessage("Ingrese una fecha valida");
+    if (!openings)
+      return setWarningMessage("Seleccione la cantidad de puestos disponibles");
+    return setWarningMessage("");
   }, [title, description, startingDate, openings]);
 
   return (
