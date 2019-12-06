@@ -61,7 +61,11 @@ function RecruiterJobPostings(props) {
           <span style={{ display: "inline-block", padding: "25px" }}>
             BUSQUEDAS LABORALES
           </span>
+          <h4>
+            Busqueda seleccionada: <br /> {props.jobPostingSelected.title}
+          </h4>
         </TitleL>
+
         <ContentL>
           {props.jobPostings.map(jobPost => (
             <JobPosting key={jobPost.id} jobPost={jobPost} />
@@ -94,9 +98,13 @@ function RecruiterJobPostings(props) {
           </div>
         </TitleR>
         <ContentR>
-          {candidateList.map(candidate => (
-            <Candidate candidate={candidate} key={candidate.id} />
-          ))}
+          {search === ""
+            ? props.candidateList.map(candidate => (
+                <Candidate candidate={candidate} key={candidate.id} />
+              ))
+            : candidateList.map(candidate => (
+                <Candidate candidate={candidate} key={candidate.id} />
+              ))}
         </ContentR>
       </Right>
     </Dashboard>
