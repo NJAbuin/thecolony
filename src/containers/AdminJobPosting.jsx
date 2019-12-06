@@ -15,7 +15,9 @@ function AdminJobPosting(props) {
   }, []);
 
   useEffect(() => {
-    setJobList(
+    if (search == "") return setJobList(props.jobPostings);
+
+    return setJobList(
       props.jobPostings.filter(posting =>
         posting.title.toLowerCase().includes(search)
       )
@@ -58,7 +60,4 @@ const mapDispatchToProps = {
   getJobPostings
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AdminJobPosting);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminJobPosting);
