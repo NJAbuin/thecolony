@@ -21,6 +21,9 @@ import {
 function RecruiterJobPostings(props) {
   const [search, setSearch] = useState("");
   const [candidateList, setCandidateList] = useState(props.candidateList);
+  const [jobSearch, setJobSearch] = useState("");
+  const [jobList, setJobList] = useState([]);
+
   const clearAll = () => {
     document
       .querySelectorAll("input")
