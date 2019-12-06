@@ -15,7 +15,7 @@ export const MainGrid = styled.div`
 export const LandingGrid = styled.div`
   display: grid;
   background-color: orangered;
-  grid-template-columns: repeat(3, 33.33vw);
+  grid-template-columns: repeat(2, 50vw);
   height: 100%;
   width: 100%;
 `;

@@ -11,7 +11,6 @@ const path = require("path");
 const fs = require("fs");
 const pdf = require("pdf-parse");
 
-
 //async await ???
 
 //CANDIDATOS
@@ -113,7 +112,7 @@ router.get("/candidates/:id", function (req, res) {
             where: { id: req.params.id, recruiterId: req.user.id }
         })
             .then(candidate => {
-                res.send(candidate)
+                res.send(candidate);
             })
             .catch(e => res.send(e));
     }
@@ -127,7 +126,7 @@ router.get("/candidates/:id", function (req, res) {
             where: { id: req.params.id }
         })
             .then(candidate => {
-                res.send(candidate)
+                res.send(candidate);
             })
             .catch(e => res.send(e));
     }
@@ -158,8 +157,6 @@ router.put("/candidates/edit/:id", function (req, res) {
 });
 
 //4. Ver las busquedas a las que esta asignado un candidato
-
-
 
 //BUSQUEDAS
 
@@ -206,7 +203,7 @@ router.get("/jobpostings", function (req, res) {
         }).then(jobs => {
             res.send(jobs)
         })
-            .catch(e => res.send(e))
+            .catch(e => res.send(e));
     }
 });
 
@@ -243,8 +240,8 @@ router.get("/jobpostings/:id", function (req, res) {
             ],
             where: { id: req.params.id }
         }).then(job => {
-            console.log(job)
-            res.send(job)
+            console.log(job);
+            res.send(job);
         });
     }
 });
@@ -289,8 +286,9 @@ router.delete("/jobpostings/delete/:id", function (req, res) {
 
 //4. Crear Busquedas
 
-router.post("/jobposting", function (req, res) {
-    const uId = req.user.type === "client" ? req.body.clientId : req.user.id;
+router.post("/jobpostings", function (req, res) {
+    console.log(req.body);
+    const uId = req.user.type === "client" ? req.user.id : req.body.clientId;
     Client.findOne({ where: { id: uId } })
         .then(client => client.createJobposting(req.body))
         .then(() => res.status(201).send(true))
@@ -300,41 +298,38 @@ router.post("/jobposting", function (req, res) {
 //5. Reportes
 //5.a crear reporte
 
-router.post("/jobpostings/:jobID/:candidateID/report", function (req, res) {
+router.post("/jobpostings/:jobID/:candidateId/report", function (req, res) {
     Report.create(req.body).then(report => res.send(report.informe));
 });
 
 //5.b ver reporte
 
-router.get("/jobpostings/:jobID/:candidateID/report", function (req, res) {
+router.get("/jobpostings/:jobID/:candidateId/report", function (req, res) {
     Report.findOne({
         where: {
-            candidateID: req.params.candidateID,
-            jobPostingID: req.params.jobID
+            candidateId: req.params.candidateId,
+            jobPostingId: req.params.jobID
         }
     }).then(report => res.send(report));
 });
 
 //5.c editar reporte
 
-router.put("/jobpostings/:jobID/:candidateID/report", function (req, res) {
-    if (req.user.type === "admin") {
+router.put("/jobpostings/:jobId/:candidateId/report", function (req, res) {
+    if (req.user.type !== "client") {
         Report.findOne({
             where: {
-                candidateID: req.params.candidateID,
-                jobPostingID: req.params.jobID
+                candidateId: req.params.candidateId,
+                jobPostingId: req.params.jobId
             }
         })
             .then(report => {
-                if (!report) {
-                    res.send("No se encontro el reporte");
-                }
+                if (!report) res.send("No se encontro el reporte");
+
                 return report.update(req.body);
             })
             .then(updated => res.send(updated));
-    } else {
-        res.send("Solo los administradores pueden editar el reporte");
-    }
+    } else res.send("Solo los administradores pueden editar el reporte");
 });
 
 module.exports = router;

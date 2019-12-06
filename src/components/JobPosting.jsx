@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { Button } from "../templates/Button";
 import { JobPostStyle } from "../templates/JobPostStyle";
 import { Candidate } from "../components/Candidate";
 
@@ -31,16 +30,16 @@ function JobPosting(props) {
       <div style={{ boxSizing: "border-box", margin: "15px", heigth: "100%" }}>
         <p>{title}</p>
         {userType !== "recruiter" ? (
-          <Button onClick={() => setShowCands(!showCands)}>
+          <button onClick={() => setShowCands(!showCands)}>
             {showCands ? "OCULTAR CANDIDATOS" : "VER CANDIDATOS"}
-          </Button>
+          </button>
         ) : (
-          <Button onClick={() => props.selectJobPostToState(id)}>
+          <button onClick={() => props.selectJobPostToState(id)}>
             SELECCIONAR
-          </Button>
+          </button>
         )}
         <Link to={`/auth/${userType}/jobpostings/${id}`}>
-          <Button>Ver detalles</Button>
+          <button>Ver detalles</button>
         </Link>
         {showCands
           ? candidates.map(candidate => (

@@ -80,11 +80,13 @@ const opts = {
   secretOrKey: jwtSecret.secret,
 };
 
-passport.use(
+/* passport.use(
   'jwt',
   new JWTstrategy(opts, (jwt_payload, done) => {
+    console.log("ACA")
+    console.log(jwt_payload)
     try {
-      Recruiter.findOne({
+      Admin.findOne({
         where: {
           email: jwt_payload.id,
         },
@@ -102,7 +104,7 @@ passport.use(
       done(err);
     }
   }),
-);
+); */
 
 passport.serializeUser((user, done) => done(null, `${user.type} ${user.id}`));
 

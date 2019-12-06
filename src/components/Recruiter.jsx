@@ -5,12 +5,12 @@ import axios from "axios";
 import React from "react";
 
 export function Recruiter({ recruiter }) {
-  const changePermissions = value => {
+  const changePermissions = value =>
     axios
       .put(`/api/admin/recruiters/${recruiter.id}`, { permissions: value })
       .then(res => res.data)
       .then(updated => console.log(updated));
-  };
+  ;
 
   return (
     <ClientStyle>
@@ -32,6 +32,7 @@ export function Recruiter({ recruiter }) {
 
       {recruiter.logoURL && <img src={recruiter.logoURL} alt="" />}
       {recruiter.website && <a href={recruiter.website}>Visitar el website.</a>}
+      <button>Editar recrutador</button>
     </ClientStyle>
   );
 }

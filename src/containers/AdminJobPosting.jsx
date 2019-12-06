@@ -6,24 +6,47 @@ import { H1 } from "../templates/Text";
 import JobPosting from "../components/JobPosting";
 
 function AdminJobPosting(props) {
+  const [jobList, setJobList] = useState([]);
+  const [search, setSearch] = useState("");
+
   useEffect(() => {
     props.getJobPostings();
+    setJobList(props.jobPostings);
   }, []);
+
+  useEffect(() => {
+    if (search == "") return setJobList(props.jobPostings);
+
+    return setJobList(
+      props.jobPostings.filter(posting =>
+        posting.title.toLowerCase().includes(search)
+      )
+    );
+  }, [search]);
+
+  const handleSearch = e => {
+    return setSearch(e.target.value.toLowerCase());
+  };
 
   return (
     <div>
       <H1>BUSQUEDAS LABORALES</H1>
-      <button
-        onClick={e => {
-          props.history.push("/auth/admin/jobpostings/new");
-        }}
-      >
+      <button onClick={e => props.history.push("/auth/admin/jobpostings/new")}>
         Crear Busqueda
       </button>
+      <input
+        type="text"
+        placeholder="Search.."
+        onChange={e => handleSearch(e)}
+      />
       <hr />
-      {props.jobPostings.map(jobPost => (
-        <JobPosting jobPost={jobPost} key={jobPost.id} />
-      ))}
+      {search === ""
+        ? props.jobPostings.map(jobPost => (
+            <JobPosting jobPost={jobPost} key={jobPost.id} />
+          ))
+        : jobList.map(jobPost => (
+            <JobPosting jobPost={jobPost} key={jobPost.id} />
+          ))}
     </div>
   );
 }

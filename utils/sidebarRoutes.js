@@ -1,11 +1,11 @@
 export const recruiterSidebar = {
-  Dashboard: "/auth/recruiter/dashboard",
+  //  Dashboard: "/auth/recruiter/dashboard",
   Busquedas: "/auth/recruiter/jobpostings",
   Candidatos: "/auth/recruiter/candidates"
 };
 
 export const adminSidebar = {
-  Dashboard: "/auth/admin/dashboard",
+  //  Dashboard: "/auth/admin/dashboard",
   Clientes: "/auth/admin/clients",
   Reclutadoras: "/auth/admin/recruiters",
   Candidatos: "/auth/admin/candidates",
@@ -14,7 +14,7 @@ export const adminSidebar = {
 };
 
 export const clientSidebar = {
-  Dashboard: "/auth/client/dashboard",
+  // Dashboard: "/auth/client/dashboard",
   Busquedas: "/auth/client/jobpostings"
 };
 

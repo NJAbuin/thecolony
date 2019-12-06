@@ -19,9 +19,9 @@ function RecruiterContainer({ getCandidateList, getJobPostings }) {
     getJobPostings();
   }, []);
 
+  //  <Route path="/auth/recruiter/dashboard" component={DashboardRecruiter} />
   return (
     <Switch>
-      <Route path="/auth/recruiter/dashboard" component={DashboardRecruiter} />
       <Route
         path="/auth/recruiter/jobpostings/:id"
         component={JobPostingDetails}
@@ -42,7 +42,7 @@ function RecruiterContainer({ getCandidateList, getJobPostings }) {
         path="/auth/recruiter/candidates"
         component={RecruiterCandidates}
       />
-      <Redirect path="/" to="/auth/recruiter/dashboard" />
+      <Redirect path="/" to="/auth/recruiter/jobpostings" />
     </Switch>
   );
 }
