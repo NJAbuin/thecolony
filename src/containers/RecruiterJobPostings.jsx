@@ -52,10 +52,10 @@ function RecruiterJobPostings(props) {
     <Dashboard>
       <Left>
         <TitleL>
-          <span style={{ display: "inline-block", padding: "25px" }}>
+          <span style={{ display: "inline-block", padding: "5px" }}>
             BUSQUEDAS LABORALES
           </span>
-          <h4>
+          <h4 style={{ padding: "5px" }}>
             Busqueda seleccionada: <br /> {props.jobPostingSelected.title}
           </h4>
         </TitleL>
