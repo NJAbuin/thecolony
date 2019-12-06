@@ -21,6 +21,7 @@ import {
 function RecruiterJobPostings(props) {
   const [search, setSearch] = useState("");
   const [candidateList, setCandidateList] = useState(props.candidateList);
+
   const clearAll = () => {
     document
       .querySelectorAll("input")
@@ -29,30 +30,22 @@ function RecruiterJobPostings(props) {
   };
 
   useEffect(() => {
-    return setCandidateList(props.candidateList);
+    setCandidateList(props.candidateList);
   }, []);
 
   useEffect(() => {
     if (search === "") return setCandidateList(props.candidateList);
-
     return setCandidateList(
-      candidateList.filter(
+      props.candidateList.filter(
         candidate =>
-          candidate.fullName.includes(search) ||
-          candidate.jobTitle.includes(search)
+          candidate.fullName.toLowerCase().includes(search) ||
+          candidate.jobTitle.toLowerCase().includes(search)
       )
     );
   }, [search]);
 
   const handleSearch = e => {
-    let filteredList = props.candidateList.filter(
-      candidate =>
-        candidate.fullName
-          .toLowerCase()
-          .includes(e.target.value.toLowerCase()) ||
-        candidate.jobTitle.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-    return setCandidateList(filteredList);
+    return setSearch(e.target.value.toLowerCase());
   };
   return (
     <Dashboard>
@@ -61,7 +54,11 @@ function RecruiterJobPostings(props) {
           <span style={{ display: "inline-block", padding: "25px" }}>
             BUSQUEDAS LABORALES
           </span>
+          <h4>
+            Busqueda seleccionada: <br /> {props.jobPostingSelected.title}
+          </h4>
         </TitleL>
+
         <ContentL>
           {props.jobPostings.map(jobPost => (
             <JobPosting key={jobPost.id} jobPost={jobPost} />
@@ -94,9 +91,13 @@ function RecruiterJobPostings(props) {
           </div>
         </TitleR>
         <ContentR>
-          {candidateList.map(candidate => (
-            <Candidate candidate={candidate} key={candidate.id} />
-          ))}
+          {search === ""
+            ? props.candidateList.map(candidate => (
+                <Candidate candidate={candidate} key={candidate.id} />
+              ))
+            : candidateList.map(candidate => (
+                <Candidate candidate={candidate} key={candidate.id} />
+              ))}
         </ContentR>
       </Right>
     </Dashboard>

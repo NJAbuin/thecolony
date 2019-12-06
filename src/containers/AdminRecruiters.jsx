@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 import { Recruiter } from "../components/Recruiter";
@@ -7,16 +7,49 @@ import { fetchRecruiterList } from "../store/actions/recruiters";
 import { FullDash } from "../templates/Dashboard";
 
 function AdminRecruiters(props) {
+  const [recruiters, setRecruiters] = useState([]);
+  const [search, setSearch] = useState("");
+
   useEffect(() => {
     props.fetchRecruiterList();
+    setRecruiters(props.recruitersList);
   }, []);
+
+  useEffect(() => {
+    if (search == "") return setRecruiters(props.recruitersList);
+
+    return setRecruiters(
+      props.recruitersList.filter(
+        recruiter =>
+          recruiter.fullName.toLowerCase().includes(search) ||
+          recruiter.email.toLowerCase().includes(search) ||
+          recruiter.permissions.toLowerCase().includes(search)
+      )
+    );
+  }, [search]);
+
+  const handleSearch = e => {
+    return setSearch(e.target.value.toLowerCase());
+  };
 
   return (
     <FullDash>
-      {props.recruitersList &&
-        props.recruitersList.map(recruiter => (
-          <Recruiter recruiter={recruiter} key={recruiter.id} />
-        ))}
+      <hr />
+      <input
+        type="text"
+        placeholder="Search.."
+        onChange={e => handleSearch(e)}
+      />
+      <hr />
+      {search === ""
+        ? props.recruitersList &&
+          props.recruitersList.map(recruiter => (
+            <Recruiter recruiter={recruiter} key={recruiter.id} />
+          ))
+        : recruiters &&
+          recruiters.map(recruiter => (
+            <Recruiter recruiter={recruiter} key={recruiter.id} />
+          ))}
     </FullDash>
   );
 }
