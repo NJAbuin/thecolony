@@ -21,8 +21,6 @@ import {
 function RecruiterJobPostings(props) {
   const [search, setSearch] = useState("");
   const [candidateList, setCandidateList] = useState(props.candidateList);
-  const [jobSearch, setJobSearch] = useState("");
-  const [jobList, setJobList] = useState([]);
 
   const clearAll = () => {
     document
@@ -32,30 +30,22 @@ function RecruiterJobPostings(props) {
   };
 
   useEffect(() => {
-    return setCandidateList(props.candidateList);
+    setCandidateList(props.candidateList);
   }, []);
 
   useEffect(() => {
     if (search === "") return setCandidateList(props.candidateList);
-
     return setCandidateList(
-      candidateList.filter(
+      props.candidateList.filter(
         candidate =>
-          candidate.fullName.includes(search) ||
-          candidate.jobTitle.includes(search)
+          candidate.fullName.toLowerCase().includes(search) ||
+          candidate.jobTitle.toLowerCase().includes(search)
       )
     );
   }, [search]);
 
   const handleSearch = e => {
-    let filteredList = props.candidateList.filter(
-      candidate =>
-        candidate.fullName
-          .toLowerCase()
-          .includes(e.target.value.toLowerCase()) ||
-        candidate.jobTitle.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-    return setCandidateList(filteredList);
+    return setSearch(e.target.value.toLowerCase());
   };
   return (
     <Dashboard>
