@@ -1,7 +1,7 @@
 //node modules
 import { connect } from "react-redux";
-import React, { useEffect } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
 //components / containers
@@ -19,9 +19,13 @@ import { MainTheme } from "../templates/MainTheme";
 import { fetchSession } from "../store/actions/session";
 
 function Main({ user, fetchSession, history }) {
+  const [loading, setLoading] = useState(true)
+  const { pathname } = useLocation()
+
   useEffect(() => {
-    fetchSession();
-    if (user.type) history.replace(`/auth/${user.type}/`);
+    fetchSession().then(() => setLoading(false))
+    if (!loading && user.type !== pathname.split('/')[1])
+      history.replace(`/auth/${user.type}/`)
   }, [user.type]);
 
   return (
@@ -30,7 +34,7 @@ function Main({ user, fetchSession, history }) {
         <Navbar />
         <Switch>
           <Route path="/landing" component={Landing} />
-          <PrivateRoute path="/auth" component={AuthContainer} user={user} />
+          <PrivateRoute path="/auth" component={AuthContainer} user={user} loading={loading} />
           <Redirect path="/" to="/landing" />
         </Switch>
       </MainGrid>
