@@ -8,12 +8,14 @@ const {
   Client,
   Recruiter
 } = require("../db/models/");
+const jwtSecret = require("../db/passport/jwtConfig")
+const jwt = require('jsonwebtoken')
 
 //REGISTER Y LOGIN
 
 //ADMIN
 
-router.post("/admin/register", function(req, res) {
+router.post("/admin/register", function (req, res) {
   Admin.findOne({ where: { email: req.body.email } })
     .then(user =>
       user
@@ -23,18 +25,41 @@ router.post("/admin/register", function(req, res) {
     .catch(err => console.log(err));
 });
 
-router.post("/admin/login", passport.authenticate("admin"), (req, res) => {
-  res.send({
-    fullName: req.user.fullName,
-    email: req.user.email,
-    type: req.user.type,
-    id: req.user.id
-  });
+
+router.post('/admin/login', (req, res, next) => {
+  passport.authenticate('admin', (err, user, info) => {
+    if (err) {
+      console.log(err);
+    }
+    if (info != undefined) {
+      console.log(info.message);
+      res.send(info.message);
+    } else {
+      req.logIn(user, err => {
+        Admin.findOne({
+          where: {
+            email: user.email
+          },
+        }).then(user => {
+          const token = jwt.sign({ id: user.email }, jwtSecret.secret);
+          res.status(200).send({
+            auth: true,
+            token: token,
+            message: 'user found & logged in',
+            fullName: req.user.fullName,
+            email: req.user.email,
+            type: req.user.type,
+            id: req.user.id
+          });
+        });
+      });
+    }
+  })(req, res, next);
 });
 
 // CLIENT
 
-router.post("/client/register", function(req, res) {
+router.post("/client/register", function (req, res) {
   Client.findOne({ where: { email: req.body.email } })
     .then(user =>
       user
@@ -44,18 +69,40 @@ router.post("/client/register", function(req, res) {
     .catch(err => console.log(err));
 });
 
-router.post("/client/login", passport.authenticate("client"), (req, res) => {
-  res.send({
-    fullName: req.user.fullName,
-    email: req.user.email,
-    type: req.user.type,
-    id: req.user.id
-  });
-});
 
+router.post('/client/login', (req, res, next) => {
+  passport.authenticate("client", (err, user, info) => {
+    if (err) {
+      console.log(err);
+    }
+    if (info != undefined) {
+      console.log(info.message);
+      res.send(info.message);
+    } else {
+      req.logIn(user, err => {
+        Client.findOne({
+          where: {
+            email: user.email
+          },
+        }).then(user => {
+          const token = jwt.sign({ id: user.email }, jwtSecret.secret);
+          res.status(200).send({
+            auth: true,
+            token: token,
+            message: 'user found & logged in',
+            fullName: req.user.fullName,
+            email: req.user.email,
+            type: req.user.type,
+            id: req.user.id
+          });
+        });
+      });
+    }
+  })(req, res, next);
+});
 // RECRUITER
 
-router.post("/recruiter/register", function(req, res) {
+router.post("/recruiter/register", function (req, res) {
   Recruiter.findOne({ where: { email: req.body.email } })
     .then(user =>
       user
@@ -65,22 +112,40 @@ router.post("/recruiter/register", function(req, res) {
     .catch(err => console.log(err));
 });
 
-router.post(
-  "/recruiter/login",
-  passport.authenticate("recruiter"),
-  (req, res) => {
-    res.send({
-      fullName: req.user.fullName,
-      email: req.user.email,
-      type: req.user.type,
-      id: req.user.id
-    });
-  }
-);
+router.post('/recruiter/login', (req, res, next) => {
+  passport.authenticate("recruiter", (err, user, info) => {
+    if (err) {
+      console.log(err);
+    }
+    if (info != undefined) {
+      console.log(info.message);
+      res.send(info.message);
+    } else {
+      req.logIn(user, err => {
+        Recruiter.findOne({
+          where: {
+            email: user.email
+          },
+        }).then(user => {
+          const token = jwt.sign({ id: user.email }, jwtSecret.secret);
+          res.status(200).send({
+            auth: true,
+            token: token,
+            message: 'user found & logged in',
+            fullName: req.user.fullName,
+            email: req.user.email,
+            type: req.user.type,
+            id: req.user.id
+          });
+        });
+      });
+    }
+  })(req, res, next);
+});
 
 //LOGOUT
 
-router.get("/logout", function(req, res) {
+router.get("/logout", function (req, res) {
   req.logout();
   res.sendStatus(200);
 });
