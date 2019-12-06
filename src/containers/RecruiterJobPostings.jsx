@@ -47,14 +47,15 @@ function RecruiterJobPostings(props) {
   const handleSearch = e => {
     return setSearch(e.target.value.toLowerCase());
   };
+
   return (
     <Dashboard>
       <Left>
         <TitleL>
-          <span style={{ display: "inline-block", padding: "25px" }}>
+          <span style={{ display: "inline-block", padding: "5px" }}>
             BUSQUEDAS LABORALES
           </span>
-          <h4>
+          <h4 style={{ padding: "5px" }}>
             Busqueda seleccionada: <br /> {props.jobPostingSelected.title}
           </h4>
         </TitleL>
@@ -72,12 +73,15 @@ function RecruiterJobPostings(props) {
           <br />
           <div>
             <button
-              onClick={() =>
+              onClick={() => (
                 props.candidatesApplyToJob(
                   props.jobPostingSelected,
                   props.candidatesSelected
-                )
-              }
+                ),
+                clearAll(),
+                alert("Candidatos asignados con exito!"),
+                window.location.reload()
+              )}
             >
               ASIGNAR A BUSQUEDA SELECCIONADA
             </button>

@@ -27,7 +27,7 @@ export const Left = styled.div`
   height: 100%;
   width: 100%;
 
-  grid-template-rows: 7% 1fr;
+  grid-template-rows: 5rem 1fr;
   grid-template-areas:
     "titlebarL"
     "contentL";
@@ -41,7 +41,7 @@ export const Right = styled.div`
   height: 100%;
   width: 100%;
 
-  grid-template-rows: 7% 1fr;
+  grid-template-rows: 5rem 1fr;
   grid-template-areas:
     "titlebarR"
     "contentR";
