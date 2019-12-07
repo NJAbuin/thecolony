@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { Recruiter } from "../components/Recruiter";
 import { fetchRecruiterList } from "../store/actions/recruiters";
+import RecrClientRegisterModal from "../components/RecrClientRegisterModal";
 
 import { FullDash } from "../templates/Dashboard";
 
@@ -40,6 +41,7 @@ function AdminRecruiters(props) {
         placeholder="Search.."
         onChange={e => handleSearch(e)}
       />
+      <RecrClientRegisterModal role={"recruiter"} />
       <hr />
       {search === ""
         ? props.recruitersList &&

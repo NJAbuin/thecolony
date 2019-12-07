@@ -66,7 +66,7 @@ export default function RecrClientRegisterModal(props) {
   return (
     <div>
       <button type="button" onClick={handleOpen}>
-        Registrate
+        Crear Usuario
       </button>
       <Modal
         aria-labelledby="spring-modal-title"
