@@ -38,7 +38,10 @@ function RecrCsvForm(props) {
     Axios.post("/api/candidates/csvImport", {
       csvValues,
       user
-    }).then(res => res.data);
+    }).then(res => {
+      if (res.data) alert("Candidatos creados!");
+      else alert("Hubo un problema al cargar sus candidatos");
+    });
   };
 
   return (
@@ -58,7 +61,12 @@ function RecrCsvForm(props) {
         onFileLoaded={handleForce}
         parserOptions={papaparseOptions}
       />
-      <button onClick={e => bulkCreateFromCsv(e, props.user)}>
+      <button
+        onClick={e => {
+          setCsvValues([]);
+          bulkCreateFromCsv(e, props.user);
+        }}
+      >
         Confirmar archivo
       </button>
     </div>
@@ -69,7 +77,4 @@ const mapStateToProps = state => ({
   user: state.session.user
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(RecrCsvForm);
+export default connect(mapStateToProps, null)(RecrCsvForm);
