@@ -9,9 +9,7 @@ import RegisterModalRecrClient from "./RegisterModalRecrClient";
 import { connect } from "react-redux";
 
 function Landing(props) {
-  const { admin, recruiter, client } = {
-    admin:
-      "https://www.governmentciomedia.com/sites/default/files/styles/featured_article_image/public/2019-05/Closing%20the%20Cyber%20Workforce%20Gap%20by%20Improving%20the%20Pipeline.jpg?itok=3cDmcN0N",
+  const { recruiter, client } = {
     recruiter:
       "https://www.totalbusinessmagazine.com/Total-Business/wp-content/uploads/2018/07/Could-a-Diverse-Workforce-Win-You-More-Customers.jpg",
     client:
@@ -71,8 +69,6 @@ const botDivStyle = {
   height: "20%",
   textAlign: "center"
 };
-
-const mapDispatchToProps = dispatch => ({});
 
 const mapStateToProps = state => ({
   user: state.session.user
