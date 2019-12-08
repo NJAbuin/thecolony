@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { LandingGrid } from "../templates/LayoutGrids";
 import { Card } from "../templates/Card";
 import { H2, P } from "../templates/Text";
 
 import LoginModal from "./LoginModal";
-import AdminRegisterModal from "./AdminRegisterModal";
-import RecrClientRegisterModal from "./RecrClientRegisterModal";
+import RegisterModalRecrClient from "./RegisterModalRecrClient";
 
 import { connect } from "react-redux";
 
@@ -29,7 +27,7 @@ function Landing(props) {
         </div>
         <div style={botDivStyle}>
           <LoginModal role={"recruiter"} />
-          <RecrClientRegisterModal role={"recruiter"} />
+          <RegisterModalRecrClient role={"recruiter"} />
         </div>
       </Card>
       <Card color="cyan" imgUrl={client}>
@@ -39,7 +37,7 @@ function Landing(props) {
         </div>
         <div style={botDivStyle}>
           <LoginModal role={"client"} />
-          <RecrClientRegisterModal role={"client"} />
+          <RegisterModalRecrClient role={"client"} />
         </div>
       </Card>
     </LandingGrid>
@@ -80,4 +78,7 @@ const mapStateToProps = state => ({
   user: state.session.user
 });
 
-export default connect(mapStateToProps, null)(Landing);
+export default connect(
+  mapStateToProps,
+  null
+)(Landing);

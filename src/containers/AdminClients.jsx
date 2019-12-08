@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 import { Client } from "../components/Client";
-import RecrClientRegisterModal from "../components/RecrClientRegisterModal";
+import RegisterModalRecrClient from "../components/RegisterModalRecrClient";
 import { FullDash } from "../templates/Dashboard";
 
 import { fetchClientList } from "../store/actions/clients";
@@ -41,7 +41,7 @@ function AdminClients({ clientList, fetchClientList, session }) {
         placeholder="Search.."
         onChange={e => handleSearch(e)}
       />
-      <RecrClientRegisterModal role={"client"} />
+      <RegisterModalRecrClient role={"client"} />
       <hr />
       {search === ""
         ? clientList.map(client => (
@@ -63,4 +63,7 @@ const mapDispatchToProps = {
   fetchClientList
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminClients);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdminClients);

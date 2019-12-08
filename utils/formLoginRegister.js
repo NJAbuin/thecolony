@@ -1,14 +1,22 @@
 import React from "react";
 import { Label } from "../src/templates/FormLabel";
 
-export const [ERROR_FULLNAME, ERROR_PASSWORD, ERROR_EMAIL, ERROR_LOGIN] = [
+const minPasswordLength = 2;
+
+export const [
+  ERROR_FULLNAME,
+  ERROR_PASSWORD,
+  ERROR_PASSWORD_CHECK,
+  ERROR_EMAIL,
+  ERROR_LOGIN
+] = [
   "Ingrese un nombre valido",
   `La contraseña debe tener al menos ${minPasswordLength} caracteres`,
+  `Las contraseñas no coinciden`,
   "Ingrese un email valido",
   "Usuario o contraseña invalidos"
 ];
 
-const minPasswordLength = 2;
 /**
  * Checks if given string is complies with the minPasswordLength required.
  * @param {String} pass string to check
@@ -20,10 +28,11 @@ export function validatePass(pass) {
 
 /**
  *labelInputCreator: output a label and an input determined by parameters
- * @param {String} fieldName label name to show
+ * @param {String} fieldName placeholder name to show
  * @param {Function} setFn setFunction for controlled input use
  * @param {String} inputType desired input type, "text" for default
  * @param {String} value default value of the field
+ * @param {Object} options pass an object for extra props
  * @returns {Any} JSX with styled label and input of optional type, using setter function passed
  */
 
@@ -31,23 +40,28 @@ export const labelInputCreator = (
   fieldName,
   setFn,
   inputType = "text",
-  value = ""
+  value = "",
+  options
 ) => {
   const inputStyle = {
     width: "100%",
-    padding: "12px 20px",
-    margin: "8px 0",
-    boxSizing: "border-box"
+    padding: "10px 17px",
+    margin: "8px 0 4px",
+    boxSizing: "border-box",
+    borderTop: "2px rgba(30,30,30, 0.3) solid",
+    borderLeft: "2px rgba(30,30,30, 0.3) solid",
+    borderRadius: "2px"
   };
 
   return (
     <Label>
-      {fieldName}:{" "}
       <input
         onChange={e => setFn(e.target.value)}
         type={inputType}
         style={inputStyle}
         defaultValue={value}
+        placeholder={fieldName}
+        {...options}
       />
       <br />
     </Label>

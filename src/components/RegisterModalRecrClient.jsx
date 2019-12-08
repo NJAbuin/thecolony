@@ -11,14 +11,16 @@ import {
   validatePass,
   ERROR_EMAIL,
   ERROR_PASSWORD,
+  ERROR_PASSWORD_CHECK,
   ERROR_FULLNAME
 } from "../../utils/formLoginRegister";
 
-export default function RecrClientRegisterModal(props) {
+export default function RegisterModalRecrClient(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordCheck, setPasswordCheck] = useState("");
   const [fullName, setfullName] = useState("");
   const [logoURL, setLogoURL] = useState("");
   const [phone, setPhone] = useState("");
@@ -42,12 +44,14 @@ export default function RecrClientRegisterModal(props) {
 
   React.useEffect(() => {
     setWarningMessage(null);
-  }, [password, fullName, email]);
+  }, [password, passwordCheck, fullName, email]);
 
   const validateAndRegister = (email, password, fullName) => {
+    if (!validateFullName(fullName)) return setWarningMessage(ERROR_FULLNAME);
     if (!validateEmail(email)) return setWarningMessage(ERROR_EMAIL);
     if (!validatePass(password)) return setWarningMessage(ERROR_PASSWORD);
-    if (!validateFullName(fullName)) return setWarningMessage(ERROR_FULLNAME);
+    if (password !== passwordCheck)
+      return setWarningMessage(ERROR_PASSWORD_CHECK);
 
     return registerUser(email, password, fullName, phone, logoURL, website);
   };
@@ -86,14 +90,18 @@ export default function RecrClientRegisterModal(props) {
               <h2 id="spring-modal-title">
                 Ingrese sus datos para registrarse
               </h2>
+              {labelInputCreator("Nombre Completo", setfullName)}
               {labelInputCreator("Email", setEmail)}
               {labelInputCreator("Password", setPassword, "password")}
-              {labelInputCreator("Nombre Completo", setfullName)}
+              {labelInputCreator(
+                "Confirma tu password",
+                setPasswordCheck,
+                "password"
+              )}
               {labelInputCreator("Logo URL", setLogoURL)}
               {labelInputCreator("Phone", setPhone)}
               {labelInputCreator("Website", setWebsite)}
               <p style={{ color: "red" }}>{warningMessage}</p>
-
               <button
                 onClick={event => {
                   event.preventDefault();
