@@ -56,7 +56,7 @@ function RecruiterJobPostings(props) {
             BUSQUEDAS LABORALES
           </span>
           <h4 style={{ padding: "5px" }}>
-            Busqueda seleccionada: <br /> {props.jobPostingSelected.title}
+            Busqueda seleccionada: {props.jobPostingSelected.title}
           </h4>
         </TitleL>
 
