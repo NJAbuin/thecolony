@@ -6,7 +6,8 @@ import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is requir
 import {
   labelInputCreator,
   validateEmail,
-  ERROR_LOGIN
+  ERROR_LOGIN,
+  ERROR_PERMISSIONS
 } from "../../utils/formLoginRegister";
 import { connect } from "react-redux";
 import { sessionLogIn } from "../store/actions/session";
@@ -38,7 +39,8 @@ function LoginModal(props) {
 
   const goLogIn = (routeToPost, email, password) =>
     props.sessionLogIn(routeToPost, email, password).then(result => {
-      if (!result) return setWarningMessage(ERROR_LOGIN);
+      if (result && result.credentials === "pendiente") return setWarningMessage(ERROR_PERMISSIONS);
+      else if (!result) return setWarningMessage(ERROR_LOGIN);
       else return handleClose();
     });
 
