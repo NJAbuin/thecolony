@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { Recruiter } from "../components/Recruiter";
 import { fetchRecruiterList } from "../store/actions/recruiters";
-import RecrClientRegisterModal from "../components/RecrClientRegisterModal";
+import RegisterModalRecrClient from "../components/RegisterModalRecrClient";
 
 import { FullDash } from "../templates/Dashboard";
 
@@ -41,7 +41,7 @@ function AdminRecruiters(props) {
         placeholder="Search.."
         onChange={e => handleSearch(e)}
       />
-      <RecrClientRegisterModal role={"recruiter"} />
+      <RegisterModalRecrClient role={"recruiter"} />
       <hr />
       {search === ""
         ? props.recruitersList &&
@@ -64,4 +64,7 @@ const mapDispatchToProps = {
   fetchRecruiterList
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminRecruiters);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdminRecruiters);

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import DashboardClient from "../containers/DashboardClient";
+//import DashboardClient from "../containers/DashboardClient";
 import ClientJobPostings from "./ClientJobPostings";
 import NewJobPostingForm from "../components/NewJobPostingForm";
 

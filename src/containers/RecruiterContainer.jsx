@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import RecruiterJobPostings from "../containers/RecruiterJobPostings";
-import DashboardRecruiter from "../containers/DashboardRecruiter";
+//import DashboardRecruiter from "../containers/DashboardRecruiter";
 
 import RecruiterCandidates from "../components/RecruiterCandidates";
 import JobPostingDetails from "../components/JobPostingDetails";
@@ -52,4 +52,7 @@ const mapDispatchToProps = {
   getJobPostings
 };
 
-export default connect(null, mapDispatchToProps)(RecruiterContainer);
+export default connect(
+  null,
+  mapDispatchToProps
+)(RecruiterContainer);

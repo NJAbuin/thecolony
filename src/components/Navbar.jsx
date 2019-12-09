@@ -8,7 +8,7 @@ import LoginModal from "./LoginModal";
 const NavBar = props => {
   const handleLogout = () => (props.sessionLogOut(), props.history.push("/"));
 
-  let logoLinkURL = props.user.fullName ? "/auth/dashboard" : "/landing";
+  let logoLinkURL = props.user.type ? `/auth/${props.user.type}` : "/landing";
 
   return (
     <div style={navStyles.nav}>
@@ -44,7 +44,7 @@ const NavBar = props => {
         {!props.user.type ? (
           <LoginModal role={"admin"} />
         ) : (
-          <span onClick={handleLogout}>Logout</span>
+          <button onClick={handleLogout}>Logout</button>
         )}
       </span>
     </div>

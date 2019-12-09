@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-import AdminRegisterModal from "../components/AdminRegisterModal";
+import RegisterModalAdmin from "../components/RegisterModalAdmin";
 import Admin from "../components/Admin";
 import { getAdminList } from "../store/actions/admins";
 
@@ -40,7 +40,7 @@ function AdminAdmins(props) {
         placeholder="Search.."
         onChange={e => handleSearch(e)}
       />
-      <AdminRegisterModal />
+      <RegisterModalAdmin />
       <hr />
 
       {search === ""
@@ -58,4 +58,7 @@ const mapDispatchToProps = {
   getAdminList
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminAdmins);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdminAdmins);

@@ -14,7 +14,7 @@ import {
   ERROR_FULLNAME
 } from "../../utils/formLoginRegister";
 
-export default function AdminRegisterModal(props) {
+export default function RegisterModalAdmin(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState("");
