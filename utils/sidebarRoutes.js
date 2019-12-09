@@ -8,9 +8,9 @@ export const adminSidebar = {
   //  Dashboard: "/auth/admin/dashboard",
   Clientes: "/auth/admin/clients",
   Reclutadoras: "/auth/admin/recruiters",
+  Busquedas: "/auth/admin/jobpostings",
   Candidatos: "/auth/admin/candidates",
   Admins: "/auth/admin/admins",
-  Busquedas: "/auth/admin/jobpostings"
 };
 
 export const clientSidebar = {

@@ -6,6 +6,7 @@ export const MainTheme = {
   CeruleanBlue: "11, 119, 196",
   CoolGray: "102, 153, 196",
   SpanishOrange: "238, 185, 2",
-  JadeGreen: "128, 222, 217",
+  SpanishOrangeSoft: "238, 185, 2",
+  JadeGreen: "55, 186, 142",
   RichBlack: "5, 5, 7"
 };

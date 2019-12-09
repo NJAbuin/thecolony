@@ -7,14 +7,14 @@ export const JobPostStyle = styled.div`
   width: 95%;
   margin: 2.5%;
 
-  background-color: #ffff00;
+  background-color: rgb(${props => props.theme.JadeGreen});
 
-  border: 2px solid blue;
-  border-radius: 5px;
-  transition: border-radius 0.5s border 0.35s;
+  border: 2px solid rgb(${props => props.theme.CeruleanBlue},0.6);;
+  border-radius: 6px;
+  transition: border-radius 0.5s border 0.8s;
 
   &:hover {
-    border: 3px solid blue;
+    border: 3px solid rgb(${props => props.theme.CeruleanBlue});;
     border-radius: 7px;
   }
 `;
