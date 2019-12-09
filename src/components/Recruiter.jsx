@@ -1,4 +1,4 @@
-import { ClientStyle } from "../templates/ClientStyle";
+import { RecruiterStyle } from "../templates/RecruiterStyle";
 import { connect } from "react-redux";
 import axios from "axios";
 
@@ -13,7 +13,7 @@ export function Recruiter({ recruiter }) {
   ;
 
   return (
-    <ClientStyle>
+    <RecruiterStyle>
       <h2> {recruiter.fullName}</h2>
       <ul>
         <li>email: {recruiter.email}</li>
@@ -33,7 +33,7 @@ export function Recruiter({ recruiter }) {
       {recruiter.logoURL && <img src={recruiter.logoURL} alt="" />}
       {recruiter.website && <a href={recruiter.website}>Visitar el website.</a>}
       <button>Editar recrutador</button>
-    </ClientStyle>
+    </RecruiterStyle>
   );
 }
 
