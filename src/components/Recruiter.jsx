@@ -1,4 +1,4 @@
-import { ClientStyle } from "../templates/ClientStyle";
+import { RecruiterStyle } from "../templates/RecruiterStyle";
 import { connect } from "react-redux";
 import { Button } from "../templates/Button";
 import axios from "axios";
@@ -25,26 +25,25 @@ export function Recruiter({ recruiter }) {
   };
 
   return (
-    <ClientStyle>
+    <RecruiterStyle>
       <h2> {recruiter.fullName}</h2>
       <ul>
-        <li>email: {recruiter.email}</li>
-        <li>
-          estado: &nbsp;
-          <select
-            defaultValue={recruiter.permissions}
-            onChange={e => changePermissions(e.target.value)}
-          >
-            <option value={"pendiente"}>pendiente</option>
-            <option value={"activo"}>activo</option>
-            <option value={"inactivo"}>inactivo</option>
-          </select>
-        </li>
+        email: {recruiter.email}
+        <br />
+        estado: &nbsp;
+        <select
+          defaultValue={recruiter.permissions}
+          onChange={e => changePermissions(e.target.value)}
+        >
+          <option value={"pendiente"}>pendiente</option>
+          <option value={"activo"}>activo</option>
+          <option value={"inactivo"}>inactivo</option>
+        </select>
       </ul>
       {recruiter.logoURL && <img src={recruiter.logoURL} alt="" />}
       {recruiter.website && <a href={recruiter.website}>Visitar el website.</a>}
       <Button onClick={handleDelete}>ELIMINAR</Button>
-    </ClientStyle>
+    </RecruiterStyle>
   );
 }
 

@@ -40,6 +40,8 @@ export const Right = styled.div`
   height: 100%;
   width: 100%;
 
+  overflow-y: scroll;
+
   grid-template-rows: 5rem 1fr;
   grid-template-areas:
     "titlebarR"
@@ -72,16 +74,18 @@ export const TitleR = styled.div`
 
 export const ContentL = styled.div`
   display: block;
-  height: 100%;
+  height: 80vh;
   width: 100%;
+  overflow-y: scroll;
 
   grid-area: contentL;
 `;
 
 export const ContentR = styled.div`
   display: block;
-  height: 100%;
+  height: 80vh;
   width: 100%;
+  overflow-y: scroll;
 
   grid-area: contentR;
 `;

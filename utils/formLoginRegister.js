@@ -8,14 +8,16 @@ export const [
   ERROR_PASSWORD,
   ERROR_PASSWORD_CHECK,
   ERROR_EMAIL,
-  ERROR_LOGIN
+  ERROR_LOGIN,
+  ERROR_PERMISSIONS
 ] = [
-  "Ingrese un nombre valido",
-  `La contraseña debe tener al menos ${minPasswordLength} caracteres`,
-  `Las contraseñas no coinciden`,
-  "Ingrese un email valido",
-  "Usuario o contraseña invalidos"
-];
+    "Ingrese un nombre valido",
+    `La contraseña debe tener al menos ${minPasswordLength} caracteres`,
+    `Las contraseñas no coinciden`,
+    "Ingrese un email valido",
+    "Usuario o contraseña invalidos",
+    "Su solicitud de registro aun no fue aceptada"
+  ];
 
 /**
  * Checks if given string is complies with the minPasswordLength required.
