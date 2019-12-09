@@ -5,10 +5,13 @@ export const CandidateStyle = styled.div`
   width: 95%;
   margin: 2.5%;
 
-  background-color: rgb(${props => props.theme.SpanishOrangeSoft});
-  border: 3px solid rgb(${props => props.theme.RichBlack});
   justify-self: center;
   display: block;
+  
+  background-color: rgb(${props => props.theme.SpanishOrangeSoft});
+  border: 3px solid rgba(${props => props.theme.RichBlack},0.8);
+  border-radius: 6px;
+
 `;
 
 export const PostingStyle = styled.div`
