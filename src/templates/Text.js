@@ -23,6 +23,14 @@ export const H2 = styled.h2`
   margin-top: 2rem;
 `;
 
+export const H5 = styled.h5`
+  font-family: ${props => props.theme.fontFamily};
+  font-size: ${props => props.theme.fontSize};
+  color: black;
+  padding: 3px 0px 3px 0px;
+  margin: 0;
+`;
+
 export const P = styled.p`
   font-family: ${props => props.theme.fontFamily};
   font-size: ${props => props.theme.fontSize};

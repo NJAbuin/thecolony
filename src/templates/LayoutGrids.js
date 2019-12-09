@@ -28,4 +28,5 @@ export const AuthGrid = styled.div`
   grid-template-areas: "sidebar contentDash";
   height: 100%;
   width: 100%;
+  background-color: rgba(${props => props.theme.CoolGray},0.125);
 `;
