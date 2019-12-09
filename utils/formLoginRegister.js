@@ -3,20 +3,18 @@ import { Label } from "../src/templates/FormLabel";
 
 export const [ERROR_FULLNAME, ERROR_PASSWORD, ERROR_EMAIL, ERROR_LOGIN] = [
   "Ingrese un nombre valido",
-  `La contraseña debe tener al menos ${minPasswordLength} caracteres`,
+  `La contraseña debe tener al menos ${8} caracteres, una letra y un numero`,
   "Ingrese un email valido",
   "Usuario o contraseña invalidos"
 ];
 
-const minPasswordLength = 2;
 /**
  * Checks if given string is complies with the minPasswordLength required.
  * @param {String} pass string to check
  * @returns {Boolean}
  */
-export function validatePass(pass) {
-  return pass.length <= minPasswordLength ? false : true;
-}
+export const validatePass = pass =>
+  /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(pass);
 
 /**
  *labelInputCreator: output a label and an input determined by parameters
