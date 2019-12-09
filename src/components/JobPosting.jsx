@@ -8,7 +8,7 @@ import { Candidate } from "../components/Candidate";
 import { selectJobPostToState } from "../store/actions/jobPostings";
 
 function JobPosting(props) {
-  const userType = props.session.user.type;
+  const user = props.session.user;
   const {
     id,
     title,
@@ -29,7 +29,7 @@ function JobPosting(props) {
     <JobPostStyle>
       <div style={{ boxSizing: "border-box", margin: "15px", heigth: "100%" }}>
         <p>{title}</p>
-        {userType !== "recruiter" ? (
+        {user.type !== "recruiter" ? (
           <button onClick={() => setShowCands(!showCands)}>
             {showCands ? "OCULTAR CANDIDATOS" : "VER CANDIDATOS"}
           </button>
@@ -38,12 +38,12 @@ function JobPosting(props) {
             SELECCIONAR
           </button>
         )}
-        <Link to={`/auth/${userType}/jobpostings/${id}`}>
+        <Link to={`/auth/${user.type}/jobpostings/${id}`}>
           <button>Ver detalles</button>
         </Link>
         {showCands
           ? candidates.map(candidate => (
-              <Candidate candidate={candidate} key={candidate.id} />
+              <Candidate candidate={candidate} key={candidate.id} user={user} />
             ))
           : null}
       </div>
