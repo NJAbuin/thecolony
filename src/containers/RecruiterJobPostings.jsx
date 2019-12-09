@@ -79,8 +79,7 @@ function RecruiterJobPostings(props) {
                   props.candidatesSelected
                 ),
                 clearAll(),
-                alert("Candidatos asignados con exito!"),
-                window.location.reload()
+                alert("Candidatos asignados con exito!")
               )}
             >
               ASIGNAR A BUSQUEDA SELECCIONADA

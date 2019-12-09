@@ -36,7 +36,7 @@ export function CandidateDetails({ candidateDetails, session }) {
               posting={posting}
               key={posting.id}
               candidate={candidateDetails}
-              userType={session.user.type}
+              user={session.user}
             />
           ))
         : null}
@@ -55,7 +55,4 @@ const mapDispatchToProps = {
   candidateFetchDetails
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CandidateDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(CandidateDetails);
