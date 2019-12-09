@@ -41,11 +41,17 @@ function JobPosting(props) {
         <Link to={`/auth/${user.type}/jobpostings/${id}`}>
           <button>Ver detalles</button>
         </Link>
-        {showCands
-          ? candidates.map(candidate => (
-              <Candidate candidate={candidate} key={candidate.id} user={user} />
-            ))
-          : null}
+        <div>
+          {showCands
+            ? candidates.map(candidate => (
+                <Candidate
+                  candidate={candidate}
+                  key={candidate.id}
+                  user={user}
+                />
+              ))
+            : null}
+        </div>
       </div>
     </JobPostStyle>
   );
