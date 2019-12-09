@@ -16,18 +16,17 @@ export function Recruiter({ recruiter }) {
     <RecruiterStyle>
       <h2> {recruiter.fullName}</h2>
       <ul>
-        <li>email: {recruiter.email}</li>
-        <li>
-          estado: &nbsp;
+        email: {recruiter.email}
+        <br />
+        estado: &nbsp;
           <select
-            defaultValue={recruiter.permissions}
-            onChange={e => changePermissions(e.target.value)}
-          >
-            <option value={"pendiente"}>pendiente</option>
-            <option value={"activo"}>activo</option>
-            <option value={"inactivo"}>inactivo</option>
-          </select>
-        </li>
+          defaultValue={recruiter.permissions}
+          onChange={e => changePermissions(e.target.value)}
+        >
+          <option value={"pendiente"}>pendiente</option>
+          <option value={"activo"}>activo</option>
+          <option value={"inactivo"}>inactivo</option>
+        </select>
       </ul>
 
       {recruiter.logoURL && <img src={recruiter.logoURL} alt="" />}
