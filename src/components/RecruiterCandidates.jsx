@@ -33,14 +33,13 @@ function RecruiterCandidates(props) {
   const handleSearch = e => {
     return setSearch(e.target.value.toLowerCase());
   };
+
   return (
     <FullDash>
       <hr />
       <Link to="/auth/recruiter/candidates/new">
         <button>CARGAR CANDIDATO</button>
       </Link>
-      <br />
-
       <input
         type="text"
         placeholder="Search.."
