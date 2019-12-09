@@ -9,6 +9,7 @@ import {
   candidateRemove,
   candidateFetchDetails
 } from "../store/actions/candidates";
+import { H5 } from "../templates/Text";
 
 export function Candidate(props) {
   const {
@@ -22,7 +23,7 @@ export function Candidate(props) {
     expectedSalary
   } = props.candidate;
 
-  const checker = function() {
+  const checker = function () {
     return (
       props.jobPostingSelected &&
       props.jobPostingSelected.candidates &&
@@ -45,27 +46,42 @@ export function Candidate(props) {
           ? "#0be325"
           : "#fff"
       }
-    >
-      {props.match && props.match.path.includes("jobpostings") && !checker() ? (
-        <input
-          type="checkbox"
-          onClick={e => {
-            e.target.checked
-              ? props.candidateAdd(props.candidate)
-              : props.candidateRemove(props.candidate);
-          }}
-        ></input>
-      ) : null}
+    > <div style={{ boxSizing: 'border-box', margin: "5px 0 7px 5px" }}>
+        <div style={{ height: "100%", overflowY: "auto" }}>
+          {props.match &&
+            props.match.path.includes("jobpostings") &&
+            !checker() ? (
+              <input
+                type="checkbox"
+                onClick={e => {
+                  e.target.checked
+                    ? props.candidateAdd(props.candidate)
+                    : props.candidateRemove(props.candidate);
+                }}
+              ></input>
+            ) : null}
 
-      <h3>{fullName}</h3>
-      <span>{jobTitle}</span>
-      <br />
-      <button onClick={e => showCV(e)}>Ver CV</button>
-      <Link to={`/auth/${props.userType}/candidates/${id}`}>
-        <button onClick={e => props.candidateFetchDetails(id)}>
-          Ver detalles
-        </button>
-      </Link>
+          <H5>{fullName}</H5>
+          <span>Job Title: {jobTitle}</span>
+          <br />
+          <span>Age: {age}</span>
+          <br />
+          <span>Address: {address}</span>
+          <br />
+          <button onClick={e => showCV(e)}>Ver CV</button>
+          <Link to={`/auth/${props.user.type}/candidates/${id}`}>
+            <button
+              onClick={e => {
+                console.log(id);
+                console.log(props.candidateFetchDetails);
+                props.candidateFetchDetails(id);
+              }}
+            >
+              Ver detalles
+          </button>
+          </Link>
+        </div>
+      </div>
     </CandidateStyle>
   );
 }
@@ -77,7 +93,7 @@ const mapStateToProps = ({
 }) => ({
   jobPostingSelected,
   candidatesSelected,
-  userType: session.user.type
+  user: session.user
 });
 
 const mapDispatchToProps = {

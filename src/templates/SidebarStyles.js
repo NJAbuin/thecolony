@@ -17,12 +17,12 @@ export const SidebarButton = styled.p`
 
   &:hover {
     cursor: pointer;
-    background-color: rgba(255, 0, 0, 0.5);
+    background-color: rgb(${props => props.theme.CeruleanBlue});
     border-radius: 50px;
   }
 `;
 
 export const SidebarStyle = styled.div`
-  background-color: #000;
+  background-color: rgb(${props => props.theme.RichBlack});
   grid-area: sidebar;
 `;

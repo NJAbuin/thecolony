@@ -44,8 +44,8 @@ const NavBar = props => {
         {!props.user.type ? (
           <LoginModal role={"admin"} />
         ) : (
-          <button onClick={handleLogout}>Logout</button>
-        )}
+            <button onClick={handleLogout}>Logout</button>
+          )}
       </span>
     </div>
   );
@@ -58,7 +58,8 @@ const navStyles = {
     width: "100%",
     backgroundColor: "white",
     textAlign: "center",
-    display: "flex"
+    display: "flex",
+    borderBottom: "solid 2px rgb(102, 153, 196)"
   },
   img: {
     height: "100%"
