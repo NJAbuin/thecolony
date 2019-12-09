@@ -23,10 +23,9 @@ export const LandingGrid = styled.div`
 export const AuthGrid = styled.div`
   grid-area: body;
   display: grid;
-  grid-template-columns: 12vw 1fr;
-  grid-column-gap: 1%;
+  grid-template-columns: 12% 1fr;
   grid-template-areas: "sidebar contentDash";
   height: 100%;
   width: 100%;
-  background-color: rgba(${props => props.theme.CoolGray},0.125);
+  background-color: rgba(${props => props.theme.CoolGray}, 0.125);
 `;
