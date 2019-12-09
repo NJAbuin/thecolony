@@ -1,5 +1,6 @@
 import { ClientStyle } from "../templates/ClientStyle";
 import { connect } from "react-redux";
+import { Button } from "../templates/Button";
 import axios from "axios";
 
 import React from "react";
@@ -10,7 +11,18 @@ export function Recruiter({ recruiter }) {
       .put(`/api/admin/recruiters/${recruiter.id}`, { permissions: value })
       .then(res => res.data)
       .then(updated => console.log(updated));
-  ;
+
+  const handleDelete = e => {
+    const confirm = prompt(
+      `Esta seguro que quiere borrar este recrutador? LOS CAMBIOS SON PERMANENTES! Escribe "SI" para continuar`,
+      "NO"
+    );
+    if (confirm === "SI") {
+      axios.delete(`/api/admin/recruiters/${recruiter.id}`).then(res => {
+        alert(res.data);
+      });
+    }
+  };
 
   return (
     <ClientStyle>
@@ -29,10 +41,9 @@ export function Recruiter({ recruiter }) {
           </select>
         </li>
       </ul>
-
       {recruiter.logoURL && <img src={recruiter.logoURL} alt="" />}
       {recruiter.website && <a href={recruiter.website}>Visitar el website.</a>}
-      <button>Editar recrutador</button>
+      <Button onClick={handleDelete}>ELIMINAR</Button>
     </ClientStyle>
   );
 }
