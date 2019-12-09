@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { PostingStyle } from "../templates/Candidates";
 
-export function CandidatePosting({ posting, candidate, userType }) {
+export function CandidatePosting({ posting, candidate, user }) {
   const { id, title, report } = posting;
   const [comment, setComment] = useState("");
   const [link, setLink] = useState("");
@@ -30,7 +30,7 @@ export function CandidatePosting({ posting, candidate, userType }) {
 
   return (
     <PostingStyle>
-      <Link to={`/auth/${userType}/jobpostings/${id}`}>
+      <Link to={`/auth/${user.type}/jobpostings/${id}`}>
         <h2>{title}</h2>
       </Link>
       <select
