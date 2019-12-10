@@ -50,7 +50,7 @@ function RecruiterClientEditForm({
   const editHandler = e => {
     e.preventDefault();
     if (!warningMessage) {
-      return Axios.put(`/api/${userToEdit.type}/clients/${userToEdit.id}`, {
+      return Axios.put(`/api/admin/${userToEdit.type}s/${userToEdit.id}`, {
         email,
         fullName,
         logoURL,
