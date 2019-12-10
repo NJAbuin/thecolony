@@ -64,7 +64,4 @@ const mapDispatchToProps = {
   fetchRecruiterList
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AdminRecruiters);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminRecruiters);

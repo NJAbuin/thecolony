@@ -1,11 +1,12 @@
 import { RecruiterStyle } from "../templates/RecruiterStyle";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { Button } from "../templates/Button";
 import axios from "axios";
 
 import React from "react";
 
-export function Recruiter({ recruiter }) {
+export function Recruiter({ recruiter, history }) {
   const changePermissions = value =>
     axios
       .put(`/api/admin/recruiters/${recruiter.id}`, { permissions: value })
@@ -23,6 +24,8 @@ export function Recruiter({ recruiter }) {
       });
     }
   };
+
+  const clickHandler = () => {};
 
   return (
     <RecruiterStyle>
@@ -43,6 +46,11 @@ export function Recruiter({ recruiter }) {
       {recruiter.logoURL && <img src={recruiter.logoURL} alt="" />}
       {recruiter.website && <a href={recruiter.website}>Visitar el website.</a>}
       <Button onClick={handleDelete}>ELIMINAR</Button>
+      <Link to="/auth/admin/recruiters/:id">
+        <Button onClick={() => clickHandler()} user={recruiter}>
+          EDITAR
+        </Button>
+      </Link>
     </RecruiterStyle>
   );
 }

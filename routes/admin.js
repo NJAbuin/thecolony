@@ -46,9 +46,9 @@ router.get("/recruiters", function(req, res) {
 //edit recruiters
 
 router.put("/recruiters/:id", function(req, res) {
-  Recruiter.findOne({ where: { id: req.params.id } }).then(recruiter => {
+  Recruiter.findByPk(req.params.id).then(recruiter => {
     if (!recruiter) {
-      res.send("No se encontro ningun recruiter");
+      res.send(false);
     }
     recruiter.update(req.body).then(updated => {
       res.send(updated);
