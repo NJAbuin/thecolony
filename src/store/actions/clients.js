@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_CLIENTS, SELECT_CLIENT } from "../constants";
+import { FETCH_CLIENTS, SELECT_CLIENT, EMPTY_CLIENT } from "../constants";
 
 export const clientList = payload => ({
   type: FETCH_CLIENTS,
@@ -22,3 +22,9 @@ export const postSingleClient = id => dispatch =>
     .get(`/api/admin/clients/${id}`)
     .then(res => res.data)
     .then(client => dispatch(singleClient(client)));
+
+export const emptyClient = () => ({
+  type: EMPTY_CLIENT,
+  payload: {}
+});
+export const removeSingleClient = () => dispatch => dispatch(emptyClient());

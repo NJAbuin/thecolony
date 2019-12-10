@@ -1,5 +1,9 @@
 import axios from "axios";
-import { FETCH_RECRUITERS, SELECT_RECRUITER } from "../constants";
+import {
+  FETCH_RECRUITERS,
+  SELECT_RECRUITER,
+  EMPTY_RECRUITER
+} from "../constants";
 
 export const fetchRecruiters = payload => ({
   type: FETCH_RECRUITERS,
@@ -23,3 +27,10 @@ export const postSingleRecruiter = id => dispatch =>
     .get(`/api/admin/recruiters/${id}`)
     .then(res => res.data)
     .then(recruiter => dispatch(singleRecruiter(recruiter)));
+
+export const emptyRecruiter = () => ({
+  type: EMPTY_RECRUITER,
+  payload: {}
+});
+export const removeSingleRecruiter = () => dispatch =>
+  dispatch(emptyRecruiter());
