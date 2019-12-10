@@ -24,3 +24,4 @@ export const FETCH_CLIENTS = "FETCH_CLIENTS";
 
 //Recruiters
 export const FETCH_RECRUITERS = "FETCH_RECRUITERS";
+export const SELECT_RECRUITER = "SELECT_RECRUITER"
