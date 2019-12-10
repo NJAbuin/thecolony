@@ -64,7 +64,7 @@ router.post("/upload", upload.single("file"), (req, res) => {
 
 //1.b agregarlos con el archivo CSV
 
-router.post("/candidates/csvImport", function(req, res) {
+router.post("/candidates/csvImport", function (req, res) {
   req.body.csvValues.forEach(candidate => {
     Recruiter.findOne({ where: { id: req.body.user.id } }).then(recruiter =>
       recruiter.createCandidate(candidate)
@@ -75,7 +75,7 @@ router.post("/candidates/csvImport", function(req, res) {
 
 //1.c agregarlos uno por uno
 
-router.post("/candidates", function(req, res) {
+router.post("/candidates", function (req, res) {
   Recruiter.findOne({ where: { id: req.user.id } }).then(recruiter => {
     Candidate.create(req.body).then(candidate => {
       candidate.setRecruiter(recruiter);
@@ -101,7 +101,7 @@ router.get("/candidates", (req, res) => {
 
 //2.b solo uno
 
-router.get("/candidates/:id", function(req, res) {
+router.get("/candidates/:id", function (req, res) {
   if (req.user.type === "recruiter") {
     Candidate.findOne({
       include: [
@@ -130,11 +130,26 @@ router.get("/candidates/:id", function(req, res) {
       })
       .catch(e => res.send(e));
   }
+  if (req.user.type === "client") {
+    Candidate.findOne({
+      include: [
+        {
+          model: JobPosting,
+          where: { clientId: req.user.id }
+        }
+      ],
+      where: { id: req.params.id }
+    })
+      .then(candidate => {
+        res.send(candidate);
+      })
+      .catch(e => res.send(e));
+  }
 });
 
 //3. Editar y borrar candidatos
 
-router.put("/candidates/edit/:id", function(req, res) {
+router.put("/candidates/edit/:id", function (req, res) {
   if (req.user.type === "recruiter") {
     Candidate.findOne({
       where: { id: req.params.id, recruiterId: req.user.id }
@@ -163,7 +178,7 @@ router.put("/candidates/edit/:id", function(req, res) {
 //1. Ver busquedas
 //1.a ver todas
 
-router.get("/jobpostings", function(req, res) {
+router.get("/jobpostings", function (req, res) {
   if (req.user.type === "client") {
     JobPosting.findAll({
       include: [
@@ -212,7 +227,7 @@ router.get("/jobpostings", function(req, res) {
 
 //1.b ver una
 
-router.get("/jobpostings/:id", function(req, res) {
+router.get("/jobpostings/:id", function (req, res) {
   if (req.user.type === "client") {
     JobPosting.findOne({
       include: [
@@ -251,7 +266,7 @@ router.get("/jobpostings/:id", function(req, res) {
 
 //2. Editar busquedas
 
-router.put("/jobpostings/edit/:id", function(req, res) {
+router.put("/jobpostings/edit/:id", function (req, res) {
   if (req.user.type === "client") {
     JobPosting.findOne({ where: { id: req.params.id, clientId: req.user.id } })
       .then(job => {
@@ -270,7 +285,7 @@ router.put("/jobpostings/edit/:id", function(req, res) {
 
 //3. Eliminar busquedas
 
-router.delete("/jobpostings/delete/:id", function(req, res) {
+router.delete("/jobpostings/delete/:id", function (req, res) {
   if (req.user.type === "client") {
     JobPosting.findOne({ where: { id: req.params.id, clientId: req.user.id } })
       .then(job => {
@@ -289,7 +304,7 @@ router.delete("/jobpostings/delete/:id", function(req, res) {
 
 //4. Crear Busquedas
 
-router.post("/jobpostings", function(req, res) {
+router.post("/jobpostings", function (req, res) {
   console.log(req.body);
   const uId = req.user.type === "client" ? req.user.id : req.body.clientId;
   Client.findOne({ where: { id: uId } })
@@ -301,13 +316,13 @@ router.post("/jobpostings", function(req, res) {
 //5. Reportes
 //5.a crear reporte
 
-router.post("/jobpostings/:jobID/:candidateId/report", function(req, res) {
+router.post("/jobpostings/:jobID/:candidateId/report", function (req, res) {
   Report.create(req.body).then(report => res.send(report.informe));
 });
 
 //5.b ver reporte
 
-router.get("/jobpostings/:jobID/:candidateId/report", function(req, res) {
+router.get("/jobpostings/:jobID/:candidateId/report", function (req, res) {
   Report.findOne({
     where: {
       candidateId: req.params.candidateId,
@@ -318,7 +333,7 @@ router.get("/jobpostings/:jobID/:candidateId/report", function(req, res) {
 
 //5.c editar reporte
 
-router.put("/jobpostings/:jobId/:candidateId/report", function(req, res) {
+router.put("/jobpostings/:jobId/:candidateId/report", function (req, res) {
   if (req.user.type !== "client") {
     Report.findOne({
       where: {
