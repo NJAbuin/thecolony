@@ -9,12 +9,12 @@ export const JobPostStyle = styled.div`
 
   background-color: rgb(${props => props.theme.JadeGreen});
 
-  border: 2px solid rgb(${props => props.theme.CeruleanBlue},0.6);;
+  border: 2px solid rgb(${props => props.theme.CeruleanBlue}, 0.6);
   border-radius: 6px;
   transition: border-radius 0.5s border 0.8s;
 
   &:hover {
-    border: 3px solid rgb(${props => props.theme.CeruleanBlue});;
+    border: 3px solid rgb(${props => props.theme.CeruleanBlue});
     border-radius: 7px;
   }
 `;

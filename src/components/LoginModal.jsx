@@ -11,6 +11,7 @@ import {
 } from "../../utils/formLoginRegister";
 import { connect } from "react-redux";
 import { sessionLogIn } from "../store/actions/session";
+import { Button } from "../templates/Button";
 
 function LoginModal(props) {
   const classes = useStyles();
@@ -39,7 +40,8 @@ function LoginModal(props) {
 
   const goLogIn = (routeToPost, email, password) =>
     props.sessionLogIn(routeToPost, email, password).then(result => {
-      if (result && result.credentials === "pendiente") return setWarningMessage(ERROR_PERMISSIONS);
+      if (result && result.credentials === "pendiente")
+        return setWarningMessage(ERROR_PERMISSIONS);
       else if (!result) return setWarningMessage(ERROR_LOGIN);
       else return handleClose();
     });
@@ -53,9 +55,9 @@ function LoginModal(props) {
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
+      <Button type="button" onClick={handleOpen}>
         {props.role === "admin" ? "Login As Admin" : "Login"}
-      </button>
+      </Button>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
@@ -76,14 +78,14 @@ function LoginModal(props) {
               {labelInputCreator("Password", setPassword, "password")}
               <br />
               <p style={{ color: "red" }}>{warningMessage}</p>
-              <button
+              <Button
                 onClick={e => {
                   e.preventDefault();
                   validateAndLogIn(routeToPost, email, password);
                 }}
               >
                 Submit
-              </button>
+              </Button>
             </form>
           </div>
         </Fade>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Label } from "../src/templates/FormLabel";
 
-const minPasswordLength = 2;
+const minPasswordLength = 8;
 
 export const [
   ERROR_FULLNAME,
@@ -11,22 +11,21 @@ export const [
   ERROR_LOGIN,
   ERROR_PERMISSIONS
 ] = [
-    "Ingrese un nombre valido",
-    `La contraseña debe tener al menos ${minPasswordLength} caracteres`,
-    `Las contraseñas no coinciden`,
-    "Ingrese un email valido",
-    "Usuario o contraseña invalidos",
-    "Su solicitud de registro aun no fue aceptada"
-  ];
+  "Ingrese un nombre valido",
+  `La contraseña debe tener al menos ${minPasswordLength} caracteres`,
+  `Las contraseñas no coinciden`,
+  "Ingrese un email valido",
+  "Usuario o contraseña invalidos",
+  "Su solicitud de registro aun no fue aceptada"
+];
 
 /**
  * Checks if given string is complies with the minPasswordLength required.
  * @param {String} pass string to check
  * @returns {Boolean}
  */
-export function validatePass(pass) {
-  return pass.length <= minPasswordLength ? false : true;
-}
+export const validatePass = pass =>
+  /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(pass);
 
 /**
  *labelInputCreator: output a label and an input determined by parameters

@@ -1,12 +1,12 @@
-import { SELECT_RECRUITER, EMPTY_RECRUITER } from "../constants";
+import { SELECT_CLIENT, EMPTY_CLIENT } from "../constants";
 
 const initialState = {};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SELECT_RECRUITER:
+    case SELECT_CLIENT:
       return { ...action.payload };
-    case EMPTY_RECRUITER:
+    case EMPTY_CLIENT:
       return {};
     default:
       return state;

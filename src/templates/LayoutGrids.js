@@ -14,7 +14,7 @@ export const MainGrid = styled.div`
 
 export const LandingGrid = styled.div`
   display: grid;
-  background-color: orangered;
+  background-color: rgba(${props => props.theme.CeruleanBlue}, 0.7);
   grid-template-columns: repeat(2, 50vw);
   height: 100%;
   width: 100%;

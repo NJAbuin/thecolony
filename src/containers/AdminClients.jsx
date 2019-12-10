@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-import { Client } from "../components/Client";
+import Client from "../components/Client";
 import RegisterModalRecrClient from "../components/RegisterModalRecrClient";
 import { FullDash } from "../templates/Dashboard";
 
-import { fetchClientList } from "../store/actions/clients";
+import { fetchClientList, postSingleClient } from "../store/actions/clients";
 
-function AdminClients({ clientList, fetchClientList, session }) {
+function AdminClients({
+  clientList,
+  fetchClientList,
+  session,
+  postSingleClient,
+  ...rest
+}) {
   const [clients, setClients] = useState([]);
   const [search, setSearch] = useState("");
-
   useEffect(() => {
     fetchClientList();
     setClients(clientList);
@@ -45,10 +50,22 @@ function AdminClients({ clientList, fetchClientList, session }) {
       <hr />
       {search === ""
         ? clientList.map(client => (
-            <Client client={client} session={session} key={client.id} />
+            <Client
+              client={client}
+              session={session}
+              postSingleClient={postSingleClient}
+              key={client.id}
+              history={rest.history}
+            />
           ))
         : clients.map(client => (
-            <Client client={client} session={session} key={client.id} />
+            <Client
+              client={client}
+              session={session}
+              postSingleClient={postSingleClient}
+              key={client.id}
+              history={rest.history}
+            />
           ))}
     </FullDash>
   );
@@ -60,10 +77,8 @@ const mapStateToProps = ({ clientList, session }) => ({
 });
 
 const mapDispatchToProps = {
-  fetchClientList
+  fetchClientList,
+  postSingleClient
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AdminClients);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminClients);
