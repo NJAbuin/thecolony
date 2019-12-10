@@ -50,7 +50,7 @@ function RecruiterClientEditForm({
   const editHandler = e => {
     e.preventDefault();
     if (!warningMessage) {
-      return Axios.put(`/api/${userToEdit.type}/clients/${userToEdit.id}`, {
+      return Axios.put(`/api/admin/${userToEdit.type}s/${userToEdit.id}`, {
         email,
         fullName,
         logoURL,
@@ -58,9 +58,11 @@ function RecruiterClientEditForm({
         website
       }).then(res =>
         !res.data
-          ? alert(`Hubo un problema al editar el ${userToEdit.fullName}`)
+          ? alert(
+              `Hubo un problema al editar el usuario ${userToEdit.fullName}`
+            )
           : (setWarningMessage(null),
-            alert(`${userToEdit.fullName} editado con exito!`))
+            alert(`Usuario ${userToEdit.fullName} editado con exito!`))
       );
     }
   };
