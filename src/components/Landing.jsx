@@ -21,7 +21,11 @@ function Landing(props) {
       <Card color="yellow" imgUrl={recruiter}>
         <div style={topDivStyle}>
           <H2>Reclutadoras</H2>
-          <P>{lor.em}</P>
+          <P>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque est
+            dolorem perspiciatis perferendis inventore explicabo optio harum ad
+            possimus quaerat!
+          </P>
         </div>
         <div style={botDivStyle}>
           <LoginModal role={"recruiter"} />
@@ -31,7 +35,10 @@ function Landing(props) {
       <Card color="cyan" imgUrl={client}>
         <div style={topDivStyle}>
           <H2>Clientes</H2>
-          <P>{lor.em}</P>
+          <P>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem odio
+            ipsum in libero, ea fugit natus sunt aut quisquam magnam.
+          </P>
         </div>
         <div style={botDivStyle}>
           <LoginModal role={"client"} />
@@ -41,22 +48,6 @@ function Landing(props) {
     </LandingGrid>
   );
 }
-
-const lor = {
-  em: `
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-            tempore sint reiciendis magnam rerum voluptas doloremque recusandae,
-            quia sit, repellendus corporis deserunt enim fugiat eos, veniam
-            sunt? Possimus labore deleniti similique, voluptate sapiente ullam
-            dolorum nesciunt nisi atque provident explicabo molestias tempora
-            suscipit pariatur? Earum molestiae ea numquam alias sit in
-            repellendus explicabo saepe voluptatum ut, corporis ullam
-            consequuntur molestias accusamus placeat laborum obcaecati aut velit
-            soluta porro quae cum quis! Non tempore, tenetur a repudiandae rerum
-            modi eos repellendus perspiciatis eaque dolor, recusandae id. Nobis
-            tenetur cupiditate facilis officia omnis qui tempore error magni
-            blanditiis placeat ducimus, dolorum voluptatum?`
-};
 
 const topDivStyle = {
   width: "100%",
@@ -74,7 +65,4 @@ const mapStateToProps = state => ({
   user: state.session.user
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(Landing);
+export default connect(mapStateToProps, null)(Landing);
