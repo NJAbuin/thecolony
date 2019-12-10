@@ -99,12 +99,14 @@ router.put("admins/edit/:id", function(req, res) {
 
 //delete admins
 
-router.delete("/admins/delete/:id", function(req, res) {
-  Admin.findOne({ where: { id: req.params.id } })
+router.delete("/admins/:id", function(req, res) {
+  Admin.findByPk(req.params.id)
     .then(admin => {
-      admin.destroy();
+      if (admin.id === 1) res.status(403).end();
+      else admin.destroy();
     })
-    .then(() => res.send("Admin eliminado con exito"));
+    .then(() => res.send("Administrador eliminado con exito"))
+    .catch(() => res.send("Hubo un problema al eliminar el administrador"));
 });
 
 module.exports = router;
