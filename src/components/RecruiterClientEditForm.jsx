@@ -16,7 +16,6 @@ import Axios from "axios";
 function RecruiterClientEditForm({
   recruiterSelected,
   clientSelected,
-  match,
   removeSingleClient,
   removeSingleRecruiter
 }) {
@@ -44,79 +43,35 @@ function RecruiterClientEditForm({
     };
   }, []);
 
+  // We join them both together, because since the hook empties
+  // them on unMount, only one will be mounted at a time.
+  const userToEdit = { ...recruiterSelected, ...clientSelected };
+
   const editHandler = e => {
     e.preventDefault();
     if (!warningMessage) {
-      if (recruiterSelected.id) {
-        return Axios.put(`/api/admin/recruiters/${recruiterSelected.id}`, {
-          email,
-          fullName,
-          logoURL,
-          phone,
-          website
-        }).then(res => {
-          if (!res.data) alert("Hubo un problema al editar el recrutador");
-          else setWarningMessage(null), alert("Recrutador editado con exito!");
-        });
-      }
-
-      if (clientSelected.id) {
-        return Axios.put(`/api/admin/clients/${clientSelected.id}`, {
-          email,
-          fullName,
-          logoURL,
-          phone,
-          website
-        }).then(res => {
-          if (!res.data) alert("Hubo un problema al editar el cliente");
-          else setWarningMessage(null), alert("Cliente editado con exito!");
-        });
-      }
+      return Axios.put(`/api/${userToEdit.type}/clients/${userToEdit.id}`, {
+        email,
+        fullName,
+        logoURL,
+        phone,
+        website
+      }).then(res =>
+        !res.data
+          ? alert(`Hubo un problema al editar el ${userToEdit.fullName}`)
+          : (setWarningMessage(null),
+            alert(`${userToEdit.fullName} editado con exito!`))
+      );
     }
   };
 
-  return match.path === "/auth/admin/recruiters" ? (
+  return (
     <form>
-      {labelInputCreator(
-        "Full Name",
-        setfullName,
-        "text",
-        recruiterSelected.fullName
-      )}
-      {labelInputCreator("Email", setEmail, "text", recruiterSelected.email)}
-      {labelInputCreator(
-        "URL Logo",
-        setLogoURL,
-        "text",
-        recruiterSelected.logoURL
-      )}
-      {labelInputCreator("Phone", setPhone, "text", recruiterSelected.phone)}
-      {labelInputCreator(
-        "Website",
-        setWebsite,
-        "text",
-        recruiterSelected.website
-      )}
-      <p style={{ color: "red" }}>{warningMessage}</p>
-      <Button onClick={e => editHandler(e)}>Editar</Button>
-    </form>
-  ) : (
-    <form>
-      {labelInputCreator(
-        "Full Name",
-        setfullName,
-        "text",
-        clientSelected.fullName
-      )}
-      {labelInputCreator("Email", setEmail, "text", clientSelected.email)}
-      {labelInputCreator(
-        "URL Logo",
-        setLogoURL,
-        "text",
-        clientSelected.logoURL
-      )}
-      {labelInputCreator("Phone", setPhone, "text", clientSelected.phone)}
-      {labelInputCreator("Website", setWebsite, "text", clientSelected.website)}
+      {labelInputCreator("Full Name", setfullName, "text", userToEdit.fullName)}
+      {labelInputCreator("Email", setEmail, "text", userToEdit.email)}
+      {labelInputCreator("URL Logo", setLogoURL, "text", userToEdit.logoURL)}
+      {labelInputCreator("Phone", setPhone, "text", userToEdit.phone)}
+      {labelInputCreator("Website", setWebsite, "text", userToEdit.website)}
       <p style={{ color: "red" }}>{warningMessage}</p>
       <Button onClick={e => editHandler(e)}>Editar</Button>
     </form>
