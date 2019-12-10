@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 import { Recruiter } from "../components/Recruiter";
-import { fetchRecruiterList } from "../store/actions/recruiters";
+import {
+  fetchRecruiterList,
+  postSingleRecruiter
+} from "../store/actions/recruiters";
+
 import RegisterModalRecrClient from "../components/RegisterModalRecrClient";
 
 import { FullDash } from "../templates/Dashboard";
@@ -46,11 +50,21 @@ function AdminRecruiters(props) {
       {search === ""
         ? props.recruitersList &&
           props.recruitersList.map(recruiter => (
-            <Recruiter recruiter={recruiter} key={recruiter.id} />
+            <Recruiter
+              recruiter={recruiter}
+              postSingleRecruiter={props.postSingleRecruiter}
+              history={props.history}
+              key={recruiter.id}
+            />
           ))
         : recruiters &&
           recruiters.map(recruiter => (
-            <Recruiter recruiter={recruiter} key={recruiter.id} />
+            <Recruiter
+              recruiter={recruiter}
+              postSingleRecruiter={props.postSingleRecruiter}
+              history={props.history}
+              key={recruiter.id}
+            />
           ))}
     </FullDash>
   );
@@ -61,7 +75,8 @@ const mapStateToProps = ({ recruitersList }) => ({
 });
 
 const mapDispatchToProps = {
-  fetchRecruiterList
+  fetchRecruiterList,
+  postSingleRecruiter
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminRecruiters);

@@ -5,9 +5,8 @@ const chalk = require("chalk");
 //agrega candidatos de a muchos a un jobposting
 //cambiar esta ruta
 
-
-router.post("/jobpostings", function (req, res) {
-  JobPosting.findOne({ where: { id: req.body.id } })
+router.post("/jobpostings", function(req, res) {
+  JobPosting.findByPk(req.body.id)
     .then(job => {
       req.body.newCandidates.map(c => {
         Candidate.findByPk(c.id).then(candidate => job.addCandidate(candidate));
@@ -19,7 +18,7 @@ router.post("/jobpostings", function (req, res) {
 
 //agregar un candidato desde el detalle de singleJobPosting
 
-router.post("/jobpostings/:id", function (req, res) {
+router.post("/jobpostings/:id", function(req, res) {
   JobPosting.findOne({ where: { id: req.params.id } }).then(job => {
     Candidate.findOne({ where: { id: req.body.id } }).then(candidate => {
       job.addCandidate(candidate).then(() => {

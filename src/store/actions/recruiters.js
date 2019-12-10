@@ -6,7 +6,6 @@ export const fetchRecruiters = payload => ({
   payload
 });
 
-
 export const fetchRecruiterList = () => dispatch => {
   axios
     .get(`/api/admin/recruiters`)
@@ -19,9 +18,8 @@ export const singleRecruiter = payload => ({
   payload
 });
 
-export const postSingleRecruiter = (id) => dispatch => {
+export const postSingleRecruiter = id => dispatch =>
   axios
-    .get(`/api/recruiters/${id}`)
+    .get(`/api/admin/recruiters/${id}`)
     .then(res => res.data)
     .then(recruiter => dispatch(singleRecruiter(recruiter)));
-};
