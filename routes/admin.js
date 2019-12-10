@@ -14,10 +14,18 @@ router.get("/clients", function(req, res) {
   Client.findAll().then(clients => res.send(clients));
 });
 
+//get single client
+router.get("/clients/:id", (req, res) =>
+  Client.findByPk(req.params.id)
+    .then(client => res.send(client))
+    .catch(() => res.send(false))
+);
+
 //edit clients
 
 router.put("/clients/:id", function(req, res) {
-  Client.findOne({ where: { id: req.params.id } }).then(client => {
+  console.log(req.params, req.body);
+  Client.findByPk(req.params.id).then(client => {
     if (!client) {
       res.send("No se encontro ningun cliente");
     }
@@ -48,7 +56,6 @@ router.get("/recruiters", function(req, res) {
 router.get("/recruiters/:id", (req, res) =>
   Recruiter.findByPk(req.params.id).then(recruiter => res.send(recruiter))
 );
-
 
 //edit recruiters
 

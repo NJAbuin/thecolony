@@ -7,6 +7,8 @@ import {
   postSingleRecruiter
 } from "../store/actions/recruiters";
 
+import { postSingleClient } from "../store/actions/clients";
+
 import RegisterModalRecrClient from "../components/RegisterModalRecrClient";
 
 import { FullDash } from "../templates/Dashboard";
@@ -76,7 +78,8 @@ const mapStateToProps = ({ recruitersList }) => ({
 
 const mapDispatchToProps = {
   fetchRecruiterList,
-  postSingleRecruiter
+  postSingleRecruiter,
+  postSingleClient
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminRecruiters);

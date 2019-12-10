@@ -21,6 +21,10 @@ function AdminContainer(props) {
       <Route path="/auth/admin/admins" component={AdminAdmins} />
       <Route path="/auth/admin/candidates/:id" component={CandidateDetails} />
       <Route path="/auth/admin/candidates" component={AdminCandidates} />
+      <Route
+        path="/auth/admin/clients/:id"
+        component={RecruiterClientEditForm}
+      />
       <Route path="/auth/admin/clients" component={AdminClients} />
       <Route
         path="/auth/admin/jobpostings/edit/:id"

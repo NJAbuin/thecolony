@@ -3,7 +3,7 @@ export const LOG_IN = "LOG_IN";
 export const LOG_OUT = "LOG_OUT";
 
 //Admins
-export const FETCH_ADMINS = 'FETCH_ADMINS'
+export const FETCH_ADMINS = "FETCH_ADMINS";
 
 //Selected Candidates
 export const CANDIDATE_ADD = "CANDIDATE_ADD";
@@ -21,7 +21,8 @@ export const DELETE_JOBPOSTING = "DELETE_JOBPOSTING";
 
 //Clients
 export const FETCH_CLIENTS = "FETCH_CLIENTS";
+export const SELECT_CLIENT = "SELECT_CLIENT";
 
 //Recruiters
 export const FETCH_RECRUITERS = "FETCH_RECRUITERS";
-export const SELECT_RECRUITER = "SELECT_RECRUITER"
+export const SELECT_RECRUITER = "SELECT_RECRUITER";
