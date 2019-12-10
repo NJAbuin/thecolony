@@ -5,6 +5,7 @@ import Axios from "axios";
 import { validateDNI, validateFullName } from "../../utils/formLoginRegister";
 import RecrCsvForm from "./RecrCsvForm";
 import { InfoParagraph } from "../templates/Text";
+import { Button } from "../templates/Button";
 import { connect } from "react-redux";
 import FileUpload from "./FileUpload";
 
@@ -89,7 +90,7 @@ function RecrNewCandidateForm(props) {
         <label>{filename}</label>
         <br />
         <p style={{ color: "red" }}>{warningMessage}</p>
-        <button>Submit</button>
+        <Button>Submit</Button>
       </form>
       <hr />
       <RecrCsvForm />

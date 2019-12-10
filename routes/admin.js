@@ -24,7 +24,6 @@ router.get("/clients/:id", (req, res) =>
 //edit clients
 
 router.put("/clients/:id", function(req, res) {
-  console.log(req.params, req.body);
   Client.findByPk(req.params.id).then(client => {
     if (!client) {
       res.send("No se encontro ningun cliente");
@@ -37,12 +36,13 @@ router.put("/clients/:id", function(req, res) {
 
 //delete clients
 
-router.delete("/clients/delete/:id", function(req, res) {
-  Client.findOne({ where: { id: req.params.id } })
+router.delete("/clients/:id", function(req, res) {
+  Client.findByPk(req.params.id)
     .then(client => {
       client.destroy();
     })
-    .then(() => res.send("Cliente eliminado con exito"));
+    .then(() => res.send("Cliente eliminado con exito"))
+    .catch(() => res.send("Error! No se pudo eliminar el cliente"));
 });
 
 //get all recruiters

@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { JobPostStyle } from "../templates/JobPostStyle";
+import { Button } from "../templates/Button";
+
 import { Candidate } from "../components/Candidate";
 
 import { selectJobPostToState } from "../store/actions/jobPostings";
@@ -39,7 +41,7 @@ function JobPosting(props) {
           </button>
         )}
         <Link to={`/auth/${user.type}/jobpostings/${id}`}>
-          <button>Ver detalles</button>
+          <Button>Ver detalles</Button>
         </Link>
         <div>
           {showCands

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
+import { Button } from "../templates/Button";
+
 import Candidate from "./Candidate";
 
 import {
@@ -38,7 +40,7 @@ function RecruiterCandidates(props) {
     <FullDash>
       <hr />
       <Link to="/auth/recruiter/candidates/new">
-        <button>CARGAR CANDIDATO</button>
+        <Button>CARGAR CANDIDATO</Button>
       </Link>
       <input
         type="text"
