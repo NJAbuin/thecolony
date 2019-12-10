@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { CandidatePosting } from "../components/CandidatePosting";
 
 import { CandidateStyle } from "../templates/Candidates";
-import { H5 } from '../templates/Text'
+import { H5, P } from "../templates/Text";
 import { candidateFetchDetails } from "../store/actions/candidates";
 
 export function CandidateDetails({ candidateDetails, session }) {
@@ -23,16 +23,28 @@ export function CandidateDetails({ candidateDetails, session }) {
   const showCV = () => window.open(`${CV.replace("dist", "")}`, "_blank");
 
   return Object.keys(candidateDetails).length == 0 ? (
-    "No details found"
+    "No se encontraron detalles"
   ) : (
-      <CandidateStyle>
-        <H5>{fullName}</H5>
-        <span>{jobTitle}</span>
+    <CandidateStyle>
+      <P>
+        DNI- {DNI}
         <br />
-        <button onClick={e => showCV(e)}>Ver CV</button>
+        Nombre Completo- {fullName}
+        <br />
+        Titulo- {jobTitle}
+        <br />
+        {age} años
+        <br />
+        Direccion- {address}
+        <br />
+        Salario Deseado- ${expectedSalary}
+        <br />
+      </P>
+      <br />
+      <button onClick={e => showCV(e)}>Ver CV</button>
 
-        {jobpostings.length > 0
-          ? jobpostings.map(posting => (
+      {jobpostings.length > 0
+        ? jobpostings.map(posting => (
             <CandidatePosting
               posting={posting}
               key={posting.id}
@@ -40,11 +52,11 @@ export function CandidateDetails({ candidateDetails, session }) {
               user={session.user}
             />
           ))
-          : null}
+        : null}
 
-        <br />
-      </CandidateStyle>
-    );
+      <br />
+    </CandidateStyle>
+  );
 }
 
 const mapStateToProps = ({ candidateDetails, session }) => ({
