@@ -43,6 +43,13 @@ router.get("/recruiters", function (req, res) {
   Recruiter.findAll().then(recruiters => res.send(recruiters));
 });
 
+// get one recruiter
+
+router.get("/recruiters/:id", (req, res) =>
+  Recruiter.findByPk(req.params.id).then(recruiter => res.send(recruiter))
+);
+
+
 //edit recruiters
 
 router.put("/recruiters/:id", function (req, res) {

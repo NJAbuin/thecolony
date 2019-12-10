@@ -7,6 +7,7 @@ import jobPostingSelectedReducer from "./jobPostingSelectedReducer";
 import candidateDetailsReducer from "./candidateDetailsReducer";
 import clientListReducer from "./clientListReducer";
 import recruitersListReducer from "./recruitersListReducer";
+import recruiterSelectReducer from './recruiterSelectReducer'
 import adminListReducer from './adminListReducer'
 
 const reducers = {
@@ -18,7 +19,8 @@ const reducers = {
   candidateList: candidatesListReducer,
   candidatesSelected: candidatesSelectedReducer,
   clientList: clientListReducer,
-  recruitersList: recruitersListReducer
+  recruiterSelected: recruiterSelectReducer,
+  recruitersList: recruitersListReducer,
 };
 
 export default combineReducers(reducers);
