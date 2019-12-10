@@ -14,6 +14,8 @@ import {
   ERROR_FULLNAME
 } from "../../utils/formLoginRegister";
 
+import { Button } from "../templates/Button";
+
 export default function RegisterModalAdmin(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -56,9 +58,9 @@ export default function RegisterModalAdmin(props) {
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
+      <Button type="button" onClick={handleOpen}>
         Registrar Admin nuevo
-      </button>
+      </Button>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
