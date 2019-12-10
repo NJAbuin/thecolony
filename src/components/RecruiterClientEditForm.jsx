@@ -58,9 +58,11 @@ function RecruiterClientEditForm({
         website
       }).then(res =>
         !res.data
-          ? alert(`Hubo un problema al editar el ${userToEdit.fullName}`)
+          ? alert(
+              `Hubo un problema al editar el usuario ${userToEdit.fullName}`
+            )
           : (setWarningMessage(null),
-            alert(`${userToEdit.fullName} editado con exito!`))
+            alert(`Usuario ${userToEdit.fullName} editado con exito!`))
       );
     }
   };

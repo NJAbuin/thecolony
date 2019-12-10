@@ -69,8 +69,4 @@ const mapStateToProps = ({ recruitersList }) => ({
   recruitersList
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   postSingleRecruiter: dispatch(postSingleRecruiter)
-// });
-
 export default connect(mapStateToProps, null)(Recruiter);

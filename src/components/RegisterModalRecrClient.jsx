@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
+import { Button } from "../templates/Button";
 import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is required for IE 11 support
 import axios from "axios";
 import {
@@ -69,9 +70,9 @@ export default function RegisterModalRecrClient(props) {
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
+      <Button type="button" onClick={handleOpen}>
         Crear Usuario
-      </button>
+      </Button>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
