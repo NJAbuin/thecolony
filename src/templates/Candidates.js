@@ -19,10 +19,11 @@ export const CandidateStyle = styled.div`
 `;
 
 export const PostingStyle = styled.div`
-  background-color: ${props => props.backgroundColor};
+  background-color: rgba(${props => props.theme.CeruleanBlue}, 0.75);
   border: red 3px solid;
   justify-self: center;
   width: 95%;
   margin: 2.5%;
   display: block;
+  align-content: center;
 `;
