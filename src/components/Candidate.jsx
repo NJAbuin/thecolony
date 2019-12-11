@@ -74,12 +74,13 @@ export function Candidate(props) {
         <br />
         <span>Address: {address}</span>
         <br />
-        <button onClick={e => showCV(e)}>Ver CV</button>
+        {CV ? <button onClick={e => showCV(e)}>Ver CV</button> : null}
+
         <Link to={`/auth/${props.user.type}/candidates/${id}`}>
           <button
             onClick={e => {
               console.log(id);
-              console.log(props.candidateFetchDetails);
+              console.log(props);
               props.candidateFetchDetails(id);
             }}
           >

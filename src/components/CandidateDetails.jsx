@@ -41,7 +41,7 @@ export function CandidateDetails({ candidateDetails, session }) {
         <br />
       </P>
       <br />
-      <button onClick={e => showCV(e)}>Ver CV</button>
+      {CV ? <button onClick={e => showCV(e)}>Ver CV</button> : null}
 
       {jobpostings.length > 0
         ? jobpostings.map(posting => (
