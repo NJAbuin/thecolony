@@ -5,6 +5,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 //import DashboardClient from "../containers/DashboardClient";
 import ClientJobPostings from "./ClientJobPostings";
 import NewJobPostingForm from "../components/NewJobPostingForm";
+import CandidateDetails from "../components/CandidateDetails";
 
 function ClientContainer() {
   //<Route path="/auth/client/dashboard" component={DashboardClient} />
@@ -15,12 +16,10 @@ function ClientContainer() {
         component={NewJobPostingForm}
       />
       <Route path="/auth/client/jobpostings" component={ClientJobPostings} />
+      <Route path="/auth/client/candidates/:id" component={CandidateDetails} />
       <Redirect path="/" to="/auth/client/jobpostings" />
     </Switch>
   );
 }
 
-export default connect(
-  null,
-  null
-)(ClientContainer);
+export default connect(null, null)(ClientContainer);

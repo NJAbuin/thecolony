@@ -8,6 +8,7 @@ import { Button } from "../templates/Button";
 import { Candidate } from "../components/Candidate";
 
 import { selectJobPostToState } from "../store/actions/jobPostings";
+import { candidateFetchDetails } from "../store/actions/candidates";
 
 function JobPosting(props) {
   const user = props.session.user;
@@ -50,6 +51,7 @@ function JobPosting(props) {
                   candidate={candidate}
                   key={candidate.id}
                   user={user}
+                  candidateFetchDetails={props.candidateFetchDetails}
                 />
               ))
             : null}
@@ -64,7 +66,8 @@ const mapStateToProps = ({ session }) => ({
 });
 
 const mapDispatchToProps = {
-  selectJobPostToState
+  selectJobPostToState,
+  candidateFetchDetails
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(JobPosting);
