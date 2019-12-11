@@ -61,7 +61,7 @@ function NewJobPostingForm({
           .fullName
       );
     }
-  }, [clientList]);
+  }, [clientList, selectedClientID, selectedClientFullName]);
 
   const clearForm = () => {
     document.querySelectorAll("input").forEach(i => (i.value = ""));
@@ -148,7 +148,7 @@ function NewJobPostingForm({
               onChange={e => {
                 let newVal = e.target.value;
                 setSelectedClientID(
-                  newVal.match(/\d\w*\:/g)[0].slice(0, newVal.indexOf(":"))
+                  newVal.match(/\d\w*\:/)[0].slice(0, newVal.indexOf(":"))
                 );
               }}
             >
