@@ -41,9 +41,12 @@ function JobPosting(props) {
             SELECCIONAR
           </button>
         )}
-        <Link to={`/auth/${user.type}/jobpostings/${id}`}>
-          <Button>Ver detalles</Button>
-        </Link>
+        {user.type === "client" ? null : (
+          <Link to={`/auth/${user.type}/jobpostings/${id}`}>
+            <Button>Ver detalles</Button>
+          </Link>
+        )}
+
         <div>
           {showCands
             ? candidates.map(candidate => (

@@ -90,7 +90,7 @@ router.get("/admins", function(req, res) {
 //edit admins
 
 router.put("admins/edit/:id", function(req, res) {
-  Admin.findOne({ where: { id: req.params.id } }).then(admin => {
+  Admin.findByPk(req.params.id).then(admin => {
     admin.update(req.body).then(updatedAdmin => {
       res.send(updatedAdmin);
     });
