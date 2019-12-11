@@ -20,12 +20,7 @@ function Landing(props) {
     <LandingGrid>
       <Card color="yellow" imgUrl={recruiter}>
         <div style={topDivStyle}>
-          <H2>Reclutadoras</H2>
-          <P>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque est
-            dolorem perspiciatis perferendis inventore explicabo optio harum ad
-            possimus quaerat!
-          </P>
+          <P>Reclutadoras</P>
         </div>
         <div style={botDivStyle}>
           <LoginModal role={"recruiter"} />
@@ -34,11 +29,7 @@ function Landing(props) {
       </Card>
       <Card color="cyan" imgUrl={client}>
         <div style={topDivStyle}>
-          <H2>Clientes</H2>
-          <P>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem odio
-            ipsum in libero, ea fugit natus sunt aut quisquam magnam.
-          </P>
+          <P>Clientes</P>
         </div>
         <div style={botDivStyle}>
           <LoginModal role={"client"} />
@@ -58,6 +49,7 @@ const botDivStyle = {
   justifyContent: "space-around",
   width: "100%",
   height: "20%",
+  marginBottom: "5rem",
   textAlign: "center"
 };
 

@@ -38,7 +38,7 @@ function NewJobPostingForm({
       match.path === "/auth/admin/jobpostings/edit/:id" &&
       clientList.length
     ) {
-      let date = jobPostingSelected.startingDate;
+      let date = jobPostingSelected.startingDate || [];
       date = date
         .substring(0, 10)
         .split("-")
@@ -61,7 +61,7 @@ function NewJobPostingForm({
           .fullName
       );
     }
-  }, [clientList]);
+  }, [clientList, selectedClientID, selectedClientFullName]);
 
   const clearForm = () => {
     document.querySelectorAll("input").forEach(i => (i.value = ""));
@@ -101,7 +101,7 @@ function NewJobPostingForm({
             clientId: selectedClientID
           })
           .then(res => {
-            if (res.data === true) {
+            if (res.data) {
               return clearForm(), alert("Busqueda laboral editada");
             } else alert("Hubo un problema al editar su busqueda.");
           });
@@ -148,7 +148,7 @@ function NewJobPostingForm({
               onChange={e => {
                 let newVal = e.target.value;
                 setSelectedClientID(
-                  newVal.match(/\d\w*\:/g)[0].slice(0, newVal.indexOf(":"))
+                  newVal.match(/\d\w*\:/)[0].slice(0, newVal.indexOf(":"))
                 );
               }}
             >
@@ -231,7 +231,4 @@ const mapDispatchToProps = {
   fetchClientList
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NewJobPostingForm);
+export default connect(mapStateToProps, mapDispatchToProps)(NewJobPostingForm);
