@@ -19,11 +19,11 @@ function RecruiterClientEditForm({
   removeSingleClient,
   removeSingleRecruiter
 }) {
-  const [email, setEmail] = useState(recruiterSelected.email || "");
-  const [fullName, setfullName] = useState(recruiterSelected.fullName || "");
-  const [logoURL, setLogoURL] = useState(recruiterSelected.logoURL);
-  const [phone, setPhone] = useState(recruiterSelected.phone);
-  const [website, setWebsite] = useState(recruiterSelected.website);
+  const [email, setEmail] = useState(userToEdit.email || "");
+  const [fullName, setfullName] = useState(userToEdit.fullName || "");
+  const [logoURL, setLogoURL] = useState(userToEdit.logoURL);
+  const [phone, setPhone] = useState(userToEdit.phone);
+  const [website, setWebsite] = useState(userToEdit.website);
   const [warningMessage, setWarningMessage] = useState(null);
 
   useEffect(() => {
