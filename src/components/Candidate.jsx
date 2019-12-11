@@ -79,8 +79,6 @@ export function Candidate(props) {
         <Link to={`/auth/${props.user.type}/candidates/${id}`}>
           <button
             onClick={e => {
-              console.log(id);
-              console.log(props);
               props.candidateFetchDetails(id);
             }}
           >
