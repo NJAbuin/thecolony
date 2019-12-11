@@ -18,8 +18,12 @@ import {
   candidatesClearListSelection
 } from "../store/actions/candidates";
 
+import { selectJobPostToState } from "../store/actions/jobPostings";
+
 function RecruiterJobPostings(props) {
   const [search, setSearch] = useState("");
+  const [updated, setUpdater] = useState(true);
+
   const [candidateList, setCandidateList] = useState(props.candidateList);
 
   const clearAll = () => {
@@ -31,7 +35,10 @@ function RecruiterJobPostings(props) {
 
   useEffect(() => {
     setCandidateList(props.candidateList);
-  }, []);
+    console.log("funcion", props.selectJobPostToState);
+    console.log("selected", props.jobPostingSelected);
+    props.selectJobPostToState(props.jobPostingSelected.id);
+  }, [updated]);
 
   useEffect(() => {
     if (search === "") return setCandidateList(props.candidateList);
@@ -79,6 +86,7 @@ function RecruiterJobPostings(props) {
                   props.candidatesSelected
                 ),
                 clearAll(),
+                setUpdater(!updated),
                 alert("Candidatos asignados con exito!")
               )}
             >
@@ -95,7 +103,7 @@ function RecruiterJobPostings(props) {
         </TitleR>
         <ContentR>
           {search === ""
-            ? props.candidateList.map(candidate => (
+            ? candidateList.map(candidate => (
                 <Candidate candidate={candidate} key={candidate.id} />
               ))
             : candidateList.map(candidate => (
@@ -109,7 +117,8 @@ function RecruiterJobPostings(props) {
 
 const mapDispatchToProps = {
   candidatesApplyToJob,
-  candidatesClearListSelection
+  candidatesClearListSelection,
+  selectJobPostToState
 };
 
 const mapStateToProps = ({

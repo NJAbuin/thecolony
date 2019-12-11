@@ -153,7 +153,10 @@ function NewJobPostingForm({
               }}
             >
               {clientList.map(client => (
-                <option key={client.id}>
+                <option
+                  key={client.id}
+                  selected={jobPostingSelected.clientId === client.id}
+                >
                   {client.id}: {client.fullName}
                 </option>
               ))}

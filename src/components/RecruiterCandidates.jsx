@@ -18,7 +18,7 @@ function RecruiterCandidates(props) {
 
   useEffect(() => {
     setCandList(props.candidateList);
-  }, []);
+  }, [props.candidateList]);
 
   useEffect(() => {
     if (search == "") return setCandList(props.candidateList);
