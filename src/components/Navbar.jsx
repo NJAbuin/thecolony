@@ -29,17 +29,7 @@ const NavBar = props => {
           marginLeft: "19rem",
           textAlign: "center"
         }}
-      >
-        <p
-          style={{
-            backgroundColor: "black",
-            color: "white",
-            textAlign: "center"
-          }}
-        >
-          DEVFLOWLOGO
-        </p>
-      </Link>
+      ></Link>
 
       <span
         style={{
