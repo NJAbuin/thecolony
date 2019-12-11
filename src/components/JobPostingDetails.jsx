@@ -48,7 +48,7 @@ function JobPostingDetails(props) {
         {props.jobPostingSelected.salary}
       </div>
 
-      {props.userType === "admin" || props.userType === "client" ? (
+      {props.userType === "admin" ? (
         <div>
           <button onClick={e => editHandler()}>Editar</button>
           <button onClick={e => deleteHandler()}>Borrar</button>

@@ -30,7 +30,15 @@ const NavBar = props => {
           textAlign: "center"
         }}
       >
-        <p style={{ backgroundColor: "black", color: "white" }}>DEVFLOWLOGO</p>
+        <p
+          style={{
+            backgroundColor: "black",
+            color: "white",
+            textAlign: "center"
+          }}
+        >
+          DEVFLOWLOGO
+        </p>
       </Link>
 
       <span
@@ -44,8 +52,8 @@ const NavBar = props => {
         {!props.user.type ? (
           <LoginModal role={"admin"} />
         ) : (
-            <button onClick={handleLogout}>Logout</button>
-          )}
+          <button onClick={handleLogout}>Logout</button>
+        )}
       </span>
     </div>
   );
@@ -72,7 +80,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { sessionLogOut };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(NavBar));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavBar));
