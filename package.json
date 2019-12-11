@@ -49,9 +49,9 @@
   "scripts": {
     "start": "nodemon ./server/index.js",
     "build": "webpack -w",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./server/index.js & webpack -w --mode development",
-    "postinstall": "createdb thecolony"
+    "postinstall": "createdb devflow"
   },
   "repository": {
     "type": "git",
