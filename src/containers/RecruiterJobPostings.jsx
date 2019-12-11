@@ -35,8 +35,6 @@ function RecruiterJobPostings(props) {
 
   useEffect(() => {
     setCandidateList(props.candidateList);
-    console.log("funcion", props.selectJobPostToState);
-    console.log("selected", props.jobPostingSelected);
     props.selectJobPostToState(props.jobPostingSelected.id);
   }, [updated]);
 
