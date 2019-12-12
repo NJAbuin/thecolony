@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 function Landing(props) {
   const { recruiter, client } = {
     recruiter:
-      "https://www.totalbusinessmagazine.com/Total-Business/wp-content/uploads/2018/07/Could-a-Diverse-Workforce-Win-You-More-Customers.jpg",
+      "https://images.unsplash.com/photo-1508785166660-30ce4484f45c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     client:
       "https://news.blr.com/app/uploads/sites/3/2018/07/Workers-Diverse-5.jpg"
   };
