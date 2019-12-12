@@ -24,15 +24,6 @@ const NavBar = props => {
         </div>
       </label>
 
-      <Link
-        to={logoLinkURL}
-        style={{
-          alignSelf: "center",
-          marginLeft: "19rem",
-          textAlign: "center"
-        }}
-      ></Link>
-
       <span
         style={{
           color: "blue",

@@ -19,6 +19,10 @@ function RecruiterClientEditForm({
   removeSingleClient,
   removeSingleRecruiter
 }) {
+  // We join them both together, because since the hook empties
+  // them on unMount, only one will be mounted at a time.
+  const userToEdit = { ...recruiterSelected, ...clientSelected };
+
   const [email, setEmail] = useState(userToEdit.email || "");
   const [fullName, setfullName] = useState(userToEdit.fullName || "");
   const [logoURL, setLogoURL] = useState(userToEdit.logoURL);
@@ -42,10 +46,6 @@ function RecruiterClientEditForm({
       removeSingleRecruiter();
     };
   }, []);
-
-  // We join them both together, because since the hook empties
-  // them on unMount, only one will be mounted at a time.
-  const userToEdit = { ...recruiterSelected, ...clientSelected };
 
   const editHandler = e => {
     e.preventDefault();
