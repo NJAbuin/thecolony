@@ -18,8 +18,12 @@ import {
   candidatesClearListSelection
 } from "../store/actions/candidates";
 
+import { selectJobPostToState } from "../store/actions/jobPostings";
+
 function RecruiterJobPostings(props) {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(null);
+  const [updated, setUpdater] = useState(true);
+
   const [candidateList, setCandidateList] = useState(props.candidateList);
 
   const clearAll = () => {
@@ -30,18 +34,22 @@ function RecruiterJobPostings(props) {
   };
 
   useEffect(() => {
-    setCandidateList(props.candidateList);
+    if (localStorage.jobPostingSelectedId) {
+      props.selectJobPostToState(localStorage.getItem("jobPostingSelectedId"));
+    }
   }, []);
 
   useEffect(() => {
-    if (search === "") return setCandidateList(props.candidateList);
-    return setCandidateList(
-      props.candidateList.filter(
-        candidate =>
-          candidate.fullName.toLowerCase().includes(search) ||
-          candidate.jobTitle.toLowerCase().includes(search)
-      )
-    );
+    if (search) {
+      return setCandidateList(
+        props.candidateList.filter(
+          candidate =>
+            candidate.fullName.toLowerCase().includes(search) ||
+            candidate.jobTitle.toLowerCase().includes(search)
+        )
+      );
+    }
+    return setCandidateList(props.candidateList);
   }, [search]);
 
   const handleSearch = e => {
@@ -73,14 +81,19 @@ function RecruiterJobPostings(props) {
           <br />
           <div>
             <button
-              onClick={() => (
+              onClick={() => {
                 props.candidatesApplyToJob(
                   props.jobPostingSelected,
                   props.candidatesSelected
-                ),
-                clearAll(),
-                alert("Candidatos asignados con exito!")
-              )}
+                );
+                localStorage.setItem(
+                  "jobPostingSelectedId",
+                  props.jobPostingSelected.id
+                );
+                clearAll();
+                alert("Candidatos asignados con exito!");
+                location.reload();
+              }}
             >
               ASIGNAR A BUSQUEDA SELECCIONADA
             </button>
@@ -94,7 +107,7 @@ function RecruiterJobPostings(props) {
           </div>
         </TitleR>
         <ContentR>
-          {search === ""
+          {!search
             ? props.candidateList.map(candidate => (
                 <Candidate candidate={candidate} key={candidate.id} />
               ))
@@ -109,7 +122,8 @@ function RecruiterJobPostings(props) {
 
 const mapDispatchToProps = {
   candidatesApplyToJob,
-  candidatesClearListSelection
+  candidatesClearListSelection,
+  selectJobPostToState
 };
 
 const mapStateToProps = ({
