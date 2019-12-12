@@ -11,9 +11,9 @@ import { connect } from "react-redux";
 function Landing(props) {
   const { recruiter, client } = {
     recruiter:
-      "https://images.unsplash.com/photo-1508785166660-30ce4484f45c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
+      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     client:
-      "https://news.blr.com/app/uploads/sites/3/2018/07/Workers-Diverse-5.jpg"
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
   };
 
   return (

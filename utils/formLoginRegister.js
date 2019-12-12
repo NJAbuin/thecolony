@@ -12,7 +12,7 @@ export const [
   ERROR_PERMISSIONS
 ] = [
   "Ingrese un nombre valido",
-  `La contraseña debe tener al menos ${minPasswordLength} caracteres`,
+  `La contraseña debe tener al menos ${minPasswordLength} caracteres, 1 letra y un numero`,
   `Las contraseñas no coinciden`,
   "Ingrese un email valido",
   "Usuario o contraseña invalidos",
