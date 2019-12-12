@@ -30,15 +30,23 @@ function JobPosting(props) {
 
   return (
     <JobPostStyle>
-      <div style={{ boxSizing: "border-box", margin: "15px", heigth: "100%" }}>
+      <div
+        style={{ boxSizing: "border-box", margin: "15px", heigth: "100%" }}
+        id={id}
+        className="jobpost"
+      >
         <p>{title}</p>
         {user.type !== "recruiter" ? (
           <Button onClick={() => setShowCands(!showCands)}>
             {showCands ? "OCULTAR CANDIDATOS" : "VER CANDIDATOS"}
           </Button>
         ) : (
-          <Button onClick={() => props.selectJobPostToState(id)}>
-            SELECCIONAR
+          <Button
+            onClick={() => {
+              props.selectJobPostToState(id);
+            }}
+          >
+            Seleccionar
           </Button>
         )}
         <Link to={`/auth/${user.type}/jobpostings/${id}`}>
