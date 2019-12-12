@@ -33,13 +33,13 @@ function JobPosting(props) {
       <div style={{ boxSizing: "border-box", margin: "15px", heigth: "100%" }}>
         <p>{title}</p>
         {user.type !== "recruiter" ? (
-          <button onClick={() => setShowCands(!showCands)}>
+          <Button onClick={() => setShowCands(!showCands)}>
             {showCands ? "OCULTAR CANDIDATOS" : "VER CANDIDATOS"}
-          </button>
+          </Button>
         ) : (
-          <button onClick={() => props.selectJobPostToState(id)}>
+          <Button onClick={() => props.selectJobPostToState(id)}>
             SELECCIONAR
-          </button>
+          </Button>
         )}
         <Link to={`/auth/${user.type}/jobpostings/${id}`}>
           <Button>Ver detalles</Button>

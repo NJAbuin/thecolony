@@ -9,7 +9,10 @@ export const Button = styled.button`
   color: #ffffff;
   text-align: center;
   font-size: 12px;
-  padding: ${props => (props.children === "Login As Admin" ? `5px` : `10px`)}
+  padding: ${props =>
+    props.children === "Login As Admin" || props.children === "Logout"
+      ? `5px`
+      : `10px`}
   width: 200px;
   transition: all 0.5s;
   cursor: pointer;

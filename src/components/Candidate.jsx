@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 
 import { CandidateStyle } from "../templates/Candidates";
+import { Button } from "../templates/Button";
 
 import {
   candidateAdd,
@@ -77,15 +78,9 @@ export function Candidate(props) {
         {CV ? <button onClick={e => showCV(e)}>Ver CV</button> : null}
 
         <Link to={`/auth/${props.user.type}/candidates/${id}`}>
-          <button
-            onClick={e => {
-              console.log(id);
-              console.log(props);
-              props.candidateFetchDetails(id);
-            }}
-          >
+          <Button onClick={e => props.candidateFetchDetails(id)}>
             Ver detalles
-          </button>
+          </Button>
         </Link>
       </div>
     </CandidateStyle>

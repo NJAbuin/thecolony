@@ -5,6 +5,8 @@ import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import LoginModal from "./LoginModal";
 
+import { Button } from "../templates/Button";
+
 const NavBar = props => {
   const handleLogout = () => (props.sessionLogOut(), props.history.push("/"));
 
@@ -14,7 +16,7 @@ const NavBar = props => {
     <div style={navStyles.nav}>
       <label>
         <div>
-          <span>
+          <span style={{ marginLeft: "0.5rem" }}>
             {props.user.fullName
               ? `Bienvenido ${props.user.fullName.split(" ")[0]}!`
               : `Registrese para comenzar a navegar!`}
@@ -42,7 +44,7 @@ const NavBar = props => {
         {!props.user.type ? (
           <LoginModal role={"admin"} />
         ) : (
-          <button onClick={handleLogout}>Logout</button>
+          <Button onClick={handleLogout}>Logout</Button>
         )}
       </span>
     </div>
