@@ -29,16 +29,26 @@ function JobPosting(props) {
   let [showCands, setShowCands] = useState(false);
 
   return (
-    <JobPostStyle>
-      <div style={{ boxSizing: "border-box", margin: "15px", heigth: "100%" }}>
+    <JobPostStyle
+      backgroundColor={id === props.jobPostingSelected.id ? true : null}
+    >
+      <div
+        style={{ boxSizing: "border-box", margin: "15px", heigth: "100%" }}
+        id={id}
+        className="jobpost"
+      >
         <p>{title}</p>
         {user.type !== "recruiter" ? (
           <Button onClick={() => setShowCands(!showCands)}>
             {showCands ? "OCULTAR CANDIDATOS" : "VER CANDIDATOS"}
           </Button>
         ) : (
-          <Button onClick={() => props.selectJobPostToState(id)}>
-            SELECCIONAR
+          <Button
+            onClick={() => {
+              props.selectJobPostToState(id);
+            }}
+          >
+            Seleccionar
           </Button>
         )}
         <Link to={`/auth/${user.type}/jobpostings/${id}`}>
@@ -62,8 +72,9 @@ function JobPosting(props) {
   );
 }
 
-const mapStateToProps = ({ session }) => ({
-  session
+const mapStateToProps = ({ session, jobPostingSelected }) => ({
+  session,
+  jobPostingSelected
 });
 
 const mapDispatchToProps = {

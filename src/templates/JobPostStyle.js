@@ -7,7 +7,11 @@ export const JobPostStyle = styled.div`
   width: 95%;
   margin: 2.5%;
 
-  background-color: rgb(${props => props.theme.JadeGreen});
+  background-color: rgb(
+    ${props => (props.backgroundColor ? "255,0,0" : props.theme.JadeGreen)}
+  );
+
+  //props.selectedId? selectedColor : props.theme.JadeGgreen
 
   border: 2px solid rgb(${props => props.theme.CeruleanBlue}, 0.6);
   border-radius: 6px;

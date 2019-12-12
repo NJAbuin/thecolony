@@ -12,6 +12,7 @@ import {
   ContentL,
   ContentR
 } from "../templates/Dashboard";
+import { Button } from "../templates/Button";
 
 import {
   candidatesApplyToJob,
@@ -22,7 +23,8 @@ import { selectJobPostToState } from "../store/actions/jobPostings";
 
 function RecruiterJobPostings(props) {
   const [search, setSearch] = useState(null);
-  const [updated, setUpdater] = useState(true);
+  const [selectPainter, setSelectPainter] = useState(0);
+  const [selectedId, setSelectedId] = useState(0);
 
   const [candidateList, setCandidateList] = useState(props.candidateList);
 
@@ -70,41 +72,45 @@ function RecruiterJobPostings(props) {
 
         <ContentL>
           {props.jobPostings.map(jobPost => (
-            <JobPosting key={jobPost.id} jobPost={jobPost} />
+            <JobPosting
+              key={jobPost.id}
+              jobPost={jobPost}
+              selected={
+                props.jobPostingSelected.id === jobPost.id ? true : false
+              }
+            />
           ))}
         </ContentL>
       </Left>
 
       <Right>
         <TitleR>
-          CANDIDATES
+          <span style={{ color: "white" }}>CANDIDATOS</span>
           <br />
-          <div>
-            <button
-              onClick={() => {
-                props.candidatesApplyToJob(
-                  props.jobPostingSelected,
-                  props.candidatesSelected
-                );
-                localStorage.setItem(
-                  "jobPostingSelectedId",
-                  props.jobPostingSelected.id
-                );
-                clearAll();
-                alert("Candidatos asignados con exito!");
-                location.reload();
-              }}
-            >
-              ASIGNAR A BUSQUEDA SELECCIONADA
-            </button>
-            <button onClick={() => clearAll()}>CANCELAR SELECCION</button>{" "}
-            <br />
-            <input
-              type="text"
-              placeholder="Search.."
-              onChange={e => handleSearch(e)}
-            />
-          </div>
+          <button
+            onClick={() => {
+              props.candidatesApplyToJob(
+                props.jobPostingSelected,
+                props.candidatesSelected
+              );
+              localStorage.setItem(
+                "jobPostingSelectedId",
+                props.jobPostingSelected.id
+              );
+              clearAll();
+              alert("Candidatos asignados con exito!");
+              location.reload();
+            }}
+          >
+            Asignar a busqueda
+          </button>
+          <button onClick={() => clearAll()}>Cancelar seleccion</button> <br />
+          <br />
+          <input
+            type="text"
+            placeholder="Search.."
+            onChange={e => handleSearch(e)}
+          />
         </TitleR>
         <ContentR>
           {!search
