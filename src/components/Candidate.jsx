@@ -69,11 +69,11 @@ export function Candidate(props) {
         ) : null}
 
         <H5>{fullName}</H5>
-        <span>Job Title: {jobTitle}</span>
+        <span>Job Title- {jobTitle}</span>
         <br />
-        <span>Age: {age}</span>
+        <span>Age- {age}</span>
         <br />
-        <span>Address: {address}</span>
+        <span>Salario esperado- ${expectedSalary}</span>
         <br />
         {CV ? <button onClick={e => showCV(e)}>Ver CV</button> : null}
 
