@@ -70,7 +70,7 @@ router.post("/candidates/csvImport", function(req, res) {
       recruiter.createCandidate(candidate)
     );
   });
-  res.send(true).catch(e => res.send(false));
+  res.send(true);
 });
 
 //1.c agregarlos uno por uno

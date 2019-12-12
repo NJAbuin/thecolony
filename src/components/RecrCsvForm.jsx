@@ -39,8 +39,10 @@ function RecrCsvForm(props) {
       csvValues,
       user
     }).then(res => {
-      if (res.data) alert("Candidatos creados!");
-      else alert("Hubo un problema al cargar sus candidatos");
+      if (res.data) {
+        setCsvValues([]);
+        alert("Candidatos creados!");
+      } else alert("Hubo un problema al cargar sus candidatos");
     });
   };
 
