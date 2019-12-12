@@ -28,13 +28,10 @@ function JobPosting(props) {
 
   let [showCands, setShowCands] = useState(false);
 
-  useEffect(() => {
-    //clean all colors
-    //change color of div with id = to jobposting selected id
-  }, [props.jobPostingSelected]);
-
   return (
-    <JobPostStyle>
+    <JobPostStyle
+      backgroundColor={id === props.jobPostingSelected.id ? true : null}
+    >
       <div
         style={{ boxSizing: "border-box", margin: "15px", heigth: "100%" }}
         id={id}

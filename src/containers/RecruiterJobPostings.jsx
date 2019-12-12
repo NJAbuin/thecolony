@@ -72,7 +72,13 @@ function RecruiterJobPostings(props) {
 
         <ContentL>
           {props.jobPostings.map(jobPost => (
-            <JobPosting key={jobPost.id} jobPost={jobPost} />
+            <JobPosting
+              key={jobPost.id}
+              jobPost={jobPost}
+              selected={
+                props.jobPostingSelected.id === jobPost.id ? true : false
+              }
+            />
           ))}
         </ContentL>
       </Left>
