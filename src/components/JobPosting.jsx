@@ -28,6 +28,11 @@ function JobPosting(props) {
 
   let [showCands, setShowCands] = useState(false);
 
+  useEffect(() => {
+    //clean all colors
+    //change color of div with id = to jobposting selected id
+  }, [props.jobPostingSelected]);
+
   return (
     <JobPostStyle>
       <div
@@ -70,8 +75,9 @@ function JobPosting(props) {
   );
 }
 
-const mapStateToProps = ({ session }) => ({
-  session
+const mapStateToProps = ({ session, jobPostingSelected }) => ({
+  session,
+  jobPostingSelected
 });
 
 const mapDispatchToProps = {
