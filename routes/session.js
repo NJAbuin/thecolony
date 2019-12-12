@@ -1,18 +1,14 @@
 const router = require("express").Router();
 const passport = require("../db/passport/");
-const {
-  Admin,
-  Client,
-  Recruiter
-} = require("../db/models/");
-const jwtSecret = require("../db/passport/jwtConfig")
-const jwt = require('jsonwebtoken')
+const { Admin, Client, Recruiter } = require("../db/models/");
+const jwtSecret = require("../db/passport/jwtConfig");
+const jwt = require("jsonwebtoken");
 
 //REGISTER Y LOGIN
 
 //ADMIN
 
-router.post("/admin/register", function (req, res) {
+router.post("/admin/register", function(req, res) {
   Admin.findOne({ where: { email: req.body.email } })
     .then(user =>
       user
@@ -22,19 +18,18 @@ router.post("/admin/register", function (req, res) {
     .catch(err => console.log(err));
 });
 
-
 router.post("/admin/login", passport.authenticate("admin"), (req, res) => {
   res.send({
     fullName: req.user.fullName,
     email: req.user.email,
     type: req.user.type,
     id: req.user.id
-  }).catch(e => res.send(e));;
+  });
 });
 
 // CLIENT
 
-router.post("/client/register", function (req, res) {
+router.post("/client/register", function(req, res) {
   Client.findOne({ where: { email: req.body.email } })
     .then(user =>
       user
@@ -43,7 +38,6 @@ router.post("/client/register", function (req, res) {
     )
     .catch(err => console.log(err));
 });
-
 
 router.post("/client/login", passport.authenticate("client"), (req, res) => {
   res.send({
@@ -56,7 +50,7 @@ router.post("/client/login", passport.authenticate("client"), (req, res) => {
 
 // RECRUITER
 
-router.post("/recruiter/register", function (req, res) {
+router.post("/recruiter/register", function(req, res) {
   Recruiter.findOne({ where: { email: req.body.email } })
     .then(user =>
       user
@@ -66,27 +60,29 @@ router.post("/recruiter/register", function (req, res) {
     .catch(err => console.log(err));
 });
 
-
-router.post("/recruiter/login", passport.authenticate("recruiter"), (req, res) => {
-  if (req.user.permissions == "pendiente") {
-    res.send("pendiente")
-  } else {
-    res.send({
-      fullName: req.user.fullName,
-      email: req.user.email,
-      type: req.user.type,
-      id: req.user.id,
-      permissions: req.user.permissions
-    });
+router.post(
+  "/recruiter/login",
+  passport.authenticate("recruiter"),
+  (req, res) => {
+    if (req.user.permissions == "pendiente") {
+      res.send("pendiente");
+    } else {
+      res.send({
+        fullName: req.user.fullName,
+        email: req.user.email,
+        type: req.user.type,
+        id: req.user.id,
+        permissions: req.user.permissions
+      });
+    }
   }
-});
+);
 
 //LOGOUT
 
-router.get("/logout", function (req, res) {
+router.get("/logout", function(req, res) {
   req.logout();
   res.sendStatus(200);
 });
-
 
 module.exports = router;

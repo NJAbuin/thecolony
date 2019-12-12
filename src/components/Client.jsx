@@ -6,8 +6,9 @@ import axios from "axios";
 
 function Client({ client, session, postSingleClient, history }) {
   const clickHandler = () => {
-    postSingleClient(client.id);
-    history.push(`/auth/admin/clients/${client.id}`);
+    postSingleClient(client.id).then(() => {
+      history.push(`/auth/admin/clients/${client.id}`);
+    });
   };
 
   const handleDelete = e => {
