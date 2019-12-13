@@ -55,9 +55,7 @@ export function Candidate(props) {
           height: "100%"
         }}
       >
-        {props.match &&
-        props.match.path.includes("jobpostings") &&
-        !checker() ? (
+        {props.match.path.includes("jobpostings") && !checker() ? (
           <input
             type="checkbox"
             onClick={e => {
@@ -67,6 +65,9 @@ export function Candidate(props) {
             }}
           ></input>
         ) : null}
+        {props.match.path.includes("jobpostings") && checker()
+          ? "ASIGNADO/A"
+          : null}
 
         <H5>{fullName}</H5>
         <span>Job Title- {jobTitle}</span>
