@@ -8,12 +8,7 @@ export const JobPostStyle = styled.div`
   margin: 2.5%;
 
   background-color: rgb(
-<<<<<<< HEAD
-    ${props =>
-      props.backgroundColor ? props.theme.CoolGray : props.theme.JadeGreen}
-=======
     ${props => (props.backgroundColor ? "19, 91, 120" : props.theme.JadeGreen)}
->>>>>>> c27992f1fa4cb1c6774583a2066d095929be0ed1
   );
 
   //props.selectedId? selectedColor : props.theme.JadeGgreen
